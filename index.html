@@ -965,7 +965,78 @@ function openDayModal(dayId = null) {
     document.getElementById('day-modal').classList.add('active');
 }
 
+async function 
 async function saveTripDay() {
+    const id = document.getElementById('day-edit-id').value;
+    const date = document.getElementById('day-date-input').value;
+
+    if (!date) {
+        alert('請選擇旅行日期。');
+        return;
+    }
+
+    if (tripDays.some(d =>
+        d.trip_date === date && String(d.day_id) !== String(id)
+    )) {
+        alert('這個日期已經存在，請勿重複新增。');
+        return;
+    }
+
+    const path = id
+        ? `trip_days?day_id=eq.${encodeURIComponent(id)}`
+        : 'trip_days';
+
+    const saveButton = document.querySelector(
+        '#day-modal button[onclick="saveTripDay()"]'
+    );
+
+    if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = '儲存中…';
+    }
+
+    try {
+        const result = await sbFetch(path, {
+            method: id ? 'PATCH' : 'POST',
+            headers: {
+                'Prefer': 'return=representation'
+            },
+            body: JSON.stringify({
+                trip_date: date
+            })
+        });
+
+        if (!Array.isArray(result) || result.length === 0) {
+            throw new Error(
+                id
+                    ? '沒有更新任何日期，請確認 day_id 與 Supabase 更新權限。'
+                    : 'Supabase 沒有回傳新增的日期，請確認新增權限。'
+            );
+        }
+
+        if (id) {
+            currentDay = Number(id);
+        } else {
+            currentDay = Number(result[0].day_id);
+        }
+
+        await refreshTripDays();
+        await refreshItinerary();
+
+        closeModal('day-modal');
+        alert('旅行日期已成功儲存！');
+
+    } catch (error) {
+        console.error('儲存旅行日期失敗：', error);
+        alert('日期儲存失敗：\n' + (error.message || String(error)));
+    } finally {
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = '儲存';
+        }
+    }
+}
+ripDay() {
     const id = document.getElementById('day-edit-id').value;
     const date = document.getElementById('day-date-input').value;
 
