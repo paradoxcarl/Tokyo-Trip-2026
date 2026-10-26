@@ -1,18 +1,14 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ <title>🍁2026/11東京迪士尼樂園楓葉銀杏行</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🍁2026/11東京迪士尼樂園楓葉銀杏行</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-
-    <style>
+<style>
 :root {
     /* 日本秋日：楓葉 × 銀杏 */
     --bg-color: #FBF7EF;
@@ -31,11 +27,8 @@
 
     --card-shadow: 0 8px 20px rgba(130, 83, 42, 0.10);
 }
-
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
-
-
 
 /* 拖動時原本位置的虛線框 */
 .cl-item-ghost {
@@ -53,9 +46,6 @@
 .cl-item:active {
     cursor: grabbing;
 }
-        @keyframes petal-fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(450deg); } }
-        @keyframes petal-shake { 0%, 100% { margin-left: 0px; } 50% { margin-left: 30px; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
         header {
             background: linear-gradient(135deg, var(--header-purple-light) 0%, #fce4ec 100%);
