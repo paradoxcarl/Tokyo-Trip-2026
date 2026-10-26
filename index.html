@@ -1034,7 +1034,6 @@ async function deleteTripDay() {
     if (!Array.isArray(result) || result.length === 0) {
         alert('日期刪除成功，請重新整理。');
         return;
-		return;
     }
 
     currentDay = null;
@@ -1156,7 +1155,7 @@ async function deleteTripDay() {
 
         // --- 匯率與日文 ---
         function convert(type) {
-            const rate = parseFloat(document.getElementById('base-rate').value) || 0.21;
+            const rate = parseFloat(document.getElementById('base-rate').value) || 0.20;
             const twd = document.getElementById('twd-val'), jpy = document.getElementById('jpy-val');
             if (type === 'jpy') twd.value = jpy.value ? (parseFloat(jpy.value) * rate).toFixed(2) : '';
             else jpy.value = twd.value ? (parseFloat(twd.value) / rate).toFixed(0) : '';
@@ -1215,8 +1214,6 @@ async function refreshMembers() {
     membersData = data;
     renderWhoSelector(); // 重新渲染介面，這時第一個人就會被選中
 }
-
-        
         
         function renderWhoSelector() { 
             document.getElementById('who-selector').innerHTML = membersData.map(m => `
@@ -1474,20 +1471,6 @@ async function saveClItem() {
         }
         setInterval(updateClock, 1000); updateClock();
 
-    function createPetal() {
-    const p = document.createElement('div');
-    p.className = 'petal';
-
-    const leaves = ['🍁', '🍂', '🍃'];
-    p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
-
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.fontSize = (Math.random() * 10 + 12) + 'px';
-    p.style.animationDuration = (Math.random() * 5 + 5) + 's';
-
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 10000);
-	}
         // ... 前面的程式碼保持不變 ...
 
 // --- ✨ 新增：Realtime 頻道變數 ✨ ---
