@@ -11,203 +11,7 @@
     <title>🍁2026/11東京迪士尼樂園楓葉銀杏行🍁</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-/* ===== 日本秋日主題覆寫 ===== */
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-header {
-    background: linear-gradient(
-        135deg,
-        #F5E8CF 0%,
-        #F8E7D5 55%,
-        #EED4B4 100%
-    );
-    border-bottom: 2px solid var(--ginkgo-gold);
-}
-
-header h1 {
-    color: var(--dark-pink);
-}
-
-.time-box {
-    color: var(--forest-green);
-    border-color: rgba(82, 107, 69, 0.2);
-    box-shadow: 0 2px 8px rgba(130, 83, 42, 0.08);
-}
-
-.date-nav {
-    background-color: var(--bg-color);
-}
-
-.date-btn {
-    border-color: #E8D8B9;
-    color: var(--forest-green);
-}
-
-.date-btn.active {
-    background: var(--dark-pink);
-    color: #FFFFFF;
-    border-color: var(--dark-pink);
-}
-
-.itin-time {
-    background: linear-gradient(to bottom, #F5E8CF, #FFFFFF);
-    color: var(--forest-green);
-    border-right-color: #E8C76A;
-}
-
-.itin-loc {
-    color: var(--dark-pink);
-}
-
-.itin-card {
-    border: 1px solid rgba(213, 172, 56, 0.12);
-}
-
-.itin-action-btn {
-    color: var(--dark-pink);
-    border-color: #F0E1CC;
-}
-
-.detail-header {
-    background: linear-gradient(
-        135deg,
-        #B74735,
-        #D97736
-    );
-}
-
-.modal-title {
-    color: var(--dark-pink);
-}
-
-.form-group input,
-.form-group textarea {
-    border-color: #E8D8B9;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: var(--ginkgo-gold);
-    background: #FFFCF5;
-}
-
-.btn-save,
-.back-btn-styled {
-    background: var(--dark-pink);
-}
-
-.btn-save {
-    box-shadow: 0 4px 10px rgba(183, 71, 53, 0.22);
-}
-
-.btn-add-inline {
-    background: var(--forest-green);
-    box-shadow: 0 4px 10px rgba(82, 107, 69, 0.20);
-}
-
-.menu-btn {
-    border-color: #F0E2C8;
-    color: var(--forest-green);
-    box-shadow: 0 5px 15px rgba(130, 83, 42, 0.08);
-}
-
-.phrase-item {
-    border-left-color: var(--ginkgo-gold);
-}
-
-.phrase-item b {
-    color: var(--dark-pink);
-}
-
-.phrase-item .romaji {
-    color: var(--forest-green);
-}
-
-.who-chip.active {
-    background: #F7E6D7;
-    border-color: var(--dark-pink);
-    color: var(--dark-pink);
-}
-
-.cl-tab-btn {
-    border-color: var(--forest-green);
-    color: var(--forest-green);
-}
-
-.cl-tab-btn.active {
-    background: var(--forest-green);
-    color: #FFFFFF;
-}
-
-.cl-check {
-    border-color: var(--forest-green);
-}
-
-.cl-item.done .cl-check {
-    background: var(--forest-green);
-}
-
-.cl-who {
-    color: #795A22;
-    background: #F8EBC6;
-}
-
-.fab {
-    background: var(--dark-pink);
-    box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28);
-}
-
-.bottom-nav {
-    box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16);
-}
-
-.nav-tab.active {
-    color: var(--dark-pink);
-}
-
-#fs-overlay {
-    background: var(--bg-color);
-}
-
-#fs-jp {
-    color: var(--forest-green) !important;
-}
-
-#fs-ch {
-    color: var(--dark-pink) !important;
-}
-
-#fixed-back-container {
-    background-color: var(--bg-color);
-}
-
-/* 拖曳中的清單項目 */
-.cl-item-ghost {
-    background: #F8EBC6 !important;
-    border: 2px dashed var(--ginkgo-gold) !important;
-}
-
-/* 秋日飄落效果 */
-.petal {
-    filter: drop-shadow(
-        2px 2px 2px rgba(130, 83, 42, 0.18)
-    );
-}
-
-@media (hover: hover) {
-    .date-btn:hover,
-    .itin-action-btn:hover,
-    .menu-btn:hover,
-    .cl-tab-btn:hover,
-    .btn-save:hover,
-    .btn-add-inline:hover {
-        box-shadow: 0 10px 20px rgba(130, 83, 42, 0.18);
-    }
-}
     <style>
 :root {
     /* 日本秋日：楓葉 × 銀杏 */
@@ -248,23 +52,6 @@ header h1 {
 
 .cl-item:active {
     cursor: grabbing;
-}
-
-
-/* 🌸 櫻花特效 修正版 🌸 */
-.petal {
-    position: fixed; 
-    top: -10%; 
-    z-index: 999; 
-    pointer-events: none; 
-    /* 移除 background, border-radius, box-shadow */
-    background: transparent; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    /* 使用 drop-shadow 讓 Emoji 本身有淡淡的陰影感 */
-    filter: drop-shadow(2px 2px 2px rgba(255, 182, 193, 0.4));
-    animation: petal-fall linear forwards, petal-shake ease-in-out infinite;
 }
         @keyframes petal-fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(450deg); } }
         @keyframes petal-shake { 0%, 100% { margin-left: 0px; } 50% { margin-left: 30px; } }
@@ -496,7 +283,203 @@ header h1 {
         /* 導覽列圖示動畫 */
         .nav-tab .nav-icon { transition: transform 0.3s ease; }
         .nav-tab.active .nav-icon { transform: scale(1.2) translateY(-3px); }
-        
+    /* ===== 日本秋日主題覆寫 ===== */
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    background: linear-gradient(
+        135deg,
+        #F5E8CF 0%,
+        #F8E7D5 55%,
+        #EED4B4 100%
+    );
+    border-bottom: 2px solid var(--ginkgo-gold);
+}
+
+header h1 {
+    color: var(--dark-pink);
+}
+
+.time-box {
+    color: var(--forest-green);
+    border-color: rgba(82, 107, 69, 0.2);
+    box-shadow: 0 2px 8px rgba(130, 83, 42, 0.08);
+}
+
+.date-nav {
+    background-color: var(--bg-color);
+}
+
+.date-btn {
+    border-color: #E8D8B9;
+    color: var(--forest-green);
+}
+
+.date-btn.active {
+    background: var(--dark-pink);
+    color: #FFFFFF;
+    border-color: var(--dark-pink);
+}
+
+.itin-time {
+    background: linear-gradient(to bottom, #F5E8CF, #FFFFFF);
+    color: var(--forest-green);
+    border-right-color: #E8C76A;
+}
+
+.itin-loc {
+    color: var(--dark-pink);
+}
+
+.itin-card {
+    border: 1px solid rgba(213, 172, 56, 0.12);
+}
+
+.itin-action-btn {
+    color: var(--dark-pink);
+    border-color: #F0E1CC;
+}
+
+.detail-header {
+    background: linear-gradient(
+        135deg,
+        #B74735,
+        #D97736
+    );
+}
+
+.modal-title {
+    color: var(--dark-pink);
+}
+
+.form-group input,
+.form-group textarea {
+    border-color: #E8D8B9;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--ginkgo-gold);
+    background: #FFFCF5;
+}
+
+.btn-save,
+.back-btn-styled {
+    background: var(--dark-pink);
+}
+
+.btn-save {
+    box-shadow: 0 4px 10px rgba(183, 71, 53, 0.22);
+}
+
+.btn-add-inline {
+    background: var(--forest-green);
+    box-shadow: 0 4px 10px rgba(82, 107, 69, 0.20);
+}
+
+.menu-btn {
+    border-color: #F0E2C8;
+    color: var(--forest-green);
+    box-shadow: 0 5px 15px rgba(130, 83, 42, 0.08);
+}
+
+.phrase-item {
+    border-left-color: var(--ginkgo-gold);
+}
+
+.phrase-item b {
+    color: var(--dark-pink);
+}
+
+.phrase-item .romaji {
+    color: var(--forest-green);
+}
+
+.who-chip.active {
+    background: #F7E6D7;
+    border-color: var(--dark-pink);
+    color: var(--dark-pink);
+}
+
+.cl-tab-btn {
+    border-color: var(--forest-green);
+    color: var(--forest-green);
+}
+
+.cl-tab-btn.active {
+    background: var(--forest-green);
+    color: #FFFFFF;
+}
+
+.cl-check {
+    border-color: var(--forest-green);
+}
+
+.cl-item.done .cl-check {
+    background: var(--forest-green);
+}
+
+.cl-who {
+    color: #795A22;
+    background: #F8EBC6;
+}
+
+.fab {
+    background: var(--dark-pink);
+    box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28);
+}
+
+.bottom-nav {
+    box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16);
+}
+
+.nav-tab.active {
+    color: var(--dark-pink);
+}
+
+#fs-overlay {
+    background: var(--bg-color);
+}
+
+#fs-jp {
+    color: var(--forest-green) !important;
+}
+
+#fs-ch {
+    color: var(--dark-pink) !important;
+}
+
+#fixed-back-container {
+    background-color: var(--bg-color);
+}
+
+/* 拖曳中的清單項目 */
+.cl-item-ghost {
+    background: #F8EBC6 !important;
+    border: 2px dashed var(--ginkgo-gold) !important;
+}
+
+/* 秋日飄落效果 */
+.petal {
+    filter: drop-shadow(
+        2px 2px 2px rgba(130, 83, 42, 0.18)
+    );
+}
+
+@media (hover: hover) {
+    .date-btn:hover,
+    .itin-action-btn:hover,
+    .menu-btn:hover,
+    .cl-tab-btn:hover,
+    .btn-save:hover,
+    .btn-add-inline:hover {
+        box-shadow: 0 10px 20px rgba(130, 83, 42, 0.18);
+    }
+}    
     </style>
 </head>
 <body>
