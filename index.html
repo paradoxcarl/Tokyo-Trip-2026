@@ -454,12 +454,6 @@ header h1 {
     border: 2px dashed var(--ginkgo-gold) !important;
 }
 
-/* 秋日飄落效果 */
-.petal {
-    filter: drop-shadow(
-        2px 2px 2px rgba(130, 83, 42, 0.18)
-    );
-}
 
 @media (hover: hover) {
     .date-btn:hover,
@@ -1467,20 +1461,7 @@ async function saveClItem() {
         }
         setInterval(updateClock, 1000); updateClock();
 
-    function createPetal() {
-    const p = document.createElement('div');
-    p.className = 'petal';
 
-    const leaves = ['🍁', '🍂', '🍃'];
-    p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
-
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.fontSize = (Math.random() * 10 + 12) + 'px';
-    p.style.animationDuration = (Math.random() * 5 + 5) + 's';
-
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 10000);
-	}
         // ... 前面的程式碼保持不變 ...
 
 // --- ✨ 新增：Realtime 頻道變數 ✨ ---
@@ -1529,7 +1510,6 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
-// 修改原本的 window.onload
 window.onload = async () => {
     await refreshTripDays();
     await refreshMembers();
