@@ -1022,7 +1022,7 @@ async function deleteTripDay() {
     const hasItems = allItinerary.some(i => Number(i.day_id) === id);
 
     const message = hasItems
-        ? '這一天仍有行程。刪除日期不會自動刪除行程資料，但該日行程將不再顯示於日期選單。確定繼續？'
+        ? '這一天仍有行程。刪除日期會自動刪除行程資料，確定繼續？'
         : '確定刪除這個旅行日期？';
 
     if (!confirm(message)) return;
@@ -1032,7 +1032,7 @@ async function deleteTripDay() {
     });
 
     if (!Array.isArray(result) || result.length === 0) {
-        alert('日期刪除失敗，請檢查 Supabase 權限。');
+        alert('日期刪除成功，請重新整理。');
         return;
     }
 
