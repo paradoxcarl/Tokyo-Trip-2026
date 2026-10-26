@@ -8,7 +8,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🍁2026/11東京迪士尼樂園楓葉銀杏行🍁</title>
+    <title>🍁2026/11東京迪士尼樂園楓葉銀杏行</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
 
@@ -485,7 +485,19 @@ header h1 {
 <body>
 
     <header>
-        <h1>🍁2026/11東京迪士尼樂園楓葉銀杏行🍁</h1>
+        <h1 class="trip-title">
+  			2026/11<br>
+  			🍁東京迪士尼樂園楓葉銀杏行🍁
+		</h1>
+			<style>
+				.trip-title {
+  				text-align: center;
+  				color: #9b4935;
+  				line-height: 1.6;
+  				font-size: 28px;
+			}
+			</style>
+		
         <div class="time-box">
             <div id="real-date">Loading...</div>
             <div id="realtime-clock"></div>
@@ -535,8 +547,8 @@ header h1 {
                 </div>
             </div>
             <div class="form-group">
-                <label>行程 / 地點名稱 *必填*</label>
-                <input type="text" id="form-loc" placeholder="要去哪兒？">
+                <label>行程 / 地點名稱</label>
+                <input type="text" id="form-loc" placeholder="(必填) 要去哪兒？">
             </div>
             <div class="form-group">
                 <label>Google Map 關鍵字或網站連結 (選填)</label>
@@ -544,7 +556,7 @@ header h1 {
             </div>
             <div class="form-group">
                 <label>交通方式 / 細節 (選填)</label>
-                <textarea id="form-trans" rows="3" placeholder="(選填) 翼龍、鷹馬、礦車..."></textarea>
+                <textarea id="form-trans" rows="3" placeholder="(選填) 迪士尼、迪士尼、迪士尼..."></textarea>
             </div>
             <div class="form-group">
                 <label>備註 / 提醒 (選填)</label>
@@ -563,7 +575,7 @@ header h1 {
     <button class="btn-add-inline"
         style="min-width:80px;"
         onclick="openDayModal()">
-        ＋ 日期
+        ⭐
     </button>
 </div>
         <div id="itinerary-list"></div>
@@ -884,33 +896,62 @@ function weekdayLabel(dateString) {
     return ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
 }
 
+
 function renderTripDays() {
     const container = document.getElementById('date-buttons');
 
+    // 中文星期與日本語星期對照
+    const chineseWeekdays = ['日', '一', '二', '三', '四', '五', '六'];
+    const japaneseWeekdays = ['日', '月', '火', '水', '木', '金', '土'];
+
     container.innerHTML = tripDays.map((day, index) => {
-        const date = new Date(`${day.trip_date}T12:00:00`);
+        // 使用日期字串拆解，避免時區造成日期偏移
+        const [year, monthValue, dayValue] = day.trip_date
+            .split('-')
+            .map(Number);
+
+        const date = new Date(year, monthValue - 1, dayValue);
+
         const month = date.getMonth() + 1;
         const dayNumber = date.getDate();
+        const weekday = date.getDay();
+
+        // 顯示格式：星期中文簡稱＋日文漢字
+        const weekdayText =
+            `（${chineseWeekdays[weekday]}、${japaneseWeekdays[weekday]}）`;
 
         return `
             <div style="position:relative;flex:0 0 85px;">
-                <button class="date-btn ${day.day_id === currentDay ? 'active' : ''}"
+                <button
+                    class="date-btn ${day.day_id === currentDay ? 'active' : ''}"
                     style="width:85px;"
-                    onclick="switchDay(${day.day_id}, this)">
+                    onclick="switchDay(${day.day_id}, this)"
+                >
                     <span class="date-day">第${index + 1}日</span>
                     <span class="date-num">${month}/${dayNumber}</span>
-                    <span class="date-week">週${weekdayLabel(day.trip_date)}</span>
+                    <span class="date-week">${weekdayText}</span>
                 </button>
+
                 <button
                     title="編輯日期"
                     onclick="openDayModal(${day.day_id})"
-                    style="position:absolute;right:-3px;top:-5px;border:0;border-radius:50%;background:#F5E8CF;width:26px;height:26px;cursor:pointer;">
-                    ✏️
-                </button>
+                    style="
+                        position:absolute;
+                        right:-3px;
+                        top:-5px;
+                        border:0;
+                        border-radius:50%;
+                        background:#F5E8CF;
+                        width:26px;
+                        height:26px;
+                        cursor:pointer;
+                    "
+                >✏️</button>
             </div>
         `;
     }).join('');
 }
+
 
 async function refreshTripDays() {
     const data = await sbFetch('trip_days?select=*&order=trip_date.asc');
