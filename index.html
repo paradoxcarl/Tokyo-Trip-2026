@@ -14,7 +14,7 @@
     --bg-color: #FBF7EF;
     --main-pink: #E8C76A;          /* 舊變數名稱保留，實際改為銀杏金 */
     --dark-pink: #B74735;          /* 楓葉紅 */
-    --main-purple: #96c77d;        /* 森林綠 */
+    --main-purple: #526B45;        /* 森林綠 */
     --header-purple-light: #F5E8CF;
     --text-color: #493B30;
     --white: #FFFFFF;
@@ -22,7 +22,7 @@
     /* 新增秋日色彩 */
     --maple-orange: #D97736;
     --ginkgo-gold: #D5AC38;
-    --forest-green: #96c77d;
+    --forest-green: #526B45;
     --cream: #FBF7EF;
 
     --card-shadow: 0 8px 20px rgba(130, 83, 42, 0.10);
@@ -273,8 +273,7 @@
         /* 導覽列圖示動畫 */
         .nav-tab .nav-icon { transition: transform 0.3s ease; }
         .nav-tab.active .nav-icon { transform: scale(1.2) translateY(-3px); }
-
-/* ===== 日本秋日主題覆寫 ===== */
+    /* ===== 日本秋日主題覆寫 ===== */
 
 body {
     background-color: var(--bg-color);
@@ -454,6 +453,12 @@ header h1 {
     border: 2px dashed var(--ginkgo-gold) !important;
 }
 
+/* 秋日飄落效果 */
+.petal {
+    filter: drop-shadow(
+        2px 2px 2px rgba(130, 83, 42, 0.18)
+    );
+}
 
 @media (hover: hover) {
     .date-btn:hover,
@@ -532,7 +537,7 @@ header h1 {
                 </div>
             </div>
             <div class="form-group">
-                <label>行程 / 地點名稱 (必填)</label>
+                <label>行程 / 地點名稱</label>
                 <input type="text" id="form-loc" placeholder="(必填) 要去哪兒？">
             </div>
             <div class="form-group">
@@ -573,7 +578,7 @@ header h1 {
         </div>
         <div style="margin-top: 20px; background: #fdf2f4; border: 1px dashed var(--dark-pink); padding: 15px; border-radius: 15px;">
             <label style="font-size: 0.8rem; color: var(--dark-pink);">🪄 自訂匯率 (1 JPY = ? TWD)</label>
-            <input type="number" id="base-rate" value="0.20" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
+            <input type="number" id="base-rate" value="0.21" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
         </div>
     </div>
 
@@ -602,6 +607,7 @@ header h1 {
             <div class="phrase-item" onclick="openFS('タオルを替えてください', '請幫我更換毛巾', 'Taoru o kaete kudasai')">
                 <b>請更換毛巾</b><p>タオルを替えてください</p><small class="romaji">Taoru o kaete kudasai</small></div>
 
+
             <div class="phrase-item" onclick="openFS('Wi-Fiのパスワードは何ですか？', 'Wi-Fi密碼是什麼？', 'Waifa-i no pasuwa-do wa nan desu ka?')">
                 <b>Wi-Fi密碼是什麼？</b><p>Wi-Fiのパスワードは何ですか？</p><small class="romaji">Waifa-i no pasuwa-do wa nan desu ka?</small></div>
 
@@ -618,7 +624,10 @@ header h1 {
                 <b>我要辦理退房</b><p>チェックアウトをお願いします</p><small class="romaji">Chekkuauto o onegaishimasu</small></div>
         </div>
 
-		<div id="cat-transport" class="phrase-list">
+
+
+
+        <div id="cat-transport" class="phrase-list">
             <div class="phrase-item" onclick="openFS('お手洗いはどこですか？', '廁所在哪裡？', 'Otearai wa doko desu ka?')">
                 <b>廁所在哪裡？</b><p>お手洗いはどこですか？</p><small class="romaji">Otearai wa doko desu ka?</small></div>
 
@@ -645,7 +654,8 @@ header h1 {
 
             <div class="phrase-item" onclick="openFS('タクシーを3人で乗りたいです', '我們3人想共乘計程車', 'Takushi o sannin de noritai desu')">
                 <b>我們3人想共乘計程車</b><p>タクシーを3人で乗りたいです</p><small class="romaji">Takushi o sannin de noritai desu</small></div>
-		</div>
+	</div>
+
 
         <div id="cat-shop" class="phrase-list">
             <div class="phrase-item" onclick="openFS('袋はいりません', '我不需要袋子', 'Fukuro wa irimasen')">
@@ -690,6 +700,8 @@ header h1 {
             <div class="phrase-item" onclick="openFS('これを〇ください', '請給我〇個這個', 'Kore o 〇 kudasai')">
                 <b>請給我〇個這個</b><p>これを〇ください</p><small class="romaji">Kore o 〇 kudasai</small></div>
         </div>
+
+
 
         <div id="cat-food" class="phrase-list">
             <div class="phrase-item" onclick="openFS('三人です', '我們3位', 'Sannin desu')">
@@ -747,7 +759,7 @@ header h1 {
 
             <div class="phrase-item" onclick="openFS('ちょっと待ってください', '請稍等一下', 'Chotto matte kudasai')">
                 <b>請稍等一下</b><p>ちょっと待ってください</p><small class="romaji">Chotto matte kudasai</small></div>
-		</div>
+	</div>
     </div>
 
     <div id="page-checklist" class="tab-content">
@@ -830,14 +842,14 @@ header h1 {
             <button class="btn-cancel"
                 onclick="closeModal('day-modal')">取消</button>
             <button class="btn-save"
-                onclick="save()">儲存日期</button>
+                onclick="saveTripDay()">儲存日期</button>
         </div>
 
         <button
             id="day-delete-btn"
             class="btn-cancel"
             style="width:100%;margin-top:10px;padding:12px;border-radius:20px;display:none;"
-            onclick="delete()">刪除此日期</button>
+            onclick="deleteTripDay()">刪除此日期</button>
     </div>
 </div>
     <script>
@@ -965,78 +977,7 @@ function openDayModal(dayId = null) {
     document.getElementById('day-modal').classList.add('active');
 }
 
-async function 
 async function saveTripDay() {
-    const id = document.getElementById('day-edit-id').value;
-    const date = document.getElementById('day-date-input').value;
-
-    if (!date) {
-        alert('請選擇旅行日期。');
-        return;
-    }
-
-    if (tripDays.some(d =>
-        d.trip_date === date && String(d.day_id) !== String(id)
-    )) {
-        alert('這個日期已經存在，請勿重複新增。');
-        return;
-    }
-
-    const path = id
-        ? `trip_days?day_id=eq.${encodeURIComponent(id)}`
-        : 'trip_days';
-
-    const saveButton = document.querySelector(
-        '#day-modal button[onclick="saveTripDay()"]'
-    );
-
-    if (saveButton) {
-        saveButton.disabled = true;
-        saveButton.textContent = '儲存中…';
-    }
-
-    try {
-        const result = await sbFetch(path, {
-            method: id ? 'PATCH' : 'POST',
-            headers: {
-                'Prefer': 'return=representation'
-            },
-            body: JSON.stringify({
-                trip_date: date
-            })
-        });
-
-        if (!Array.isArray(result) || result.length === 0) {
-            throw new Error(
-                id
-                    ? '沒有更新任何日期，請確認 day_id 與 Supabase 更新權限。'
-                    : 'Supabase 沒有回傳新增的日期，請確認新增權限。'
-            );
-        }
-
-        if (id) {
-            currentDay = Number(id);
-        } else {
-            currentDay = Number(result[0].day_id);
-        }
-
-        await refreshTripDays();
-        await refreshItinerary();
-
-        closeModal('day-modal');
-        alert('旅行日期已成功儲存！');
-
-    } catch (error) {
-        console.error('儲存旅行日期失敗：', error);
-        alert('日期儲存失敗：\n' + (error.message || String(error)));
-    } finally {
-        if (saveButton) {
-            saveButton.disabled = false;
-            saveButton.textContent = '儲存';
-        }
-    }
-}
-ripDay() {
     const id = document.getElementById('day-edit-id').value;
     const date = document.getElementById('day-date-input').value;
 
@@ -1302,52 +1243,6 @@ async function refreshMembers() {
             `).join('');
             document.getElementById('who-manage-modal').classList.add('active');
         }
-		
-		async function sbFetch(path, options = {}) {
-    const method = (options.method || 'GET').toUpperCase();
-
-    try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
-            ...options,
-            headers: {
-                'apikey': SUPABASE_KEY,
-                'Authorization': `Bearer ${SUPABASE_KEY}`,
-                'Content-Type': 'application/json',
-                ...(method === 'POST' || method === 'PATCH'
-                    ? { 'Prefer': 'return=representation' }
-                    : {}),
-                ...(options.headers || {})
-            }
-        });
-
-        const text = await res.text();
-        let data = null;
-
-        if (text) {
-            try {
-                data = JSON.parse(text);
-            } catch {
-                data = text;
-            }
-        }
-
-        if (!res.ok) {
-            const message = typeof data === 'object' && data !== null
-                ? (data.message || data.details || data.hint || JSON.stringify(data))
-                : String(data || res.statusText);
-
-            throw new Error(
-                `Supabase HTTP ${res.status}: ${message}`
-            );
-        }
-
-        return data ?? [];
-    } catch (e) {
-        console.error('Supabase API 錯誤：', e);
-        throw e;
-    }
-}
-		
         async function addWho() {
             const val = document.getElementById('new-who-input').value;
             if (val) { await sbFetch('members', { method: 'POST', body: JSON.stringify({ name: val }) }); document.getElementById('new-who-input').value = ''; await refreshMembers(); openWhoManageModal(); }
@@ -1578,7 +1473,20 @@ async function saveClItem() {
         }
         setInterval(updateClock, 1000); updateClock();
 
+    function createPetal() {
+    const p = document.createElement('div');
+    p.className = 'petal';
 
+    const leaves = ['🍁', '🍂', '🍃'];
+    p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
+
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.fontSize = (Math.random() * 10 + 12) + 'px';
+    p.style.animationDuration = (Math.random() * 5 + 5) + 's';
+
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 10000);
+	}
         // ... 前面的程式碼保持不變 ...
 
 // --- ✨ 新增：Realtime 頻道變數 ✨ ---
@@ -1627,6 +1535,7 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
+// 修改原本的 window.onload
 window.onload = async () => {
     await refreshTripDays();
     await refreshMembers();
