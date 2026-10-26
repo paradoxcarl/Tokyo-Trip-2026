@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 
@@ -558,16 +558,14 @@ header h1 {
     </div>
 
     <div id="page-itinerary" class="tab-content active">
-        <div class="date-nav">
-            <div class="date-btn active" onclick="switchDay(8, this)"><span class="date-day">第一日</span><span class="date-num">4/8</span><span class="date-week">(三、水)</span></div>
-            <div class="date-btn" onclick="switchDay(9, this)"><span class="date-day">第二日</span><span class="date-num">4/9</span><span class="date-week">(四、木)</span></div>
-            <div class="date-btn" onclick="switchDay(10, this)"><span class="date-day">第三日</span><span class="date-num">4/10</span><span class="date-week">(五、金)</span></div>
-            <div class="date-btn" onclick="switchDay(11, this)"><span class="date-day">第四日</span><span class="date-num">4/11</span><span class="date-week">(六、土)</span></div>
-            <div class="date-btn" onclick="switchDay(12, this)"><span class="date-day">第五日</span><span class="date-num">4/12</span><span class="date-week">(日、日)</span></div>
-            <div class="date-btn" onclick="switchDay(13, this)"><span class="date-day">第六日</span><span class="date-num">4/13</span><span class="date-week">(一、月)</span></div>
-            <div class="date-btn" onclick="switchDay(14, this)"><span class="date-day">第七日</span><span class="date-num">4/14</span><span class="date-week">(二、火)</span></div>
-            <div class="date-btn" onclick="switchDay(15, this)"><span class="date-day">第八日</span><span class="date-num">4/15</span><span class="date-week">(三、水)</span></div>
-        </div>
+<div class="date-nav">
+    <div id="date-buttons" style="display:flex; gap:10px;"></div>
+    <button class="btn-add-inline"
+        style="min-width:80px;"
+        onclick="openDayModal()">
+        ＋ 日期
+    </button>
+</div>
         <div id="itinerary-list"></div>
     </div>
 
@@ -823,7 +821,35 @@ header h1 {
     </nav>
 
     <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; color:var(--main-purple); margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; color:var(--dark-pink); font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
+<div id="day-modal" class="overlay">
+    <div class="modal-content">
+        <button class="detail-close"
+            style="background:#F5E8CF;color:#526B45;top:15px;right:15px;"
+            onclick="closeModal('day-modal')">✕</button>
 
+        <div class="modal-title" id="day-modal-title">新增旅行日期</div>
+
+        <input type="hidden" id="day-edit-id">
+
+        <div class="form-group">
+            <label>旅行日期</label>
+            <input type="date" id="day-date-input">
+        </div>
+
+        <div class="modal-btns">
+            <button class="btn-cancel"
+                onclick="closeModal('day-modal')">取消</button>
+            <button class="btn-save"
+                onclick="saveTripDay()">儲存日期</button>
+        </div>
+
+        <button
+            id="day-delete-btn"
+            class="btn-cancel"
+            style="width:100%;margin-top:10px;padding:12px;border-radius:20px;display:none;"
+            onclick="deleteTripDay()">刪除此日期</button>
+    </div>
+</div>
     <script>
     
         const SUPABASE_URL = 'https://zyyjuzysjjdnuqwhummh.supabase.co';
@@ -842,9 +868,149 @@ header h1 {
         }
 
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+// ===== 旅行日期管理 =====
+let tripDays = [];
+let currentDay = null;
 
+function localDateString(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
+function weekdayLabel(dateString) {
+    const date = new Date(`${dateString}T12:00:00`);
+    return ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
+}
+
+function renderTripDays() {
+    const container = document.getElementById('date-buttons');
+
+    container.innerHTML = tripDays.map((day, index) => {
+        const date = new Date(`${day.trip_date}T12:00:00`);
+        const month = date.getMonth() + 1;
+        const dayNumber = date.getDate();
+
+        return `
+            <div style="position:relative;flex:0 0 85px;">
+                <button class="date-btn ${day.day_id === currentDay ? 'active' : ''}"
+                    style="width:85px;"
+                    onclick="switchDay(${day.day_id}, this)">
+                    <span class="date-day">第${index + 1}日</span>
+                    <span class="date-num">${month}/${dayNumber}</span>
+                    <span class="date-week">週${weekdayLabel(day.trip_date)}</span>
+                </button>
+                <button
+                    title="編輯日期"
+                    onclick="openDayModal(${day.day_id})"
+                    style="position:absolute;right:-3px;top:-5px;border:0;border-radius:50%;background:#F5E8CF;width:26px;height:26px;cursor:pointer;">
+                    ✏️
+                </button>
+            </div>
+        `;
+    }).join('');
+}
+
+async function refreshTripDays() {
+    const data = await sbFetch('trip_days?select=*&order=trip_date.asc');
+
+    if (!Array.isArray(data)) {
+        alert('讀取旅行日期失敗，請檢查 Supabase 設定。');
+        return;
+    }
+
+    tripDays = data;
+
+    if (!tripDays.some(day => day.day_id === currentDay)) {
+        currentDay = tripDays[0]?.day_id ?? null;
+    }
+
+    renderTripDays();
+    renderItinerary();
+}
+
+function openDayModal(dayId = null) {
+    const day = tripDays.find(d => d.day_id === dayId);
+
+    document.getElementById('day-edit-id').value = day ? day.day_id : '';
+    document.getElementById('day-date-input').value =
+        day?.trip_date || '';
+
+    document.getElementById('day-modal-title').innerText =
+        day ? '修改旅行日期' : '新增旅行日期';
+
+    document.getElementById('day-delete-btn').style.display =
+        day ? 'block' : 'none';
+
+    document.getElementById('day-modal').classList.add('active');
+}
+
+async function saveTripDay() {
+    const id = document.getElementById('day-edit-id').value;
+    const date = document.getElementById('day-date-input').value;
+
+    if (!date) {
+        alert('請選擇旅行日期。');
+        return;
+    }
+
+    if (tripDays.some(d =>
+        d.trip_date === date && String(d.day_id) !== String(id)
+    )) {
+        alert('這個日期已經存在，請勿重複新增。');
+        return;
+    }
+
+    const path = id
+        ? `trip_days?day_id=eq.${id}`
+        : 'trip_days';
+
+    const result = await sbFetch(path, {
+        method: id ? 'PATCH' : 'POST',
+        body: JSON.stringify({ trip_date: date })
+    });
+
+    if (!Array.isArray(result) || result.length === 0) {
+        alert('日期儲存失敗，請確認 Supabase 資料表與權限設定。');
+        return;
+    }
+
+    if (id) currentDay = Number(id);
+    else currentDay = result[0].day_id;
+
+    closeModal('day-modal');
+    await refreshTripDays();
+    await refreshItinerary();
+}
+
+async function deleteTripDay() {
+    const id = Number(document.getElementById('day-edit-id').value);
+    if (!id) return;
+
+    const hasItems = allItinerary.some(i => Number(i.day_id) === id);
+
+    const message = hasItems
+        ? '這一天仍有行程。刪除日期不會自動刪除行程資料，但該日行程將不再顯示於日期選單。確定繼續？'
+        : '確定刪除這個旅行日期？';
+
+    if (!confirm(message)) return;
+
+    const result = await sbFetch(`trip_days?day_id=eq.${id}`, {
+        method: 'DELETE'
+    });
+
+    if (!Array.isArray(result) || result.length === 0) {
+        alert('日期刪除失敗，請檢查 Supabase 權限。');
+        return;
+    }
+
+    currentDay = null;
+    closeModal('day-modal');
+    await refreshTripDays();
+    await refreshItinerary();
+}
         // --- 行程功能 ---
-        let currentDay = 8;
         let allItinerary = [];
 
         async function refreshItinerary() {
@@ -949,10 +1115,12 @@ header h1 {
             document.getElementById('detail-overlay').classList.add('active');
         }
         function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
-        function switchDay(d, btn) {
-            document.querySelectorAll('.date-nav .date-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active'); currentDay = d; renderItinerary();
-        }
+
+		function switchDay(dayId) {
+ 		   currentDay = Number(dayId);
+					    renderTripDays();
+					    renderItinerary();
+		}
 
         // --- 匯率與日文 ---
         function convert(type) {
@@ -1337,13 +1505,12 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // 修改原本的 window.onload
-window.onload = () => {
-    refreshMembers(); 
-    refreshCategories();
-    refreshChecklist(); 
-    refreshItinerary();
-    
-    // 初次載入時啟動即時同步
+window.onload = async () => {
+    await refreshTripDays();
+    await refreshMembers();
+    await refreshCategories();
+    await refreshChecklist();
+    await refreshItinerary();
     subscribeRealtime();
 };
 
