@@ -1034,6 +1034,7 @@ async function deleteTripDay() {
     if (!Array.isArray(result) || result.length === 0) {
         alert('日期刪除成功，請重新整理。');
         return;
+		return;
     }
 
     currentDay = null;
