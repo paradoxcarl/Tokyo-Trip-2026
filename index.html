@@ -273,7 +273,8 @@
         /* 導覽列圖示動畫 */
         .nav-tab .nav-icon { transition: transform 0.3s ease; }
         .nav-tab.active .nav-icon { transform: scale(1.2) translateY(-3px); }
-    /* ===== 日本秋日主題覆寫 ===== */
+
+/* ===== 日本秋日主題覆寫 ===== */
 
 body {
     background-color: var(--bg-color);
@@ -537,7 +538,7 @@ header h1 {
                 </div>
             </div>
             <div class="form-group">
-                <label>行程 / 地點名稱</label>
+                <label>行程 / 地點名稱 (必填)</label>
                 <input type="text" id="form-loc" placeholder="(必填) 要去哪兒？">
             </div>
             <div class="form-group">
@@ -578,7 +579,7 @@ header h1 {
         </div>
         <div style="margin-top: 20px; background: #fdf2f4; border: 1px dashed var(--dark-pink); padding: 15px; border-radius: 15px;">
             <label style="font-size: 0.8rem; color: var(--dark-pink);">🪄 自訂匯率 (1 JPY = ? TWD)</label>
-            <input type="number" id="base-rate" value="0.21" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
+            <input type="number" id="base-rate" value="0.20" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
         </div>
     </div>
 
@@ -607,7 +608,6 @@ header h1 {
             <div class="phrase-item" onclick="openFS('タオルを替えてください', '請幫我更換毛巾', 'Taoru o kaete kudasai')">
                 <b>請更換毛巾</b><p>タオルを替えてください</p><small class="romaji">Taoru o kaete kudasai</small></div>
 
-
             <div class="phrase-item" onclick="openFS('Wi-Fiのパスワードは何ですか？', 'Wi-Fi密碼是什麼？', 'Waifa-i no pasuwa-do wa nan desu ka?')">
                 <b>Wi-Fi密碼是什麼？</b><p>Wi-Fiのパスワードは何ですか？</p><small class="romaji">Waifa-i no pasuwa-do wa nan desu ka?</small></div>
 
@@ -624,10 +624,7 @@ header h1 {
                 <b>我要辦理退房</b><p>チェックアウトをお願いします</p><small class="romaji">Chekkuauto o onegaishimasu</small></div>
         </div>
 
-
-
-
-        <div id="cat-transport" class="phrase-list">
+		<div id="cat-transport" class="phrase-list">
             <div class="phrase-item" onclick="openFS('お手洗いはどこですか？', '廁所在哪裡？', 'Otearai wa doko desu ka?')">
                 <b>廁所在哪裡？</b><p>お手洗いはどこですか？</p><small class="romaji">Otearai wa doko desu ka?</small></div>
 
@@ -654,8 +651,7 @@ header h1 {
 
             <div class="phrase-item" onclick="openFS('タクシーを3人で乗りたいです', '我們3人想共乘計程車', 'Takushi o sannin de noritai desu')">
                 <b>我們3人想共乘計程車</b><p>タクシーを3人で乗りたいです</p><small class="romaji">Takushi o sannin de noritai desu</small></div>
-	</div>
-
+		</div>
 
         <div id="cat-shop" class="phrase-list">
             <div class="phrase-item" onclick="openFS('袋はいりません', '我不需要袋子', 'Fukuro wa irimasen')">
@@ -700,8 +696,6 @@ header h1 {
             <div class="phrase-item" onclick="openFS('これを〇ください', '請給我〇個這個', 'Kore o 〇 kudasai')">
                 <b>請給我〇個這個</b><p>これを〇ください</p><small class="romaji">Kore o 〇 kudasai</small></div>
         </div>
-
-
 
         <div id="cat-food" class="phrase-list">
             <div class="phrase-item" onclick="openFS('三人です', '我們3位', 'Sannin desu')">
@@ -759,7 +753,7 @@ header h1 {
 
             <div class="phrase-item" onclick="openFS('ちょっと待ってください', '請稍等一下', 'Chotto matte kudasai')">
                 <b>請稍等一下</b><p>ちょっと待ってください</p><small class="romaji">Chotto matte kudasai</small></div>
-	</div>
+		</div>
     </div>
 
     <div id="page-checklist" class="tab-content">
@@ -871,20 +865,7 @@ header h1 {
 
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 // ===== 旅行日期管理 =====
-let tripDays = [];
-let currentDay = null;
 
-function localDateString(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
-
-function weekdayLabel(dateString) {
-    const date = new Date(`${dateString}T12:00:00`);
-    return ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
-}
 
 
 function renderTripDays() {
