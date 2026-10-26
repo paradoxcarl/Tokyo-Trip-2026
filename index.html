@@ -7,7 +7,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🍁2026/11東京迪士尼樂園楓葉銀杏行</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
@@ -33,7 +33,6 @@
 }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
 
 
 
@@ -53,9 +52,7 @@
 .cl-item:active {
     cursor: grabbing;
 }
-        @keyframes petal-fall { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(110vh) rotate(450deg); } }
-        @keyframes petal-shake { 0%, 100% { margin-left: 0px; } 50% { margin-left: 30px; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
 
         header {
             background: linear-gradient(135deg, var(--header-purple-light) 0%, #fce4ec 100%);
@@ -300,10 +297,6 @@ header {
     border-bottom: 2px solid var(--ginkgo-gold);
 }
 
-header h1 {
-    color: var(--dark-pink);
-}
-
 .time-box {
     color: var(--forest-green);
     border-color: rgba(82, 107, 69, 0.2);
@@ -463,12 +456,6 @@ header h1 {
     border: 2px dashed var(--ginkgo-gold) !important;
 }
 
-/* 秋日飄落效果 */
-.petal {
-    filter: drop-shadow(
-        2px 2px 2px rgba(130, 83, 42, 0.18)
-    );
-}
 
 @media (hover: hover) {
     .date-btn:hover,
@@ -884,20 +871,7 @@ header h1 {
 let tripDays = [];
 let currentDay = null;
 
-function localDateString(date) {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
-
-function weekdayLabel(dateString) {
-    const date = new Date(`${dateString}T12:00:00`);
-    return ['日', '一', '二', '三', '四', '五', '六'][date.getDay()];
-}
-
-
-function renderTripDays() {
+	function renderTripDays() {
     const container = document.getElementById('date-buttons');
 
     // 中文星期與日本語星期對照
@@ -1483,32 +1457,10 @@ async function saveClItem() {
         }
         setInterval(updateClock, 1000); updateClock();
 
-    function createPetal() {
-    const p = document.createElement('div');
-    p.className = 'petal';
-
-    const leaves = ['🍁', '🍂', '🍃'];
-    p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
-
-    p.style.left = Math.random() * 100 + 'vw';
-    p.style.fontSize = (Math.random() * 10 + 12) + 'px';
-    p.style.animationDuration = (Math.random() * 5 + 5) + 's';
-
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 10000);
-	}
-        // ... 前面的程式碼保持不變 ...
-
 // --- ✨ 新增：Realtime 頻道變數 ✨ ---
 let itineraryChannel = null;
 let checklistChannel = null;
 
-// --- ✨ 新增：啟動即時同步的函式 ✨ ---
-function subscribeRealtime() {
-    // 如果已經有連線，先清除
-if (supabaseClient.getChannels().length > 0) {
-        supabaseClient.removeAllChannels();
-    }
 
 
     // 訂閱行程表變動
@@ -1541,7 +1493,6 @@ document.addEventListener("visibilitychange", () => {
         refreshCategories();
         refreshChecklist(); 
         refreshItinerary();
-        subscribeRealtime();
     }
 });
 
@@ -1552,7 +1503,6 @@ window.onload = async () => {
     await refreshCategories();
     await refreshChecklist();
     await refreshItinerary();
-    subscribeRealtime();
 };
 
 
