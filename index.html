@@ -31,17 +31,16 @@ body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-color
 .cl-item { cursor: grab; user-select: none; }
 .cl-item:active { cursor: grabbing; }
 
-@keyframes petal-fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 100% { transform: translateY(110vh) rotate(450deg); opacity: 0.2; } }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
 header {
     background: linear-gradient(135deg, #F5E8CF 0%, #F8E7D5 55%, #EED4B4 100%);
-    text-align: center; padding: 15px 10px; border-bottom: 2px solid var(--ginkgo-gold);
+    text-align: center; padding: 12px 10px; border-bottom: 2px solid var(--ginkgo-gold);
     position: sticky; top: 0; z-index: 200; backdrop-filter: blur(8px);
 }
-header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; font-weight: 800; line-height: 1.5; }
+header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; font-weight: 800; line-height: 1.4; }
 .time-box {
-    background: rgba(255,255,255,0.7); margin: 6px auto 0; padding: 4px 12px;
+    background: rgba(255,255,255,0.7); margin: 5px auto 0; padding: 3px 12px;
     border-radius: 12px; font-size: 0.7rem; color: var(--forest-green);
     font-weight: bold; border: 1px solid rgba(82, 107, 69, 0.2); 
     width: fit-content; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(130, 83, 42, 0.08);
@@ -51,8 +50,9 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
 .clock-item { display: flex; align-items: center; gap: 4px; }
 
 .tab-content { display: none; padding: 15px 15px 100px 15px; min-height: 80vh; }
-.tab-content.active { display: block; animation: fadeInUp 0.4s ease-out; }
+.tab-content.active { display: block; animation: fadeInUp 0.35s ease-out; }
 
+/* 行程日期列 */
 .date-nav {
     display: flex; overflow-x: auto; gap: 10px; margin-bottom: 15px;
     padding: 10px 5px; position: sticky; top: 78px; background-color: var(--bg-color); z-index: 100;
@@ -93,6 +93,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
 .itin-action-btn { background: #fff; color: var(--dark-pink); border: 1px solid #F0E1CC; width: 32px; height: 32px; border-radius: 50%; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
 .itin-map-btn { color: #4285F4; border-color: #e8f0fe; }
 
+/* 彈窗樣式 */
 .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1500; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
 .overlay.active { display: flex; }
 .detail-card { width: 100%; max-width: 350px; background: white; border-radius: 30px; overflow: hidden; position: relative; animation: fadeInUp 0.3s ease-out; }
@@ -106,16 +107,16 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
 .detail-text-content { font-size: 1rem; color: var(--text-color); font-weight: 500; white-space: pre-wrap; }
 .detail-close { position: absolute; top: 15px; right: 15px; width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.2); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-.modal-content { background: white; width: 100%; max-width: 360px; border-radius: 25px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); animation: fadeInUp 0.3s ease-out; position: relative; max-height: 90vh; overflow-y: auto; }
-.modal-title { font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); margin-bottom: 20px; text-align: center; }
-.form-group { margin-bottom: 15px; }
-.form-group label { display: block; font-size: 0.75rem; color: #aaa; margin-bottom: 5px; font-weight: bold; }
-.form-group input, .form-group textarea { width: 100%; border: 2px solid #E8D8B9; border-radius: 12px; padding: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
+.modal-content { background: white; width: 100%; max-width: 380px; border-radius: 25px; padding: 22px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); animation: fadeInUp 0.3s ease-out; position: relative; max-height: 90vh; overflow-y: auto; }
+.modal-title { font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); margin-bottom: 18px; text-align: center; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 0.75rem; color: #8d6e63; margin-bottom: 5px; font-weight: bold; }
+.form-group input, .form-group textarea { width: 100%; border: 2px solid #E8D8B9; border-radius: 12px; padding: 10px 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
 .form-group input:focus, .form-group textarea:focus { border-color: var(--ginkgo-gold); background: #FFFCF5; }
 
 .time-range { display: flex; align-items: center; gap: 10px; }
 .time-range input { flex: 1; text-align: center; }
-.modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+.modal-btns { display: flex; gap: 10px; margin-top: 18px; }
 .modal-btns button { flex: 1; padding: 12px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
 .modal-btns button:active { transform: scale(0.95); }
 .btn-cancel { background: #eee; color: #777; }
@@ -123,7 +124,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
 .btn-add-inline { flex: 0 0 80px; background: var(--forest-green); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 10px rgba(82,107,69,0.2); transition: 0.2s; }
 .btn-delete-itin-top { position: absolute; top: 15px; left: 15px; width: 35px; height: 35px; border-radius: 50%; background: #fff5f5; color: #e53935; border: 1.5px solid #ffcdd2; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
 
-.card { background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--card-shadow); }
+.card { background: var(--white); padding: 18px; border-radius: 20px; box-shadow: var(--card-shadow); }
 .input-group { margin-bottom: 15px; position: relative; }
 .input-group label { display: block; font-size: 0.8rem; color: #a1887f; margin-bottom: 5px; }
 .input-group input { width: 100%; padding: 12px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 1.3rem; outline: none; font-weight: 700; background: #fafafa; }
@@ -135,63 +136,129 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
 .back-btn-styled { background: var(--dark-pink); color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; border: none; font-size: 0.9rem; }
 .phrase-list { display: none; padding-top: 65px; }
 .phrase-list.active { display: block; animation: fadeInUp 0.3s; }
-.phrase-item { background: white; padding: 18px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #eee; border-left: 6px solid var(--ginkgo-gold); }
+.phrase-item { background: white; padding: 16px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #eee; border-left: 6px solid var(--ginkgo-gold); }
 .phrase-item b { display: block; color: var(--dark-pink); font-size: 1rem; margin-bottom: 4px; }
 .phrase-item .romaji { display: block; color: var(--forest-green); font-size: 0.75rem; font-style: italic; margin-top: 2px; }
 
+/* 旅伴 Chip 列 */
 .who-container { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
-.who-chip { position: relative; flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; background: #f5f5f5; border: 2px solid transparent; font-size: 0.8rem; color: #888; font-weight: 700; cursor: pointer; }
+.who-chip { position: relative; flex: 0 0 auto; padding: 7px 15px; border-radius: 50px; background: #f5f5f5; border: 2px solid transparent; font-size: 0.8rem; color: #888; font-weight: 700; cursor: pointer; }
 .who-chip.active { background: #F7E6D7; border-color: var(--dark-pink); color: var(--dark-pink); }
+
 .checklist-tabs { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; align-items: center; }
 .cl-tab-btn { flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; border: 2px solid var(--forest-green); background: white; color: var(--forest-green); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
 .cl-tab-btn.active { background: var(--forest-green); color: white; }
 .cl-tab-manage { font-size: 0.7rem; padding: 6px 12px; background: #eee; border: none; border-radius: 50px; color: #777; cursor: pointer; font-weight: bold; flex-shrink: 0; }
 
-/* ✨ 清單卡片與圖片樣式 ✨ */
-.cl-item { display: flex; align-items: center; gap: 12px; background: white; padding: 14px; border-radius: 18px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #E8D8B9; }
-.cl-item.done { opacity: 0.55; }
-.cl-item.done .cl-text { text-decoration: line-through; }
-.cl-check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--forest-green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; font-weight: bold; }
-.cl-item.done .cl-check { background: var(--forest-green); color: white; }
-.cl-img-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 12px; border: 1.5px solid var(--ginkgo-gold); cursor: zoom-in; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
-.cl-text { flex: 1; font-size: 0.95rem; font-weight: 500; cursor: pointer; word-break: break-word; }
-.cl-who { font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px; border-radius: 10px; flex-shrink: 0; }
-.cl-del { color: #ccc; border: none; background: none; font-size: 1.1rem; padding: 5px; cursor: pointer; }
-.cl-del:hover { color: #e53935; }
+/* ✨✨ 購物清單卡片核心樣式（縮圖在名稱後面、多圖並排、備註欄位）✨✨ */
+.shop-item-card {
+    background: white; border-radius: 18px; padding: 12px 14px; margin-bottom: 11px;
+    box-shadow: 0 4px 12px rgba(130, 83, 42, 0.06); border: 1.5px solid #E8D8B9;
+    display: flex; flex-direction: column; gap: 6px; transition: 0.2s;
+}
+.shop-item-card.done { opacity: 0.55; }
+.shop-item-card.done .shop-title-text { text-decoration: line-through; }
 
-/* 圖片上傳區塊樣式 */
-.img-upload-box { background: #FFFCF5; border: 2px dashed #D5AC38; border-radius: 14px; padding: 12px; margin-bottom: 15px; }
-.img-upload-btns { display: flex; gap: 8px; margin-top: 8px; }
-.btn-img-action { flex: 1; padding: 8px; background: white; border: 1.5px solid #D5AC38; color: #526B45; border-radius: 10px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
-.img-preview-container { margin-top: 10px; position: relative; display: flex; flex-direction: column; align-items: center; }
-.img-preview { max-width: 100%; max-height: 180px; object-fit: contain; border-radius: 10px; border: 1px solid #E8D8B9; }
-.btn-remove-img { position: absolute; top: -8px; right: -8px; width: 26px; height: 26px; border-radius: 50%; background: #e53935; color: white; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.shop-card-main-row {
+    display: flex; align-items: center; gap: 10px; width: 100%;
+}
+.cl-check {
+    width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--forest-green);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    cursor: pointer; font-weight: bold; color: white; transition: 0.2s;
+}
+.shop-item-card.done .cl-check { background: var(--forest-green); }
+
+/* 名稱與縮圖並排區塊（名稱在前，多張縮圖在後） */
+.shop-title-and-thumbs {
+    flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; cursor: pointer;
+}
+.shop-title-text {
+    font-size: 1rem; font-weight: 700; color: #493B30; word-break: break-word; line-height: 1.3;
+}
+
+/* 縮圖橫排容器（放在名稱後面） */
+.shop-thumbs-wrap {
+    display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+.shop-thumb {
+    width: 44px; height: 44px; border-radius: 10px; object-fit: cover;
+    border: 1.5px solid var(--ginkgo-gold); cursor: zoom-in; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.15s; flex-shrink: 0;
+}
+.shop-thumb:active { transform: scale(0.92); }
+
+/* 備註欄位顯示樣式 */
+.shop-notes-row {
+    font-size: 0.82rem; color: #8d6e63; padding-left: 38px; display: flex;
+    align-items: flex-start; gap: 5px; white-space: pre-wrap; line-height: 1.4;
+}
+
+.cl-who-badge {
+    font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px;
+    border-radius: 10px; flex-shrink: 0; font-weight: bold;
+}
+.btn-card-del {
+    color: #ccc; border: none; background: none; font-size: 1.15rem; padding: 4px; cursor: pointer;
+}
+.btn-card-del:hover { color: #e53935; }
+
+/* 購物項目統計標籤 */
+.shop-stats-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    background: #FFF9ED; border: 1.5px dashed #D5AC38; border-radius: 14px;
+    padding: 8px 14px; font-size: 0.8rem; font-weight: bold; color: var(--forest-green);
+    margin-bottom: 12px;
+}
+
+/* 圖片多選上傳面板 */
+.multi-img-upload-box {
+    background: #FFFCF5; border: 2px dashed #D5AC38; border-radius: 15px; padding: 12px; margin-bottom: 14px;
+}
+.multi-img-btns { display: flex; gap: 8px; margin-top: 6px; }
+.btn-upload-action {
+    flex: 1; padding: 8px; background: white; border: 1.5px solid #D5AC38;
+    color: #526B45; border-radius: 10px; font-size: 0.8rem; font-weight: bold; cursor: pointer;
+}
+.multi-img-grid {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
+}
+.multi-img-item {
+    position: relative; width: 62px; height: 62px; border-radius: 10px; overflow: hidden;
+    border: 1.5px solid #D5AC38; box-shadow: 0 2px 5px rgba(0,0,0,0.08); flex-shrink: 0;
+}
+.multi-img-item img { width: 100%; height: 100%; object-fit: cover; }
+.btn-remove-single-img {
+    position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; border-radius: 50%;
+    background: #e53935; color: white; border: none; font-size: 11px; font-weight: bold;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
 
 /* 全螢幕圖片燈箱 */
-#cl-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+#cl-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 3000; align-items: center; justify-content: center; padding: 15px; }
 #cl-lightbox.active { display: flex; animation: fadeInUp 0.25s; }
-.lightbox-box { max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; align-items: center; background: #FBF7EF; border-radius: 20px; overflow: hidden; border: 2px solid #D5AC38; }
-.lightbox-img { max-width: 85vw; max-height: 70vh; object-fit: contain; padding: 10px; }
-.lightbox-caption { padding: 10px 15px; font-weight: bold; color: var(--dark-pink); text-align: center; }
+.lightbox-box { max-width: 92vw; max-height: 88vh; display: flex; flex-direction: column; align-items: center; background: #FBF7EF; border-radius: 20px; overflow: hidden; border: 2px solid #D5AC38; }
+.lightbox-img { max-width: 88vw; max-height: 72vh; object-fit: contain; padding: 8px; }
+.lightbox-caption { padding: 8px 15px; font-weight: bold; color: var(--dark-pink); text-align: center; }
 
-.fab { position: fixed; bottom: 95px; right: 25px; width: 60px; height: 60px; background: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28); z-index: 500; border: none; cursor: pointer; }
-.bottom-nav { position: fixed; bottom: 15px; left: 15px; right: 15px; background: rgba(255,255,255,0.95); display: flex; height: 65px; z-index: 1000; border-radius: 30px; box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px); }
-.nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75rem; color: #ccc; text-decoration: none; }
-.nav-tab.active { color: var(--dark-pink); font-weight: 700; }
-.nav-tab .nav-icon { font-size: 1.4rem; }
+/* 底部導覽列（5個項目：行程、購物、待辦、匯率、日文） */
+.bottom-nav {
+    position: fixed; bottom: 12px; left: 8px; right: 8px; background: rgba(255,255,255,0.96);
+    display: flex; height: 64px; z-index: 1000; border-radius: 30px;
+    box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px);
+}
+.nav-tab {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 0.72rem; color: #bbb; text-decoration: none; transition: 0.2s;
+}
+.nav-tab.active { color: var(--dark-pink); font-weight: 800; transform: scale(1.04); }
+.nav-tab .nav-icon { font-size: 1.35rem; margin-bottom: 2px; }
 
+.fab { position: fixed; bottom: 90px; right: 20px; width: 58px; height: 58px; background: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28); z-index: 500; border: none; cursor: pointer; }
 #fs-overlay { display: none; position: fixed; inset: 0; background: var(--bg-color); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; }
 #fs-overlay.active { display: flex; }
 #fs-jp { color: var(--forest-green) !important; }
 #fs-ch { color: var(--dark-pink) !important; }
-
-.manage-btn-group { display: flex; gap: 5px; }
-.manage-icon-btn { border: none; background: #f5f5f5; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
-.btn-edit-small { color: #4285F4; }
-.btn-del-small { color: #e53935; }
-.btn-sort-small { color: #9e9e9e; background: #eee; }
-
-.petal { position: fixed; top: -20px; z-index: 10; pointer-events: none; animation: petal-fall linear infinite; filter: drop-shadow(2px 2px 2px rgba(130,83,42,0.18)); user-select: none; }
     </style>
 </head>
 <body>
@@ -271,16 +338,47 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         </div>
     </div>
 
-    <!-- 行程頁面 -->
+    <!-- 1. 行程頁面 -->
     <div id="page-itinerary" class="tab-content active">
         <div class="date-nav">
             <div id="date-buttons" style="display:flex; gap:10px;"></div>
-            <button class="btn-add-inline" style="min-width:80px;" onclick="openDayModal()">⭐</button>
+            <button class="date-btn" style="flex:0 0 85px; width:85px; height:85px; border: 2px dashed #D5AC38; background: #FFFCF5; color: var(--forest-green); cursor: pointer;" onclick="openDayModal()">
+                <span style="font-size: 1.35rem; margin-bottom: 2px;">⭐</span>
+                <span style="font-size: 0.8rem; font-weight: 700;">新增日期</span>
+            </button>
         </div>
         <div id="itinerary-list"></div>
     </div>
 
-    <!-- 匯率頁面 -->
+    <!-- 2. ✨✨ 獨立出來的「購物清單」頁面 ✨✨ -->
+    <div id="page-shopping" class="tab-content">
+        <!-- 購物清單統計 -->
+        <div class="shop-stats-bar" id="shop-stats-bar">
+            <span>🛍️ 購物清單</span>
+            <span id="shop-count-text">待買 0 項</span>
+        </div>
+
+        <!-- 購物項目列表 -->
+        <div id="shopping-items-list" style="padding-bottom: 80px;"></div>
+    </div>
+
+    <!-- 3. 待辦/行李等其他清單頁面 -->
+    <div id="page-checklist" class="tab-content">
+        <div class="card" style="margin-bottom: 12px; padding: 14px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 旅伴</span>
+                <button onclick="openWhoManageModal()" style="border: none; background: none; color: var(--forest-green); font-weight: 700; cursor: pointer;">⚙️ 管理</button>
+            </div>
+            <div class="who-container" id="who-selector"></div>
+        </div>
+        <div class="checklist-tabs" id="cl-tabs-container">
+            <div id="cl-tabs" style="display: flex; gap: 8px; overflow-x: auto; flex: 1;"></div>
+            <button class="cl-tab-manage" onclick="openCatModal()">⚙️ 分類</button>
+        </div>
+        <div id="cl-items-list" style="padding-bottom: 80px;"></div>
+    </div>
+
+    <!-- 4. 匯率頁面 -->
     <div id="page-exchange" class="tab-content">
         <div class="card">
             <div class="input-group"><label>🇯🇵 日幣 JPY</label><input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')"><span class="currency-unit">円</span></div>
@@ -292,7 +390,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         </div>
     </div>
 
-    <!-- 日文常用語頁面 -->
+    <!-- 5. 日文常用語頁面 -->
     <div id="page-japanese" class="tab-content">
         <div id="fixed-back-container"><button class="back-btn-styled" onclick="backToMenu()">← 返回分類</button></div>
         <div id="jp-menu" class="jp-menu-grid">
@@ -320,7 +418,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             <div class="phrase-item" onclick="openFS('切符売り場はどこですか？', '售票處在哪裡？', 'Kippu uriba wa doko desu ka?')"><b>售票處在哪裡？</b><p>切符売り場はどこですか？</p><small class="romaji">Kippu uriba wa doko desu ka?</small></div>
             <div class="phrase-item" onclick="openFS('ここに行きたいです', '我想去這裡（出示地圖）', 'Koko ni ikitai desu')"><b>我想去這裡（出示地圖）</b><p>ここに行きたいです</p><small class="romaji">Koko ni ikitai desu</small></div>
             <div class="phrase-item" onclick="openFS('ICカードにチャージしたいです', '我想加值IC卡', 'Aishi-ka-do ni cha-ji shitai desu')"><b>我想加值IC卡</b><p>ICカードにチャージしたいです</p><small class="romaji">Aishi-ka-do ni cha-ji shitai desu</small></div>
-            <div class="phrase-item" onclick="openFS('これは〇〇駅に止まりますか？', '這班車會停靠〇〇站嗎？', 'Kore wa 〇〇-eki ni tomarimasu ka?')"><b>會停靠〇〇站嗎？</b><p>これは〇〇駅に止まりますか？</p><small class="romaji">Kore wa 〇〇-eki ni tomarimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('これは〇〇駅に止まりますか？', '這班車會停靠〇〇站嗎？', 'Kore wa 〇〇-eki ni tomarimasu ka?')"><b>會停靠〇〇站嗎？</b><p>這是〇〇駅に止まりますか？</p><small class="romaji">Kore wa 〇〇-eki ni tomarimasu ka?</small></div>
             <div class="phrase-item" onclick="openFS('〇〇駅はどこですか？', '〇〇車站在哪裡？', '〇〇 chikai eki wa doko desu ka?')"><b>〇〇車站在哪裡？</b><p>〇〇駅はどこですか？</p><small class="romaji">〇〇 chikai eki wa doko desu ka?</small></div>
             <div class="phrase-item" onclick="openFS('〇〇行きのバス停はどこですか？', '往〇〇的巴士站在哪裡？', '〇〇-iki no basutei wa doko desu ka?')"><b>往〇〇的巴士站在哪裡？</b><p>〇〇行きのバス停はどこですか？</p><small class="romaji">XX-iki no basutei wa doko desu ka?</small></div>
             <div class="phrase-item" onclick="openFS('タクシーを3人で乗りたいです', '我們3人想共乘計程車', 'Takushi o sannin de noritai desu')"><b>我們3人想共乘計程車</b><p>タクシーを3人で乗りたいです</p><small class="romaji">Takushi o sannin de noritai desu</small></div>
@@ -365,22 +463,6 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         </div>
     </div>
 
-    <!-- 清單頁面 -->
-    <div id="page-checklist" class="tab-content">
-        <div class="card" style="margin-bottom: 15px;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 旅伴</span>
-                <button onclick="openWhoManageModal()" style="border: none; background: none; color: var(--forest-green); font-weight: 700; cursor: pointer;">⚙️ 管理</button>
-            </div>
-            <div class="who-container" id="who-selector"></div>
-        </div>
-        <div class="checklist-tabs" id="cl-tabs-container">
-            <div id="cl-tabs" style="display: flex; gap: 8px; overflow-x: auto; flex: 1;"></div>
-            <button class="cl-tab-manage" onclick="openCatModal()">⚙️ 分類</button>
-        </div>
-        <div id="cl-items-list"></div>
-    </div>
-
     <!-- 旅伴管理 Modal -->
     <div id="who-manage-modal" class="overlay">
         <div class="modal-content">
@@ -419,37 +501,52 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         </div>
     </div>
 
-    <!-- ✨ 清單項目新增/修改 Modal (含圖片上傳與網址) ✨ -->
+    <!-- ✨✨ 清單項目 Modal（含物品名稱、備註欄位、多圖上傳與網址）✨✨ -->
     <div id="cl-item-modal" class="overlay">
         <div class="modal-content">
             <div class="modal-title" id="cl-modal-title">清單項目</div>
             <input type="hidden" id="cl-edit-id">
-            
+            <input type="hidden" id="cl-edit-category">
+
             <div class="form-group">
-                <label>內容 / 物品名稱</label>
-                <textarea id="cl-text-input" placeholder="例如：達菲熊爆米花桶、合利他命、抹茶零食..." rows="3"></textarea>
+                <label>物品 / 項目名稱 <span style="color:#B74735">*</span></label>
+                <input type="text" id="cl-name-input" placeholder="例如：達菲熊爆米花桶、合利他命、東京芭娜娜...">
             </div>
 
-            <!-- 圖片設定區塊 -->
-            <div class="img-upload-box">
-                <label style="font-size: 0.75rem; font-weight: bold; color: var(--dark-pink); display: block;">📸 物品圖片 (拍照 / 相簿 / 網址)</label>
-                <div class="img-upload-btns">
-                    <button type="button" class="btn-img-action" onclick="document.getElementById('cl-img-file-input').click()">📷 拍照/選照片</button>
-                    <button type="button" class="btn-img-action" onclick="toggleUrlField()">🔗 貼上網址</button>
-                </div>
-                
-                <input type="file" id="cl-img-file-input" accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
-                
-                <div id="cl-url-container" style="display: none; margin-top: 8px;">
-                    <input type="url" id="cl-img-url-input" placeholder="https://... 圖片網址" style="padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid #D5AC38;">
-                    <button type="button" onclick="applyImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">套用網址</button>
+            <!-- ✨ 新增的備註欄位 ✨ -->
+            <div class="form-group">
+                <label>備註 / 規格說明 (選填)</label>
+                <textarea id="cl-notes-input" placeholder="例如：買2盒、尺寸L、世界市集商店限定、預估 ¥3,500、代購給小美..." rows="2"></textarea>
+            </div>
+
+            <!-- 登記旅伴 -->
+            <div class="form-group">
+                <label>登記旅伴</label>
+                <div id="modal-who-chips" style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;"></div>
+            </div>
+
+            <!-- ✨ 支援多張圖片上傳／拍照／網址 ✨ -->
+            <div class="multi-img-upload-box">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 物品圖片 (可放多張照片)</label>
+                    <span id="img-count-badge" style="font-size: 0.7rem; color: #795A22; font-weight: bold;">0 張</span>
                 </div>
 
-                <div id="cl-preview-wrap" class="img-preview-container" style="display:none;">
-                    <button type="button" class="btn-remove-img" onclick="removeSelectedImage()">✕</button>
-                    <img id="cl-preview-img" class="img-preview" src="" alt="預覽">
+                <div class="multi-img-btns">
+                    <button type="button" class="btn-upload-action" onclick="document.getElementById('cl-multi-file-input').click()">📷 拍照/加照片</button>
+                    <button type="button" class="btn-upload-action" onclick="toggleUrlField()">🔗 貼上網址</button>
                 </div>
-                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 圖片將直接上傳至 Supabase Storage (<code>checklist-images</code>)</div>
+                
+                <input type="file" id="cl-multi-file-input" accept="image/*" multiple style="display:none;" onchange="handleMultiFilesSelect(event)">
+                
+                <div id="cl-url-container" style="display: none; margin-top: 8px;">
+                    <input type="url" id="cl-img-url-input" placeholder="https://... 貼上圖片網址" style="padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid #D5AC38;">
+                    <button type="button" onclick="applySingleImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">➕ 加入此圖片</button>
+                </div>
+
+                <!-- 多圖縮圖預覽列 -->
+                <div id="cl-images-preview-grid" class="multi-img-grid"></div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳至 Supabase Storage (<code>checklist-images</code>)</div>
             </div>
 
             <div class="modal-btns">
@@ -486,11 +583,13 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         </div>
     </div>
 
+    <!-- 底部導覽列（5個項目：行程、購物、待辦、匯率、日文） -->
     <nav class="bottom-nav">
         <a href="#" class="nav-tab active" onclick="switchTab('itinerary', this)"><span class="nav-icon">📅</span><span>行程</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('shopping', this)"><span class="nav-icon">🛍️</span><span>購物</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>待辦</span></a>
         <a href="#" class="nav-tab" onclick="switchTab('exchange', this)"><span class="nav-icon">💰</span><span>匯率</span></a>
         <a href="#" class="nav-tab" onclick="switchTab('japanese', this)"><span class="nav-icon">🍬</span><span>日文</span></a>
-        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>清單</span></a>
     </nav>
 
     <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
@@ -737,11 +836,27 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         }
 
         function renderWhoSelector() { 
-            document.getElementById('who-selector').innerHTML = membersData.map(m => `
+            const container = document.getElementById('who-selector');
+            if (!container) return;
+            container.innerHTML = membersData.map(m => `
                 <div class="who-chip ${m.name === currentWho ? 'active' : ''}" onclick="setWho('${m.name}')">${m.name}</div>
             `).join(''); 
         }
-        function setWho(name) { currentWho = name; localStorage.setItem('osaka_who', name); localStorage.setItem('currentUserName', name); renderWhoSelector(); renderItems(); }
+
+        function setWho(name) { 
+            currentWho = name; 
+            localStorage.setItem('osaka_who', name); 
+            localStorage.setItem('currentUserName', name); 
+            renderWhoSelector(); 
+            renderItems(); 
+        }
+
+        function setShoppingWho(name) {
+            shoppingSelectedWho = name;
+            renderShoppingWhoSelector();
+            renderShoppingList();
+        }
+
         function openWhoManageModal() {
             document.getElementById('who-list-container').innerHTML = membersData.map((m, i) => `
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
@@ -767,9 +882,13 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         async function refreshCategories() {
             const data = await sbFetch('checklist_categories?order=sort_order.asc');
             categoriesData = data.length > 0 ? data : [];
-            if (!currentCat && categoriesData.length > 0) currentCat = categoriesData[0].name;
+            // 如果清單中沒有「🛍️ 購物清單」，預設第一個不是購物的分類
+            const nonShoppingCats = categoriesData.filter(c => !c.name.includes('購物'));
+            if (!currentCat && nonShoppingCats.length > 0) currentCat = nonShoppingCats[0].name;
+            else if (!currentCat && categoriesData.length > 0) currentCat = categoriesData[0].name;
             renderChecklistTabs();
             renderItems();
+            renderShoppingList();
         }
 
         async function addCategory() {
@@ -802,24 +921,52 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             document.getElementById('cat-modal').classList.add('active');
         }
 
-        // --- ✨ 清單與 Supabase Storage 圖片處理核心 ✨ ---
+        // --- ✨✨ 購物清單／多圖／備註核心處理 ✨✨ ---
         const STORAGE_BUCKET = 'checklist-images'; // Supabase Storage Bucket 名稱
         let checklistSortableInstance = null;
-        let currentModalImage = null; // 存放當前選取的圖片 base64 或 Storage URL
-        let isNewLocalImage = false; // 標記是否為剛選取、尚未上傳到 Storage 的新圖片
+        let shoppingSortableInstance = null;
+        
+        // Modal 中多張圖片的資料列 [{ url: '...', isLocal: true/false }]
+        let currentModalImages = [];
+        let modalSelectedWho = '';
 
-        // 解析文字中是否夾帶圖片標籤
-        function parseTextAndImg(rawText, explicitImg) {
-            if (explicitImg && explicitImg.trim()) {
-                const clean = (rawText || '').replace(/<!--IMG:[\s\S]*?-->/g, '').trim();
-                return { text: clean, img: explicitImg.trim() };
+        // 解析包含「名稱、備註、多張圖片」的內容結構
+        function parseItemContent(rawText, explicitImg) {
+            let text = rawText || '';
+            let notes = '';
+            let images = [];
+
+            // 1. 提取備註 <!--NOTES:...-->
+            const noteMatch = text.match(/<!--NOTES:([\s\S]*?)-->/);
+            if (noteMatch) {
+                notes = noteMatch[1].trim();
+                text = text.replace(noteMatch[0], '').trim();
             }
-            const match = (rawText || '').match(/<!--IMG:([\s\S]*?)-->/);
-            if (match && match[1]) {
-                const clean = rawText.replace(match[0], '').trim();
-                return { text: clean, img: match[1].trim() };
+
+            // 2. 提取多張圖片陣列 <!--IMGS:[...]-->
+            const multiImgMatch = text.match(/<!--IMGS:([\s\S]*?)-->/);
+            if (multiImgMatch) {
+                try {
+                    const parsedImgs = JSON.parse(multiImgMatch[1]);
+                    if (Array.isArray(parsedImgs)) images = parsedImgs;
+                } catch(e) {}
+                text = text.replace(multiImgMatch[0], '').trim();
             }
-            return { text: rawText || '', img: null };
+
+            // 3. 相容舊版單圖 <!--IMG:...-->
+            const singleImgMatch = text.match(/<!--IMG:([\s\S]*?)-->/);
+            if (singleImgMatch) {
+                const singleUrl = singleImgMatch[1].trim();
+                if (singleUrl && !images.includes(singleUrl)) images.push(singleUrl);
+                text = text.replace(singleImgMatch[0], '').trim();
+            }
+
+            // 4. 若有 explicitImg 欄位
+            if (explicitImg && explicitImg.trim() && !images.includes(explicitImg.trim())) {
+                images.push(explicitImg.trim());
+            }
+
+            return { name: text, notes, images };
         }
 
         // 將 Data URL 轉為 Blob
@@ -835,7 +982,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             return new Blob([u8arr], { type: mime });
         }
 
-        // 圖片壓縮輔助工具
+        // 圖片自動壓縮工具
         function compressImage(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -862,15 +1009,21 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             });
         }
 
-        async function handleFileSelect(event) {
-            const file = event.target.files?.[0];
-            if (!file) return;
-            try {
-                const dataUrl = await compressImage(file);
-                setImagePreview(dataUrl, true);
-            } catch (err) {
-                alert('圖片讀取失敗');
+        // 支援一次多選圖片或分次追加
+        async function handleMultiFilesSelect(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            for (let i = 0; i < files.length; i++) {
+                try {
+                    const dataUrl = await compressImage(files[i]);
+                    currentModalImages.push({ url: dataUrl, isLocal: true });
+                } catch (e) {
+                    console.error('圖片壓縮失敗', e);
+                }
             }
+            renderModalImagesPreview();
+            event.target.value = '';
         }
 
         function toggleUrlField() {
@@ -878,36 +1031,38 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
-        function applyImageUrl() {
+        function applySingleImageUrl() {
             const url = document.getElementById('cl-img-url-input').value.trim();
             if (url) {
-                setImagePreview(url, false);
+                currentModalImages.push({ url, isLocal: false });
+                document.getElementById('cl-img-url-input').value = '';
                 document.getElementById('cl-url-container').style.display = 'none';
+                renderModalImagesPreview();
             }
         }
 
-        function setImagePreview(url, isNew = false) {
-            currentModalImage = url;
-            isNewLocalImage = isNew;
-            const wrap = document.getElementById('cl-preview-wrap');
-            const img = document.getElementById('cl-preview-img');
-            img.src = url;
-            wrap.style.display = 'flex';
+        function removeModalImageAt(index) {
+            currentModalImages.splice(index, 1);
+            renderModalImagesPreview();
         }
 
-        function removeSelectedImage() {
-            currentModalImage = null;
-            isNewLocalImage = false;
-            document.getElementById('cl-preview-wrap').style.display = 'none';
-            document.getElementById('cl-preview-img').src = '';
-            document.getElementById('cl-img-file-input').value = '';
-            document.getElementById('cl-img-url-input').value = '';
+        function renderModalImagesPreview() {
+            const grid = document.getElementById('cl-images-preview-grid');
+            const badge = document.getElementById('img-count-badge');
+            badge.innerText = `${currentModalImages.length} 張照片`;
+
+            grid.innerHTML = currentModalImages.map((item, idx) => `
+                <div class="multi-img-item">
+                    <img src="${item.url}" alt="縮圖">
+                    <button type="button" class="btn-remove-single-img" onclick="removeModalImageAt(${idx})">✕</button>
+                </div>
+            `).join('');
         }
 
-        // 上傳圖片至 Supabase Storage
-        async function uploadToSupabaseStorage(dataUrl) {
+        // 上傳單張圖片至 Supabase Storage
+        async function uploadSingleToStorage(dataUrl) {
             const blob = dataURLtoBlob(dataUrl);
-            const fileName = `item_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
+            const fileName = `shop_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
 
             const { data, error } = await supabaseClient.storage
                 .from(STORAGE_BUCKET)
@@ -917,9 +1072,7 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
                     upsert: false
                 });
 
-            if (error) {
-                throw error;
-            }
+            if (error) throw error;
 
             const { data: urlData } = supabaseClient.storage
                 .from(STORAGE_BUCKET)
@@ -940,12 +1093,99 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             if (Array.isArray(data)) {
                 allItems = data;
                 renderItems();
+                renderShoppingList();
             }
         }
 
-        async function saveNewOrder() {
-            const listDiv = document.getElementById('cl-items-list');
-            const items = listDiv.querySelectorAll('.cl-item');
+        // --- ✨ 渲染獨立出來的「購物清單」頁面 ✨ ---
+        function renderShoppingList() {
+            const container = document.getElementById('shopping-items-list');
+            if (!container) return;
+
+            // 抓出屬於「購物清單」分類的項目
+            let shopItems = allItems.filter(i => (i.category || '').includes('購物'));
+
+            const pending = shopItems.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+            const completed = shopItems.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+            // 更新統計條
+            const countText = document.getElementById('shop-count-text');
+            if (countText) {
+                countText.innerText = `待買 ${pending.length} 項 | 已買 ${completed.length} 項`;
+            }
+
+            if (shopItems.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; color: #b39ddb; padding: 50px 20px; border: 2px dashed #f3e5f5; border-radius: 20px; background: white;">
+                        <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">🛍️</span>
+                        <b>目前沒有購物清單項目</b><br>
+                        <span style="font-size: 0.85rem; color: #aaa;">點擊右下角 ＋ 新增伴手禮、迪士尼限定品或藥妝，可放多張照片與備註！</span>
+                    </div>`;
+                return;
+            }
+
+            let html = pending.map(i => renderSingleShoppingCard(i)).join('');
+            if (completed.length > 0) {
+                html += `<div style="text-align:center; font-size:12px; color:#aaa; margin:16px 0 10px;">✓ 已完成購買 (${completed.length})</div>`;
+                html += completed.map(i => renderSingleShoppingCard(i)).join('');
+            }
+            container.innerHTML = html;
+
+            // 支援拖曳排序
+            if (shoppingSortableInstance) shoppingSortableInstance.destroy();
+            shoppingSortableInstance = new Sortable(container, {
+                animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
+                filter: '.cl-check, .btn-card-del, .shop-thumb',
+                ghostClass: 'cl-item-ghost',
+                onEnd: async function () { await saveShoppingOrder(); }
+            });
+        }
+
+        // 單個購物項目卡片（✨縮圖放名稱後面、支援多圖、含備註欄位✨）
+        function renderSingleShoppingCard(i) {
+            const parsed = parseItemContent(i.text, i.image_url);
+            const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
+            const safeName = parsed.name.replace(/"/g, '&quot;');
+
+            // 縮圖橫排 HTML（放在名稱後面）
+            const thumbsHtml = parsed.images.length > 0 ? `
+                <div class="shop-thumbs-wrap">
+                    ${parsed.images.map(img => `
+                        <img src="${img}" class="shop-thumb" onclick="event.stopPropagation(); openLightbox('${img}', '${safeName}')" title="點擊放大檢視">
+                    `).join('')}
+                </div>
+            ` : '';
+
+            // 備註 HTML
+            const notesHtml = parsed.notes ? `
+                <div class="shop-notes-row">
+                    <span>📝</span>
+                    <span>${parsed.notes}</span>
+                </div>
+            ` : '';
+
+            return `
+                <div class="shop-item-card ${i.done ? 'done' : ''}" data-id="${i.id}">
+                    <div class="shop-card-main-row">
+                        <div class="cl-check" onclick="toggleItem(${i.id}, ${i.done})">${i.done ? '✓' : ''}</div>
+                        
+                        <!-- 名稱與後面跟隨的多張縮圖 -->
+                        <div class="shop-title-and-thumbs" onclick="openClItemModal(${safeItem}, '🛍️ 購物清單')">
+                            <span class="shop-title-text">${parsed.name}</span>
+                            ${thumbsHtml}
+                        </div>
+
+                        <span class="cl-who-badge">${i.who || ''}</span>
+                        <button class="btn-card-del" onclick="delItem(${i.id})">✕</button>
+                    </div>
+                    ${notesHtml}
+                </div>
+            `;
+        }
+
+        async function saveShoppingOrder() {
+            const listDiv = document.getElementById('shopping-items-list');
+            const items = listDiv.querySelectorAll('.shop-item-card');
             const updates = Array.from(items).map((el, index) => {
                 const id = el.getAttribute('data-id');
                 return sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: index }) });
@@ -953,8 +1193,13 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             await Promise.all(updates);
         }
 
+        // --- 待辦/行李清單 ---
         function renderChecklistTabs() { 
-            document.getElementById('cl-tabs').innerHTML = categoriesData.map(c => `
+            const container = document.getElementById('cl-tabs');
+            if (!container) return;
+            // 排除購物清單（因為已經獨立出專屬分頁）
+            const nonShoppingCats = categoriesData.filter(c => !c.name.includes('購物'));
+            container.innerHTML = nonShoppingCats.map(c => `
                 <button class="cl-tab-btn ${c.name === currentCat ? 'active' : ''}" onclick="switchClTab('${c.name}')">${c.name}</button>
             `).join(''); 
         }
@@ -964,139 +1209,202 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         function renderItems() {
             const listDiv = document.getElementById('cl-items-list');
             if (!listDiv) return;
+
+            // 抓出屬於當前分類的項目
             const items = allItems.filter(i => i.category === currentCat);
             if (items.length === 0) {
-                listDiv.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px;">清單空空如也，點 ＋ 新增物品吧！</div>`;
+                listDiv.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px;">清單空空如也，點 ＋ 新增待辦項目吧！</div>`;
                 return;
             }
 
             const pending = items.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
             const completed = items.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
 
-            let html = pending.map(i => renderSingleItem(i)).join('');
+            let html = pending.map(i => renderSingleShoppingCard(i)).join('');
             if (completed.length > 0) {
-                html += `<div class="cl-divider" style="text-align:center; font-size:12px; color:#aaa; margin:15px 0;">已完成項目 (${completed.length})</div>`;
-                html += completed.map(i => renderSingleItem(i)).join('');
+                html += `<div style="text-align:center; font-size:12px; color:#aaa; margin:15px 0;">已完成項目 (${completed.length})</div>`;
+                html += completed.map(i => renderSingleShoppingCard(i)).join('');
             }
             listDiv.innerHTML = html;
 
             if (checklistSortableInstance) checklistSortableInstance.destroy();
             checklistSortableInstance = new Sortable(listDiv, {
                 animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
-                filter: '.cl-check, .cl-del, .cl-divider, .cl-img-thumb',
+                filter: '.cl-check, .btn-card-del, .shop-thumb',
                 ghostClass: 'cl-item-ghost',
-                onEnd: async function () { await saveNewOrder(); }
+                onEnd: async function () { await saveChecklistOrder(); }
             });
         }
 
-        function renderSingleItem(i) {
-            const parsed = parseTextAndImg(i.text, i.image_url);
-            const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
-            const safeImg = parsed.img ? parsed.img.replace(/"/g, '&quot;') : '';
-            const safeText = parsed.text.replace(/"/g, '&quot;');
-
-            return `
-                <div class="cl-item ${i.done ? 'done' : ''}" data-id="${i.id}">
-                    <div class="cl-check" onclick="toggleItem(${i.id}, ${i.done})">${i.done ? '✓' : ''}</div>
-                    ${parsed.img ? `<img src="${safeImg}" class="cl-img-thumb" onclick="openLightbox('${safeImg}', '${safeText}')" title="點擊放大檢視">` : ''}
-                    <span class="cl-text" onclick="openClItemModal(${safeItem})">${parsed.text}</span>
-                    <span class="cl-who">${i.who || ''}</span>
-                    <button class="cl-del" onclick="delItem(${i.id})">✕</button>
-                </div>`;
+        async function saveChecklistOrder() {
+            const listDiv = document.getElementById('cl-items-list');
+            const items = listDiv.querySelectorAll('.shop-item-card');
+            const updates = Array.from(items).map((el, index) => {
+                const id = el.getAttribute('data-id');
+                return sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: index }) });
+            });
+            await Promise.all(updates);
         }
 
-        function openClItemModal(item = null) {
+        // --- 打開新增/修改清單項目 Modal ---
+        function openClItemModal(item = null, defaultCat = null) {
             const modal = document.getElementById('cl-item-modal');
-            const input = document.getElementById('cl-text-input');
+            const nameInput = document.getElementById('cl-name-input');
+            const notesInput = document.getElementById('cl-notes-input');
             const editId = document.getElementById('cl-edit-id');
-            removeSelectedImage();
+            const editCat = document.getElementById('cl-edit-category');
+            const titleEl = document.getElementById('cl-modal-title');
+            
+            currentModalImages = [];
+
+            // 判斷分類（如果是從購物分頁打開，自動指定為購物清單）
+            let targetCategory = defaultCat || (currentTabId === 'shopping' ? '🛍️ 購物清單' : currentCat);
+            if (!targetCategory) targetCategory = '🛍️ 購物清單';
+            editCat.value = targetCategory;
 
             if (item) {
-                const parsed = parseTextAndImg(item.text, item.image_url);
-                input.value = parsed.text;
+                titleEl.innerText = item.category?.includes('購物') ? '修改購物項目' : '修改清單項目';
                 editId.value = item.id;
-                if (parsed.img) setImagePreview(parsed.img, false);
+                editCat.value = item.category || targetCategory;
+                modalSelectedWho = item.who || currentWho;
+
+                const parsed = parseItemContent(item.text, item.image_url);
+                nameInput.value = parsed.name;
+                notesInput.value = parsed.notes;
+
+                // 載入多張已存在的圖片
+                currentModalImages = parsed.images.map(url => ({ url, isLocal: false }));
             } else {
-                input.value = '';
+                titleEl.innerText = targetCategory.includes('購物') ? '新增購物項目' : '新增清單項目';
                 editId.value = '';
+                nameInput.value = '';
+                notesInput.value = '';
+                modalSelectedWho = currentWho;
             }
+
+            renderModalWhoChips();
+            renderModalImagesPreview();
+            document.getElementById('cl-url-container').style.display = 'none';
             modal.classList.add('active');
         }
 
+        function renderModalWhoChips() {
+            const container = document.getElementById('modal-who-chips');
+            container.innerHTML = membersData.map(m => `
+                <div class="who-chip ${m.name === modalSelectedWho ? 'active' : ''}" style="padding: 5px 12px; font-size: 0.75rem;" onclick="setModalWho('${m.name}')">${m.name}</div>
+            `).join('');
+        }
+
+        function setModalWho(name) {
+            modalSelectedWho = name;
+            renderModalWhoChips();
+        }
+
+        // --- 儲存清單項目（上傳多張照片至 Supabase Storage + 儲存備註） ---
         async function saveClItem() {
             const id = document.getElementById('cl-edit-id').value;
-            const text = document.getElementById('cl-text-input').value.trim();
+            const targetCategory = document.getElementById('cl-edit-category').value || '🛍️ 購物清單';
+            const name = document.getElementById('cl-name-input').value.trim();
+            const notes = document.getElementById('cl-notes-input').value.trim();
             const saveBtn = document.getElementById('btn-save-cl-item');
-            if (!text) return;
 
-            let finalImageUrl = currentModalImage;
+            if (!name) { alert('請輸入物品名稱！'); return; }
 
-            // 如果選了本機新圖片，上傳到 Supabase Storage
-            if (isNewLocalImage && currentModalImage && currentModalImage.startsWith('data:')) {
-                if (saveBtn) { saveBtn.innerText = '☁️ 上傳至 Storage...'; saveBtn.disabled = true; }
-                try {
-                    finalImageUrl = await uploadToSupabaseStorage(currentModalImage);
-                } catch (err) {
-                    console.error('Storage 上傳失敗:', err);
-                    const proceedFallback = confirm(
-                        `⚠️ 圖片上傳至 Supabase Storage 失敗（${err.message || 'Bucket 或權限設定問題'}）\n\n` +
-                        `請確認 Supabase Storage 已建立公開的「${STORAGE_BUCKET}」儲存庫。\n\n` +
-                        `是否要先以此照片儲存？（點「確定」直接存入，「取消」返回重試）`
-                    );
-                    if (!proceedFallback) {
-                        if (saveBtn) { saveBtn.innerText = '儲存'; saveBtn.disabled = false; }
-                        return;
+            // 1. 上傳尚未上傳的本機新照片至 Supabase Storage
+            const finalImageUrls = [];
+            const hasLocalImages = currentModalImages.some(i => i.isLocal);
+
+            if (hasLocalImages && saveBtn) {
+                saveBtn.innerText = '☁️ 上傳圖片至 Storage...';
+                saveBtn.disabled = true;
+            }
+
+            for (let i = 0; i < currentModalImages.length; i++) {
+                const item = currentModalImages[i];
+                if (item.isLocal && item.url.startsWith('data:')) {
+                    try {
+                        const uploadedUrl = await uploadSingleToStorage(item.url);
+                        finalImageUrls.push(uploadedUrl);
+                    } catch (err) {
+                        console.warn('Storage 上傳失敗，降級保留', err);
+                        finalImageUrls.push(item.url); // 降級保留
                     }
-                } finally {
-                    if (saveBtn) { saveBtn.innerText = '儲存'; saveBtn.disabled = false; }
+                } else {
+                    finalImageUrls.push(item.url);
                 }
             }
 
-            let finalText = text;
-            if (finalImageUrl) {
-                finalText += `\n<!--IMG:${finalImageUrl}-->`;
+            if (saveBtn) {
+                saveBtn.innerText = '儲存中...';
             }
 
-            if (id) {
-                await sbFetch(`checklist_items?id=eq.${id}`, {
-                    method: 'PATCH',
-                    body: JSON.stringify({ text: finalText, who: currentWho })
-                });
-            } else {
-                const catItems = allItems.filter(i => i.category === currentCat);
-                const maxSort = catItems.length > 0 ? Math.max(...catItems.map(i => i.sort_order || 0)) : -1;
-                await sbFetch('checklist_items', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        category: currentCat,
-                        text: finalText,
-                        done: false,
-                        who: currentWho,
-                        sort_order: maxSort + 1
-                    })
-                });
+            // 2. 組成完整格式（名稱 + 備註標籤 + 多圖標籤）
+            let finalText = name;
+            if (notes) {
+                finalText += `\n<!--NOTES:${notes}-->`;
             }
-            closeModal('cl-item-modal');
-            refreshChecklist();
+            if (finalImageUrls.length > 0) {
+                finalText += `\n<!--IMGS:${JSON.stringify(finalImageUrls)}-->`;
+            }
+
+            const assignee = modalSelectedWho || currentWho || (membersData[0]?.name || '');
+
+            try {
+                if (id) {
+                    await sbFetch(`checklist_items?id=eq.${id}`, {
+                        method: 'PATCH',
+                        body: JSON.stringify({ text: finalText, who: assignee, category: targetCategory })
+                    });
+                } else {
+                    const catItems = allItems.filter(i => i.category === targetCategory);
+                    const maxSort = catItems.length > 0 ? Math.max(...catItems.map(i => i.sort_order || 0)) : -1;
+                    await sbFetch('checklist_items', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            category: targetCategory,
+                            text: finalText,
+                            done: false,
+                            who: assignee,
+                            sort_order: maxSort + 1
+                        })
+                    });
+                }
+                closeModal('cl-item-modal');
+                await refreshChecklist();
+            } catch (e) {
+                alert('儲存失敗，請確認網路連線');
+            } finally {
+                if (saveBtn) {
+                    saveBtn.innerText = '儲存';
+                    saveBtn.disabled = false;
+                }
+            }
         }
 
         async function toggleItem(id, status) {
-            await sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ done: !status, who: currentWho }) });
+            await sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ done: !status }) });
             refreshChecklist();
         }
 
         async function delItem(id) {
-            if (confirm('確定刪除項目？')) {
+            if (confirm('確定刪除此項目？')) {
                 await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
                 refreshChecklist();
             }
         }
 
+        // --- 分頁切換與 FAB 按鈕 ---
         let currentTabId = 'itinerary';
+
         function handleFabClick() {
             if (navigator.vibrate) navigator.vibrate(5);
-            if (currentTabId === 'itinerary') openItinModal();
-            else if (currentTabId === 'checklist') openClItemModal();
+            if (currentTabId === 'itinerary') {
+                openItinModal();
+            } else if (currentTabId === 'shopping') {
+                openClItemModal(null, '🛍️ 購物清單');
+            } else if (currentTabId === 'checklist') {
+                openClItemModal(null, currentCat);
+            }
         }
 
         function switchTab(id, el) {
@@ -1105,8 +1413,14 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.getElementById('page-' + id).classList.add('active');
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            el.classList.add('active');
-            document.getElementById('add-fab').style.display = (id === 'checklist' || id === 'itinerary') ? 'flex' : 'none';
+            if (el) el.classList.add('active');
+
+            // 浮動按鈕在 行程、購物、待辦 時顯示
+            document.getElementById('add-fab').style.display = 
+                (id === 'itinerary' || id === 'shopping' || id === 'checklist') ? 'flex' : 'none';
+
+            if (id === 'shopping') renderShoppingList();
+            if (id === 'checklist') renderItems();
         }
 
         function updateClock() {
@@ -1118,19 +1432,6 @@ header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; fon
         }
         setInterval(updateClock, 1000);
         updateClock();
-
-        function createPetal() {
-            const p = document.createElement('div');
-            p.className = 'petal';
-            const leaves = ['🍁', '🍂', '🍃'];
-            p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.fontSize = (Math.random() * 10 + 14) + 'px';
-            p.style.animationDuration = (Math.random() * 5 + 6) + 's';
-            document.body.appendChild(p);
-            setTimeout(() => p.remove(), 11000);
-        }
-        setInterval(createPetal, 1200);
 
         function subscribeRealtime() {
             if (supabaseClient.getChannels().length > 0) supabaseClient.removeAllChannels();
