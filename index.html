@@ -546,7 +546,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
                 <!-- 多圖縮圖預覽列 -->
                 <div id="cl-images-preview-grid" class="multi-img-grid"></div>
-                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳至 Supabase Storage (<code>checklist-images</code>)</div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮上傳 (<code>checklist-images</code>)</div>
             </div>
 
             <div class="modal-btns">
@@ -1315,7 +1315,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             const hasLocalImages = currentModalImages.some(i => i.isLocal);
 
             if (hasLocalImages && saveBtn) {
-                saveBtn.innerText = '☁️ 上傳圖片至 Storage...';
+                saveBtn.innerText = '上傳中...';
                 saveBtn.disabled = true;
             }
 
