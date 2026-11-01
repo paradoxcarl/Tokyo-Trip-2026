@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🍁2026/11東京迪士尼樂園楓葉銀杏行</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
+    <style>
+:root {
+    --bg-color: #FBF7EF;
+    --main-pink: #E8C76A;
+    --dark-pink: #B74735;
+    --main-purple: #526B45;
+    --header-purple-light: #F5E8CF;
+    --text-color: #493B30;
+    --white: #FFFFFF;
+    --maple-orange: #D97736;
+    --ginkgo-gold: #D5AC38;
+    --forest-green: #526B45;
+    --cream: #FBF7EF;
+    --card-shadow: 0 8px 20px rgba(130, 83, 42, 0.10);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body { font-family: 'Noto Sans TC', sans-serif; background-color: var(--bg-color); color: var(--text-color); overflow-x: hidden; }
+
+.cl-item-ghost { opacity: 0.5; background: #F8EBC6 !important; border: 2px dashed var(--ginkgo-gold) !important; }
+.cl-item { cursor: grab; user-select: none; }
+.cl-item:active { cursor: grabbing; }
+
+@keyframes petal-fall { 0% { transform: translateY(0) rotate(0deg); opacity: 0.9; } 100% { transform: translateY(110vh) rotate(450deg); opacity: 0.2; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+header {
+    background: linear-gradient(135deg, #F5E8CF 0%, #F8E7D5 55%, #EED4B4 100%);
+    text-align: center; padding: 15px 10px; border-bottom: 2px solid var(--ginkgo-gold);
+    position: sticky; top: 0; z-index: 200; backdrop-filter: blur(8px);
+}
+header h1 { font-size: 1.4rem; color: var(--dark-pink); letter-spacing: 2px; font-weight: 800; line-height: 1.5; }
+.time-box {
+    background: rgba(255,255,255,0.7); margin: 6px auto 0; padding: 4px 12px;
+    border-radius: 12px; font-size: 0.7rem; color: var(--forest-green);
+    font-weight: bold; border: 1px solid rgba(82, 107, 69, 0.2); 
+    width: fit-content; backdrop-filter: blur(4px); box-shadow: 0 2px 8px rgba(130, 83, 42, 0.08);
+}
+#real-date { margin-bottom: 2px; }
+#realtime-clock { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; }
+.clock-item { display: flex; align-items: center; gap: 4px; }
+
+.tab-content { display: none; padding: 15px 15px 100px 15px; min-height: 80vh; }
+.tab-content.active { display: block; animation: fadeInUp 0.4s ease-out; }
+
+.date-nav {
+    display: flex; overflow-x: auto; gap: 10px; margin-bottom: 15px;
+    padding: 10px 5px; position: sticky; top: 78px; background-color: var(--bg-color); z-index: 100;
+    box-shadow: 0 4px 10px -5px rgba(179, 157, 219, 0.1);
+}
+.date-nav::-webkit-scrollbar { display: none; }
+.date-btn {
+    flex: 0 0 85px; height: 85px; background: var(--white); border: 2px solid #E8D8B9;
+    border-radius: 18px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--forest-green); transition: 0.3s;
+}
+.date-btn.active { background: var(--dark-pink); color: var(--white); border-color: var(--dark-pink); }
+.date-btn .date-day { font-size: 0.85rem; font-weight: 700; opacity: 0.9; margin-bottom: 2px; }
+.date-btn .date-num { font-size: 1.1rem; font-weight: 700; }
+.date-btn .date-week { font-size: 0.8rem; }
+
+#itinerary-list { display: flex; flex-direction: column; gap: 12px; padding-bottom: 80px; }
+.itin-card {
+    display: flex; background: var(--white); border-radius: 18px;
+    box-shadow: var(--card-shadow); overflow: hidden; position: relative;
+    cursor: pointer; min-height: 90px; border: 1px solid rgba(213, 172, 56, 0.12);
+}
+.itin-time {
+    background: linear-gradient(to bottom, #F5E8CF, #FFFFFF);
+    color: var(--forest-green); font-family: 'JetBrains Mono', monospace; 
+    font-size: 1.1rem; font-weight: 900;
+    padding: 12px 5px; width: 95px; flex-shrink: 0; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center; 
+    text-align: center; border-right: 1.5px dashed var(--main-pink);
+    line-height: 1;
+}
+.time-sep { display: block; margin: 2px 0; font-size: 0.8rem; opacity: 0.3; font-weight: normal; }
+.itin-content { padding: 12px 15px; padding-right: 50px; flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.itin-loc { font-size: 1.05rem; font-weight: 700; color: var(--dark-pink); }
+.itin-detail-row { display: flex; align-items: flex-start; gap: 6px; font-size: 0.82rem; color: var(--text-color); opacity: 0.9; white-space: pre-wrap; }
+.itin-notes-row { display: flex; align-items: flex-start; gap: 6px; font-size: 0.8rem; color: #8d6e63; margin-top: 2px; white-space: pre-wrap; }
+.itin-action-group { position: absolute; right: 8px; top: 0; bottom: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.itin-action-btn { background: #fff; color: var(--dark-pink); border: 1px solid #F0E1CC; width: 32px; height: 32px; border-radius: 50%; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.itin-map-btn { color: #4285F4; border-color: #e8f0fe; }
+
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1500; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.overlay.active { display: flex; }
+.detail-card { width: 100%; max-width: 350px; background: white; border-radius: 30px; overflow: hidden; position: relative; animation: fadeInUp 0.3s ease-out; }
+.detail-header { background: linear-gradient(135deg, #B74735, #D97736); padding: 40px 20px; text-align: center; color: white; }
+.detail-header .time { font-family: 'JetBrains Mono'; font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+.detail-header .loc { font-size: 1.3rem; font-weight: 800; }
+.detail-body { padding: 30px 25px; }
+.detail-row { display: flex; gap: 15px; margin-bottom: 20px; }
+.detail-icon { font-size: 1.5rem; flex-shrink: 0; }
+.detail-text-label { font-size: 0.75rem; color: #aaa; display: block; margin-bottom: 4px; }
+.detail-text-content { font-size: 1rem; color: var(--text-color); font-weight: 500; white-space: pre-wrap; }
+.detail-close { position: absolute; top: 15px; right: 15px; width: 35px; height: 35px; border-radius: 50%; background: rgba(255,255,255,0.2); color: white; border: none; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+
+.modal-content { background: white; width: 100%; max-width: 360px; border-radius: 25px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.2); animation: fadeInUp 0.3s ease-out; position: relative; max-height: 90vh; overflow-y: auto; }
+.modal-title { font-size: 1.2rem; font-weight: 800; color: var(--dark-pink); margin-bottom: 20px; text-align: center; }
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; font-size: 0.75rem; color: #aaa; margin-bottom: 5px; font-weight: bold; }
+.form-group input, .form-group textarea { width: 100%; border: 2px solid #E8D8B9; border-radius: 12px; padding: 12px; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--ginkgo-gold); background: #FFFCF5; }
+
+.time-range { display: flex; align-items: center; gap: 10px; }
+.time-range input { flex: 1; text-align: center; }
+.modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+.modal-btns button { flex: 1; padding: 12px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.modal-btns button:active { transform: scale(0.95); }
+.btn-cancel { background: #eee; color: #777; }
+.btn-save { background: var(--dark-pink); color: white; box-shadow: 0 4px 10px rgba(183,71,53,0.22); }
+.btn-add-inline { flex: 0 0 80px; background: var(--forest-green); color: white; border: none; border-radius: 12px; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 10px rgba(82,107,69,0.2); transition: 0.2s; }
+.btn-delete-itin-top { position: absolute; top: 15px; left: 15px; width: 35px; height: 35px; border-radius: 50%; background: #fff5f5; color: #e53935; border: 1.5px solid #ffcdd2; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; }
+
+.card { background: var(--white); padding: 20px; border-radius: 20px; box-shadow: var(--card-shadow); }
+.input-group { margin-bottom: 15px; position: relative; }
+.input-group label { display: block; font-size: 0.8rem; color: #a1887f; margin-bottom: 5px; }
+.input-group input { width: 100%; padding: 12px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 1.3rem; outline: none; font-weight: 700; background: #fafafa; }
+.currency-unit { position: absolute; right: 12px; top: 38px; font-weight: 700; color: #ddd; }
+.jp-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.menu-btn { background: var(--white); border: 2.5px solid #F0E2C8; padding: 25px 10px; border-radius: 22px; text-align: center; font-weight: 700; color: var(--forest-green); box-shadow: 0 5px 15px rgba(130,83,42,0.08); }
+.menu-btn span { display: block; font-size: 1.8rem; margin-bottom: 8px; }
+#fixed-back-container { position: fixed; top: 110px; left: 0; right: 0; padding: 12px 15px; background-color: var(--bg-color); z-index: 180; display: none; }
+.back-btn-styled { background: var(--dark-pink); color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; border: none; font-size: 0.9rem; }
+.phrase-list { display: none; padding-top: 65px; }
+.phrase-list.active { display: block; animation: fadeInUp 0.3s; }
+.phrase-item { background: white; padding: 18px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #eee; border-left: 6px solid var(--ginkgo-gold); }
+.phrase-item b { display: block; color: var(--dark-pink); font-size: 1rem; margin-bottom: 4px; }
+.phrase-item .romaji { display: block; color: var(--forest-green); font-size: 0.75rem; font-style: italic; margin-top: 2px; }
+
+.who-container { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding-bottom: 5px; }
+.who-chip { position: relative; flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; background: #f5f5f5; border: 2px solid transparent; font-size: 0.8rem; color: #888; font-weight: 700; cursor: pointer; }
+.who-chip.active { background: #F7E6D7; border-color: var(--dark-pink); color: var(--dark-pink); }
+.checklist-tabs { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; align-items: center; }
+.cl-tab-btn { flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; border: 2px solid var(--forest-green); background: white; color: var(--forest-green); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
+.cl-tab-btn.active { background: var(--forest-green); color: white; }
+.cl-tab-manage { font-size: 0.7rem; padding: 6px 12px; background: #eee; border: none; border-radius: 50px; color: #777; cursor: pointer; font-weight: bold; flex-shrink: 0; }
+
+/* ✨ 清單卡片與圖片樣式 ✨ */
+.cl-item { display: flex; align-items: center; gap: 12px; background: white; padding: 14px; border-radius: 18px; margin-bottom: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #E8D8B9; }
+.cl-item.done { opacity: 0.55; }
+.cl-item.done .cl-text { text-decoration: line-through; }
+.cl-check { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--forest-green); display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; font-weight: bold; }
+.cl-item.done .cl-check { background: var(--forest-green); color: white; }
+.cl-img-thumb { width: 52px; height: 52px; object-fit: cover; border-radius: 12px; border: 1.5px solid var(--ginkgo-gold); cursor: zoom-in; flex-shrink: 0; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.cl-text { flex: 1; font-size: 0.95rem; font-weight: 500; cursor: pointer; word-break: break-word; }
+.cl-who { font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px; border-radius: 10px; flex-shrink: 0; }
+.cl-del { color: #ccc; border: none; background: none; font-size: 1.1rem; padding: 5px; cursor: pointer; }
+.cl-del:hover { color: #e53935; }
+
+/* 圖片上傳區塊樣式 */
+.img-upload-box { background: #FFFCF5; border: 2px dashed #D5AC38; border-radius: 14px; padding: 12px; margin-bottom: 15px; }
+.img-upload-btns { display: flex; gap: 8px; margin-top: 8px; }
+.btn-img-action { flex: 1; padding: 8px; background: white; border: 1.5px solid #D5AC38; color: #526B45; border-radius: 10px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+.img-preview-container { margin-top: 10px; position: relative; display: flex; flex-direction: column; align-items: center; }
+.img-preview { max-width: 100%; max-height: 180px; object-fit: contain; border-radius: 10px; border: 1px solid #E8D8B9; }
+.btn-remove-img { position: absolute; top: -8px; right: -8px; width: 26px; height: 26px; border-radius: 50%; background: #e53935; color: white; border: none; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+/* 全螢幕圖片燈箱 */
+#cl-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 3000; align-items: center; justify-content: center; padding: 20px; }
+#cl-lightbox.active { display: flex; animation: fadeInUp 0.25s; }
+.lightbox-box { max-width: 90vw; max-height: 85vh; display: flex; flex-direction: column; align-items: center; background: #FBF7EF; border-radius: 20px; overflow: hidden; border: 2px solid #D5AC38; }
+.lightbox-img { max-width: 85vw; max-height: 70vh; object-fit: contain; padding: 10px; }
+.lightbox-caption { padding: 10px 15px; font-weight: bold; color: var(--dark-pink); text-align: center; }
+
+.fab { position: fixed; bottom: 95px; right: 25px; width: 60px; height: 60px; background: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28); z-index: 500; border: none; cursor: pointer; }
+.bottom-nav { position: fixed; bottom: 15px; left: 15px; right: 15px; background: rgba(255,255,255,0.95); display: flex; height: 65px; z-index: 1000; border-radius: 30px; box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px); }
+.nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75rem; color: #ccc; text-decoration: none; }
+.nav-tab.active { color: var(--dark-pink); font-weight: 700; }
+.nav-tab .nav-icon { font-size: 1.4rem; }
+
+#fs-overlay { display: none; position: fixed; inset: 0; background: var(--bg-color); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; }
+#fs-overlay.active { display: flex; }
+#fs-jp { color: var(--forest-green) !important; }
+#fs-ch { color: var(--dark-pink) !important; }
+
+.manage-btn-group { display: flex; gap: 5px; }
+.manage-icon-btn { border: none; background: #f5f5f5; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; }
+.btn-edit-small { color: #4285F4; }
+.btn-del-small { color: #e53935; }
+.btn-sort-small { color: #9e9e9e; background: #eee; }
+
+.petal { position: fixed; top: -20px; z-index: 10; pointer-events: none; animation: petal-fall linear infinite; filter: drop-shadow(2px 2px 2px rgba(130,83,42,0.18)); user-select: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🍁2026/11🍁<br>東京迪士尼楓葉銀杏行</h1>
+        <div class="time-box">
+            <div id="real-date">讀取中...</div>
+            <div id="realtime-clock"></div>
+        </div>
+    </header>
+
+    <button id="add-fab" class="fab" onclick="handleFabClick()">＋</button>
+
+    <!-- 行程詳細燈箱 -->
+    <div id="detail-overlay" class="overlay" onclick="closeItinDetail()">
+        <div class="detail-card" onclick="event.stopPropagation()">
+            <button class="detail-close" onclick="closeItinDetail()">✕</button>
+            <div class="detail-header">
+                <div class="time" id="dt-time">--:--</div>
+                <div class="loc" id="dt-loc">地點名稱</div>
+            </div>
+            <div class="detail-body">
+                <div class="detail-row">
+                    <div class="detail-icon">🚋</div>
+                    <div>
+                        <span class="detail-text-label">交通方式</span>
+                        <div class="detail-text-content" id="dt-trans">無設定</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">📝</div>
+                    <div>
+                        <span class="detail-text-label">備註細節</span>
+                        <div class="detail-text-content" id="dt-notes">尚無備註</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 行程編輯/新增彈窗 -->
+    <div id="itin-modal" class="overlay">
+        <div class="modal-content">
+            <button id="btn-delete-itin" class="btn-delete-itin-top" style="display:none;" onclick="delItinFromModal()">🗑️</button>
+            <button class="detail-close" style="background:#F5E8CF; color:var(--dark-pink); top:15px; right:15px;" onclick="closeModal('itin-modal')">✕</button>
+            <div class="modal-title" id="modal-title">新增行程</div>
+            <input type="hidden" id="edit-id">
+            <div class="form-group">
+                <label>時間範圍 (選填)</label>
+                <div class="time-range">
+                    <input type="time" id="form-time-start">
+                    <span style="color:#ddd">至</span>
+                    <input type="time" id="form-time-end">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>行程 / 地點名稱</label>
+                <input type="text" id="form-loc" placeholder="(必填) 要去哪兒？">
+            </div>
+            <div class="form-group">
+                <label>Google Map 關鍵字或網站連結 (選填)</label>
+                <input type="text" id="form-map-query" placeholder="(選填) 輸入地點名稱或網址...">
+            </div>
+            <div class="form-group">
+                <label>交通方式 / 細節 (選填)</label>
+                <textarea id="form-trans" rows="3" placeholder="(選填) 迪士尼、迪士尼、迪士尼..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>備註 / 提醒 (選填)</label>
+                <textarea id="form-notes" rows="3" placeholder="(選填) 妳說說，我不聽..."></textarea>
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('itin-modal')">取消</button>
+                <button class="btn-save" onclick="saveItin()">儲存行程</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 行程頁面 -->
+    <div id="page-itinerary" class="tab-content active">
+        <div class="date-nav">
+            <div id="date-buttons" style="display:flex; gap:10px;"></div>
+            <button class="btn-add-inline" style="min-width:80px;" onclick="openDayModal()">⭐</button>
+        </div>
+        <div id="itinerary-list"></div>
+    </div>
+
+    <!-- 匯率頁面 -->
+    <div id="page-exchange" class="tab-content">
+        <div class="card">
+            <div class="input-group"><label>🇯🇵 日幣 JPY</label><input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')"><span class="currency-unit">円</span></div>
+            <div class="input-group"><label>🇹🇼 台幣 TWD</label><input type="number" id="twd-val" placeholder="0" oninput="convert('twd')"><span class="currency-unit">元</span></div>
+        </div>
+        <div style="margin-top: 20px; background: #fdf2f4; border: 1px dashed var(--dark-pink); padding: 15px; border-radius: 15px;">
+            <label style="font-size: 0.8rem; color: var(--dark-pink);">🪄 自訂匯率 (1 JPY = ? TWD)</label>
+            <input type="number" id="base-rate" value="0.21" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
+        </div>
+    </div>
+
+    <!-- 日文常用語頁面 -->
+    <div id="page-japanese" class="tab-content">
+        <div id="fixed-back-container"><button class="back-btn-styled" onclick="backToMenu()">← 返回分類</button></div>
+        <div id="jp-menu" class="jp-menu-grid">
+            <div class="menu-btn" onclick="showCategory('hotel')"><span>🏩</span>飯店用語</div>
+            <div class="menu-btn" onclick="showCategory('transport')"><span>🚋</span>交通用語</div>
+            <div class="menu-btn" onclick="showCategory('shop')"><span>🎀</span>購物用語</div>
+            <div class="menu-btn" onclick="showCategory('food')"><span>🍰</span>餐廳用語</div>
+            <div class="menu-btn" onclick="showCategory('common')"><span>🍭</span>常用語</div>
+        </div>
+        <div id="cat-hotel" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('チェックインをお願いします', '我要辦理入住', 'Chekkuin o onegaishimasu')"><b>我要辦理入住</b><p>チェックインをお願いします</p><small class="romaji">Chekkuin o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('荷物を預かってもらえますか？', '可以幫我寄放行李嗎？', 'Nimotsu o azukatte moraemasu ka?')"><b>可以幫我寄放行李嗎？</b><p>荷物を預かってもらえますか？</p><small class="romaji">Nimotsu o azukatte moraemasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('新しいタオルを3人分ください', '請給我們3條新毛巾', 'Atarashii taoru o sanninbun kudasai')"><b>請給我們3條新毛巾</b><p>新しいタオルを3人分ください</p><small class="romaji">Atarashii taoru o sanninbun kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('部屋の掃除は不要です', '房間不需要打掃', 'Heya no soji wa fuyo desu')"><b>房間不需要打掃</b><p>部屋の掃除は不要です</p><small class="romaji">Heya no soji wa fuyo desu</small></div>
+            <div class="phrase-item" onclick="openFS('タオルを替えてください', '請幫我更換毛巾', 'Taoru o kaete kudasai')"><b>請更換毛巾</b><p>タオルを替えてください</p><small class="romaji">Taoru o kaete kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('Wi-Fiのパスワードは何ですか？', 'Wi-Fi密碼是什麼？', 'Waifa-i no pasuwa-do wa nan desu ka?')"><b>Wi-Fi密碼是什麼？</b><p>Wi-Fiのパスワードは何ですか？</p><small class="romaji">Waifa-i no pasuwa-do wa nan desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('朝食は何時までですか？', '早餐供應到幾點？', 'Choushoku wa nanji made desu ka?')"><b>早餐供應到幾點？</b><p>朝食は何時までですか？</p><small class="romaji">Choushoku wa nanji made desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('部屋の鍵をなくしました', '我弄丟了房間鑰匙', 'Heya no kagi o nakushimashita')"><b>我弄丟了房間鑰匙</b><p>部屋の鍵をなくしました</p><small class="romaji">Heya no kagi o nakushimashita</small></div>
+            <div class="phrase-item" onclick="openFS('チェックアウトは何時ですか？', '退房時間是幾點？', 'Chekkuauto wa nanji desu ka?')"><b>退房時間是幾點？</b><p>チェックアウトは何時ですか？</p><small class="romaji">Chekkuauto wa nanji desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('チェックアウトをお願いします', '我要辦理退房', 'Chekkuauto o onegaishimasu')"><b>我要辦理退房</b><p>チェックアウトをお願いします</p><small class="romaji">Chekkuauto o onegaishimasu</small></div>
+        </div>
+        <div id="cat-transport" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('お手洗いはどこですか？', '廁所在哪裡？', 'Otearai wa doko desu ka?')"><b>廁所在哪裡？</b><p>お手洗いはどこですか？</p><small class="romaji">Otearai wa doko desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('エレベーターはどこですか？', '電梯在哪裡？', 'Erebeta wa doko desu ka?')"><b>電梯在哪裡？</b><p>エレベーターはどこですか？</p><small class="romaji">Erebeta wa doko desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('切符売り場はどこですか？', '售票處在哪裡？', 'Kippu uriba wa doko desu ka?')"><b>售票處在哪裡？</b><p>切符売り場はどこですか？</p><small class="romaji">Kippu uriba wa doko desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('ここに行きたいです', '我想去這裡（出示地圖）', 'Koko ni ikitai desu')"><b>我想去這裡（出示地圖）</b><p>ここに行きたいです</p><small class="romaji">Koko ni ikitai desu</small></div>
+            <div class="phrase-item" onclick="openFS('ICカードにチャージしたいです', '我想加值IC卡', 'Aishi-ka-do ni cha-ji shitai desu')"><b>我想加值IC卡</b><p>ICカードにチャージしたいです</p><small class="romaji">Aishi-ka-do ni cha-ji shitai desu</small></div>
+            <div class="phrase-item" onclick="openFS('これは〇〇駅に止まりますか？', '這班車會停靠〇〇站嗎？', 'Kore wa 〇〇-eki ni tomarimasu ka?')"><b>會停靠〇〇站嗎？</b><p>これは〇〇駅に止まりますか？</p><small class="romaji">Kore wa 〇〇-eki ni tomarimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('〇〇駅はどこですか？', '〇〇車站在哪裡？', '〇〇 chikai eki wa doko desu ka?')"><b>〇〇車站在哪裡？</b><p>〇〇駅はどこですか？</p><small class="romaji">〇〇 chikai eki wa doko desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('〇〇行きのバス停はどこですか？', '往〇〇的巴士站在哪裡？', '〇〇-iki no basutei wa doko desu ka?')"><b>往〇〇的巴士站在哪裡？</b><p>〇〇行きのバス停はどこですか？</p><small class="romaji">XX-iki no basutei wa doko desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('タクシーを3人で乗りたいです', '我們3人想共乘計程車', 'Takushi o sannin de noritai desu')"><b>我們3人想共乘計程車</b><p>タクシーを3人で乗りたいです</p><small class="romaji">Takushi o sannin de noritai desu</small></div>
+        </div>
+        <div id="cat-shop" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('袋はいりません', '我不需要袋子', 'Fukuro wa irimasen')"><b>我不需要袋子</b><p>袋はいりません</p><small class="romaji">Fukuro wa irimasen</small></div>
+            <div class="phrase-item" onclick="openFS('これを見せてください', '請給我看這個', 'Kore o misete kudasai')"><b>請給我看這個</b><p>これを見せてください</p><small class="romaji">Kore o misete kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('いくらですか？', '多少錢？', 'Ikura desu ka?')"><b>多少錢？</b><p>いくらですか？</p><small class="romaji">Ikura desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('これをください', '我要買這個', 'Kore o kudasai')"><b>我要買這個</b><p>これをください</p><small class="romaji">Kore o kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('免税はできますか？', '可以免稅嗎？', 'Menzei wa dekimasu ka?')"><b>可以免稅嗎？</b><p>免税はできますか？</p><small class="romaji">Menzei wa dekimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('クレジットカードは使えますか？', '可以使用信用卡嗎？', 'Kurejitto ka-do wa tsukaemasu ka?')"><b>可以使用信用卡嗎？</b><p>クレジットカードは使えますか？</p><small class="romaji">Kurejitto ka-do wa tsukaemasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('お会計は別々にお願いします', '請幫我分開結帳', 'Okaikei wa betsubetsu ni onegaishimasu')"><b>請幫我分開結帳</b><p>お会計は別々にお願いします</p><small class="romaji">Okaikei wa betsubetsu ni onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('試着してもいいですか？', '可以試穿嗎？', 'Shichaku shite mo ii desu ka?')"><b>可以試穿嗎？</b><p>試着してもいいですか？</p><small class="romaji">Shichaku shite mo ii desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('大きいサイズはありますか？', '有大一點的尺寸嗎？', 'Ookii saizu wa arimasu ka?')"><b>有大一點的尺寸嗎？</b><p>大きいサイズはありますか？</p><small class="romaji">Ookii saizu wa arimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('他の色はありますか？', '有其他的顏色嗎？', 'Hoka no iro wa arimasu ka?')"><b>有其他的顏色嗎？</b><p>他の色はありますか？</p><small class="romaji">Hoka no iro wa arimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('プレゼント用です', '這是要送人的禮物', 'Purezento you desu')"><b>這是要送人的禮物</b><p>プレゼント用です</p><small class="romaji">Purezento you desu</small></div>
+            <div class="phrase-item" onclick="openFS('一人〇個まで買えますか？', '一個人最多買〇個嗎？', 'Hitori 〇 made desu ka?')"><b>一個人最多買〇個嗎？</b><p>一人〇個まで買えますか？</p><small class="romaji">Hitori 〇 made desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('在庫はありますか？', '還有庫存嗎？', 'Zaiko wa arimasu ka?')"><b>還有庫存嗎？</b><p>在庫はありますか？</p><small class="romaji">Zaiko wa arimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('これを〇ください', '請給我〇個這個', 'Kore o 〇 kudasai')"><b>請給我〇個這個</b><p>これを〇ください</p><small class="romaji">Kore o 〇 kudasai</small></div>
+        </div>
+        <div id="cat-food" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('三人です', '我們3位', 'Sannin desu')"><b>我們3位</b><p>三人です</p><small class="romaji">Sannin desu</small></div>
+            <div class="phrase-item" onclick="openFS('禁煙席をお願いします', '請給我禁菸席', 'Kin-en seki o onegaishimasu')"><b>請給我禁菸席</b><p>禁煙席をお願いします</p><small class="romaji">Kin-en seki o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('三人一緒に座れますか？', '我們3人可以坐在一起嗎？', 'Sannin issho ni suwaremasu ka?')"><b>我們3人可以坐在一起嗎？</b><p>三人一緒に座れますか？</p><small class="romaji">Sannin issho ni suwaremasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('メニューをください', '請給我菜單', 'Menyu- o kudasai')"><b>請給我菜單</b><p>メニューをください</p><small class="romaji">Menyu- o kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('お水をください', '請給我水', 'Omizu o kudasai')"><b>請給我水</b><p>お水をください</p><small class="romaji">Omizu o kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('中国語のメニューはありますか？', '有中文菜單嗎？', 'Chugokugo no menyu wa arimasu ka?')"><b>有中文菜單嗎？</b><p>中国語のメニューはありますか？</p><small class="romaji">Chugokugo no menyu wa arimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('おすすめは何ですか？', '有什麼推薦的嗎？', 'Osusume wa nan desu ka?')"><b>有什麼推薦的嗎？</b><p>おすすめは何ですか？</p><small class="romaji">Osusume wa nan desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('テイクアウトできますか？', '可以外帶嗎？', 'Teikuauto dekimasu ka?')"><b>可以外帶嗎？</b><p>テイクアウトできますか？</p><small class="romaji">Teikuauto dekimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('注文をお願いします', '我要點餐', 'Chuumon o onegaishimasu')"><b>我要點餐</b><p>注文をお願いします</p><small class="romaji">Chuumon o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('お会計をお願いします', '請結帳', 'Okaikei o onegaishimasu')"><b>請結帳</b><p>お会計をお願いします</p><small class="romaji">Okaikei o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('お会計は別々でお願いします', '請幫我們分開結帳', 'Okaikei wa betsubetsu de onegaishimasu')"><b>請幫我們分開結帳</b><p>お会計は別々でお願いします</p><small class="romaji">Okaikei wa betsubetsu de onegaishimasu</small></div>
+        </div>
+        <div id="cat-common" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('すみません', '不好意思／打擾一下', 'Sumimasen')"><b>不好意思／打擾一下</b><p>すみません</p><small class="romaji">Sumimasen</small></div>
+            <div class="phrase-item" onclick="openFS('ありがとうございます', '謝謝', 'Arigatou gozaimasu')"><b>謝謝</b><p>ありがとうございます</p><small class="romaji">Arigatou gozaimasu</small></div>
+            <div class="phrase-item" onclick="openFS('写真を撮ってもらえますか？', '可以幫我們拍照嗎？', 'Shashin o totte moraemasu ka?')"><b>可以幫我們拍照嗎？</b><p>写真を撮ってもらえますか？</p><small class="romaji">Shashin o totte moraemasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('はい / いいえ', '是 / 不是', 'Hai / Iie')"><b>是 / 不是</b><p>はい / いいえ</p><small class="romaji">Hai / Iie</small></div>
+            <div class="phrase-item" onclick="openFS('もう一度お願いします', '請再說一次', 'Mou ichido onegaishimasu')"><b>請再說一次</b><p>もう一度お願いします</p><small class="romaji">Mou ichido onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('ゆっくり話してください', '請慢慢說', 'Yukkuri hanashite kudasai')"><b>請慢慢說</b><p>ゆっくり話してください</p><small class="romaji">Yukkuri hanashite kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('ちょっと待ってください', '請稍等一下', 'Chotto matte kudasai')"><b>請稍等一下</b><p>ちょっと待ってください</p><small class="romaji">Chotto matte kudasai</small></div>
+        </div>
+    </div>
+
+    <!-- 清單頁面 -->
+    <div id="page-checklist" class="tab-content">
+        <div class="card" style="margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 旅伴</span>
+                <button onclick="openWhoManageModal()" style="border: none; background: none; color: var(--forest-green); font-weight: 700; cursor: pointer;">⚙️ 管理</button>
+            </div>
+            <div class="who-container" id="who-selector"></div>
+        </div>
+        <div class="checklist-tabs" id="cl-tabs-container">
+            <div id="cl-tabs" style="display: flex; gap: 8px; overflow-x: auto; flex: 1;"></div>
+            <button class="cl-tab-manage" onclick="openCatModal()">⚙️ 分類</button>
+        </div>
+        <div id="cl-items-list"></div>
+    </div>
+
+    <!-- 旅伴管理 Modal -->
+    <div id="who-manage-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:var(--forest-green); top:15px; right:15px;" onclick="closeModal('who-manage-modal')">✕</button>
+            <div class="modal-title">旅伴管理</div>
+            <div id="who-list-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; border: 2px solid #fcfaff; border-radius: 12px;"></div>
+            <div class="form-group">
+                <label>新增旅伴</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="new-who-input" placeholder="名稱">
+                    <button class="btn-add-inline" onclick="addWho()">新增</button>
+                </div>
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" style="width: 100%;" onclick="closeModal('who-manage-modal')">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分類管理 Modal -->
+    <div id="cat-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:var(--forest-green); top:15px; right:15px;" onclick="closeModal('cat-modal')">✕</button>
+            <div class="modal-title">分類管理</div>
+            <div id="cat-list-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; border: 2px solid #fcfaff; border-radius: 12px;"></div>
+            <div class="form-group">
+                <label>新增分類</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="new-cat-input" placeholder="分類名稱">
+                    <button class="btn-add-inline" onclick="addCategory()">新增</button>
+                </div>
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" style="width: 100%;" onclick="closeModal('cat-modal')">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✨ 清單項目新增/修改 Modal (含圖片上傳與網址) ✨ -->
+    <div id="cl-item-modal" class="overlay">
+        <div class="modal-content">
+            <div class="modal-title" id="cl-modal-title">清單項目</div>
+            <input type="hidden" id="cl-edit-id">
+            
+            <div class="form-group">
+                <label>內容 / 物品名稱</label>
+                <textarea id="cl-text-input" placeholder="例如：達菲熊爆米花桶、合利他命、抹茶零食..." rows="3"></textarea>
+            </div>
+
+            <!-- 圖片設定區塊 -->
+            <div class="img-upload-box">
+                <label style="font-size: 0.75rem; font-weight: bold; color: var(--dark-pink); display: block;">📸 物品圖片 (拍照 / 相簿 / 網址)</label>
+                <div class="img-upload-btns">
+                    <button type="button" class="btn-img-action" onclick="document.getElementById('cl-img-file-input').click()">📷 拍照/選照片</button>
+                    <button type="button" class="btn-img-action" onclick="toggleUrlField()">🔗 貼上網址</button>
+                </div>
+                
+                <input type="file" id="cl-img-file-input" accept="image/*" style="display:none;" onchange="handleFileSelect(event)">
+                
+                <div id="cl-url-container" style="display: none; margin-top: 8px;">
+                    <input type="url" id="cl-img-url-input" placeholder="https://... 圖片網址" style="padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid #D5AC38;">
+                    <button type="button" onclick="applyImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">套用網址</button>
+                </div>
+
+                <div id="cl-preview-wrap" class="img-preview-container" style="display:none;">
+                    <button type="button" class="btn-remove-img" onclick="removeSelectedImage()">✕</button>
+                    <img id="cl-preview-img" class="img-preview" src="" alt="預覽">
+                </div>
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('cl-item-modal')">取消</button>
+                <button class="btn-save" onclick="saveClItem()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 圖片放大檢視燈箱 -->
+    <div id="cl-lightbox" onclick="closeLightbox()">
+        <div class="lightbox-box" onclick="event.stopPropagation()">
+            <img id="lightbox-full-img" class="lightbox-img" src="" alt="商品圖片">
+            <div id="lightbox-title" class="lightbox-caption"></div>
+            <button onclick="closeLightbox()" style="margin: 0 15px 15px; padding: 8px 25px; border-radius: 20px; border: none; background: var(--dark-pink); color: white; font-weight: bold; cursor: pointer;">關閉</button>
+        </div>
+    </div>
+
+    <!-- 旅行日期 Modal -->
+    <div id="day-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:#526B45; top:15px; right:15px;" onclick="closeModal('day-modal')">✕</button>
+            <div class="modal-title" id="day-modal-title">新增旅行日期</div>
+            <input type="hidden" id="day-edit-id">
+            <div class="form-group">
+                <label>旅行日期</label>
+                <input type="date" id="day-date-input">
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('day-modal')">取消</button>
+                <button class="btn-save" onclick="saveTripDay()">儲存日期</button>
+            </div>
+            <button id="day-delete-btn" class="btn-cancel" style="width:100%; margin-top:10px; padding:12px; border-radius:20px; display:none; color: #e53935;" onclick="deleteTripDay()">刪除此日期</button>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="#" class="nav-tab active" onclick="switchTab('itinerary', this)"><span class="nav-icon">📅</span><span>行程</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('exchange', this)"><span class="nav-icon">💰</span><span>匯率</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('japanese', this)"><span class="nav-icon">🍬</span><span>日文</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>清單</span></a>
+    </nav>
+
+    <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
+
+    <script>
+        const SUPABASE_URL = 'https://zyyjuzysjjdnuqwhummh.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5eWp1enlzampkbnVxd2h1bW1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5OTU3MzEsImV4cCI6MjEwODU3MTczMX0.4d7Id1Zz4fac3q7V6ENNlV957fxaCyuQ8Y_8elGAV3M';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function sbFetch(path, options = {}) {
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+                    ...options,
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': (options.method === 'POST' || options.method === 'PATCH') ? 'return=representation' : '', ...(options.headers || {}) }
+                });
+                const text = await res.text(); return text ? JSON.parse(text) : [];
+            } catch (e) { console.error('API Error:', e); return []; }
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // --- 旅行日期管理 ---
+        let tripDays = [];
+        let currentDay = null;
+
+        function renderTripDays() {
+            const container = document.getElementById('date-buttons');
+            const chineseWeekdays = ['日', '一', '二', '三', '四', '五', '六'];
+            const japaneseWeekdays = ['日', '月', '火', '水', '木', '金', '土'];
+
+            container.innerHTML = tripDays.map((day, index) => {
+                const [year, monthValue, dayValue] = day.trip_date.split('-').map(Number);
+                const date = new Date(year, monthValue - 1, dayValue);
+                const month = date.getMonth() + 1;
+                const dayNumber = date.getDate();
+                const weekday = date.getDay();
+                const weekdayText = `（${chineseWeekdays[weekday]}、${japaneseWeekdays[weekday]}）`;
+
+                return `
+                    <div style="position:relative; flex:0 0 85px;">
+                        <button class="date-btn ${day.day_id === currentDay ? 'active' : ''}" style="width:85px;" onclick="switchDay(${day.day_id})">
+                            <span class="date-day">第${index + 1}日</span>
+                            <span class="date-num">${month}/${dayNumber}</span>
+                            <span class="date-week">${weekdayText}</span>
+                        </button>
+                        <button title="編輯日期" onclick="openDayModal(${day.day_id})" style="position:absolute; right:-3px; top:-5px; border:0; border-radius:50%; background:#F5E8CF; width:26px; height:26px; cursor:pointer;">✏️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function refreshTripDays() {
+            const data = await sbFetch('trip_days?select=*&order=trip_date.asc');
+            if (!Array.isArray(data)) return;
+            tripDays = data;
+            if (!tripDays.some(day => day.day_id === currentDay)) {
+                currentDay = tripDays[0]?.day_id ?? null;
+            }
+            renderTripDays();
+            renderItinerary();
+        }
+
+        function openDayModal(dayId = null) {
+            const day = tripDays.find(d => d.day_id === dayId);
+            document.getElementById('day-edit-id').value = day ? day.day_id : '';
+            document.getElementById('day-date-input').value = day?.trip_date || '';
+            document.getElementById('day-modal-title').innerText = day ? '修改旅行日期' : '新增旅行日期';
+            document.getElementById('day-delete-btn').style.display = day ? 'block' : 'none';
+            document.getElementById('day-modal').classList.add('active');
+        }
+
+        async function saveTripDay() {
+            const id = document.getElementById('day-edit-id').value;
+            const date = document.getElementById('day-date-input').value;
+            if (!date) { alert('請選擇旅行日期。'); return; }
+            if (tripDays.some(d => d.trip_date === date && String(d.day_id) !== String(id))) {
+                alert('這個日期已經存在，請勿重複新增。'); return;
+            }
+            const path = id ? `trip_days?day_id=eq.${id}` : 'trip_days';
+            const result = await sbFetch(path, { method: id ? 'PATCH' : 'POST', body: JSON.stringify({ trip_date: date }) });
+            if (id) currentDay = Number(id); else currentDay = result[0]?.day_id ?? null;
+            closeModal('day-modal');
+            await refreshTripDays();
+            await refreshItinerary();
+        }
+
+        async function deleteTripDay() {
+            const id = Number(document.getElementById('day-edit-id').value);
+            if (!id || !confirm('確定刪除這個旅行日期？')) return;
+            await sbFetch(`trip_days?day_id=eq.${id}`, { method: 'DELETE' });
+            currentDay = null;
+            closeModal('day-modal');
+            await refreshTripDays();
+            await refreshItinerary();
+        }
+
+        // --- 行程功能 ---
+        let allItinerary = [];
+        async function refreshItinerary() {
+            const data = await sbFetch('itinerary_items?select=*,map_query&order=time.asc');
+            if (Array.isArray(data)) { allItinerary = data; renderItinerary(); }
+        }
+
+        function formatItinTime(timeStr) {
+            if (!timeStr || timeStr.trim() === '' || timeStr === '|') return '<span>--:--</span>';
+            const parts = timeStr.split(/[-|]/).map(s => s.trim());
+            return `<span>${parts[0] || ""}</span><span class="time-sep">|</span><span>${parts[1] || ""}</span>`;
+        }
+
+        function goToMap(query) {
+            if (!query) return;
+            const q = query.trim();
+            if (q.startsWith('http')) window.open(q, '_blank');
+            else window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`, '_blank');
+        }
+
+        function renderItinerary() {
+            const list = document.getElementById('itinerary-list');
+            const items = allItinerary.filter(i => i.day_id === currentDay);
+            if (items.length === 0) {
+                list.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px; font-weight: 700; border: 2px dashed #f3e5f5; border-radius: 22px;">~快想想吧~<br>點擊 ＋ 號新增！</div>`;
+                return;
+            }
+            list.innerHTML = items.map(i => `
+                <div class="itin-card" onclick='openItinDetail(${JSON.stringify(i).replace(/'/g, "&#39;")})'>
+                    <div class="itin-time">${formatItinTime(i.time)}</div>
+                    <div class="itin-content">
+                        <div class="itin-loc">${i.location}</div>
+                        ${i.transport ? `<div class="itin-detail-row"><span>🚋 ${i.transport}</span></div>` : ''}
+                        ${i.notes ? `<div class="itin-notes-row"><span>📝 ${i.notes}</span></div>` : ''}
+                    </div>
+                    <div class="itin-action-group">
+                        <button class="itin-action-btn" onclick='event.stopPropagation(); openItinModal(${JSON.stringify(i).replace(/'/g, "&#39;")})'>✏️</button>
+                        ${(i.map_query && i.map_query.trim() !== '') ? `<button class="itin-action-btn itin-map-btn" onclick="event.stopPropagation(); goToMap(\`${i.map_query}\`)">📍</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openItinModal(item = null) {
+            const modal = document.getElementById('itin-modal');
+            const delBtn = document.getElementById('btn-delete-itin');
+            if (item) {
+                document.getElementById('modal-title').innerText = '修改行程';
+                document.getElementById('edit-id').value = item.id;
+                const parts = (item.time || '').split(/[-|]/).map(s => s.trim());
+                document.getElementById('form-time-start').value = parts[0] || '';
+                document.getElementById('form-time-end').value = parts[1] || '';
+                document.getElementById('form-loc').value = item.location || '';
+                document.getElementById('form-map-query').value = item.map_query || '';
+                document.getElementById('form-trans').value = item.transport || '';
+                document.getElementById('form-notes').value = item.notes || '';
+                delBtn.style.display = 'flex';
+            } else {
+                document.getElementById('modal-title').innerText = '新增行程';
+                document.getElementById('edit-id').value = '';
+                document.getElementById('form-time-start').value = '';
+                document.getElementById('form-time-end').value = '';
+                document.getElementById('form-loc').value = '';
+                document.getElementById('form-map-query').value = '';
+                document.getElementById('form-trans').value = '';
+                document.getElementById('form-notes').value = '';
+                delBtn.style.display = 'none';
+            }
+            modal.classList.add('active');
+        }
+
+        async function saveItin() {
+            const id = document.getElementById('edit-id').value;
+            const start = document.getElementById('form-time-start').value;
+            const end = document.getElementById('form-time-end').value;
+            const location = document.getElementById('form-loc').value;
+            const map_query = document.getElementById('form-map-query').value.trim();
+            const transport = document.getElementById('form-trans').value;
+            const notes = document.getElementById('form-notes').value;
+            if (!location) return;
+            const combinedTime = `${start}|${end}`;
+            const body = { day_id: currentDay, time: combinedTime, location, map_query: map_query || null, transport, notes };
+            if (id) await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(body) });
+            else await sbFetch('itinerary_items', { method: 'POST', body: JSON.stringify(body) });
+            closeModal('itin-modal'); refreshItinerary();
+        }
+
+        async function delItinFromModal() {
+            const id = document.getElementById('edit-id').value;
+            if (id && confirm('確定刪除此行程？')) {
+                await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'DELETE' });
+                closeModal('itin-modal'); refreshItinerary();
+            }
+        }
+
+        function openItinDetail(item) {
+            const parts = (item.time || '').split(/[-|]/).map(s => s.trim());
+            document.getElementById('dt-time').innerText = (parts[0] || parts[1]) ? `${parts[0]} - ${parts[1]}` : '--:--';
+            document.getElementById('dt-loc').innerText = item.location;
+            document.getElementById('dt-trans').innerText = item.transport || '無設定';
+            document.getElementById('dt-notes').innerText = item.notes || '尚無備註';
+            document.getElementById('detail-overlay').classList.add('active');
+        }
+        function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
+        function switchDay(dayId) { currentDay = Number(dayId); renderTripDays(); renderItinerary(); }
+
+        // --- 匯率與日文 ---
+        function convert(type) {
+            const rate = parseFloat(document.getElementById('base-rate').value) || 0.21;
+            const twd = document.getElementById('twd-val'), jpy = document.getElementById('jpy-val');
+            if (type === 'jpy') twd.value = jpy.value ? (parseFloat(jpy.value) * rate).toFixed(2) : '';
+            else jpy.value = twd.value ? (parseFloat(twd.value) / rate).toFixed(0) : '';
+        }
+        function showCategory(cat) {
+            document.getElementById('jp-menu').style.display = 'none';
+            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
+            document.getElementById('cat-' + cat).classList.add('active');
+            document.getElementById('fixed-back-container').style.display = 'block';
+        }
+        function backToMenu() {
+            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
+            document.getElementById('jp-menu').style.display = 'grid';
+            document.getElementById('fixed-back-container').style.display = 'none';
+        }
+        function openFS(jp, ch, romaji) {
+            document.getElementById('fs-jp').innerText = jp; document.getElementById('fs-ch').innerText = ch;
+            document.getElementById('fs-romaji').innerText = romaji; document.getElementById('fs-overlay').classList.add('active');
+        }
+
+        // --- 旅伴與分類管理 ---
+        let currentWho = localStorage.getItem('currentUserName') || ''; 
+        let membersData = [];
+        let categoriesData = []; 
+        let currentCat = '';
+        let allItems = [];
+
+        async function refreshMembers() {
+            const remote = await sbFetch('members?order=id.asc');
+            let data = (remote && remote.length) ? remote : [{id: 999, name: '未命名'}];
+            if (!currentWho || (Array.isArray(currentWho) && currentWho.length === 0)) {
+                if (data.length > 0 && data[0].name) {
+                    currentWho = data[0].name;
+                    localStorage.setItem('currentUserName', currentWho);
+                }
+            }
+            membersData = data;
+            renderWhoSelector();
+        }
+
+        function renderWhoSelector() { 
+            document.getElementById('who-selector').innerHTML = membersData.map(m => `
+                <div class="who-chip ${m.name === currentWho ? 'active' : ''}" onclick="setWho('${m.name}')">${m.name}</div>
+            `).join(''); 
+        }
+        function setWho(name) { currentWho = name; localStorage.setItem('osaka_who', name); localStorage.setItem('currentUserName', name); renderWhoSelector(); renderItems(); }
+        function openWhoManageModal() {
+            document.getElementById('who-list-container').innerHTML = membersData.map((m, i) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700;">${m.name}</span>
+                    <div class="manage-btn-group">
+                        <button class="manage-icon-btn btn-edit-small" onclick="editWho(${m.id}, '${m.name}')">✏️</button>
+                        <button class="manage-icon-btn btn-del-small" onclick="deleteWhoMember(${m.id})">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('who-manage-modal').classList.add('active');
+        }
+        async function addWho() {
+            const val = document.getElementById('new-who-input').value;
+            if (val) { await sbFetch('members', { method: 'POST', body: JSON.stringify({ name: val }) }); document.getElementById('new-who-input').value = ''; await refreshMembers(); openWhoManageModal(); }
+        }
+        async function editWho(id, oldName) {
+            const newName = prompt('請輸入新的旅伴名稱：', oldName);
+            if (newName && newName !== oldName) { await sbFetch(`members?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) }); if (currentWho === oldName) currentWho = newName; await refreshMembers(); openWhoManageModal(); }
+        }
+        async function deleteWhoMember(id) { if (confirm('確定刪除？')) { await sbFetch(`members?id=eq.${id}`, { method: 'DELETE' }); await refreshMembers(); openWhoManageModal(); } }
+
+        async function refreshCategories() {
+            const data = await sbFetch('checklist_categories?order=sort_order.asc');
+            categoriesData = data.length > 0 ? data : [];
+            if (!currentCat && categoriesData.length > 0) currentCat = categoriesData[0].name;
+            renderChecklistTabs();
+            renderItems();
+        }
+
+        async function addCategory() {
+            const val = document.getElementById('new-cat-input').value;
+            if (val) {
+                const nextSort = categoriesData.length > 0 ? categoriesData[categoriesData.length-1].sort_order + 1 : 1;
+                await sbFetch('checklist_categories', { method: 'POST', body: JSON.stringify({ name: val, sort_order: nextSort }) });
+                document.getElementById('new-cat-input').value = '';
+                await refreshCategories();
+                openCatModal();
+            }
+        }
+        async function editCategory(id, oldName) {
+            const newName = prompt('請輸入新的分類名稱：', oldName);
+            if (newName && newName !== oldName) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) }); if (currentCat === oldName) currentCat = newName; await refreshCategories(); openCatModal(); }
+        }
+        async function deleteCategory(id, name) {
+            if (confirm(`確定刪除分類「${name}」？`)) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'DELETE' }); if (currentCat === name) currentCat = categoriesData[0]?.name || ''; await refreshCategories(); openCatModal(); }
+        }
+        function openCatModal() {
+            document.getElementById('cat-list-container').innerHTML = categoriesData.map((c, i) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700;">${c.name}</span>
+                    <div class="manage-btn-group">
+                        <button class="manage-icon-btn btn-edit-small" onclick="editCategory(${c.id}, '${c.name}')">✏️</button>
+                        <button class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id}, '${c.name}')">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('cat-modal').classList.add('active');
+        }
+
+        // --- ✨ 清單與圖片處理核心 ✨ ---
+        let checklistSortableInstance = null;
+        let currentModalImage = null; // 存放當前選取的圖片 base64 或 URL
+
+        // 解析文字中是否夾帶圖片標籤
+        function parseTextAndImg(rawText, explicitImg) {
+            if (explicitImg && explicitImg.trim()) {
+                const clean = (rawText || '').replace(/<!--IMG:[\s\S]*?-->/g, '').trim();
+                return { text: clean, img: explicitImg.trim() };
+            }
+            const match = (rawText || '').match(/<!--IMG:([\s\S]*?)-->/);
+            if (match && match[1]) {
+                const clean = rawText.replace(match[0], '').trim();
+                return { text: clean, img: match[1].trim() };
+            }
+            return { text: rawText || '', img: null };
+        }
+
+        // 圖片壓縮輔助工具
+        function compressImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onerror = reject;
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onerror = reject;
+                    img.onload = () => {
+                        let w = img.width, h = img.height;
+                        const maxDim = 850;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+                            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w; canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', 0.8));
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleFileSelect(event) {
+            const file = event.target.files?.[0];
+            if (!file) return;
+            try {
+                const dataUrl = await compressImage(file);
+                setImagePreview(dataUrl);
+            } catch (err) {
+                alert('圖片讀取失敗');
+            }
+        }
+
+        function toggleUrlField() {
+            const el = document.getElementById('cl-url-container');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function applyImageUrl() {
+            const url = document.getElementById('cl-img-url-input').value.trim();
+            if (url) {
+                setImagePreview(url);
+                document.getElementById('cl-url-container').style.display = 'none';
+            }
+        }
+
+        function setImagePreview(url) {
+            currentModalImage = url;
+            const wrap = document.getElementById('cl-preview-wrap');
+            const img = document.getElementById('cl-preview-img');
+            img.src = url;
+            wrap.style.display = 'flex';
+        }
+
+        function removeSelectedImage() {
+            currentModalImage = null;
+            document.getElementById('cl-preview-wrap').style.display = 'none';
+            document.getElementById('cl-preview-img').src = '';
+            document.getElementById('cl-img-file-input').value = '';
+            document.getElementById('cl-img-url-input').value = '';
+        }
+
+        function openLightbox(imgUrl, title) {
+            document.getElementById('lightbox-full-img').src = imgUrl;
+            document.getElementById('lightbox-title').innerText = title || '';
+            document.getElementById('cl-lightbox').classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('cl-lightbox').classList.remove('active'); }
+
+        async function refreshChecklist() {
+            const data = await sbFetch('checklist_items?order=sort_order.asc');
+            if (Array.isArray(data)) {
+                allItems = data;
+                renderItems();
+            }
+        }
+
+        async function saveNewOrder() {
+            const listDiv = document.getElementById('cl-items-list');
+            const items = listDiv.querySelectorAll('.cl-item');
+            const updates = Array.from(items).map((el, index) => {
+                const id = el.getAttribute('data-id');
+                return sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: index }) });
+            });
+            await Promise.all(updates);
+        }
+
+        function renderChecklistTabs() { 
+            document.getElementById('cl-tabs').innerHTML = categoriesData.map(c => `
+                <button class="cl-tab-btn ${c.name === currentCat ? 'active' : ''}" onclick="switchClTab('${c.name}')">${c.name}</button>
+            `).join(''); 
+        }
+
+        function switchClTab(c) { currentCat = c; renderChecklistTabs(); renderItems(); }
+
+        function renderItems() {
+            const listDiv = document.getElementById('cl-items-list');
+            if (!listDiv) return;
+            const items = allItems.filter(i => i.category === currentCat);
+            if (items.length === 0) {
+                listDiv.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px;">清單空空如也，點 ＋ 新增物品吧！</div>`;
+                return;
+            }
+
+            const pending = items.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+            const completed = items.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+            let html = pending.map(i => renderSingleItem(i)).join('');
+            if (completed.length > 0) {
+                html += `<div class="cl-divider" style="text-align:center; font-size:12px; color:#aaa; margin:15px 0;">已完成項目 (${completed.length})</div>`;
+                html += completed.map(i => renderSingleItem(i)).join('');
+            }
+            listDiv.innerHTML = html;
+
+            if (checklistSortableInstance) checklistSortableInstance.destroy();
+            checklistSortableInstance = new Sortable(listDiv, {
+                animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
+                filter: '.cl-check, .cl-del, .cl-divider, .cl-img-thumb',
+                ghostClass: 'cl-item-ghost',
+                onEnd: async function () { await saveNewOrder(); }
+            });
+        }
+
+        function renderSingleItem(i) {
+            const parsed = parseTextAndImg(i.text, i.image_url);
+            const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
+            const safeImg = parsed.img ? parsed.img.replace(/"/g, '&quot;') : '';
+            const safeText = parsed.text.replace(/"/g, '&quot;');
+
+            return `
+                <div class="cl-item ${i.done ? 'done' : ''}" data-id="${i.id}">
+                    <div class="cl-check" onclick="toggleItem(${i.id}, ${i.done})">${i.done ? '✓' : ''}</div>
+                    ${parsed.img ? `<img src="${safeImg}" class="cl-img-thumb" onclick="openLightbox('${safeImg}', '${safeText}')" title="點擊放大">` : ''}
+                    <span class="cl-text" onclick="openClItemModal(${safeItem})">${parsed.text}</span>
+                    <span class="cl-who">${i.who || ''}</span>
+                    <button class="cl-del" onclick="delItem(${i.id})">✕</button>
+                </div>`;
+        }
+
+        function openClItemModal(item = null) {
+            const modal = document.getElementById('cl-item-modal');
+            const input = document.getElementById('cl-text-input');
+            const editId = document.getElementById('cl-edit-id');
+            removeSelectedImage();
+
+            if (item) {
+                const parsed = parseTextAndImg(item.text, item.image_url);
+                input.value = parsed.text;
+                editId.value = item.id;
+                if (parsed.img) setImagePreview(parsed.img);
+            } else {
+                input.value = '';
+                editId.value = '';
+            }
+            modal.classList.add('active');
+        }
+
+        async function saveClItem() {
+            const id = document.getElementById('cl-edit-id').value;
+            const text = document.getElementById('cl-text-input').value.trim();
+            if (!text) return;
+
+            let finalText = text;
+            if (currentModalImage) {
+                finalText += `\n<!--IMG:${currentModalImage}-->`;
+            }
+
+            if (id) {
+                await sbFetch(`checklist_items?id=eq.${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ text: finalText, who: currentWho })
+                });
+            } else {
+                const catItems = allItems.filter(i => i.category === currentCat);
+                const maxSort = catItems.length > 0 ? Math.max(...catItems.map(i => i.sort_order || 0)) : -1;
+                await sbFetch('checklist_items', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        category: currentCat,
+                        text: finalText,
+                        done: false,
+                        who: currentWho,
+                        sort_order: maxSort + 1
+                    })
+                });
+            }
+            closeModal('cl-item-modal');
+            refreshChecklist();
+        }
+
+        async function toggleItem(id, status) {
+            await sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ done: !status, who: currentWho }) });
+            refreshChecklist();
+        }
+
+        async function delItem(id) {
+            if (confirm('確定刪除項目？')) {
+                await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
+                refreshChecklist();
+            }
+        }
+
+        let currentTabId = 'itinerary';
+        function handleFabClick() {
+            if (navigator.vibrate) navigator.vibrate(5);
+            if (currentTabId === 'itinerary') openItinModal();
+            else if (currentTabId === 'checklist') openClItemModal();
+        }
+
+        function switchTab(id, el) {
+            if (navigator.vibrate) navigator.vibrate(5);
+            currentTabId = id;
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('page-' + id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('add-fab').style.display = (id === 'checklist' || id === 'itinerary') ? 'flex' : 'none';
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('real-date').innerText = now.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit', weekday: 'short' });
+            const tw = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Taipei' });
+            const jp = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' });
+            document.getElementById('realtime-clock').innerHTML = `<div class="clock-item">🇯🇵 ${jp}</div> <span style="opacity:0.3">|</span> <div class="clock-item">🇹🇼 ${tw}</div>`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function createPetal() {
+            const p = document.createElement('div');
+            p.className = 'petal';
+            const leaves = ['🍁', '🍂', '🍃'];
+            p.innerText = leaves[Math.floor(Math.random() * leaves.length)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.fontSize = (Math.random() * 10 + 14) + 'px';
+            p.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 11000);
+        }
+        setInterval(createPetal, 1200);
+
+        function subscribeRealtime() {
+            if (supabaseClient.getChannels().length > 0) supabaseClient.removeAllChannels();
+            supabaseClient.channel('itinerary-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'itinerary_items' }, () => refreshItinerary())
+                .subscribe();
+            supabaseClient.channel('checklist-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'checklist_items' }, () => refreshChecklist())
+                .subscribe();
+        }
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                supabaseClient.removeAllChannels();
+            } else {
+                refreshMembers(); refreshCategories(); refreshChecklist(); refreshItinerary();
+                subscribeRealtime();
+            }
+        });
+
+        window.onload = async () => {
+            await refreshTripDays();
+            await refreshMembers();
+            await refreshCategories();
+            await refreshChecklist();
+            await refreshItinerary();
+            subscribeRealtime();
+        };
+    </script>
+</body>
+</html>
