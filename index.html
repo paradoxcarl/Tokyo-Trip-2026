@@ -150,7 +150,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .cl-tab-btn.active { background: var(--forest-green); color: white; }
 .cl-tab-manage { font-size: 0.7rem; padding: 6px 12px; background: #eee; border: none; border-radius: 50px; color: #777; cursor: pointer; font-weight: bold; flex-shrink: 0; }
 
-/* ✨✨ 購物清單卡片核心樣式（縮圖在名稱後面、多圖並排、備註欄位）✨✨ */
+/* ✨✨ 清單卡片核心樣式（iOS 點擊優化、上下標籤按鈕、備註、縮圖在名稱後面）✨✨ */
 .shop-item-card {
     background: white; border-radius: 18px; padding: 12px 14px; margin-bottom: 11px;
     box-shadow: 0 4px 12px rgba(130, 83, 42, 0.06); border: 1.5px solid #E8D8B9;
@@ -160,16 +160,20 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .shop-item-card.done .shop-title-text { text-decoration: line-through; }
 
 .shop-card-main-row {
-    display: flex; align-items: center; gap: 10px; width: 100%;
+    display: flex; align-items: center; gap: 8px; width: 100%;
 }
+
+/* ✨ iOS 優化：完成勾選按鈕使用 <button> 並且有正確的觸控屬性 ✨ */
 .cl-check {
-    width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--forest-green);
+    width: 32px; height: 32px; border-radius: 50%; border: 2.5px solid var(--forest-green);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    cursor: pointer; font-weight: bold; color: white; transition: 0.2s;
+    cursor: pointer; font-weight: bold; color: white; background: transparent; padding: 0;
+    touch-action: manipulation; -webkit-tap-highlight-color: transparent; transition: 0.15s;
+    outline: none; -webkit-appearance: none;
 }
 .shop-item-card.done .cl-check { background: var(--forest-green); }
 
-/* 名稱與縮圖並排區塊（名稱在前，多張縮圖在後） */
+/* 名稱與後面跟隨的多張縮圖 */
 .shop-title-and-thumbs {
     flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; cursor: pointer;
 }
@@ -182,15 +186,15 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
     display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
 }
 .shop-thumb {
-    width: 44px; height: 44px; border-radius: 10px; object-fit: cover;
+    width: 42px; height: 42px; border-radius: 10px; object-fit: cover;
     border: 1.5px solid var(--ginkgo-gold); cursor: zoom-in; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: transform 0.15s; flex-shrink: 0;
+    transition: transform 0.15s; flex-shrink: 0; touch-action: manipulation;
 }
 .shop-thumb:active { transform: scale(0.92); }
 
 /* 備註欄位顯示樣式 */
 .shop-notes-row {
-    font-size: 0.82rem; color: #8d6e63; padding-left: 38px; display: flex;
+    font-size: 0.82rem; color: #8d6e63; padding-left: 40px; display: flex;
     align-items: flex-start; gap: 5px; white-space: pre-wrap; line-height: 1.4;
 }
 
@@ -198,18 +202,40 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
     font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px;
     border-radius: 10px; flex-shrink: 0; font-weight: bold;
 }
+
+/* 旅伴管理與分類管理統一按鈕樣式 */
+.manage-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.manage-icon-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1.5px solid #E8D8B9;
+    background: #FFFCF5;
+    color: var(--forest-green);
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.15s;
+    touch-action: manipulation;
+    padding: 0;
+    line-height: 1;
+}
+.manage-icon-btn:hover { background: #F5E8CF; }
+.manage-icon-btn:disabled { opacity: 0.25; cursor: default; background: #f5f5f5; border-color: #eee; color: #ccc; }
+.manage-icon-btn.btn-del-small { color: #e53935; border-color: #ffcdd2; background: #fff5f5; }
+.manage-icon-btn.btn-del-small:hover { background: #ffebee; }
+
 .btn-card-del {
-    color: #ccc; border: none; background: none; font-size: 1.15rem; padding: 4px; cursor: pointer;
+    color: #ccc; border: none; background: none; font-size: 1.15rem; padding: 4px; cursor: pointer; touch-action: manipulation;
 }
 .btn-card-del:hover { color: #e53935; }
-
-/* 購物項目統計標籤 */
-.shop-stats-bar {
-    display: flex; justify-content: space-between; align-items: center;
-    background: #FFF9ED; border: 1.5px dashed #D5AC38; border-radius: 14px;
-    padding: 8px 14px; font-size: 0.8rem; font-weight: bold; color: var(--forest-green);
-    margin-bottom: 12px;
-}
 
 /* 圖片多選上傳面板 */
 .multi-img-upload-box {
@@ -241,18 +267,18 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .lightbox-img { max-width: 88vw; max-height: 72vh; object-fit: contain; padding: 8px; }
 .lightbox-caption { padding: 8px 15px; font-weight: bold; color: var(--dark-pink); text-align: center; }
 
-/* 底部導覽列（5個項目：行程、購物、待辦、匯率、日文） */
+/* 底部導覽列（4個項目：行程、清單、匯率、日文） */
 .bottom-nav {
-    position: fixed; bottom: 12px; left: 8px; right: 8px; background: rgba(255,255,255,0.96);
+    position: fixed; bottom: 12px; left: 12px; right: 12px; background: rgba(255,255,255,0.96);
     display: flex; height: 64px; z-index: 1000; border-radius: 30px;
     box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px);
 }
 .nav-tab {
     flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 0.72rem; color: #bbb; text-decoration: none; transition: 0.2s;
+    font-size: 0.75rem; color: #bbb; text-decoration: none; transition: 0.2s;
 }
-.nav-tab.active { color: var(--dark-pink); font-weight: 800; transform: scale(1.04); }
-.nav-tab .nav-icon { font-size: 1.35rem; margin-bottom: 2px; }
+.nav-tab.active { color: var(--dark-pink); font-weight: 800; transform: scale(1.05); }
+.nav-tab .nav-icon { font-size: 1.4rem; margin-bottom: 2px; }
 
 .fab { position: fixed; bottom: 90px; right: 20px; width: 58px; height: 58px; background: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; box-shadow: 0 8px 20px rgba(183, 71, 53, 0.28); z-index: 500; border: none; cursor: pointer; }
 #fs-overlay { display: none; position: fixed; inset: 0; background: var(--bg-color); z-index: 2000; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; }
@@ -279,7 +305,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             <button class="detail-close" onclick="closeItinDetail()">✕</button>
             <div class="detail-header">
                 <div class="time" id="dt-time">--:--</div>
-                <div class="loc" id="dt-loc">地點名稱 <span style="color:#B74735">*</span></div>
+                <div class="loc" id="dt-loc">地點名稱 </div>
             </div>
             <div class="detail-body">
                 <div class="detail-row">
@@ -316,7 +342,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 </div>
             </div>
             <div class="form-group">
-                <label>行程 / 地點名稱</label>
+                <label>行程 / 地點名稱  <span style="color:#B74735">*</span></label>
                 <input type="text" id="form-loc" placeholder="(必填) 要去哪兒？">
             </div>
             <div class="form-group">
@@ -350,35 +376,27 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         <div id="itinerary-list"></div>
     </div>
 
-    <!-- 2. ✨✨ 獨立出來的「購物清單」頁面 ✨✨ -->
-    <div id="page-shopping" class="tab-content">
-        <!-- 購物清單統計 -->
-        <div class="shop-stats-bar" id="shop-stats-bar">
-            <span>🛍️ 購物清單</span>
-            <span id="shop-count-text">待買 0 項</span>
-        </div>
-
-        <!-- 購物項目列表 -->
-        <div id="shopping-items-list" style="padding-bottom: 80px;"></div>
-    </div>
-
-    <!-- 3. 待辦/行李等其他清單頁面 -->
+    <!-- 2. ✨✨ 清單頁面（包含購物清單、必帶行李、景點預約等所有分類標籤）✨✨ -->
     <div id="page-checklist" class="tab-content">
         <div class="card" style="margin-bottom: 12px; padding: 14px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 旅伴</span>
+                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 選擇登記旅伴</span>
                 <button onclick="openWhoManageModal()" style="border: none; background: none; color: var(--forest-green); font-weight: 700; cursor: pointer;">⚙️ 管理</button>
             </div>
             <div class="who-container" id="who-selector"></div>
         </div>
+        
+        <!-- 清單分類標籤列 -->
         <div class="checklist-tabs" id="cl-tabs-container">
             <div id="cl-tabs" style="display: flex; gap: 8px; overflow-x: auto; flex: 1;"></div>
             <button class="cl-tab-manage" onclick="openCatModal()">⚙️ 分類</button>
         </div>
+        
+        <!-- 項目列表 -->
         <div id="cl-items-list" style="padding-bottom: 80px;"></div>
     </div>
 
-    <!-- 4. 匯率頁面 -->
+    <!-- 3. 匯率頁面 -->
     <div id="page-exchange" class="tab-content">
         <div class="card">
             <div class="input-group"><label>🇯🇵 日幣 JPY</label><input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')"><span class="currency-unit">円</span></div>
@@ -390,7 +408,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
-    <!-- 5. 日文常用語頁面 -->
+    <!-- 4. 日文常用語頁面 -->
     <div id="page-japanese" class="tab-content">
         <div id="fixed-back-container"><button class="back-btn-styled" onclick="backToMenu()">← 返回分類</button></div>
         <div id="jp-menu" class="jp-menu-grid">
@@ -430,7 +448,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             <div class="phrase-item" onclick="openFS('これをください', '我要買這個', 'Kore o kudasai')"><b>我要買這個</b><p>これをください</p><small class="romaji">Kore o kudasai</small></div>
             <div class="phrase-item" onclick="openFS('免税はできますか？', '可以免稅嗎？', 'Menzei wa dekimasu ka?')"><b>可以免稅嗎？</b><p>免税はできますか？</p><small class="romaji">Menzei wa dekimasu ka?</small></div>
             <div class="phrase-item" onclick="openFS('クレジットカードは使えますか？', '可以使用信用卡嗎？', 'Kurejitto ka-do wa tsukaemasu ka?')"><b>可以使用信用卡嗎？</b><p>クレジットカードは使えますか？</p><small class="romaji">Kurejitto ka-do wa tsukaemasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('お会計は別々にお願いします', '請幫我分開結帳', 'Okaikei wa betsubetsu ni onegaishimasu')"><b>請幫我分開結帳</b><p>お会計は別々にお願いします</p><small class="romaji">Okaikei wa betsubetsu ni onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('お会計は別々にお願いします', '請幫我分開結帳', 'Okaikei wa betsubetsu ni onegaishimasu')"><b>請幫我分開結帳</b><p>お会計は別々にお願いします</p><small class="romaji">Okaikei wa betsubetsu de onegaishimasu</small></div>
             <div class="phrase-item" onclick="openFS('試着してもいいですか？', '可以試穿嗎？', 'Shichaku shite mo ii desu ka?')"><b>可以試穿嗎？</b><p>試着してもいいですか？</p><small class="romaji">Shichaku shite mo ii desu ka?</small></div>
             <div class="phrase-item" onclick="openFS('大きいサイズはありますか？', '有大一點的尺寸嗎？', 'Ookii saizu wa arimasu ka?')"><b>有大一點的尺寸嗎？</b><p>大きいサイズはありますか？</p><small class="romaji">Ookii saizu wa arimasu ka?</small></div>
             <div class="phrase-item" onclick="openFS('他の色はありますか？', '有其他的顏色嗎？', 'Hoka no iro wa arimasu ka?')"><b>有其他的顏色嗎？</b><p>他の色はありますか？</p><small class="romaji">Hoka no iro wa arimasu ka?</small></div>
@@ -501,7 +519,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
-    <!-- ✨✨ 清單項目 Modal（含物品名稱、備註欄位、多圖上傳與網址）✨✨ -->
+    <!-- ✨✨ 清單項目 Modal（物品名稱、備註欄位、登記旅伴、多圖上傳與網址）✨✨ -->
     <div id="cl-item-modal" class="overlay">
         <div class="modal-content">
             <div class="modal-title" id="cl-modal-title">清單項目</div>
@@ -510,13 +528,13 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
             <div class="form-group">
                 <label>物品 / 項目名稱 <span style="color:#B74735">*</span></label>
-                <input type="text" id="cl-name-input" placeholder="例如：達菲熊爆米花桶、合利他命、東京芭娜娜...">
+                <input type="text" id="cl-name-input" placeholder="例如：購物清單、行李清單、景點清單、預約資訊...">
             </div>
 
-            <!-- ✨ 新增的備註欄位 ✨ -->
+            <!-- 備註欄位 -->
             <div class="form-group">
                 <label>備註 / 規格說明 (選填)</label>
-                <textarea id="cl-notes-input" placeholder="例如：買2盒、尺寸L、世界市集商店限定、預估 ¥3,500、代購給誰..." rows="2"></textarea>
+                <textarea id="cl-notes-input" placeholder="例如：尺寸、數量、限定商店、預估金額..." rows="2"></textarea>
             </div>
 
             <!-- 登記旅伴 -->
@@ -525,15 +543,15 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 <div id="modal-who-chips" style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;"></div>
             </div>
 
-            <!-- ✨ 支援多張圖片上傳／拍照／網址 ✨ -->
+            <!-- 多張圖片上傳／拍照／網址 -->
             <div class="multi-img-upload-box">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張照片)</label>
+                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張圖片)</label>
                     <span id="img-count-badge" style="font-size: 0.7rem; color: #795A22; font-weight: bold;">0 張</span>
                 </div>
 
                 <div class="multi-img-btns">
-                    <button type="button" class="btn-upload-action" onclick="document.getElementById('cl-multi-file-input').click()">📷 上傳圖片</button>
+                    <button type="button" class="btn-upload-action" onclick="document.getElementById('cl-multi-file-input').click()">📷 圖片</button>
                     <button type="button" class="btn-upload-action" onclick="toggleUrlField()">🔗 貼上網址</button>
                 </div>
                 
@@ -546,7 +564,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
                 <!-- 多圖縮圖預覽列 -->
                 <div id="cl-images-preview-grid" class="multi-img-grid"></div>
-                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮上傳</div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳)</div>
             </div>
 
             <div class="modal-btns">
@@ -583,13 +601,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
-    <!-- 底部導覽列（5個項目：行程、購物、待辦、匯率、日文） -->
+    <!-- 底部導覽列（4個項目：行程、匯率、日文、清單） -->
     <nav class="bottom-nav">
         <a href="#" class="nav-tab active" onclick="switchTab('itinerary', this)"><span class="nav-icon">📅</span><span>行程</span></a>
-        <a href="#" class="nav-tab" onclick="switchTab('shopping', this)"><span class="nav-icon">🛍️</span><span>購物</span></a>
-        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>待辦</span></a>
         <a href="#" class="nav-tab" onclick="switchTab('exchange', this)"><span class="nav-icon">💰</span><span>匯率</span></a>
         <a href="#" class="nav-tab" onclick="switchTab('japanese', this)"><span class="nav-icon">🍬</span><span>日文</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>清單</span></a>
     </nav>
 
     <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
@@ -851,44 +868,79 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             renderItems(); 
         }
 
-        function setShoppingWho(name) {
-            shoppingSelectedWho = name;
-            renderShoppingWhoSelector();
-            renderShoppingList();
-        }
-
         function openWhoManageModal() {
             document.getElementById('who-list-container').innerHTML = membersData.map((m, i) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
-                    <span style="font-weight:700;">${m.name}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">${m.name}</span>
                     <div class="manage-btn-group">
-                        <button class="manage-icon-btn btn-edit-small" onclick="editWho(${m.id}, '${m.name}')">✏️</button>
-                        <button class="manage-icon-btn btn-del-small" onclick="deleteWhoMember(${m.id})">🗑️</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortWho(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="上移">▲</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortWho(${i}, 1)" ${i === membersData.length - 1 ? 'disabled' : ''} title="下移">▼</button>
+                        <button type="button" class="manage-icon-btn" onclick="editWho(${m.id}, '${m.name.replace(/'/g, "\\'")}')" title="編輯">✏️</button>
+                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteWhoMember(${m.id})" title="刪除">🗑️</button>
                     </div>
                 </div>
             `).join('');
             document.getElementById('who-manage-modal').classList.add('active');
         }
         async function addWho() {
-            const val = document.getElementById('new-who-input').value;
-            if (val) { await sbFetch('members', { method: 'POST', body: JSON.stringify({ name: val }) }); document.getElementById('new-who-input').value = ''; await refreshMembers(); openWhoManageModal(); }
+            const val = document.getElementById('new-who-input').value.trim();
+            if (val) {
+                await sbFetch('members', { method: 'POST', body: JSON.stringify({ name: val }) });
+                document.getElementById('new-who-input').value = '';
+                await refreshMembers();
+                openWhoManageModal();
+            }
         }
         async function editWho(id, oldName) {
             const newName = prompt('請輸入新的旅伴名稱：', oldName);
-            if (newName && newName !== oldName) { await sbFetch(`members?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) }); if (currentWho === oldName) currentWho = newName; await refreshMembers(); openWhoManageModal(); }
+            if (newName && newName !== oldName) {
+                await sbFetch(`members?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) });
+                if (currentWho === oldName) currentWho = newName;
+                await refreshMembers();
+                openWhoManageModal();
+            }
         }
-        async function deleteWhoMember(id) { if (confirm('確定刪除？')) { await sbFetch(`members?id=eq.${id}`, { method: 'DELETE' }); await refreshMembers(); openWhoManageModal(); } }
+        async function deleteWhoMember(id) {
+            if (confirm('確定刪除此旅伴？')) {
+                await sbFetch(`members?id=eq.${id}`, { method: 'DELETE' });
+                await refreshMembers();
+                openWhoManageModal();
+            }
+        }
+        async function sortWho(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= membersData.length) return;
+            const curr = membersData[idx];
+            const target = membersData[targetIdx];
+            
+            // Swap member positions in array locally and update names or sort_order
+            const temp = membersData[idx];
+            membersData[idx] = membersData[targetIdx];
+            membersData[targetIdx] = temp;
+
+            try {
+                // If sort_order is supported on members table
+                const tempSort = curr.sort_order !== undefined ? curr.sort_order : idx;
+                const targetSort = target.sort_order !== undefined ? target.sort_order : targetIdx;
+                await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: targetSort }) });
+                await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
+            } catch(e) {
+                // Fallback: swap names if sort_order column isn't present
+                await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ name: target.name }) });
+                await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ name: curr.name }) });
+            }
+            await refreshMembers();
+            openWhoManageModal();
+        }
 
         async function refreshCategories() {
             const data = await sbFetch('checklist_categories?order=sort_order.asc');
             categoriesData = data.length > 0 ? data : [];
-            // 如果清單中沒有「🛍️ 購物清單」，預設第一個不是購物的分類
-            const nonShoppingCats = categoriesData.filter(c => !c.name.includes('購物'));
-            if (!currentCat && nonShoppingCats.length > 0) currentCat = nonShoppingCats[0].name;
-            else if (!currentCat && categoriesData.length > 0) currentCat = categoriesData[0].name;
+            if (!currentCat && categoriesData.length > 0) {
+                currentCat = categoriesData[0].name;
+            }
             renderChecklistTabs();
             renderItems();
-            renderShoppingList();
         }
 
         async function addCategory() {
@@ -910,23 +962,35 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         }
         function openCatModal() {
             document.getElementById('cat-list-container').innerHTML = categoriesData.map((c, i) => `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:12px; border-bottom:1px solid #eee;">
-                    <span style="font-weight:700;">${c.name}</span>
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">${c.name}</span>
                     <div class="manage-btn-group">
-                        <button class="manage-icon-btn btn-edit-small" onclick="editCategory(${c.id}, '${c.name}')">✏️</button>
-                        <button class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id}, '${c.name}')">🗑️</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="上移">▲</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, 1)" ${i === categoriesData.length - 1 ? 'disabled' : ''} title="下移">▼</button>
+                        <button type="button" class="manage-icon-btn" onclick="editCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="編輯">✏️</button>
+                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="刪除">🗑️</button>
                     </div>
                 </div>
             `).join('');
             document.getElementById('cat-modal').classList.add('active');
         }
 
-        // --- ✨✨ 購物清單／多圖／備註核心處理 ✨✨ ---
+        async function sortCategory(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= categoriesData.length) return;
+            const curr = categoriesData[idx];
+            const target = categoriesData[targetIdx];
+            const tempSort = curr.sort_order;
+            await sbFetch(`checklist_categories?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: target.sort_order }) });
+            await sbFetch(`checklist_categories?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
+            await refreshCategories();
+            openCatModal();
+        }
+
+        // --- ✨✨ 清單／多圖／備註／iOS 點擊／上下移動核心處理 ✨✨ ---
         const STORAGE_BUCKET = 'checklist-images'; // Supabase Storage Bucket 名稱
         let checklistSortableInstance = null;
-        let shoppingSortableInstance = null;
         
-        // Modal 中多張圖片的資料列 [{ url: '...', isLocal: true/false }]
         let currentModalImages = [];
         let modalSelectedWho = '';
 
@@ -1009,7 +1073,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             });
         }
 
-        // 支援一次多選圖片或分次追加
         async function handleMultiFilesSelect(event) {
             const files = event.target.files;
             if (!files || files.length === 0) return;
@@ -1049,7 +1112,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         function renderModalImagesPreview() {
             const grid = document.getElementById('cl-images-preview-grid');
             const badge = document.getElementById('img-count-badge');
-            badge.innerText = `${currentModalImages.length} 張照片`;
+            badge.innerText = `${currentModalImages.length} 張圖片`;
 
             grid.innerHTML = currentModalImages.map((item, idx) => `
                 <div class="multi-img-item">
@@ -1059,7 +1122,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             `).join('');
         }
 
-        // 上傳單張圖片至 Supabase Storage
         async function uploadSingleToStorage(dataUrl) {
             const blob = dataURLtoBlob(dataUrl);
             const fileName = `shop_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
@@ -1093,59 +1155,61 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             if (Array.isArray(data)) {
                 allItems = data;
                 renderItems();
-                renderShoppingList();
             }
         }
 
-        // --- ✨ 渲染獨立出來的「購物清單」頁面 ✨ ---
-        function renderShoppingList() {
-            const container = document.getElementById('shopping-items-list');
+        // --- 清單頁面分類標籤列 ---
+        function renderChecklistTabs() { 
+            const container = document.getElementById('cl-tabs');
             if (!container) return;
+            container.innerHTML = categoriesData.map(c => `
+                <button class="cl-tab-btn ${c.name === currentCat ? 'active' : ''}" onclick="switchClTab('${c.name}')">${c.name}</button>
+            `).join(''); 
+        }
 
-            // 抓出屬於「購物清單」分類的項目
-            let shopItems = allItems.filter(i => (i.category || '').includes('購物'));
+        function switchClTab(c) { currentCat = c; renderChecklistTabs(); renderItems(); }
 
-            const pending = shopItems.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
-            const completed = shopItems.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+        function renderItems() {
+            const listDiv = document.getElementById('cl-items-list');
+            if (!listDiv) return;
 
-            // 更新統計條
-            const countText = document.getElementById('shop-count-text');
-            if (countText) {
-                countText.innerText = `待買 ${pending.length} 項 | 已買 ${completed.length} 項`;
-            }
-
-            if (shopItems.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; color: #b39ddb; padding: 50px 20px; border: 2px dashed #f3e5f5; border-radius: 20px; background: white;">
-                        <span style="font-size: 2.2rem; display: block; margin-bottom: 8px;">🛍️</span>
-                        <b>目前沒有購物清單項目</b><br>
-                        <span style="font-size: 0.85rem; color: #aaa;">點擊右下角 ＋ 新增伴手禮、迪士尼限定品或藥妝，可放多張照片與備註！</span>
-                    </div>`;
+            // 抓出屬於當前分類的項目
+            const items = allItems.filter(i => i.category === currentCat);
+            if (items.length === 0) {
+                listDiv.innerHTML = `<div style="text-align: center; color: #8d6e63; padding: 40px 20px; font-weight: bold; border: 2px dashed #E8D8B9; border-radius: 20px; background: white;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 6px;">📝</span>
+                    目前「${currentCat}」清單空空如也<br>
+                    <span style="font-size: 0.8rem; color: #aaa; font-weight: normal;">點擊右下角 ＋ 新增項目吧！</span>
+                </div>`;
                 return;
             }
 
-            let html = pending.map(i => renderSingleShoppingCard(i)).join('');
-            if (completed.length > 0) {
-                html += `<div style="text-align:center; font-size:12px; color:#aaa; margin:16px 0 10px;">✓ 已完成購買 (${completed.length})</div>`;
-                html += completed.map(i => renderSingleShoppingCard(i)).join('');
-            }
-            container.innerHTML = html;
+            const pending = items.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+            const completed = items.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
 
-            // 支援拖曳排序
-            if (shoppingSortableInstance) shoppingSortableInstance.destroy();
-            shoppingSortableInstance = new Sortable(container, {
+            let html = pending.map((i, idx) => renderSingleShoppingCard(i, idx, pending.length)).join('');
+            if (completed.length > 0) {
+                html += `<div style="text-align:center; font-size:12px; color:#aaa; font-weight:bold; margin:16px 0 10px;">✓ 已完成項目 (${completed.length})</div>`;
+                html += completed.map((i, idx) => renderSingleShoppingCard(i, idx, completed.length)).join('');
+            }
+            listDiv.innerHTML = html;
+
+            if (checklistSortableInstance) checklistSortableInstance.destroy();
+            checklistSortableInstance = new Sortable(listDiv, {
                 animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
                 filter: '.cl-check, .btn-card-del, .shop-thumb',
+                preventOnFilter: false,
                 ghostClass: 'cl-item-ghost',
-                onEnd: async function () { await saveShoppingOrder(); }
+                onEnd: async function () { await saveChecklistOrder(); }
             });
         }
 
-        // 單個購物項目卡片（✨縮圖放名稱後面、支援多圖、含備註欄位✨）
-        function renderSingleShoppingCard(i) {
+        // 單個卡片（✨縮圖放名稱後面、多圖、備註、iOS 點擊優化✨）
+        function renderSingleShoppingCard(i, index, totalCount) {
             const parsed = parseItemContent(i.text, i.image_url);
             const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
             const safeName = parsed.name.replace(/"/g, '&quot;');
+            const safeCategory = (i.category || '').replace(/"/g, '&quot;');
 
             // 縮圖橫排 HTML（放在名稱後面）
             const thumbsHtml = parsed.images.length > 0 ? `
@@ -1164,76 +1228,36 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 </div>
             ` : '';
 
+            // 旅伴標籤（消除 "沒有人" 的問題，無人指派時預設為目前選擇的旅伴或全員）
+            let displayWho = i.who;
+            if (!displayWho || displayWho === '沒有人' || displayWho === '未指派') {
+                displayWho = currentWho || (membersData[0]?.name || '全員');
+            }
+
             return `
                 <div class="shop-item-card ${i.done ? 'done' : ''}" data-id="${i.id}">
                     <div class="shop-card-main-row">
-                        <div class="cl-check" onclick="toggleItem(${i.id}, ${i.done})">${i.done ? '✓' : ''}</div>
+                        <!-- 針對 iOS 優化的勾選按鈕 (使用 <button> 搭配 touch-action) -->
+                        <button type="button" class="cl-check" 
+                                onclick="event.stopPropagation(); toggleItem(${i.id}, ${i.done})"
+                                ontouchstart="event.stopPropagation();"
+                                title="標記完成狀態">
+                            ${i.done ? '✓' : ''}
+                        </button>
                         
                         <!-- 名稱與後面跟隨的多張縮圖 -->
-                        <div class="shop-title-and-thumbs" onclick="openClItemModal(${safeItem}, '🛍️ 購物清單')">
+                        <div class="shop-title-and-thumbs" onclick="openClItemModal(${safeItem}, '${safeCategory}')">
                             <span class="shop-title-text">${parsed.name}</span>
                             ${thumbsHtml}
                         </div>
 
-                        <span class="cl-who-badge">${i.who || ''}</span>
-                        <button class="btn-card-del" onclick="delItem(${i.id})">✕</button>
+                        <span class="cl-who-badge">${displayWho}</span>
+
+                        <button type="button" class="btn-card-del" onclick="event.stopPropagation(); delItem(${i.id})" title="刪除">✕</button>
                     </div>
                     ${notesHtml}
                 </div>
             `;
-        }
-
-        async function saveShoppingOrder() {
-            const listDiv = document.getElementById('shopping-items-list');
-            const items = listDiv.querySelectorAll('.shop-item-card');
-            const updates = Array.from(items).map((el, index) => {
-                const id = el.getAttribute('data-id');
-                return sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: index }) });
-            });
-            await Promise.all(updates);
-        }
-
-        // --- 待辦/行李清單 ---
-        function renderChecklistTabs() { 
-            const container = document.getElementById('cl-tabs');
-            if (!container) return;
-            // 排除購物清單（因為已經獨立出專屬分頁）
-            const nonShoppingCats = categoriesData.filter(c => !c.name.includes('購物'));
-            container.innerHTML = nonShoppingCats.map(c => `
-                <button class="cl-tab-btn ${c.name === currentCat ? 'active' : ''}" onclick="switchClTab('${c.name}')">${c.name}</button>
-            `).join(''); 
-        }
-
-        function switchClTab(c) { currentCat = c; renderChecklistTabs(); renderItems(); }
-
-        function renderItems() {
-            const listDiv = document.getElementById('cl-items-list');
-            if (!listDiv) return;
-
-            // 抓出屬於當前分類的項目
-            const items = allItems.filter(i => i.category === currentCat);
-            if (items.length === 0) {
-                listDiv.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px;">清單空空如也，點 ＋ 新增待辦項目吧！</div>`;
-                return;
-            }
-
-            const pending = items.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
-            const completed = items.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
-
-            let html = pending.map(i => renderSingleShoppingCard(i)).join('');
-            if (completed.length > 0) {
-                html += `<div style="text-align:center; font-size:12px; color:#aaa; margin:15px 0;">已完成項目 (${completed.length})</div>`;
-                html += completed.map(i => renderSingleShoppingCard(i)).join('');
-            }
-            listDiv.innerHTML = html;
-
-            if (checklistSortableInstance) checklistSortableInstance.destroy();
-            checklistSortableInstance = new Sortable(listDiv, {
-                animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
-                filter: '.cl-check, .btn-card-del, .shop-thumb',
-                ghostClass: 'cl-item-ghost',
-                onEnd: async function () { await saveChecklistOrder(); }
-            });
         }
 
         async function saveChecklistOrder() {
@@ -1257,16 +1281,19 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             
             currentModalImages = [];
 
-            // 判斷分類（如果是從購物分頁打開，自動指定為購物清單）
-            let targetCategory = defaultCat || (currentTabId === 'shopping' ? '🛍️ 購物清單' : currentCat);
-            if (!targetCategory) targetCategory = '🛍️ 購物清單';
+            let targetCategory = defaultCat || currentCat;
+            if (!targetCategory && categoriesData.length > 0) targetCategory = categoriesData[0].name;
             editCat.value = targetCategory;
 
             if (item) {
-                titleEl.innerText = item.category?.includes('購物') ? '修改購物項目' : '修改清單項目';
+                titleEl.innerText = `修改${item.category || '清單'}項目`;
                 editId.value = item.id;
                 editCat.value = item.category || targetCategory;
-                modalSelectedWho = item.who || currentWho;
+                
+                // 正確預設旅伴，消除 "沒有人" 的問題
+                let whoVal = item.who;
+                if (!whoVal || whoVal === '沒有人' || whoVal === '未指派') whoVal = currentWho || (membersData[0]?.name || '');
+                modalSelectedWho = whoVal;
 
                 const parsed = parseItemContent(item.text, item.image_url);
                 nameInput.value = parsed.name;
@@ -1275,11 +1302,11 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 // 載入多張已存在的圖片
                 currentModalImages = parsed.images.map(url => ({ url, isLocal: false }));
             } else {
-                titleEl.innerText = targetCategory.includes('購物') ? '新增購物項目' : '新增清單項目';
+                titleEl.innerText = `新增${targetCategory || '清單'}項目`;
                 editId.value = '';
                 nameInput.value = '';
                 notesInput.value = '';
-                modalSelectedWho = currentWho;
+                modalSelectedWho = currentWho || (membersData[0]?.name || '');
             }
 
             renderModalWhoChips();
@@ -1300,10 +1327,10 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             renderModalWhoChips();
         }
 
-        // --- 儲存清單項目（上傳多張照片至 Supabase Storage + 儲存備註） ---
+        // --- 儲存清單項目（照片至 Storage + 備註 + 正確旅伴） ---
         async function saveClItem() {
             const id = document.getElementById('cl-edit-id').value;
-            const targetCategory = document.getElementById('cl-edit-category').value || '🛍️ 購物清單';
+            const targetCategory = document.getElementById('cl-edit-category').value || currentCat;
             const name = document.getElementById('cl-name-input').value.trim();
             const notes = document.getElementById('cl-notes-input').value.trim();
             const saveBtn = document.getElementById('btn-save-cl-item');
@@ -1327,7 +1354,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                         finalImageUrls.push(uploadedUrl);
                     } catch (err) {
                         console.warn('Storage 上傳失敗，降級保留', err);
-                        finalImageUrls.push(item.url); // 降級保留
+                        finalImageUrls.push(item.url);
                     }
                 } else {
                     finalImageUrls.push(item.url);
@@ -1347,7 +1374,11 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 finalText += `\n<!--IMGS:${JSON.stringify(finalImageUrls)}-->`;
             }
 
-            const assignee = modalSelectedWho || currentWho || (membersData[0]?.name || '');
+            // 確保旅伴名稱不為空，也不為 "沒有人"
+            let assignee = modalSelectedWho || currentWho || (membersData[0]?.name || '');
+            if (assignee === '沒有人' || assignee === '未指派') {
+                assignee = currentWho || (membersData[0]?.name || '');
+            }
 
             try {
                 if (id) {
@@ -1400,8 +1431,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             if (navigator.vibrate) navigator.vibrate(5);
             if (currentTabId === 'itinerary') {
                 openItinModal();
-            } else if (currentTabId === 'shopping') {
-                openClItemModal(null, '🛍️ 購物清單');
             } else if (currentTabId === 'checklist') {
                 openClItemModal(null, currentCat);
             }
@@ -1415,11 +1444,10 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
             if (el) el.classList.add('active');
 
-            // 浮動按鈕在 行程、購物、待辦 時顯示
+            // 浮動按鈕在 行程、清單 時顯示
             document.getElementById('add-fab').style.display = 
-                (id === 'itinerary' || id === 'shopping' || id === 'checklist') ? 'flex' : 'none';
+                (id === 'itinerary' || id === 'checklist') ? 'flex' : 'none';
 
-            if (id === 'shopping') renderShoppingList();
             if (id === 'checklist') renderItems();
         }
 
