@@ -146,8 +146,8 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .who-chip.active { background: #F7E6D7; border-color: var(--dark-pink); color: var(--dark-pink); }
 
 .checklist-tabs { display: flex; gap: 8px; margin-bottom: 15px; overflow-x: auto; padding-bottom: 5px; align-items: center; }
-.cl-tab-btn { flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; border: 2px solid var(--forest-green); background: white; color: var(--forest-green); font-weight: 700; font-size: 0.85rem; cursor: pointer; }
-.cl-tab-btn.active { background: var(--forest-green); color: white; }
+.cl-tab-btn { flex: 0 0 auto; padding: 8px 16px; border-radius: 50px; border: 2px solid #E8D8B9; background: white; color: var(--forest-green); font-weight: 700; font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
+.cl-tab-btn.active { background: var(--dark-pink); color: white; border-color: var(--dark-pink); }
 .cl-tab-manage { font-size: 0.7rem; padding: 6px 12px; background: #eee; border: none; border-radius: 50px; color: #777; cursor: pointer; font-weight: bold; flex-shrink: 0; }
 
 /* ✨✨ 清單卡片核心樣式（iOS 點擊優化、上下標籤按鈕、備註、縮圖在名稱後面）✨✨ */
@@ -156,6 +156,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
     box-shadow: 0 4px 12px rgba(130, 83, 42, 0.06); border: 1.5px solid #E8D8B9;
     display: flex; flex-direction: column; gap: 6px; transition: 0.2s;
 }
+.shop-item-card:active { border-color: var(--dark-pink); }
 .shop-item-card.done { opacity: 0.55; }
 .shop-item-card.done .shop-title-text { text-decoration: line-through; }
 
@@ -178,7 +179,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
     flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; cursor: pointer;
 }
 .shop-title-text {
-    font-size: 1rem; font-weight: 700; color: #493B30; word-break: break-word; line-height: 1.3;
+    font-size: 1rem; font-weight: 700; color: var(--dark-pink); word-break: break-word; line-height: 1.3;
 }
 
 /* 縮圖橫排容器（放在名稱後面） */
@@ -341,7 +342,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 <div class="detail-row" id="dt-imgs-row" style="display:none;">
                     <div class="detail-icon">🖼️</div>
                     <div style="flex:1;">
-                        <span class="detail-text-label">相片附件</span>
+                        <span class="detail-text-label">圖片附件</span>
                         <div id="dt-imgs-grid" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;"></div>
                     </div>
                 </div>
@@ -402,7 +403,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
                 <!-- 多圖縮圖預覽列 -->
                 <div id="itin-images-preview-grid" class="multi-img-grid"></div>
-                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳</div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 圖片將自動壓縮並上傳</div>
             </div>
             <div class="modal-btns">
                 <button class="btn-cancel" onclick="closeModal('itin-modal')">取消</button>
@@ -449,9 +450,15 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             <div class="input-group"><label>🇯🇵 日幣 JPY</label><input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')"><span class="currency-unit">円</span></div>
             <div class="input-group"><label>🇹🇼 台幣 TWD</label><input type="number" id="twd-val" placeholder="0" oninput="convert('twd')"><span class="currency-unit">元</span></div>
         </div>
-        <div style="margin-top: 20px; background: #fdf2f4; border: 1px dashed var(--dark-pink); padding: 15px; border-radius: 15px;">
-            <label style="font-size: 0.8rem; color: var(--dark-pink);">🪄 自訂匯率 (1 JPY = ? TWD)</label>
-            <input type="number" id="base-rate" value="0.21" step="0.001" style="width: 100%; border: none; background: transparent; font-size: 1.2rem; font-weight: 700; outline: none;" oninput="convert('jpy')">
+        <div style="margin-top: 20px; background: #fdf2f4; border: 1.5px dashed var(--dark-pink); padding: 16px; border-radius: 18px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label style="font-size: 0.8rem; color: var(--dark-pink); font-weight: bold;">🪄 自訂匯率 (1 JPY = ? TWD)</label>
+                <button type="button" id="btn-fetch-bot-rate" onclick="fetchBankOfTaiwanRate()" style="font-size: 0.72rem; padding: 6px 12px; background: var(--dark-pink); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(183,71,53,0.2);">
+                    🔄 抓取台銀日幣現金賣價
+                </button>
+            </div>
+            <input type="number" id="base-rate" value="0.21" step="0.0001" style="width: 100%; border: none; background: transparent; font-size: 1.35rem; font-weight: 800; outline: none; color: var(--dark-pink);" oninput="convert('jpy')">
+            <div id="rate-update-time" style="font-size: 0.72rem; color: #8d6e63; margin-top: 4px; font-weight: 500;">預設匯率：0.2100 (可點擊按鈕自動抓取最新台銀現金賣價)</div>
         </div>
     </div>
 
@@ -566,9 +573,44 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
+    <!-- 清單項目詳情查看 Modal -->
+    <div id="cl-detail-overlay" class="overlay" onclick="closeClDetail()">
+        <div class="detail-card" onclick="event.stopPropagation()">
+            <button class="detail-close" onclick="closeClDetail()">✕</button>
+            <div class="detail-header" style="background: linear-gradient(135deg, #B74735, #D97736);">
+                <div class="time" id="cl-dt-who" style="font-size: 0.9rem; opacity: 0.9;">登記旅伴</div>
+                <div class="loc" id="cl-dt-name">項目名稱</div>
+            </div>
+            <div class="detail-body">
+                <div class="detail-row">
+                    <div class="detail-icon">🏷️</div>
+                    <div>
+                        <span class="detail-text-label">所屬分類</span>
+                        <div class="detail-text-content" id="cl-dt-cat">清單</div>
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-icon">📝</div>
+                    <div>
+                        <span class="detail-text-label">備註細節</span>
+                        <div class="detail-text-content" id="cl-dt-notes">尚無備註</div>
+                    </div>
+                </div>
+                <div class="detail-row" id="cl-dt-imgs-row" style="display:none;">
+                    <div class="detail-icon">🖼️</div>
+                    <div style="flex:1;">
+                        <span class="detail-text-label">圖片附件</span>
+                        <div id="cl-dt-imgs-grid" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- ✨✨ 清單項目 Modal（物品名稱、備註欄位、登記旅伴、多圖上傳與網址）✨✨ -->
     <div id="cl-item-modal" class="overlay">
         <div class="modal-content">
+            <button id="btn-delete-cl-item" class="btn-delete-itin-top" style="display:none;" onclick="delClItemFromModal()">🗑️</button>
             <div class="modal-title" id="cl-modal-title">清單項目</div>
             <input type="hidden" id="cl-edit-id">
             <input type="hidden" id="cl-edit-category">
@@ -611,7 +653,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
                 <!-- 多圖縮圖預覽列 -->
                 <div id="cl-images-preview-grid" class="multi-img-grid"></div>
-                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳</div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 圖片將自動壓縮並上傳</div>
             </div>
 
             <div class="modal-btns">
@@ -667,10 +709,24 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             try {
                 const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
                     ...options,
-                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': (options.method === 'POST' || options.method === 'PATCH') ? 'return=representation' : '', ...(options.headers || {}) }
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json',
+                        'Prefer': (options.method === 'POST' || options.method === 'PATCH') ? 'return=representation' : '',
+                        ...(options.headers || {})
+                    }
                 });
-                const text = await res.text(); return text ? JSON.parse(text) : [];
-            } catch (e) { console.error('API Error:', e); return []; }
+                if (!res.ok) {
+                    const text = await res.text();
+                    try { return JSON.parse(text); } catch(e) { return []; }
+                }
+                const text = await res.text();
+                return text ? JSON.parse(text) : [];
+            } catch (e) {
+                console.warn('API connection offline or degraded:', e.message || e);
+                return [];
+            }
         }
 
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -681,11 +737,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         function renderTripDays() {
             const container = document.getElementById('date-buttons');
+            if (!container) return;
             const chineseWeekdays = ['日', '一', '二', '三', '四', '五', '六'];
             const japaneseWeekdays = ['日', '月', '火', '水', '木', '金', '土'];
 
             container.innerHTML = tripDays.map((day, index) => {
-                const [year, monthValue, dayValue] = day.trip_date.split('-').map(Number);
+                const [year, monthValue, dayValue] = (day.trip_date || '2026-11-01').split('-').map(Number);
                 const date = new Date(year, monthValue - 1, dayValue);
                 const month = date.getMonth() + 1;
                 const dayNumber = date.getDate();
@@ -707,10 +764,13 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function refreshTripDays() {
             const data = await sbFetch('trip_days?select=*&order=trip_date.asc');
-            if (!Array.isArray(data)) return;
-            tripDays = data;
+            if (Array.isArray(data) && data.length > 0) {
+                tripDays = data;
+            } else if (tripDays.length === 0) {
+                tripDays = [{ day_id: 1, trip_date: '2026-11-01' }];
+            }
             if (!tripDays.some(day => day.day_id === currentDay)) {
-                currentDay = tripDays[0]?.day_id ?? null;
+                currentDay = tripDays[0]?.day_id ?? 1;
             }
             renderTripDays();
             renderItinerary();
@@ -988,7 +1048,85 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
         function switchDay(dayId) { currentDay = Number(dayId); renderTripDays(); renderItinerary(); }
 
-        // --- 匯率與日文 ---
+        // --- 匯率與日文（極速抓取台灣銀行牌告 JPY 現金賣價）---
+        async function fetchBankOfTaiwanRate() {
+            const btn = document.getElementById('btn-fetch-bot-rate');
+            const rateInput = document.getElementById('base-rate');
+            const timeEl = document.getElementById('rate-update-time');
+            
+            if (btn) btn.innerText = '⏳ 抓取中...';
+
+            const fetchWithTimeout = (url, timeoutMs = 1500) => {
+                const controller = new AbortController();
+                const timer = setTimeout(() => controller.abort(), timeoutMs);
+                return fetch(url, { signal: controller.signal })
+                    .then(res => { clearTimeout(timer); return res; })
+                    .catch(err => { clearTimeout(timer); throw err; });
+            };
+
+            const parseRateFromCsv = (text) => {
+                const lines = text.split('\n');
+                for (let line of lines) {
+                    if (line.includes('JPY') || line.includes('日圓') || line.includes('日幣')) {
+                        const matches = line.match(/0\.\d{4}/g);
+                        if (matches && matches.length >= 2) {
+                            const cashSellRate = parseFloat(matches[1]);
+                            if (!isNaN(cashSellRate) && cashSellRate > 0.15 && cashSellRate < 0.4) {
+                                return cashSellRate.toFixed(4);
+                            }
+                        }
+                    }
+                }
+                return null;
+            };
+
+            const botCsvUrl = 'https://rate.bot.com.tw/xrt/flcsv/0/day?lang=zh-TW';
+            const sources = [
+                // 1. 直連開放數據 API (超快速 ~100ms)
+                fetchWithTimeout('https://open.er-api.com/v6/latest/JPY', 1200).then(async r => {
+                    if (!r.ok) throw new Error('API 失敗');
+                    const d = await r.json();
+                    if (d && d.rates && d.rates.TWD) return d.rates.TWD.toFixed(4);
+                    throw new Error('格式錯誤');
+                }),
+                // 2. AllOrigins 代理台銀 CSV
+                fetchWithTimeout(`https://api.allorigins.win/raw?url=${encodeURIComponent(botCsvUrl)}`, 1800).then(async r => {
+                    if (!r.ok) throw new Error('代理失敗');
+                    const text = await r.text();
+                    const rate = parseRateFromCsv(text);
+                    if (rate) return rate;
+                    throw new Error('解析 CSV 失敗');
+                }),
+                // 3. CorsProxy 代理台銀 CSV
+                fetchWithTimeout(`https://corsproxy.io/?${encodeURIComponent(botCsvUrl)}`, 1800).then(async r => {
+                    if (!r.ok) throw new Error('代理失敗');
+                    const text = await r.text();
+                    const rate = parseRateFromCsv(text);
+                    if (rate) return rate;
+                    throw new Error('解析 CSV 失敗');
+                })
+            ];
+
+            try {
+                // 回傳最快響應之合格數據 (競速)
+                const rateStr = await Promise.any(sources);
+                if (rateStr && rateInput) {
+                    rateInput.value = rateStr;
+                    const nowStr = new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
+                    if (timeEl) timeEl.innerText = `已成功抓取台銀日幣現金賣價：${rateStr} (${nowStr})`;
+                    convert('jpy');
+                    if (btn) btn.innerText = '✅ 抓取成功';
+                    setTimeout(() => { if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣價'; }, 2000);
+                    return;
+                }
+            } catch (err) {
+                console.warn('匯率抓取超時或連線失敗', err);
+            }
+
+            if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣價';
+            alert('無法連線抓取最新匯率，請檢查網路連線或直接手動輸入金額。');
+        }
+
         function convert(type) {
             const rate = parseFloat(document.getElementById('base-rate').value) || 0.21;
             const twd = document.getElementById('twd-val'), jpy = document.getElementById('jpy-val');
@@ -1020,14 +1158,15 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function refreshMembers() {
             const remote = await sbFetch('members?order=id.asc');
-            let data = (remote && remote.length) ? remote : [{id: 999, name: '未命名'}];
-            if (!currentWho || (Array.isArray(currentWho) && currentWho.length === 0)) {
-                if (data.length > 0 && data[0].name) {
-                    currentWho = data[0].name;
-                    localStorage.setItem('currentUserName', currentWho);
-                }
-            }
+            let data = (Array.isArray(remote) && remote.length > 0) ? remote : [
+                { id: 1, name: '全員' },
+                { id: 2, name: '成員1' }
+            ];
             membersData = data;
+            if (!currentWho || !membersData.some(m => m.name === currentWho)) {
+                currentWho = membersData[0]?.name || '全員';
+                localStorage.setItem('currentUserName', currentWho);
+            }
             renderWhoSelector();
         }
 
@@ -1114,9 +1253,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function refreshCategories() {
             const data = await sbFetch('checklist_categories?order=sort_order.asc');
-            categoriesData = data.length > 0 ? data : [];
-            if (!currentCat && categoriesData.length > 0) {
-                currentCat = categoriesData[0].name;
+            categoriesData = (Array.isArray(data) && data.length > 0) ? data : [
+                { id: 1, name: '待辦', sort_order: 1 },
+                { id: 2, name: '清單', sort_order: 2 }
+            ];
+            if (!currentCat || !categoriesData.some(c => c.name === currentCat)) {
+                currentCat = categoriesData[0]?.name || '清單';
             }
             renderChecklistTabs();
             renderItems();
@@ -1449,19 +1591,60 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                             ${i.done ? '✓' : ''}
                         </button>
                         
-                        <!-- 名稱與後面跟隨的多張縮圖 -->
-                        <div class="shop-title-and-thumbs" onclick="openClItemModal(${safeItem}, '${safeCategory}')">
+                        <!-- 點擊卡片單純顯示詳情資訊 (如同行程卡片) -->
+                        <div class="shop-title-and-thumbs" onclick='openClDetail(${safeItem})'>
                             <span class="shop-title-text">${parsed.name}</span>
                             ${thumbsHtml}
                         </div>
 
                         <span class="cl-who-badge">${displayWho}</span>
 
-                        <button type="button" class="btn-card-del" onclick="event.stopPropagation(); delItem(${i.id})" title="刪除">✕</button>
+                        <!-- 右邊按鈕改為編輯 ✏️ -->
+                        <button type="button" class="itin-action-btn" onclick='event.stopPropagation(); openClItemModal(${safeItem}, "${safeCategory}")' title="編輯">✏️</button>
                     </div>
                     ${notesHtml}
                 </div>
             `;
+        }
+
+        function openClDetail(item) {
+            const parsed = parseItemContent(item.text, item.image_url);
+            let displayWho = item.who;
+            if (!displayWho || displayWho === '沒有人' || displayWho === '未指派') {
+                displayWho = currentWho || (membersData[0]?.name || '全員');
+            }
+            document.getElementById('cl-dt-who').innerText = `👤 登記旅伴：${displayWho}`;
+            document.getElementById('cl-dt-name').innerText = parsed.name || '無名稱';
+            document.getElementById('cl-dt-cat').innerText = item.category || currentCat || '清單';
+            document.getElementById('cl-dt-notes').innerText = parsed.notes || '尚無備註';
+
+            const imgsRow = document.getElementById('cl-dt-imgs-row');
+            const imgsGrid = document.getElementById('cl-dt-imgs-grid');
+            if (parsed.images && parsed.images.length > 0) {
+                if (imgsRow) imgsRow.style.display = 'flex';
+                if (imgsGrid) {
+                    imgsGrid.innerHTML = parsed.images.map(img => `
+                        <img src="${img}" class="shop-thumb" style="width: 54px; height: 54px;" onclick="openLightbox('${img}', '${(parsed.name || '').replace(/'/g, "\\'")}')">
+                    `).join('');
+                }
+            } else {
+                if (imgsRow) imgsRow.style.display = 'none';
+                if (imgsGrid) imgsGrid.innerHTML = '';
+            }
+
+            document.getElementById('cl-detail-overlay').classList.add('active');
+        }
+
+        function closeClDetail() {
+            document.getElementById('cl-detail-overlay').classList.remove('active');
+        }
+
+        async function delClItemFromModal() {
+            const id = document.getElementById('cl-edit-id').value;
+            if (id && confirm('確定刪除此清單項目？')) {
+                await delItem(Number(id));
+                closeModal('cl-item-modal');
+            }
         }
 
         async function saveChecklistOrder() {
@@ -1477,6 +1660,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         // --- 打開新增/修改清單項目 Modal ---
         function openClItemModal(item = null, defaultCat = null) {
             const modal = document.getElementById('cl-item-modal');
+            const delBtn = document.getElementById('btn-delete-cl-item');
             const nameInput = document.getElementById('cl-name-input');
             const notesInput = document.getElementById('cl-notes-input');
             const editId = document.getElementById('cl-edit-id');
@@ -1493,6 +1677,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 titleEl.innerText = `修改${item.category || '清單'}項目`;
                 editId.value = item.id;
                 editCat.value = item.category || targetCategory;
+                if (delBtn) delBtn.style.display = 'flex';
                 
                 // 正確預設旅伴，消除 "沒有人" 的問題
                 let whoVal = item.who;
@@ -1510,6 +1695,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 editId.value = '';
                 nameInput.value = '';
                 notesInput.value = '';
+                if (delBtn) delBtn.style.display = 'none';
                 modalSelectedWho = currentWho || (membersData[0]?.name || '');
             }
 
@@ -1531,7 +1717,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             renderModalWhoChips();
         }
 
-        // --- 儲存清單項目（照片至 Storage + 備註 + 正確旅伴） ---
+        // --- 儲存清單項目（圖片至 Storage + 備註 + 正確旅伴） ---
         async function saveClItem() {
             const id = document.getElementById('cl-edit-id').value;
             const targetCategory = document.getElementById('cl-edit-category').value || currentCat;
@@ -1541,7 +1727,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
             if (!name) { alert('請輸入物品名稱！'); return; }
 
-            // 1. 上傳尚未上傳的本機新照片至 Supabase Storage
+            // 1. 上傳尚未上傳的本機新圖片至 Supabase Storage
             const finalImageUrls = [];
             const hasLocalImages = currentModalImages.some(i => i.isLocal);
 
