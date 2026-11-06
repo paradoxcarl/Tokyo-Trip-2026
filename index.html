@@ -969,10 +969,35 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 openCatModal();
             }
         }
-        async function editCategory(id, oldName) {
-            const newName = prompt('請輸入新的分類名稱：', oldName);
-            if (newName && newName !== oldName) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) }); if (currentCat === oldName) currentCat = newName; await refreshCategories(); openCatModal(); }
-        }
+
+
+    async function editCategory(id, oldName) {
+    const newName = prompt('請輸入新的分類名稱：', oldName);
+    if (newName && newName !== oldName) {
+        // 1. 更新分類清單表 (checklist_categories) 的名稱
+        await sbFetch(`checklist_categories?id=eq.${id}`, { 
+            method: 'PATCH', 
+            body: JSON.stringify({ name: newName }) 
+        });
+        
+        // 2. 同步更新所有隸屬該分類的清單項目 (checklist_items) 的 category 欄位
+        await sbFetch(`checklist_items?category=eq.${encodeURIComponent(oldName)}`, { 
+            method: 'PATCH', 
+            body: JSON.stringify({ category: newName }) 
+        });
+
+        // 3. 更新前端當前選擇的分類並重新載入資料
+        if (currentCat === oldName) currentCat = newName; 
+        await refreshCategories(); 
+        await refreshChecklist();
+        openCatModal(); 
+    }
+}
+
+
+
+
+
         async function deleteCategory(id, name) {
             if (confirm(`確定刪除分類「${name}」？`)) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'DELETE' }); if (currentCat === name) currentCat = categoriesData[0]?.name || ''; await refreshCategories(); openCatModal(); }
         }
