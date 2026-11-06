@@ -130,13 +130,13 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .input-group input { width: 100%; padding: 12px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 1.3rem; outline: none; font-weight: 700; background: #fafafa; }
 .currency-unit { position: absolute; right: 12px; top: 38px; font-weight: 700; color: #ddd; }
 .jp-menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-.menu-btn { background: var(--white); border: 2.5px solid #F0E2C8; padding: 25px 10px; border-radius: 22px; text-align: center; font-weight: 700; color: var(--forest-green); box-shadow: 0 5px 15px rgba(130,83,42,0.08); }
-.menu-btn span { display: block; font-size: 1.8rem; margin-bottom: 8px; }
+.menu-btn { background: var(--white); border: 2.5px solid #F0E2C8; padding: 20px 10px; border-radius: 22px; text-align: center; font-weight: 700; color: var(--forest-green); box-shadow: 0 5px 15px rgba(130,83,42,0.08); transition: 0.2s; }
+.menu-btn:active { transform: scale(0.96); }
 #fixed-back-container { position: fixed; top: 110px; left: 0; right: 0; padding: 12px 15px; background-color: var(--bg-color); z-index: 180; display: none; }
-.back-btn-styled { background: var(--dark-pink); color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; border: none; font-size: 0.9rem; }
+.back-btn-styled { background: var(--dark-pink); color: white; padding: 8px 20px; border-radius: 50px; font-weight: bold; border: none; font-size: 0.9rem; cursor: pointer; }
 .phrase-list { display: none; padding-top: 65px; }
 .phrase-list.active { display: block; animation: fadeInUp 0.3s; }
-.phrase-item { background: white; padding: 16px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #eee; border-left: 6px solid var(--ginkgo-gold); }
+.phrase-item { background: white; padding: 16px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #eee; border-left: 6px solid var(--ginkgo-gold); cursor: pointer; }
 .phrase-item b { display: block; color: var(--dark-pink); font-size: 1rem; margin-bottom: 4px; }
 .phrase-item .romaji { display: block; color: var(--forest-green); font-size: 0.75rem; font-style: italic; margin-top: 2px; }
 
@@ -150,7 +150,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .cl-tab-btn.active { background: var(--dark-pink); color: white; border-color: var(--dark-pink); }
 .cl-tab-manage { font-size: 0.7rem; padding: 6px 12px; background: #eee; border: none; border-radius: 50px; color: #777; cursor: pointer; font-weight: bold; flex-shrink: 0; }
 
-/* ✨✨ 清單卡片核心樣式（iOS 點擊優化、上下標籤按鈕、備註、縮圖在名稱後面）✨✨ */
+/* 清單卡片核心樣式 */
 .shop-item-card {
     background: white; border-radius: 18px; padding: 12px 14px; margin-bottom: 11px;
     box-shadow: 0 4px 12px rgba(130, 83, 42, 0.06); border: 1.5px solid #E8D8B9;
@@ -160,11 +160,8 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .shop-item-card.done { opacity: 0.55; }
 .shop-item-card.done .shop-title-text { text-decoration: line-through; }
 
-.shop-card-main-row {
-    display: flex; align-items: center; gap: 8px; width: 100%;
-}
+.shop-card-main-row { display: flex; align-items: center; gap: 8px; width: 100%; }
 
-/* ✨ iOS 優化：完成勾選按鈕使用 <button> 並且有正確的觸控屬性 ✨ */
 .cl-check {
     width: 32px; height: 32px; border-radius: 50%; border: 2.5px solid var(--forest-green);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -174,18 +171,10 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 }
 .shop-item-card.done .cl-check { background: var(--forest-green); }
 
-/* 名稱與後面跟隨的多張縮圖 */
-.shop-title-and-thumbs {
-    flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; cursor: pointer;
-}
-.shop-title-text {
-    font-size: 1rem; font-weight: 700; color: var(--dark-pink); word-break: break-word; line-height: 1.3;
-}
+.shop-title-and-thumbs { flex: 1; display: flex; align-items: center; flex-wrap: wrap; gap: 6px 8px; cursor: pointer; }
+.shop-title-text { font-size: 1rem; font-weight: 700; color: var(--dark-pink); word-break: break-word; line-height: 1.3; }
 
-/* 縮圖橫排容器（放在名稱後面） */
-.shop-thumbs-wrap {
-    display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
-}
+.shop-thumbs-wrap { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; }
 .shop-thumb {
     width: 42px; height: 42px; border-radius: 10px; object-fit: cover;
     border: 1.5px solid var(--ginkgo-gold); cursor: zoom-in; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -193,73 +182,31 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 }
 .shop-thumb:active { transform: scale(0.92); }
 
-/* 備註欄位顯示樣式 */
-.shop-notes-row {
-    font-size: 0.82rem; color: #8d6e63; padding-left: 40px; display: flex;
-    align-items: flex-start; gap: 5px; white-space: pre-wrap; line-height: 1.4;
-}
+.shop-notes-row { font-size: 0.82rem; color: #8d6e63; padding-left: 40px; display: flex; align-items: flex-start; gap: 5px; white-space: pre-wrap; line-height: 1.4; }
+.cl-who-badge { font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px; border-radius: 10px; flex-shrink: 0; font-weight: bold; }
 
-.cl-who-badge {
-    font-size: 0.7rem; color: #795A22; background: #F8EBC6; padding: 3px 8px;
-    border-radius: 10px; flex-shrink: 0; font-weight: bold;
-}
-
-/* 旅伴管理與分類管理統一按鈕樣式 */
-.manage-btn-group {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
+.manage-btn-group { display: flex; align-items: center; gap: 4px; }
 .manage-icon-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    border: 1.5px solid #E8D8B9;
-    background: #FFFCF5;
-    color: var(--forest-green);
-    font-size: 0.8rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.15s;
-    touch-action: manipulation;
-    padding: 0;
-    line-height: 1;
+    width: 30px; height: 30px; border-radius: 8px; border: 1.5px solid #E8D8B9;
+    background: #FFFCF5; color: var(--forest-green); font-size: 0.8rem; font-weight: bold;
+    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    transition: 0.15s; touch-action: manipulation; padding: 0; line-height: 1;
 }
 .manage-icon-btn:hover { background: #F5E8CF; }
 .manage-icon-btn:disabled { opacity: 0.25; cursor: default; background: #f5f5f5; border-color: #eee; color: #ccc; }
 .manage-icon-btn.btn-del-small { color: #e53935; border-color: #ffcdd2; background: #fff5f5; }
-.manage-icon-btn.btn-del-small:hover { background: #ffebee; }
 
-.btn-card-del {
-    color: #ccc; border: none; background: none; font-size: 1.15rem; padding: 4px; cursor: pointer; touch-action: manipulation;
-}
+.btn-card-del { color: #ccc; border: none; background: none; font-size: 1.15rem; padding: 4px; cursor: pointer; touch-action: manipulation; }
 .btn-card-del:hover { color: #e53935; }
 
 /* 圖片多選上傳面板 */
-.multi-img-upload-box {
-    background: #FFFCF5; border: 2px dashed #D5AC38; border-radius: 15px; padding: 12px; margin-bottom: 14px;
-}
+.multi-img-upload-box { background: #FFFCF5; border: 2px dashed #D5AC38; border-radius: 15px; padding: 12px; margin-bottom: 14px; }
 .multi-img-btns { display: flex; gap: 8px; margin-top: 6px; }
-.btn-upload-action {
-    flex: 1; padding: 8px; background: white; border: 1.5px solid #D5AC38;
-    color: #526B45; border-radius: 10px; font-size: 0.8rem; font-weight: bold; cursor: pointer;
-}
-.multi-img-grid {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;
-}
-.multi-img-item {
-    position: relative; width: 62px; height: 62px; border-radius: 10px; overflow: hidden;
-    border: 1.5px solid #D5AC38; box-shadow: 0 2px 5px rgba(0,0,0,0.08); flex-shrink: 0;
-}
+.btn-upload-action { flex: 1; padding: 8px; background: white; border: 1.5px solid #D5AC38; color: #526B45; border-radius: 10px; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+.multi-img-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.multi-img-item { position: relative; width: 62px; height: 62px; border-radius: 10px; overflow: hidden; border: 1.5px solid #D5AC38; box-shadow: 0 2px 5px rgba(0,0,0,0.08); flex-shrink: 0; }
 .multi-img-item img { width: 100%; height: 100%; object-fit: cover; }
-.btn-remove-single-img {
-    position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; border-radius: 50%;
-    background: #e53935; color: white; border: none; font-size: 11px; font-weight: bold;
-    cursor: pointer; display: flex; align-items: center; justify-content: center;
-}
+.btn-remove-single-img { position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; border-radius: 50%; background: #e53935; color: white; border: none; font-size: 11px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
 /* 全螢幕圖片燈箱 */
 #cl-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 3000; align-items: center; justify-content: center; padding: 15px; }
@@ -269,15 +216,8 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 .lightbox-caption { padding: 8px 15px; font-weight: bold; color: var(--dark-pink); text-align: center; }
 
 /* 底部導覽列（4個項目：行程、清單、匯率、日文） */
-.bottom-nav {
-    position: fixed; bottom: 12px; left: 12px; right: 12px; background: rgba(255,255,255,0.96);
-    display: flex; height: 64px; z-index: 1000; border-radius: 30px;
-    box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px);
-}
-.nav-tab {
-    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    font-size: 0.75rem; color: #bbb; text-decoration: none; transition: 0.2s;
-}
+.bottom-nav { position: fixed; bottom: 12px; left: 12px; right: 12px; background: rgba(255,255,255,0.96); display: flex; height: 64px; z-index: 1000; border-radius: 30px; box-shadow: 0 10px 25px rgba(130, 83, 42, 0.16); backdrop-filter: blur(10px); }
+.nav-tab { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 0.75rem; color: #bbb; text-decoration: none; transition: 0.2s; }
 .nav-tab.active { color: var(--dark-pink); font-weight: 800; transform: scale(1.05); }
 .nav-tab .nav-icon { font-size: 1.4rem; margin-bottom: 2px; }
 
@@ -286,37 +226,70 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 #fs-overlay.active { display: flex; }
 #fs-jp { color: var(--forest-green) !important; }
 #fs-ch { color: var(--dark-pink) !important; }
+
+/* 匯率快速選擇與速查表 */
+.quick-btn-group { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.quick-chip {
+    padding: 5px 12px; background: #FFFCF5; border: 1.5px solid #E8D8B9;
+    border-radius: 50px; font-size: 0.8rem; font-weight: 700; color: var(--forest-green);
+    cursor: pointer; transition: 0.15s; touch-action: manipulation;
+}
+.quick-chip:active { transform: scale(0.95); background: #F5E8CF; }
+.quick-chip.add-chip { border-color: var(--ginkgo-gold); color: var(--dark-pink); background: #FFF8EB; }
+.quick-chip.reset-chip { border-color: #ffcdd2; color: #e53935; background: #fff5f5; }
+
+.quick-sheet-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;
+}
+.quick-sheet-item {
+    background: white; border: 1.5px solid #E8D8B9; border-radius: 12px;
+    padding: 8px 10px; font-size: 0.82rem; display: flex; justify-content: space-between;
+    align-items: center; cursor: pointer; transition: 0.15s; box-shadow: 0 2px 6px rgba(130,83,42,0.04);
+}
+.quick-sheet-item:active { transform: scale(0.97); border-color: var(--dark-pink); background: #FFFCF5; }
     </style>
 
-    <!-- PWA & Mobile Home Screen Icons (iOS Safari & Android Chrome) -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="東京迪士尼">
     
-    <!-- iOS Apple Touch Icon (Home Screen Icon) -->
-    <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
-    <link rel="apple-touch-icon-precomposed" href="data:image/png;base64,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">
-    
-    <!-- Transparent Mickey Favicon for Browsers & Mobile Tabs -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMic+CiAgPGcgZmlsbD0nI0I3NDczNSc+CiAgICA8IS0tIExlZnQgRWFyIC0tPgogICAgPGNpcmNsZSBjeD0nMTQ1JyBjeT0nMTc1JyByPSc4NScvPgogICAgPCEtLSBSaWdodCBFYXIgLS0+CiAgICA8Y2lyY2xlIGN4PSczNjcnIGN5PScxNzUnIHI9Jzg1Jy8+CiAgICA8IS0tIENlbnRlciBIZWFkIC0tPgogICAgPGNpcmNsZSBjeD0nMjU2JyBjeT0nMzAwJyByPScxMzUnLz4KICA8L2c+Cjwvc3ZnPg==">
-    <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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">
-    <link rel="shortcut icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAACXBIWXMAAAsTAAALEwEAmpwYAAAgAElEQVR4nO3dD9ClV10f8MWQULVqRyUgEAQJVuOfZLnn3N3wbyHZe84lBDuT8lKqFUVAsdpB/IMWRFJHOx0RMFEYwVItjFpXUUj2PefubiAUgcQYsBX/tFZoO86oJJBmQ4Agu0nneXeV3c2/99197z33Ps/nM3NmmEzIvvu839/3PPe59z7Pjh0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL1zYHLxubM0Gtccn1fz+BUlx18sKfxGzeFATfHDNceP1hRu61bJ8c6a4z3d2vjfx//5sX+n+3fDge7/2/03ag4/VqfjtTINsUwvenjrvycsE3MHLMy+tbWzyjTsrDm+uOZwdUnx+pLDJ/9+Q5/36v6sksN7SgpXdT/D/km8qPuZRIA+M3fAwu1bu+Cc9cn4kprjlSXFQyXHTy1qs9/0SuGOkuPB7mecpfEzu59ZVFhl5g5o4tDe0WNrji8tKb5rKTf8B71K0P3M4fdqHn3fLIXzxIhVYO6AJq599u5H1xxeVnN8f8nx7tab+DZfIfjTkuKPH9y781HixTIxd0ATZXr+w2oe/cvuPfWa4tHmG/XcTwTi0ZrCdWUSnt/93cUOc2fuYFAO7t31xJrj60sOn2i+Kbc7Gbi1pPC67li0/n0wDObO3EEzB9KuUUnxbTWFI8034GVZKR4tOVxbc9grmpg7cwe9Mkvx8pLjHzTfbJd9pXBDmY4ua/37oh/MnbmDZsp09NSaw39tvrGu4onAJDxHdDF35g5WSs2jJ9UU39t8I135Fd7d3Wio9e+T1WDuzB00c+jS+FUbd8jzHv82Xg2IR7vPTVx3ya5HiDbmblFX4cwdbPo2oRvf4U/hcPtXzf1cJcfbS4r/5jWv2fFFYom5M3fQ3IFJ+ObuPevWG+RQVknhgzXHb2r9e6ctc2fuoJnr9+x5aHfv+5ri51pvioNbKX6upPBT3e/ACAyLuTN30FTNux7X3bK3+UY48NV9tXKWdp5vHIbB3LWfOXPHoM1SeOEqPqCntyuFw+tp/ILWuWC+zN0SzJq5Y6iu37PnH5UUfqX54Fn3eQy6bwrsW9v9xa1zwvYyd8s98+aO3useaetOfqvwqiR++MBk/PjWeWF7mLslmClzx5DVPHrGoB/as2orxVv3T+LTW+eGM2PulmCWzB1DVnN8Xsnhs82Hy9pqGX2uTMO/ap0fTo+5W9GZN3f0RXdjn5Lj3c2HyjqtY3D8d3dl6xyxNeZutWfe3LHSujvNlRR/ufUgWdt0DFJ8o7sHLj9z17OZN3es4i19Swq/2nx4rG09BiWHX3fToOVl7vo58+aOlbFv7YJzao6/3XporDkdgxT23Twand06Z5zM3PV85s0dK/EwnxR/s/mwWHM9BiXFd7gSsDzM3TBm3tyxtO7ZseMhNYX/2HpIrEUdg/CffSagPXM3tJk3dyxhCfnA3wBXim9snb0hM3dLMAPmjqHbeJpf66GwmhyDkuKrWudvqMzdcOfe3LEUyiQ83/f8h36fgPCdrXM4NOauffbNHTuGfpvR7q5VrYfBanwMUryr5vHTWudxKMydmTd3NHVo7+ix3f3ibb7K6NiVgPBJDxAyd/pg0VfgzB0NHi1ac/hDw27zP+VKwIc9Stjc6YWFX4EzdyxOzfGthtzmf5+vSFJ8m1k0d/phwVcCzB2LMEvhhYbb5v/AGfChQHNnRhbfk+aOOdp/afi6msIdTgCU2wO/Lxk/dXDvricaRnOnKxZ4FcDcMS/drV9rCjcYaJv/Jt+XvMkzA8ydvlhwX5g75sFNR2z8p1FIrzaN5s5JwMK7w9yxfQ5Mwjf7vr8TgNN4NdLdI+KbzKK5cxKw0KsA5o7t0T3wpeT4AQPsBOA0M3CjhwaZO/2x8P4wd5y5msPLDK/N/8wyEH7ALJo7PbLoHjF3nIEDk4vPrSkcNrhOAM7skmQ4vP+y+EjDaO50ySLfCjB3nAE3/LHxb1cZdY+LNozmzgnAYjvF3HFayjTsrCkeNbBOArbn1Ug8eiDtGhlHc6dTFnkVwNxxGmqK7zWoNv/tzUB4t2E0d3pl0b1i7tiCWRpNDKnNfx4ZmKXxMw2judMvi+0Xc8emueOfzX9eRdR9pdQomjsnAIvtGHPHpsxSvNxwOgGYcwaycTR3embhPWPueGAlxz8wmE4AvBpZLHNn5lwFoKn9k/h0m78iWkQGZik82bibO32z2L4xd9yvkuK7DKQTgEVkoKT4DqNo7vTNYvvG3HGf1p8Vv973/m3+CyujFI7M0s7zhz6O5s7MLfQkyNxxX2qOb3A2rowWnIHXDn0azZ2Za9C7g587TrBv7YJzaoq3OAFQRot9NRJvLdPzHzbUYTR35q1J5w587jjFLMVvt/kroyYZmI7XhjqQ5s7MNevdAc8dpyg5vMcJgDJqkYGS48GhDqS5M3OtenfIc8cJynT8GB/+U0TNTgBTPHpw785HDW0ozZ2Za/qia6BzxynKZPRyr/6VUcsMzNLoB4c2mObOzLXu3dkA545TuO+/ImpdRCWF9w1tMM2duTN3NDVL4byS492tg2gN/BgM7HKkuVuCzFn3DG3uOEVJ8fsNgjJYkgy8eCgDau6aZ80a4NxxCrf+VQTLUoYlx98ZyoCau/Z5s4Y3d9zrJiThDoOgDJYiAykcvnk0OrvvQ2ruliBr1uDmjlOsT8aXGARlsEwZ6J5G2fdBNXftc2YNb+44RUnhpw2CMliyDLy674Nq7ppnzBrg3HGKmsJ1hkEZLFMGSgqzvg+quWufM2t4c8cJ9q2tneX9f0WwdEWYwuEum30dVnO3BBmzBjd3nKJMw06DoAyWMQOzNL6wrwNr7trnyxre3HGK9RRfYhCUwTJmoKTwPX0dWHPXPl/W8OaOU9QcrjYIymBJM/CGvg6suWueLWuAc8cpaorvNQzKYDkzEN7d14E1d62zZQ1x7jhFyeEThkEZLGUGUry1rwNr7pYgX9bg5o4TlOlFDzcEimCZM3Do0vhVfRtac9c+V9bw5o5TzNJobBCUwXJnYPSkvg2uuWudKWuIc8cpao7PMwzKYJkzMEvhn/dtcM1d+1xZw5s7TlFS/HGDoAyWOQOzFH9ks4O7/7L4yJrjxV15HX/M7k92n2guKb6tprhec7yxpvA/a44fLTl8rKZwW7dKjnf+/Z+38b//4Z+Hj238uyn+j2P/37i+8d/K8Q3df7v7Mzb+rOl4d/dnb/bnNHftc2Vt39yxokqOv2gQlMEyZ6CkcNWJmb322bsfPUtxWnP4sZrDm2qOpebwZyWHz7b+WWsKn+l+lo2TjRTfWFL40e5n7X5mc9c+S9bpzx09VHP8L4ZCMSx5Bm7syqjk8J6SwyeX4Oc5rdV96n/j75DCVTXHm1r/PJZj8CB5/fXW+xNzVlI8pAgUgQzIgAzIQD3xBMBDgfqv5vBHBt/gy4AMyIAM1JOvANzcen9izmqK/8fgG3wZkAEZkIF68gnAx2zAPVdy+LjBN/gyIAMyIAP1xGOQwt+03p+Ys5Lj7Qbf4MuADMiADNSTTwBuswH33LGvLQm+YyADMiADMhBPOAGIn269PzFnNYUjQq/4ZEAGZEAG6slXAI7YgHvOCYChV/wyIAMycK8MOAHoP28BGHzlLwMyIAP1XicA3gLoPR8CNPjKXwZkQAbqva8A+BBg3/kaoMFX/jIgAzJQ730C4GuAfedGQAZf+cuADMhAvfezANwIqO9Kih8y/IZfBmRABmSgnvwZgJta70/MWcnxoME3+DIgAzIgA/XkKwDVBtxzJYXfMPgGXwZkQAZkoJ58BeDtrfcn5qzmcLXBN/gyIAMyIAP1pMcBx1+wAfdczeNXGHyDLwMyIAMyUE84BrMUf6T1/sSc1RyfZ/ANvgzIgAzIQD3pGIQrbMA9N0ujscE3+DIgAzIgA/WkYzB6Uuv9iTkr04sebvANvgzIgAzIQD3pLYDdX2kDHoCa4q2G3/DLgAzIgAzUY98AuKX1vsSClBzeY/ANvgzIgAzIQD32DYBDNuCBKClcZfANvgzIgAzIQN04AQiva70vsSA1xxcbfIMvAzIgAzJwPAPfbQMeiDINOw2+wZcBGZABGagbHwAcX9h6X2JB9q2tnVVTOGz4Db8MyIAMDDwDKRzu9gQb8IB0H/poHjzLMZABGZCB1hkorfcjFqzmeKXBaz54lmMgAzLQNAMlxVfZgAdmlsbPNHjKVwZkQAaGnoHx01rvRyzYvrULzqkp3NE+fJZjIAMyIANNMpDC4ZtHo7NtwANUUnyn4lE8MiADMjDYDPx2632IRmqOL12CAFqOgQzIgAw0yECZjl9kAx6oWQrnlRzvVj7KRwZkQAYGloEUjx7cu/NRrfchGio5fqB5EC3HQAZkQAYWfQLwXpvvwNUcXmbwlK8MyIAMDCsDZRr+dev9h8ZqHn1NTeFI6zBajoEMyIAMLOrVfzhy3SW7HtF6/2EJ1BzebfCUrwzIgAwMJQPhQOt9hyVRJuH57QNpOQYyIAMysIgMlMnoua33HZbqpkDxFuWjfGRABhaegeSYL/h431qm5z+s9b7DEqk5vl75KyIZkAEZ6HcGSoo/13q/Yckc3Lvrid33QluH03IMZEAGZGBer/7DkTIdPaH1fsMSqin8rsFTvjIgAzLQ0wyksK/1PsOSWp+MntI8oJZjIAMyIANzyUCZjne33mdYYjWFGwyfApYBGZCBnmUgxd9vvb+w5Mp0dFnzoFqOgQzIgAxsawZmaTRpvb+wAkoK7zN8ClgGZKBtBoIMbt/xfH/rfYUVUabxUuWv/GVABmSgLxkYPaP1vsIKcXvg1gNrOQYyIANnnoGS48HW+wkrZpbGF3pIkAJWwDIgAyucgRSOrD9r9C2t9xNWUM3hLc0DbDkGMiADMnB6r/5T/KXW+wgr6sDk4nNLjrcbPgUsAzIgAyuWgRRuu+by0Ve33kdYYbM0+sHmQbYcAxmQARnYagZe2nr/YMW95jU7vqj7ConhU8AyIAMysBoZKCl8sOvu1vsHPTBLo2+oKd7VOtSWYyADMiADD5KBFO8q0/EFrfcNeqSk8FMGT/nKgAzIwHJnoKT4qtb7BT1z/Z49D+0uK7UOt+UYyIAMyMD9ZuD9+9bWzmq9X9BDBybjx9cUDhs+BSwDMiADy5WBY9/Y2vW41vsEPbaexi9oHXTLMZABGZCBkzMwS/HbW+8PDEBJ4VcMnwKWARmQgWXJQHhT632BgSjT8x9WU7ypfegtx0AGZGDwGbix6+TW+wIDMkvhvJriLcpn8OVjA5IBGWiUgZLDx8t0/JjW+wEDtH8Sn+7+AMrPBigDMtBk8/9smY6e2nofYMDWU/gXJce7FYBNQAZkQAYWtfnHu0uK39G6/2FHzfHVBl/5y4AMyMCCTgBS/AlbD0ujpvhGw28DkAEZkIF5ZyBc3brv4ST37NjxEF8PVP7KXwZkYK6b/695yA9LqbsFZU3xNxWATUAGZEAGtv2y/zu6W7K37nm4XzePRmfXFPYZfhuADMiADGzX5h9+q+tWWw+rcSUgx7cafhuADMiADJxhBlJ8u1f+rNxnAnwwUPkrfxlol4HQg/yFq7subd3ncFpqDi+rKR5tP0iWYyADMrAaGTh+b5UrbTusvDIZPbem8JnWQ2U5BjIgA0ufgRTv8mQ/eqXm8dM8O2AJysVyDGRgqe/tvz4ZPaV1X8O26x5aUVO4ofWQWY6BDMjAsmWg5HDz/st2fq2th97qHltZUriq9bBZjoEMyMASZeDN+9YuOKd1P8NC1By+s6ZweAkGz3IMZEAGmmSg5Hi79/sZpO5yV0nhfcrHBiQDMjC4DKRwQ5mOntC6h6GZ7gYXG08TTPGu5gNpOQYyIANz3/jjXSXFV3U3TLP1wI4dO2Zp5/klh/coYAUsAzLQ4wy8v0zHFyh9OEX3lKuaww/UHP/fEgyq5RjIgAxs06v+cFvN8aXu6gcPYpZ2f+XGNwVSOKKAbEIyIAMrm4EUj5YU33ZgcvG5ih+2YJbGF9YUrms+xJZjIAMysMUMlBwPrj9r9C1KH85AmY6e6vMBCtgmLAOrkIGS4wfKNF6q9GEbzVKcdsPVesAtx0AGZOA+Lvf/fpmMk9KHOTqQdo2699VKDp9XxIpYBmSg6Xv8OVw7S+HJSh8W/9XBn/eQIRuAkwAZWOxl/vDxmuNr3cgHGuvuoV1zfF73oRvfHLAROBmQgfm82g9HSgqzOh2vuW8/LKFDl8avWk/jF3SX5bxFYCNwMiADZ3qJv7t5T83hZTWPvqZ1vwGbdHDvzkfVHF9cUnyHBw/ZCJwMyMDmLu/H20uOv9N1R9chChd68MyB/ZP49O65AxuX8TyJ0IZoQ5SBY5f2D5cc6sYzSfL4aV1XtO4rYI66B3GUafwlm4BNQAaGm4GS4i90tyBXtjAwNYX/3rqALMdABpqeAHyodQ8BCzZL4TzFa/OVARnoukABw4B0T+ZS/spfBmSgTMcvat1HwAKVFN+l/JW/DMhAzfG3lS8M6cZBKdyh/JW/DMhA9y2Am0ejs1v3ErAA3ZO6FL/ilwEZ+EIGxk9TvjAA3T28lb/ylwEZOOHbAD/bupeABag5/JHyV/4yIAP/kIEUb1K+0HNlOv5yDwxS/DZ/GTjpfgA5fP76PRf849b9BMxRzTErf+UvAzJwagbWJ+NLlC/0WEnhp5W/8pcBGbiPDLy6dT8Bc1RzeLfyV/4yIAP3vi1wmClf6KnuKV8lx08pf+UvAzJwrwykcLh7SFjrngLmoEzDTsWv+GVABu4vA7M0vlD5Qg+tp/gS5a/8ZUAG7v8EILywdU8Bc1BzuFr5K38ZkIEHyMDrlS/0UEnxeuWv/GVABu43Aylc17qngDkoOXxC+St/GZCB+z8BiLcoX+iZMh0/RvErfhmQgQfLwP7L4iNb9xWwjcp0dJnyV/4yIAMPloFZGk2UL/RISeFHlb/ylwEZeLAMlMno5a37CthGNYc3KX/lLwMy8OAZCFcrX+iRkkNV/spfBmRgExm4pnVfAduo5Pjnyl/5y4AMPOhbADl+RPlCT9yzY8dDaoqfVv7KXwZkYBMnAHe27ixgm3Rf61H8il8GZGCzGSjTix6ugKEHao4XK3/lLwMysPkTgBBb9xawDcpk9Fzlr/xlQAY2n4FwhfKFHigpfr/yV/4yIAObvgKQwve27i1gG9Qcf1L5K38ZkIEtXAH4t8oXeqDm+Ablr/xlQAY2fQUgh59v3VvANqgpvl35K38ZkIEtXAH4NeULPVBzLMpf+cuADGzhCsC1rXsL2AY1xZuUv/KXARnYdAZSuEH5Qg/UHP5M+St/GZCBLXwL4E9a9xawDWqOH1X+yl8GZGALbwH8hfKFHqgp/JXyV/4yIAObPwGI/7d1bwHboKZ4i/JX/jIgA1u4AvC3yhd6oOR4u/JX/jIgA1v4EOBtrXsL2AY1hc8of+UvAzKw+ROA+GnlCz1QUzii/JW/DMjAFq4AHGndW8A2cAKg+G3+MrClDDgBgH7wFoDydwIgA1s7AfAWAPSCDwEqfycAMrDFKwA+BAh9UHL4uA3ABiADMuBrgDAwbgSk+G3+MrCVDLgREPSEWwErfycAMrC1EwC3AoZe8DAg5e8EQAa2dALgYUDQDzXHG20ANgAZkIEtvAXwgda9BWyDmuK68lf+MiADW8jANcoXeqCk+Dblr/xlQAa28BbAr7buLWAb1Bxfr/yVvwzIwBYy8FrlCz1QUnyV8lf+MiADm78CEH+idW8B26Dm+FLlr/xlQAY2m4H1FF+ifKEHymT0XOWv/GVABjafgXBF694CtkGZjncrf+UvAzKw6bcApiEqX+iB/ZfFRyp/5S8DMrDZDFxz+eirW/cWsA3u2bHjId3jPW0ANgAZkIFN3AToTsULPVJy/HPlr/xlQAY2cQLwkdZ9BWyjmmNR/spfBmTAXQBhYGoOb1L+yl8GZGATdwG8qnVfAduopPCjyl/5y4AMbOIE4IeUL/TILMWp8lf+MiADm7gHwN7WfQVso2ufvfvRyl/5y4AMPFgGDkwuPlf5Qs/UFG+1AdgAZEAG7v8bAOFvW/cUMAclh/cof+UvAzLwAF8BPKh8oYdKir+g/JW/DMjAA3wA8HWtewqYgzIdv0j5K38ZkIEHyMB3K1/ooTINO5W/8pcBGbi/DMzS+MLWPQXMwb61tbNqCodtADYAGZCBe2UghcNdRyhf6KmS4iHlr/xlQAbu4xsAtXU/AXNUc7xS+St/GZCB+8jATypf6LFZGk2Uv/KXARm4dwZGz2jdT8AcvfPbnvxlNYUjNgAbgAzIwAnf//+7ay4ffYnyhZ6rKX5Y+St/GZCBL3wAMN7UupeABSgp/pzyV/4yIAMnPADoZ5QvDMD6ZHyJ8lf+MiAD//AWwHT01Na9BCzAzaPR2e4HoPydAMjA8ff/b+86QfnCQJQU32kDsAHIgAzUFPa17iNggWoefZ/yV/4yIAMlhe9RvjAgsxTOU/7KXwaGnYGS493XPnv3o1v3EbBgJYf/1rqALMdABlqeAISbFS8MUM3hlcrXBiwDQ85A+LHWPQQ0sP/S8HXdJcD2JWQ5BjKw+Ff/3ezvepzyhYHqLgHafGw+MjDADKRwQ+v+ARqqefyK5kVkOQYysPgrAJPRy5UvDNihvaPHehvABmwDHlYGupnvZr91/wCNlRQ+2LqQLMdABhZ4ApDC+1r3DrAEynT8IuVrA5aB4WRgPY1f0Lp3gCVwYPKtX+rZAO1L2XIMFvLqP8fbr7l89CWtewdYEjXHN9uAbEAyMIAMpPjG1n0DLJH1vTE0LybLMZCB+V8BmIadrfsGWDIlxQ8pYJuwDPQ5A+EPW/cMsIQ8IbB1OVuOwXwzsJ7iS1r3DLCEug8G1RRvVcI2YhnoYQZSvGXf2u4vbt0zwJIqKfx086KyHAMZ2PYMlBRe07pfgCV2YHLxuTWFzyhgm7AM9CgDKXymTC96eOt+AZZczeEtzQvLcgxkYBszEN7UuleAFVBz+Kc1xaMK2CYsAz3IQIpHZ2n0Da17BVgRJcV3NS8uyzGQgTPOQEnxHa37BFghNY+e5CmBNmAb8GpnoJvhWRpf2LpPgBVTU/jd1gVmOQYycCav/sNvte4RYAXVHL/JZwFswDbgFc1ACkf27931ja17BFhRNcXfbF5klmMgA6dxAhDf3ro/gBV2cO+uJ5YcPq+AbcIysEIZSOFI922e1v0BrLia41ubF5rlGMjAFjIQ3tK6N4AeuO6SXY+oKRxWwDZhGViBDKRwx/7L4iNb9wbQEyXFn2hebJZjIAMPmoFZij/Sui+AHtm3dsE5JYe/UMA2YRlY4gyk+Jdlev7DWvcF0DM1hyuaF5zlGMjA/WagTMJzWvcE0FMlx4MK2CYsA0uYgRSua90PQI91Xy0qOXy2edlZjoEMnHjp/y43/QHmruZ4pfK1AcvAMmUgvFL1AYv5QGAKf9K+9CzHQAZqin9882h0tuoDFmL/ZLTr2N3GFLBjIAPNMpDi0ZrjxWoPWKiaw9U2P5ufDDTNwOvVHrBw7/y2J39ZyeFjNgAnATLQJAMfPTD51i9VfUAT65PRU7wV4ATACcBiM3D8AV0u/QNt1Rz/nQ3ASYAMLPAEIIWf0ntAc9fv2fPQksIHbQBOAmRgIRl4/761tbNazz3Ahv2Xhq/zxEAnAE4A5n3pP95+YDJ+vNoBlkqZxO+yATgJkIF5XvqP39F6zgHuU0nhV2wATgJkYB4ZCG9SO8DS6h5FWlO8yQbgJEAGtjUDN3rML7D0ZimcV1O8xQbgJEAGtuN9//DxMh0/pvVcA2zK+mR8yfHvKtsEHAMZOP3N//M1j56hdoCVUvP4FTY/m58MnFEGfrj1HANs2T07djykpPCrNgAnATJwWhl4q9oBVlb3mNKS4iEbgJMAGdjS1/2u7x673Xp+Ac5ImY6/vHtmuQ3ASYAMbCIDKfzp7+258J+oHaAXat71uJrC39gAnATIwAO+8v/rQ3tHj209rwDban1vDCXHO20ATgJk4L4+8R8/VfPoSWoH6PPXAz9rA3ASIAMnXfb/zCyNn9l6PgHmquaYa4p32QCcBMjAxiv/v5uleLnaAQah5nCFGwU5ARj8CUAKR8okPL/1PAIs1Hoav6CmeHTwm4ATgUGeCJQc7645vljtAINUUvz+40XYvJAtx2DBm/9LW88fQFPdM869HWDzHdRl/xS+R+0AHPtg4PO6D0M1L2fLMZjr5h8/V6fjNUMPcIIyHV3WfR3KJmwT7mUGNr75Mvpnhh7gPpRpvNTNgpZgs7K2/SY/vucP8CBmaXxhTeGvbEI24r7c3vdA2jUy+ACbcO2zdz+65vBHrcvbcgzO8JX/R9zbH2CL3vltT/6ymmOxCduEVzED3WOwD+0dfYXBBzgN1+/Z89CS4i+3LnPLMdjiK///dPNodLahBzgD9+zY8ZCax6/ovj9tI7YRL3MGjt/P4ocNPMA22j+JTy85/G3rkrccg/vMQIq31hz2GnqAOSjT8WNqCjfYhG3Cy5SBksPN+y/b+bWGHmCOyvT8h9Uc39y69C3H4HgG3rxv7YJzDD3AgpRJ/K6awh02Yhtxm1f98fbuORYGHqCBmnc9rqb4+04CnAQsOAM3lunoCYYeoP1XBX/cw4ScBCzgvf7P1xz+g6/4ASyR9cnoKSWF/+1qgBOBOWXgo2U63t065wDch2suH31J9wrNPQOcBGzbxp/i0e6Dft2dKQ0dwJKrefSkmuKHXQ1wInCGm/8f75+MdrXOMwBb0M+0wPwAAANQSURBVL1P23024Nhz2G2EjsGWPuH/d92VJF/vA1hh+/fu+saaw7ttgE6CNrn5H1x/Vvz61rkFYJuUSXhOTfEvnQg4Ebifjf9/1el4zcAB9PRtgZrDy2oKh50IOBE4vvHfWXO8srvDZOt8AjBn+y+Lj6w5vtW3BeLQv9P/lusu2fUIAwcwMAcm48dvPFfAo4aH9bW+FPZ5nx+A7imDF5QU33b8O9/tNylrDq/4490lh2tnaXyhyANwkv2TeFFJ8Z1OBHr3iv93y3TXt4o7AA+oe9BLSeGqmuKnm29g1ulu/Hd1V3W6r4GKOwBbUqYXPXzjQUMp/rWNeEVORlK8ZeN20Hn0NeIOwBnZt7b7i0sK31tyuLn5BmfdzzEIf7ie4ku635W4AzCXDwx2rzBLDp+0Gbd+tb9xP4c3d89+EHUAFvjkwfjdNcf3d58wdzKwwE/zp/C+Monf1f0OxB2AZmYpnLdxh0EnA/N8tf+nx+7YN3qCqAOwlDcXOv7BwQ+5KnCmr/a7z1yMX1Hzrse1/r0CwKYdmFx8bveAmWM3GQq3OSF40Mv7d3Y36+k+cNldVRE1AFbe9Xv2PHT/JD69pPjva4o3HbsX/bA/1d8dg5LjH5QUf7bm8dO6Y9T69wQAc9V9gK1MR0/deLuge9U7gG8VlBw/1X1OYuNbFJPwnEN7R18hZgAM2r61tbO6+9TPUnhhzfH1NYXrjt3UZmVf3X+8pHio+7t0f6fu79b9HVsfZwBYmUcXz9JoUiajl9ccrj7+HvmfHH+OfetX9HeWHD9Sc7ymu3VySeGHag57PWIXAOb8IcNZGo1rDld0H5yrObyypPC6msOvHT9R+GB3slBz/Gi3Sg6f6D6MePxS/Bcuy2/8s/CJL/x78SMb/98crt34bx37b77y+J9xRfdndrdJ9ssFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAHWfm/wNOJTg+SU6BUwAAAABJRU5ErkJggg==">
-    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiMjAyNi8xMSDmnbHkuqzov6rlo6vlsLzmpZPokYnpioDmnY/ooYwiLCJzaG9ydF9uYW1lIjoi5p2x5Lqs6L+q5aOr5bC8Iiwic3RhcnRfdXJsIjoiLi9pbmRleC5odG1sIiwiZGlzcGxheSI6InN0YW5kYWxvbmUiLCJiYWNrZ3JvdW5kX2NvbG9yIjoiI0ZCRjdFRiIsInRoZW1lX2NvbG9yIjoiI0I3NDczNSIsImljb25zIjpbeyJzcmMiOiJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQU1BQUFBREFDQVlBQUFCUzNHd0hBQUFBQ1hCSVdYTUFBQXNUQUFBTEV3RUFtcHdZQUFBZmkwbEVRVlI0bk8xZCtYTVUxNTJmL0xUSjdsYXl5ZjRMdTF1MTJXeXlWZXJYWU1jeHNZMjZSd2RJNHBJUWg3Z0ZPT0F6dnRabkhBY0hZeHduVG5COHhJa2QyMW1NYld5ajdobHBSaU9KUXdpUWhNMGx4Q0hFSVlFUERpRmxrNDJyM3RiMzlVaDYzWFAyVEhkL3UyZTZxejVsckxsZWY5LzMyKzk3ZndNQjVHdEh4VTNmREVuaUxhcE1WcXN5MmF6S1JGRWwwcVBLNUpRcWtVOVZpWXlwTXFFK1BFZ0RpWXl4UGRUMkV2WlUwZmE0cEJIMi9QMXAzL3VuUUxGZFcrZE8vVnBUcVZDbXl1UVpSUllPcUpMd0pmcEcrYUE0QWdKN0wreFhKTElSZUNJMmJkcFhBNFY2aGFVcEpZb2tQSy9Jd3VjK3cvbENweWFoZ1NLVHE0cEVYbGRsWVRvTkJMNFM4UHIxWVdYSjM2c3lXYS9Jd21tZjZYMm1WODNSNEpRaWtYV2dNUVM4ZHNXbWZmc2ZWVm00UTVISWtNLzRQdU9yK2RrUllFTTg3Z2w3QVk2dEprbGNyTWpDSloveGZjWlhMYVNCSWd0ZktKS3d5cldxVVZNWitUZEZJaTArNC91TXI5cElBMFVTT3NLbHduY0NicmxBSWtNU3VVZVJ5Zi81ek84enYrcUk5NGo4VlNrdHVRdjlOR2laWHZJTlZTYnYrSXl2MzZCUUJhSGhLcEUyenhGcHl6eENXK29JalM0UWFYU1JTR01OSW0xZExOTFdwVVNQeGRwcjhCNTRMM3dHUHRzOFcyVGZGUzczaFV0TkZJWVBROUxVYjZFd2YwZ1N2NmZJWkxCWW1UOGtFeHFlUVdqTEhFSWo5UnBEdDYwU2FjZGFrYmF2bldJTDRMdmJWbXEvRmEzWGZodldFSElCUFZRc1NPU01FcHp5WFVlWmYwY3B1Umw4dGtYRjhCV0VOdGRvakJkYkp0TDJOZll4dW1tc0VXbmJDcEcyTGhTWlVNQmFzZW1sT29zcndKT09NTDhxQ3pOVlNmaHp3VE44VUtUTjFjRHdHbk9aWXNoR2tiWXRKNXBLczFDa2tmbUVSbW8xNWdTVmhxR2E2QkgvT3p0UmFyWFB3R2ZoTytDNzREdk5yQUhXRENjVENDM2NDelk5VmJzaGtiOG9wU1Z6YkdYK0prbXNWbVRoYjRYTDlCb2pnajZlNlFuZkFVeTJTbVBRU0Iwd0w2RWhVRWVDOXE0UFZCNzRyV2lkU0ZzYk5MVXJvMENzMW13TXVEYzcxNmNpUStQTmtpcGJtRjhKQ3RNVVdmaGY3SnUwSEVGQ1cyb0liVzNJd1BSclJCcGJLdExvZkVLYlo0azBWT2FDdGNjQmE0RTF3ZHBnalpudWd3bERqWGJ2Mkd1M0dzQ2pscXREVFdVbC82bEt3bVhzbTdNUzRGV0oxR1o0Z3E3UzlHcDRjcW91WXZpc1RqS212aEVhVzU3bS9ocEY5cDVRSmY2YUxZVWtYTnRSU3Y3THNuUmxSUklHMEcvS0lvU3J0YWQ5UnhyZEdWeVE0UUppQ2xDYkl2TlQyeklkYTZmUTJCS1IwUVo3clZaQmtjblpsdHZJUCtmRi9CQm9VQ1N5SGZ0bUxGRnpab3NwbjRad0NrVHFOVVpCWDZ2TmdIdUVwMzZxa3krMlhHUzBLZ1QxU0pHRmovSUtsa0dFRi9zbThtYjhPY2szRzU1NnJVdEUyakxMQmV0RVF2TXN3bWlRN0RTTXJZd0xnZ3ZXbVIrRU8zSmlmc2kzOEhKNkEranRzUlVrdVJHNFVDd29GU2RmaENzMWwyc3k0eG5VSnZBNllhOHhyN1NKb1BqdFhGU2ZtQ2Mzc3lxRjRkZW82ZlloUDZVZ0plMUM1WEZiWVhVaS9TRDRGNTZKdjcrNVFXZzNwUXFwTWxuaU9jWXZKeXlQSnRrVEh6YlZTMTRjTjdoVkkzV0pKd0pUR3hlSm5ueUloQ1JTbnhYekswSHg2MTdMNTIrWlMyaUg4ZmdHeGdjWG44LzRlUWxDdEo0a3FrWnJSTm95MTJQMmdTUU1RNkZXRms5LzRVSFBiRkJGUEMvSGVGd3ZFUXZQdDQxTTUraWlGR3FSaHp4bmlpVGNtNWI1b1NvZkpBVjdvZGtnV3BmNFpBS0RyWkI4Mlc1RHVJYlF0cFVrOGFTdDljWnBvTWpDeGJRMXhsREFqcjNJYko1RzRMclQ2NmJ4aUdZeEpIMjVBSkZha3BEMkhWdXEyV0hZYThzTTRmYWt6QTlXTW10Z2hMN0ExQUNmdmRGREFabVNYanFHQ3dYaEdhQitHazZEeG5pT2tleGlTT1JrVW84UUpMdWhMeTRWZ25GanpIRDBzcWMrOXRxS0djSGszcUxJQW5jbjJqV1ZsbncvVWYyUmhGZXdGNVlNNEhLRENpaGo2b0t2NjdzSDRabUVKUTdxVlNMUnRZVTVpa1JlVERSK1pYTEZqWVExcGpFd0Q0L3YyblFkUW1XRTdZM3VRYlhTblY0aXFHYlVHY05Lc0tRY2UxRkdRRHF2OFdnRmxRZDdYVDVJRmdheXZoaW51Y1o5emdtbFZKUjQ3ODh6MkF2aUFVRVdIZk92RmwxSlJCOGtLUTJnT0lmZlAvQVlSVndYT0JNMlRKNEEwS1VaZlVFYUluVko5SDBYSHFNK1NGb2F3SjRaMVZmWVc3ZlFUWkZKMTBUQmkxdGFsRU9kYTBKZ3l4TytaUjlxQ2dlR01USFJOV3FzSkh3SmZhMEM4ZUVVNkF1S0x0QS8rY0dnTXVOS0M1VlBvYTN6WmRxMlpBYmQyVGliZHE1ZndQN2J0cWljUnVmZGhuNS9Ya04wM20yTWRqcGFOc3lnclhVU28zWFczMVdXNk1WamJsSVgzQ09ySFk1UFpzRWxkcjFvaXZuRDVUZlFQZXZxNmRFdFQ5REJwdGZvNXdkVk9ucitBQjI3MkpzU0kyYzY2YVd1N2ZUTSs3K2xIejl6UDIxZlZvVytBYTVBVUtUdHk2dnBKNXZ1b3dQYmY4dG9OREs0TnkwdGdkYWY5NnFNOWtkKzh6amRzMjQrRFZWTVRma2JFS3VCRGhhNmsyQWgvcjAzU1dRbENNQnptSXVBL2pjOFlhQmpRU3FtMy8vUVNqclk5THVNRzVRdHJoNXZweWZlM0V4M3I1Mkh2aGxPWS9mdHRmVEVtNytnVi9zN0xLRWw3TW5nUjYvU2ZRK3VaSHVWTkpocFNLaUR2Y2VrZ1NJTG13THh1VTBvQzRBQ2xRVG1Oeno1STNOdnBYMnZiS0RYVHU2eVpLTlNBVTZSZzAvZlM4TVZONkl6cDEyQWUvdDQ0NzMwczRNaFcybDU5ZVJPMnZmeVV6UXk1OVlFSVdBOWwxeGlHRVBOTUVTQVAwWmgvamw2UWtDQ200N3haOTlDKzk5NGxvNmMyMmZyWmhseDVWaU1mckxwL3JSSHV0Y0E5M0pvODRQMFNsK2JvN1FjT2R0RisxL2ZSRnRtLzFDM0htUEFESzIyUUNJOUFZd0VPUERwODM1aU1KSW1udnhCa2ZZOHVZNWVQV0hOMFp6UGlkQjU5MkowNXMwWFlDdDlkbUFIS2kydm5kNU5QM24yQVJvS1RwbTBDWmJvNHdRUStIU2FOb3BNVGdUaUkyZ2M5US96ekE5dXNuSG1Cdy9EaGZhdHFKdWx3M0FQUGZISFp6MnBGb1VyYjJBNlB0d0RPaDB2YWhocSt4T04xcFZxUWhBa1dzOVRMcm5SNlpwanFBOElPTm5vTmxRdTZvSWo4Ty94aEtuT3V4WXhveFI3azVMaFV0Y0h0RzF4QlRwVFo0dTJoZ3A2cWV0RGRMcU5wYkFQdW42OFZCUFNjcExJRDA3R2ZTUXlGbkRzeDRJR2YvQ2F5UWd2dU9CR2g3dlJOeWNkcnAzYXpkUUpiT2JPaE03MTlYVGs5QjUwZW8ybHczQVAvZVFYRDdIMVFrTmhTSFhoQzJ1Y1RLVjJUQUQ0Zkg1SWxtSzVQVUdSSHQzeUUvd055UkxYeisrait4OXVSR2Z5Vk5qM3dBckhuUVpqZWFEdjFRMk1CeUIzcUFQSlBScHdxcElybWV1ci83V042SnRnRnFNWHVobWpZVE83RVJBamdiVmgwMmZNSkk2LzlqUmJQN1N1MFhtR2FncEVBRURQNDRjN3NDaXZUT2poWHo2Q1R2eGNBVTlaTjZsRGtLcHcvZHgrZExxTTVZaER6LzgzdXc4K1d0elc2RXdlbU8wQ3dQclZqMHMyR0RsbGhIWS91dFpWM29sY1hYdHVNSXpiR3lwdDBma3ZuM2lmWGo2NTNSbDZEdmZRQXcrdlpyekJHOFhNUGU1bEFkQ2xOb1BSV3lVeXBoa1o2RVJuWUN2dzZmNGR0TGtTejBVSzdsbndVTmx4YjRNZGQ5TEJqcnNjb3lYa2FrR3lIWlM2OG01eXUxdXVCT3hzdU1yZlNIUytHTjh3ZDdybmNnWEVDYkFFZ1BuNWJiaW42K2QzMGFQdjNVU1B2bnNUdlg1dXAyTzB2TFQzQTVaSEJKTnVrbmtMUFNVQWZNYzJhSjhCcmkzSTNzUm1XTXN4M01OMGNLZVpIMndRSzlUSXo0NytnWjdwdUlOK2V2aFZPbnBCTzVtSHUzOU9qMnlieWpEY3JUa3FSb2YyMFMvNjNxYm45anhJUHovMnBtMzBQUHpDWXhyL2NIVUVvRVo3U2dDZ1Z5Y2Y1bVk5Wk9xRExEY0VuV0Z0QUtRYU9KazdCUG40b0g1WnRmN0JqcnNZc3g5NzcyWTZFR3VreHo4c214QUErRGY4RFY2RC83ZGJMUUlIUTJ4aEdlTVp2dm1XWGZsQ2xnc0FXTzU4bzFxbzhvSy9uMVZlUTJkVU8vSHh4dnNjRXdCSWJMTnk3ZGN2N0tYOVNzMEUwNmNDdkFmZWF6Y3R6M3owQ3J0UG95cGtSNXNWeXdXQXovbUdQcEtnK25Tc3JQRzgxeWNUTGg5cmRTUm5DSDRETWxhdFh2L1YwMDMwMlB2VFVqSS92QWJ2Y1lTZXd6MjBZM2tOYTNYSkR6bUIxdXl1RmdBWVRzRUhNOGFiVjUzNThHVjBCblVDQnpmY2Jic0FRRDYvWGVzZjNIVlBTZ0dBMTV5a0pWVHVUYlRINFRNSVpycFlBSGpEZDd5eUMrcDBSNGNLKytrL0RpZ1R0RlVBZ3FKdHhTeERCNTZtUjdiZGtGWUZPci8zTWNkb0NUelRHczhjNWVzSGdNZGNLUUF3azB1bnI4WDc4NE5WajgyWVRtTFg2cm0yQ2NEdUg5Vlp2K2JoSG5wMjkzMmMwVnV1VTRYZzMvQzM4ZitIOXpxbHpoNzZ4Y1BzdmtIMzF4bkVzOXdtQUVHaTA5VmdNc3Y0YTU5MU82UTN1Z1Q5YjJ5MlRRQk92dlc4eGV2dG9jTzl6N0VuKzJkSGZrOUh6cllscUVManFnKzhCdStCOThKbjRMTjIweEo0Wi96ZUkxempCR2k1NkNvQmdGR2t1cWQvdkhkbis5S1o2QXpwTk1CQXRVVUFncUpsQmV5WjhNWHgvNWtRZ0MrTzR4WW9RWFNZblFLUVU4WjVGNXZuaUM0UmdLQStmNE1OcEl1L0J1MUhzQmtTQSsxTHRVMnpFdEM2eExGN0dPNW1hZzhBL28xSlN6RDZKMDRCemkwNjdtRkVGNENXMmR6VGY3VytjL1BnamxmUm1iRlFZZ0pRcU8va1BaenJmTlJSb3pkVFRJQ2RBcEFzeHhYUGdOMkpMZ0I4eUJyYW5QQ3ZPZDJGd0MwWWVPOUZ5d1VBbWxZNWVROVhUKzFnd0tibFpZTkt5YmZQaEpwaVZBR0FvV2s2M1ovTDMyNnUvZ0U2OGJCd3NYTzc1UUpnVjlibm1Oc3gzRU9icTM0d2VRcVU2enVLNURzb0pTOEI0UDJ6MFlYNjR3amNnZWpFUXdLazlvTFJtbzUyOElDQURna0ErSGRhV2dkRjlwM1k5eldHaEoycjV1am8wYm93c2NES2NRRUFQLzk0SFNmODE1aW53WXBlWEVBOExPeTlwNEYyUDdHT0hudnBLYWJIZnJydkk2WVNwcXVGZ05mZ1BmQmVpSjRmZSttbnRQdUpIOUc5OXk1QnY1OHhSRUN4akU3enlNQjdqZ2dBYjVFbms4S0RUenNiT3ZkUnVEVG9mZXJPdE5vSERPcHpWZ0RBOWRrNEtRRE5TU0p6aDU1N0NKMXdQZ3FEQm9jMlA1aW9RbkxlUjNERDUrb1N6VWtBb0dKZjkrTkozblBrMTQrakU4NUhZZERneUs4ZlQxVEJaWDJ6aFZ4SGFPVWtBSzBOZk9BcitYc2dqd09iY0Q0S2d3YUg0bDBqMHZXYWlpNTJTQUNncHlQdmhvTE9YazZuN2Zvb0xob2NmUHFlMVBPSnVXbVV3SnUyQ3dEa1lFd1l2eXRTU3gxNEw3QUo1Nk13YU5EOTJOcVVmQVp6NUNZand3NElBRC9nd0JqNTVRR0Y0dGlFODFFWU5OaVRwZ2taZUlBbWFsQWFSSHNGQUVyVTRLaVppTUxGYy81VERWbkRKcHlQd3FCQnhEaHBodWZKR1lac0JEc0ZnQzlQaTJXUmt3MGRsYkdKNThQYk5MaDJhbGRHUHVPemtjMm1SZ1J5bmVZWVhaQlpBQzYwdm8xT1FCL2Vwc0dGeUp1WitYSWh5WGtPc1NrQjRLdStzdkc3K3JFQWZBYnlPZzcvNnBITW1na2ZsekpaTFphMUFMQ0tIRjdYQ2lMVnNQb29LaHJzV2pQUHRHdGVMYmRCQVBqUWM3YXQ2cUNEbVZ2SEh2bHdQdzJndkRSVUpwcnVTSklzTlNkdkFRQ2RQMVAwTnhtTy8rRVpkRUw2OENZTmp2L3U1MW56R1RSaW1HektJRm92QVB4RVB6TjVGNURMalUxSUg5NmtRY2VLNnF6NWpMY0QyT1JSS3dVQS9QL2pmVmxZL2pWWDk1c05oanJlUVNlbUQyL1JZSGpYdTZaNExNRkd0VklBK0p5TFhIcXlkTjIzREoyZ1ByeEZnNzMzTGpITlorMThQR0NHaFFMQTkvMFpiM2xvQ2tHeGVHdGFmVkN6TkxqWStiNTVIak5NbjRkdUpaWUpBQjhBNC92K1lBeDA4RkhnTkJqT2ZlQUlYNldZYlVBc0t3SGd5OC9NdUppTUdIaDNDejZCZmJpYUJxZmZlY0dTL3JUWkpzWmxKUUI4cmtXcS9QK3NKSFRlYlk2MTkvUGhQUnBjUGQ2ZU52SE5uSzFxNFFtZ2k3TGwyWTZ1ODY1RlJkTXUzVWR2MWpRWUhlNm1uZmMwNU1WYmFwbmVFMlNKQUVETGlZa3ZiYlNtSVNtMEN2R1p3eGVRTVk0R1IxOTgwaExlNGxzbjhvM2FjaGFBNWlxdUFzeUNWblJNcUlKVGltWnFqSS9lakRRWTJQNFM0d2tyZUl0djFkazhVN1JBQUhqRElzZkM0MlNBZWJEblcrd2J0K25ER3pRWWl2M0owdGxxclExY3hrSVdydENNQXRBeWo2UnNmNWd2b09lalh6TlF2TGdRZlV2WDk5TVNBVmhvYnJScVJnRUF2Mzh1U1hCbVRvS0JEMTVDM3d3ZnZZN1NBRnJuaHl0dnNKeWYrRmhBSkUzTmV2WUNzSUQ3d2xwN2hoV0QvdGYzOGxQTUUrQXpZbUVMNCtod056TjRyZEw1RS9pMWxxdGF6Q0lyTkdCbTdpK2tSTml4YU41RmVzV3ZIeWhZWEQzUmtWT09qeG0wekRVM1Z6aWpBTVFhckozSWtWR0M1OTVLVDIvYjRxZE5GQktHZStqcGJiL09LOGlWUzkrcWJKdzJBVE1KUnBCemJmY044TGxEbC9iNkNYU0ZrTmkyWjkxOHgvZ0dScWhPcGtNUXF3WEEvaE1nbVNENG5pTHZZYWpqSGJydmdSVVpCNFZZRGVEUmRHMzdUUXRBYkNsZkNlWXM4L05vWDFaRisxN2RVTFJ6eDd5QUszMXR0UCtOWjlOMmNyTmZBUGphZFZJNEFqQU9LSkxldmJhV0h2N1ZveXlJTXVyQXdHWWZ2VWxwQUxRZmFuMmJ0UzZCN2czWkZyQjdTZ0N3VmFCMGdCRkVQbk82dDNHdGlpSUFGcXRBV0Vad05qaTk3VGUrQUNBTHdLbXR2MExuQTF1TllLZmRvR2J3eFpHSUx3RElBdkRGa1lpN0JNQms3cHFyQW1GbTBOWlE0VE8vUyt5VDJNSXk5d2lBTGhCR0xCQUFyaUZXaTAycEVMbkFuMExwN2ltT0toSWcvOGZTVklnVy9ndHRTSWJMRmI3K1h4aDF2S3JGNE9lR1daSU1aMmM2ZEQ2NHVPYzk5STMzMFp0VEV5dGJCV0NSeGVuUWRoWEU1QXQvK0lhM2hsaW9Ec0h5Z3Bnd1Z4SUovVUd4YjNDOHV3VDJwdnZvMWRFZ012c1dkTDZ3cFNUU2pxTDRmTkc1dnQ1blFKY0o0UjRIRTk2eUxvcXZjR0ZiRkN2UTgrUjY5QTMzMGF1alFmZFAxcUh6aFMxdFVaaFU1ZEIwMUU1OHN1aytud0ZkSm9RZmI3d1BuUythN1dxTXBXdU5tTU13WXF0eCtJWEgwRGZjUjYvcFdWNk9Gc05ZMlJwUjcxdkZ0d1A2WHZtWno0QXVFOEsrbDU5QzV3dUlVNWx0NEdDK1BYb1dDVVoyNDhRZm4wWGZjQis5T2hyMHY3RVpuUzk0VFFWeWdpd1RBSjF1dFFyL0JEaTE5UVdmQVYwbWhLZTI0a2VEWVhpTFdWczF1eEZKTXNsclJKTFY4RThBOTZFZitRUXdqa2l5ZkVnZTlBV2RuQkdBZXdyNE5vRDcwSWRzQTdUd2xXRExiQkFBL1pRWXZCc0YrRjRnOStFd3NoZUlkOVJrT3gzR2xBREFaSmpKV2t2Y0U4Q1BBN2dQSC8vOHg2ZzhvUnVVWFdPREFPaFNJbUFNSldKRXVPZEp2eGJZYmVoK0FqRVNIRFJrSzVUYklBQ0F0aFh1S0pEM2M0SGNoejJJdVVCOEp3amdVVE9mTlNVQU9qdGdBWkswKzltZ3JrUUVNUnNVNmxSeTBmOU5DMEJ6ZFg0RHM2MkVYdy9nSGx4RHJnZlE1YXBWMnlnQW9hQkkyMWNUVnlURytSVmg3c0V3WWtVWThHQXUvditjQkFBQVZXR1Q3bEM4VThDdkNYWVBUaVBXQkVmcjhxdFlOQzBBZklsa3RpbW5kc0R2Q3VFZTlDSjJoWWl0NEFPMHhINEJBUGVuRzlTZ3RzVitYNkJpN3dzVTV0U2ZqaHhkODZZRndLZ0dtYlc2cllUZkdhNjRPOE5GT0s4a2RJUEk1VHNDZWZ0ZEViTkRmVHVnZUxOQVE2QUZOT1lmbHdya0dubmpYVS9Ra0JTRENOMVAvQWlkQVlvZDNZL2lkSWZXMmFMd0VNNHhNeUZneFRoSzZDQ05Rb1NaTjlHUk01M29URkNzR0JuY2EvbWMzMnpSeXMydHlNY2JtYk1BaEN2MCtSZFl4dkRBZXkraU0wS3g0dlMyMzZEc2ViZ1M2bFBpeG0rVzdVOHNGd0JqQ1JwVzIwUVl1NG5OQ01XS3pyc1dvYWMrWkRNRXd6WUJnTEN6TGtPMDNIa2hnSUhMbDQvRjBKbWgySEQ1V0F4bkpGSzVRZk9vUWhRQVl5czZyTWd3VEI3SFpvaGl3OUVYZjRLeTE3enRDVldLK1g1ZndNcUpITzJyUlpSNjRaWlpQL1NOWVFlWmYrUk1KMHIySi9BVzhKaVZQYXJ5RmdCd1A4VzRhbnlzdmtIOXIyMUVmeW9XQy9wZTNZRGU5d2RTSUt4bzA1bS9BTEJUd0dBTElKd0MwWG0zMFpGeis5Q1pvOUJ4L2R4K0dxMmRqdEwxQWRJZEpwLysxanhvTFJFQVk3VVlWbnFFM3k3RmZnRTQvb2RuVVBhV0g5Vmx0dXJMRVFGb05wNENsU0tLTFhEMVJBZjZVN0pRY2JXL2c3YlVURVB5KzlzenJ0Y3lBVEJXNW1PMVVJVFVYR3hHS1ZUMFBJbFQrTTdIbTh6MC9IRmNBTUl6SnlOMHpFZUxNVmc3S05MaG5kdlFtYVhRTU5TeGxkRVdjL0k3YUJaV1p4eFlLZ0NBMWtXR2dobUU5aWtkSzJ2bzZJVnVkS1lwRkl5ZVAwRGJsMWM3dm84aFE5SmxxdzNaQmdGYmVqU3V3ZThpZC9pWGo2QXpUcUhnMEhNUG9YZDdnOUZIWnZyOW9Ba0FBTVpUNm82dG1RaENFQlRwV2ZYMzZNempkWnhyZmgxRjlkSFVhUzdsZm80OWE3QkZBQURRUG5FeVpJMFRIQU92a0Y4MWxqdnpYejRheFluNEdsSnNyRFo4SFJFQWNGMjVRUlhhczY2ZVhyK3dILzFKNmpWY3Y3Q2Y3cjY5RmwzMVlScEVKZkdlQUFCYWFnMnFrTW1tUlZZQnFwWkdoMzJqT0Z2bUh4M3VwZ2NlV1lPeVY4QWp2Q2N4VW11djltQ3JBQmdyZDhDaXh4cXVBZDJMc1orcVhzR2h6UStpN0JFNFVIaXZUNzY1L3E0UWdIQzV2bmdaQkFKcjFyQS9XQ016OHg5NzZhY29ld09BMHRxSmgyVWoxSmNRN3d1QWNYb0hha2U1b0VqN1g5K0Uvb1IxZFo1UFVFVFA4N2M2M1FGZEFJdzMySUU4WnVtVFp4K2dZOE05NkF6bkdnejMwS05iY0FwY2pHMTJuSGFZT0NZQXhpTU9VbHRoK2lRVzBYdWVYTzlIaXkvMjB0R2hIbnB3dzkxbys4QzZ1NjNCVTVFRHFpVDgyVkVqaHl1ZUFZTUhiQVFzNHU5N1lBVWRHU2pldGlvakE1MjA2LzdsYVBTSGJnNjgwZHZ1dEpORUltTUJWU0tmT25yVE0vUmxiU3hJaGpoMk5iWWdTSWQzdjR2T2pFN2pVdGQyMWw4VmkrNnc1N0VWOWlhNlpZSWlDeGRCQlRxRjQrdmxoQURSTThUV1UzRWo3WCtqZUtiUEQ3eTdoVFpYM29oR2J4YnA1ZFhodFNJYnZ1TDBPaFNabkFnb3NuQVFnd2d0Yy9XR0R4QUVCbkJnYlFwZy84T045TXJ4ZG5RR3RRdFgrdHJvL29kV29kSllOVEMvbHVlRHRCYUo5TUFKb0dBUklsS25Gd0kyNEFEeEpBQTAxOXpNVGdNd0RyRVoxc3JJN3NtM24yZjNoc3I4UVVKYkcvVE1INjNEVzQ4aUN4K0JBRHlIU1JTKzBsK3JKTU05QmNheGM5VXNOdm9IbTNuenhhVzlIOUJkcStlaTAxT1ZrekEvNG9TaHVBQnNBZ0ZZalUwWWZ2cmt1QkJnemlHZVFGQmtuaUl2R3NtWHVqNWtKWXpRT1ErYmpxR2d5RXBrZGN5UE9HVjBIRTBTV1JrSVNlSXQyQXNCd05oVm5SQ0FZWXpvSFVxV1ZYcWg5VzEweHM2RW9ZNTNtTkJpUlhUVlpONGVMalZlWTM1M3JHMUhLYms1c0tQaXBtK3FrdkFsOW1JQWtWcTlFRUQ3aTN3Ni85cUIzV3RyNlltM25tT2pRYkdaZlJ6WFR1NWlhOXExWmg0NmZWUU9FT1BoOC9veFcrWWtRQksrYkpsZThvMEFYSW9zSEVCZlVBckRtQVhMRU1leHB0N2NHNWhIWmJEcE5UcHl0c3R4cG9mZkhHejZIZDMvMEVxMkZteDZxQVpBbEY4WDVHSmRBL0hYeFdFdlkzNG1BQkxaNklJRlRTQXlWOVRGQ1NCSWt1c0lIQ2NRS3A5Q2R6Yk9ablhJRjZKdjBldm5yZTlRQjBYK1lOQkNXOExPdXhmVGNLWDdtRjdsY252NExtNndsMml1emhSUUpQS3pDUUZvS2hYSzNFaEVQbUxzcXVNejA5cG5mSjhKeElISGIyZWRxd2MrZUlsZTZ2cUF0UlJQTitFZVhydDhySlc5Rno0RG4rMStiQzM3THZoTzdQdFNzMVJqK1lJVzJFT3NRcWgwQ0VrbHBSTUNFSnMyN2F1cVRLNWdMOG9JVUgyTXh5anpFTG5JT000Vk1Gb0llbXdDc01ZTXFSWUM5b1JQZHB6STdYR2grcXBLd21VbCtDOS9OeUVBbWhva3ZPeEt3b0loWlNBc3N3dGMrRlFwVm9Tcmt6eW9scmozUWFWSXdwYUE4UUtYRVBiQ1RCMnRZRlF0MFBKS3NOZFd0QWlDMDBMVXBUTlBxS3B1aU9Pa1FFZ1Nia3dRQUJvSWZBVWpNYzVzWlJsZlhqbWVUWXJTZDZqSUVaNXB5T2FNbHpGaUZqcGxtd0FIdko0Z0FIRnYwRHJzQldZQ3hBV01LaEU4Z2RocDRPS25UcUVnRkgvcTY3eDA4Y0FsWm0xSHRsQ0N3dHFrekQ5dURDc1NHY0plWkRhQWRobkdveGQ2a1dLazFSWUxtbXZFQkYyZlBYeHNibDFpR1NSaGVPdmNxVjlMS1FEeFUrQis5SVZtQ1poQkFMVUV1ZzJKUDQxYzZYM3dLTUtWaE1ZTWlXeE0vVnhtYjlNcXkvbEZJdmVrWlg0bUFFSHg2MUFwZzcxWTA3MUlEVEVET0tJajljNjAxaWhVaE1xMVJFV2p1Z09OYXUzcTFXa1hRTE1KbDM3M0h3TFpYRTJTdU5pTG04VVM2Z3hxVWZ0cXJkV2VXMTF5cmtSWlBDL0xRRXZ3d2tVWHVTOC9LeHNvcFVKZElOc0xyR1JGRmxxeEY1MXJEZ28vcVlhUFNFWmhncVYvSXFTbVgzbThmWTN4SWNMS1Z0MlprNVVkaFBhVW5wOVVseXFULzFBbDhsZjh4ZWVHbGxuNkRoUzgwUWFERnJ5a3U5cU5jQ1ZoTkVuRytKQ1I2MVNUS2xzZ2tiL3VtRDdsMzAweFB5Y0VkNlBmZ0FXRHZNRTdaTnhZT003Qm5RckQvWW94bUFiMzNEeGJaQTREWTRCeGd2RXRHa1dLalBXQlhDOHRPQ2E4NzRLYnlBOUJiYk5qeXhJRmdhRlJaSFpDTVFUVVFJMEJ3OVlZVUd5ZkNDeHFFeit4MTJsVnphOXAxY2Q0UWNHTUlna0RCY01BMVZvZ0xkbFRienlXQUxhQ2QvWGRGRXcvUC9sSjJCNC9EU0YzSjF4VkVFOThCa1VtZ3lGcDZyY0NWbHpoVXVFN2tFR0hmVk9XTWtWNTNOTmhET3dZc2hsQk4yYXFRSm0zb3JVUUVJUlRMYllpeGFuSFVoZUk1aUVyTUh0SWtjblZrQ1IrTDJEbHBRVEZxZEJLRHZ2bUxBY3dTNDFJbzR0RlhSRkhNdU1adkV1UmVxMVd3VTN4QlZnTHJJa3hQSGpBMHR3SDNDTzBuM0Z6Z1pHYUQxaXJUL0VIQVRzdVZTNnBVbVRoYitnM2FSY2pNVnRCYTkrUlZoajRFMktKeUZ5SGNFb3dHOExPazZKTXMxUGd0K0EzV1U1VXVoUE15UFN6Q2p0ZlNtRzhXVklWc1BOU1NvVVpUamJVeGZTU2dMMEFUOVdrN3RSMGFCUlpsaXEwQW9rdTFKZ1Y4bVdnR3g0d0wwTTEwU1ArZHlnZGhORlMwQzhKUGd2ZndRckxVeGl0S2RXYkZYSER2bGh5b3lUeUY2VzBaSTZ0ekQ4aEJFRnhxaUlMbjZQZnRKTUFOV09XNWtFQmhqU21CMkFDMXFLcFozR2Z2WXZVTTlVWlhMRk43VWt0QkZPK3EwcmtqQXR1SHRXN0FuRUdlTktDMnNTOExObW9UcmxpamZZYjhGdGdpOEJ2RjVLM1NzMEJpaXljQmlkTkFPT0N2aXFxSkd6RkpvTGJ3SXpTS2kzSUJvbDYwQTRFbWtGQkhnMWtWUUlnQU1WajR1K0xSUFplK0F4OEZyNER2c3ROUnJmcUVpZ1MyVzZacXpQWGkrVU5TY0tkWGs2YjhFRzhSUU9OMTlibkhlU3k4bXFlUHVWZlZWa0lveFBIUjJIVFFDSnRrS2NXY09zRlhpSkZKbWZSQ2VXam9HaWdTR1FJMHZSZDlkUlBkVUhoZ1NvTGQ2aVNjQjZiY0Q2OFRRTkZGaTZwTW5rY0NyVUNYcnUwaGx2QzdhcEVUbUlUMG9lM2FLREk1QVR3RHZCUW9CQ3VzRFNsUkpHRTUxV0pmSVpOWEIvdXplRlJKUEs2S2d2VFBhSHE1SEt4emhPbG9xVEt3dE9xUlBhNXBUVzdEK0k4RFNUaFMwVW1YYW9zYkFDZVNHaFhXQXdYeEJLVW9EQk5rWVJWTUxKR2tZUWQ4WGJ0cDVqK1Y0Z0plTVVDaVl6RmRYall5d09Rbnc5N0RKTlpZTThuK3ZNalh2OFBjNm9hcmE4K1dWd0FBQUFBU1VWT1JLNUNZSUk9Iiwic2l6ZXMiOiIxOTJ4MTkyIiwidHlwZSI6ImltYWdlL3BuZyJ9LHsic3JjIjoiZGF0YTppbWFnZS9wbmc7YmFzZTY0LGlWQk9SdzBLR2dvQUFBQU5TVWhFVWdBQUFNQUFBQURBQ0FZQUFBQlMzR3dIQUFBQUNYQklXWE1BQUFzVEFBQUxFd0VBbXB3WUFBQWZpMGxFUVZSNG5PMWQrWE1VMTUyZi9MVEo3bGF5eWY0THUxdTEyV3l5VmVyWFlNY3hzWTI2UndkSTRwSVFoN2dGT09BenZ0Wm5IQWNIWXh3blRuQjh4SWtkMjFtTWJXeWo3aGxwUmlPSlF3aVFoTTBseENIRUlZRVBEaUZsazQycjN0YjM5VWg2M1hQMlRIZC91MmU2cXo1bHJMbGVmOS8zMis5N2Z3TUI1R3RIeFUzZkRFbmlMYXBNVnFzeTJhektSRkVsMHFQSzVKUXFrVTlWaVl5cE1xRStQRWdEaVl5eFBkVDJFdlpVMGZhNHBCSDIvUDFwMy91blFMRmRXK2RPL1ZwVHFWQ215dVFaUlJZT3FKTHdKZnBHK2FBNEFnSjdMK3hYSkxJUmVDSTJiZHBYQTRWNmhhVXBKWW9rUEsvSXd1Yyt3L2xDcHlhaGdTS1RxNHBFWGxkbFlUb05CTDRTOFByMVlXWEozNnN5V2EvSXdtbWY2WDJtVjgzUjRKUWlrWFdnTVFTOGRzV21mZnNmVlZtNFE1SElrTS80UHVPcitka1JZRU04N2dsN0FZNnRKa2xjck1qQ0paL3hmY1pYTGFTQklndGZLSkt3eXJXcVVWTVorVGRGSWkwKzQvdU1yOXBJQTBVU09zS2x3bmNDYnJsQUlrTVN1VWVSeWYvNXpPOHp2K3FJOTRqOFZTa3R1UXY5TkdpWlh2SU5WU2J2K0l5djM2QlFCYUhoS3BFMnp4RnB5enhDVytvSWpTNFFhWFNSU0dNTkltMWRMTkxXcFVTUHhkcHI4QjU0TDN3R1B0czhXMlRmRlM3M2hVdE5GSVlQUTlMVWI2RXdmMGdTdjZmSVpMQlltVDhrRXhxZVFXakxIRUlqOVJwRHQ2MFNhY2Rha2Jhdm5XSUw0THZiVm1xL0ZhM1hmaHZXRUhJQlBWUXNTT1NNRXB6eVhVZVpmMGNwdVJsOHRrWEY4QldFTnRkb2pCZGJKdEwyTmZZeHVtbXNFV25iQ3BHMkxoU1pVTUJhc2VtbE9vc3J3Sk9PTUw4cUN6TlZTZmh6d1ROOFVLVE4xY0R3R25PWllzaEdrYll0SjVwS3MxQ2trZm1FUm1vMTVnU1ZocUdhNkJIL096dFJhclhQd0dmaE8rQzc0RHZOckFIV0RDY1RDQzNjQ3pZOVZic2hrYjhvcFNWemJHWCtKa21zVm1UaGI0WEw5Qm9qZ2o2ZTZRbmZBVXkyU21QUVNCMHdMNkVoVUVlQzlxNFBWQjc0cldpZFNGc2JOTFVybzBDczFtd011RGM3MTZjaVErUE5raXBibUY4SkN0TVVXZmhmN0p1MEhFRkNXMm9JYlczSXdQUnJSQnBiS3RMb2ZFS2JaNGswVk9hQ3RjY0JhNEUxd2RwZ2pabnVnd2xEalhidjJHdTNHc0NqbHF0RFRXVWwvNmxLd21Yc203TVM0RldKMUdaNGdxN1M5R3A0Y3FvdVl2aXNUakttdmhFYVc1N20vaHBGOXA1UUpmNmFMWVVrWE50UlN2N0xzblJsUlJJRzBHL0tJb1NydGFkOVJ4cmRHVnlRNFFKaUNsQ2JJdk5UMnpJZGE2ZlEyQktSMFFaN3JWWkJrY25abHR2SVArZkYvQkJvVUNTeUhmdG1MRkZ6Wm9zcG40WndDa1RxTlVaQlg2dk5nSHVFcDM2cWt5KzJYR1MwS2dUMVNKR0ZqL0lLbGtHRUYvc204bWI4T2NrM0c1NTZyVXRFMmpMTEJldEVRdk1zd21pUTdEU01yWXdMZ2d2V21SK0VPM0ppZnNpMzhISjZBK2p0c1JVa3VSRzRVQ3dvRlNkZmhDczFsMnN5NHhuVUp2QTZZYTh4cjdTSm9QanRYRlNmbUNjM3N5cUY0ZGVvNmZZaFA2VWdKZTFDNVhGYllYVWkvU0Q0RjU2SnY3KzVRV2czcFFxcE1sbmlPY1l2Snl5UEp0a1RIemJWUzE0Y043aFZJM1dKSndKVEd4ZUpubnlJaENSU254WHpLMEh4NjE3TDUyK1pTMmlIOGZnR3hnY1huOC80ZVFsQ3RKNGtxa1pyUk5veTEyUDJnU1FNUTZGV0ZrOS80VUhQYkZCRlBDL0hlRnd2RVF2UHQ0MU01K2lpRkdxUmh6eG5paVRjbTViNW9Tb2ZKQVY3b2RrZ1dwZjRaQUtEclpCODJXNUR1SWJRdHBVazhhU3Q5Y1pwb01qQ3hiUTF4bERBanIzSWJKNUc0THJUNjZieGlHWXhKSDI1QUpGYWtwRDJIVnVxMldIWWE4c000ZmFrekE5V01tdGdoTDdBMUFDZnZkRkRBWm1TWGpxR0N3WGhHYUIrR2s2RHhuaU9rZXhpU09Sa1VvOFFKTHVoTHk0VmduRmp6SEQwc3FjKzl0cUtHY0hrM3FMSUFuY24yaldWbG53L1VmMlJoRmV3RjVZTTRIS0RDaWhqNm9LdjY3c0g0Wm1FSlE3cVZTTFJ0WVU1aWtSZVREUitaWExGallRMXBqRXdENC92Mm5RZFFtV0U3WTN1UWJYU25WNGlxR2JVR2NOS3NLUWNlMUZHUURxdjhXZ0ZsUWQ3WFQ1SUZnYXl2aGludWNaOXpnbWxWSlI0Nzg4ejJBdmlBVUVXSGZPdkZsMUpSQjhrS1EyZ09JZmZQL0FZUlZ3WE9CTTJUSjRBMEtVWmZVRWFJblZKOUgwWEhxTStTRm9hd0o0WjFWZllXN2ZRVFpGSjEwVEJpMXRhbEVPZGEwSmd5eE8rWlI5cUNnZUdNVEhSTldxc0pId0pmYTBDOGVFVTZBdUtMdEEvK2NHZ011TktDNVZQb2EzelpkcTJaQWJkMlRpYmRxNWZ3UDdidHFpY1J1ZmRobjUvWGtOMDNtMk1kanBhTnN5Z3JYVVNvM1hXMzFXVzZNVmpibElYM0NPckhZNVBac0VsZHIxb2l2bkQ1VGZRUGV2cTZkRXRUOURCcHRmbzV3ZFZPbnIrQUIyNzJKc1NJMmM2NmFXdTdmVE0rNytsSHo5elAyMWZWb1crQWE1QVVLVHR5NnZwSjV2dW93UGJmOHRvTkRLNE55MHRnZGFmOTZxTTlrZCs4empkczI0K0RWVk1UZmtiRUt1QkRoYTZrMkFoL3IwM1NXUWxDTUJ6bUl1QS9qYzhZYUJqUVNxbTMvL1FTanJZOUx1TUc1UXRyaDV2cHlmZTNFeDNyNTJIdmhsT1kvZnR0ZlRFbTcrZ1YvczdMS0VsN01uZ1I2L1NmUSt1Wkh1Vk5KaHBTS2lEdmNla2dTSUxtd0x4dVUwb0M0QUNsUVRtTnp6NUkzTnZwWDJ2YktEWFR1NnlaS05TQVU2UmcwL2ZTOE1WTjZJenAxMkFlL3Q0NDczMHM0TWhXMmw1OWVSTzJ2ZnlVelF5NTlZRUlXQTlsMXhpR0VQTk1FU0FQMFpoL2psNlFrQ0NtNDd4Wjk5Qys5OTRsbzZjMjJmclpobHg1VmlNZnJMcC9yUkh1dGNBOTNKbzg0UDBTbCtibzdRY09kdEYrMS9mUkZ0bS8xQzNIbVBBREsyMlFDSTlBWXdFT1BEcDgzNWlNSkltbnZ4QmtmWTh1WTVlUFdITjBaelBpZEI1OTJKMDVzMFhZQ3Q5ZG1BSEtpMnZuZDVOUDNuMkFSb0tUcG0wQ1pibzR3UVErSFNhTm9wTVRnVGlJMmdjOVEvenpBOXVzbkhtQncvRGhmYXRxSnVsdzNBUFBmSEhaejJwRm9VcmIyQTZQdHdET2gwdmFoaHEreE9OMXBWcVFoQWtXczlUTHJuUjZacGpxQThJT05ub05sUXU2b0lqOE8veGhLbk91eFl4b3hSN2s1TGhVdGNIdEcxeEJUcFRaNHUyaGdwNnFldERkTHFOcGJBUHVuNjhWQlBTY3BMSUQwN0dmU1F5Rm5Ec3g0SUdmL0NheVFndnVPQkdoN3ZSTnljZHJwM2F6ZFFKYk9iT2hNNzE5WFRrOUI1MGVvMmx3M0FQL2VRWEQ3SDFRa05oU0hYaEMydWNUS1YyVEFENGZINUlsbUs1UFVHUkh0M3lFL3dOeVJMWHorK2oreDl1UkdmeVZOajN3QXJIblFaamVhRHYxUTJNQnlCM3FBUEpQUnB3cXBJcm1ldXIvN1dONkp0Z0ZxTVh1aG1qWVRPN0VSQWpnYlZoMDJmTUpJNi85alJiUDdTdTBYbUdhZ3BFQUVEUDQ0YzdzQ2l2VE9qaFh6NkNUdnhjQVU5Wk42bERrS3B3L2R4K2RMcU01WWhEei84M3V3OCtXdHpXNkV3ZW1PMEN3UHJWajBzMkdEbGxoSFkvdXRaVjNvbGNYWHR1TUl6Ykd5cHQwZmt2bjNpZlhqNjUzUmw2RHZmUUF3K3ZacnpCRzhYTVBlNWxBZENsTm9QUld5VXlwaGtaNkVSbllDdnc2ZjRkdExrU3owVUs3bG53VU5seGI0TWRkOUxCanJzY295WGtha0d5SFpTNjhtNXl1MXV1Qk94c3VNcmZTSFMrR044d2Q3cm5jZ1hFQ2JBRWdQbjViYmluNitkMzBhUHYzVVNQdm5zVHZYNXVwMk8wdkxUM0E1WkhCSk51a25rTFBTVUFmTWMyYUo4QnJpM0kzc1JtV01zeDNNTjBjS2VaSDJ3UUs5VEl6NDcrZ1o3cHVJTitldmhWT25wQk81bUh1MzlPajJ5YnlqRGNyVGtxUm9mMjBTLzYzcWJuOWp4SVB6LzJwbTMwUFB6Q1l4ci9jSFVFb0VaN1NnQ2dWeWNmNW1ZOVpPcURMRGNFbldGdEFLUWFPSms3QlBuNG9INVp0ZjdCanJzWXN4OTc3Mlk2RUd1a3h6OHNteEFBK0RmOERWNkQvN2RiTFFJSFEyeGhHZU1adnZtV1hmbENsZ3NBV081OG8xcW84b0svbjFWZVEyZFVPL0h4eHZzY0V3QkliTE55N2RjdjdLWDlTczBFMDZjQ3ZBZmVhemN0ejN6MENydFBveXBrUjVzVnl3V0F6L21HUHBLZytuU3NyUEc4MXljVExoOXJkU1JuQ0g0RE1sYXRYdi9WMDAzMDJQdlRVakkvdkFidmNZU2V3ejIwWTNrTmEzWEpEem1CMXV5dUZnQVlUc0VITThhYlY1MzU4R1YwQm5VQ0J6ZmNiYnNBUUQ2L1hlc2YzSFZQU2dHQTE1eWtKVlR1VGJUSDRUTUlacnBZQUhqRGQ3eXlDK3AwUjRjSysray9EaWdUdEZVQWdxSnR4U3hEQjU2bVI3YmRrRllGT3IvM01jZG9DVHpUR3M4YzVlc0hnTWRjS1FBd2swdW5yOFg3ODROVmo4MllUbUxYNnJtMkNjRHVIOVZaditiaEhucDI5MzJjMFZ1dVU0WGczL0MzOGYrSDl6cWx6aDc2eGNQc3ZrSDMxeG5Fczl3bUFFR2kwOVZnTXN2NGE1OTFPNlEzdWdUOWIyeTJUUUJPdnZXOHhldnRvY085ejdFbisyZEhmazlIenJZbHFFTGpxZys4QnUrQjk4Sm40TE4yMHhKNFovemVJMXpqQkdpNTZDb0JnRkdrdXFkL3ZIZG4rOUtaNkF6cE5NQkF0VVVBZ3FKbEJleVo4TVh4LzVrUWdDK080eFlvUVhTWW5RS1FVOFo1RjV2bmlDNFJnS0ErZjRNTnBJdS9CdTFIc0JrU0ErMUx0VTJ6RXRDNnhMRjdHTzVtYWc4QS9vMUpTekQ2SjA0QnppMDY3bUZFRjRDVzJkelRmN1crYy9QZ2psZlJtYkZRWWdKUXFPL2tQWnpyZk5SUm96ZFRUSUNkQXBBc3h4WFBnTjJKTGdCOHlCcmFuUEN2T2QyRndDMFllTzlGeXdVQW1sWTVlUTlYVCsxZ3dLYmxaWU5LeWJmUGhKcGlWQUdBb1drNjNaL0wzMjZ1L2dFNjhiQndzWE83NVFKZ1Y5Ym5tTnN4M0VPYnEzNHdlUXFVNnp1SzVEc29KUzhCNFAyejBZWDY0d2pjZ2VqRVF3S2s5b0xSbW81MjhJQ0FEZ2tBK0hkYVdnZEY5cDNZOXpXR2hKMnI1dWpvMGJvd3NjREtjUUVBUC85NEhTZjgxNWlud1lwZVhFQThMT3k5cDRGMlA3R09IbnZwS2FiSGZycnZJNllTcHF1RmdOZmdQZkJlaUo0ZmUrbW50UHVKSDlHOTl5NUJ2NTh4UkVDeGpFN3p5TUI3amdnQWI1RW5rOEtEVHpzYk92ZFJ1RFRvZmVyT3ROb0hET3B6VmdEQTlkazRLUUROU1NKemg1NTdDSjF3UGdxREJvYzJQNWlvUW5MZVIzREQ1K29TelVrQW9HSmY5K05KM25QazE0K2pFODVIWWREZ3lLOGZUMVRCWlgyemhWeEhhT1VrQUswTmZPQXIrWHNnandPYmNENEtnd2FINGwwajB2V2FpaTUyU0FDZ3B5UHZob0xPWGs2bjdmb29MaG9jZlBxZTFQT0p1V21Vd0p1MkN3RGtZRXdZdnl0U1N4MTRMN0FKNTZNd2FORDkyTnFVZkFaejVDWWp3dzRJQUQvZ3dCajU1UUdGNHRpRTgxRVlOTmlUcGdrWmVJQW1hbEFhUkhzRkFFclU0S2laaU1MRmMvNVREVm5ESnB5UHdxQkJ4RGhwaHVmSkdZWnNCRHNGZ0M5UGkyV1JrdzBkbGJHSjU4UGJOTGgyYWxkR1B1T3prYzJtUmdSeW5lWVlYWkJaQUM2MHZvMU9RQi9lcHNHRnlKdVorWEloeVhrT3NTa0I0S3Urc3ZHNytyRUFmQWJ5T2c3LzZwSE1tZ2tmbHpKWkxaYTFBTENLSEY3WENpTFZzUG9vS2hyc1dqUFB0R3RlTGJkQkFQalFjN2F0NnFDRG1WdkhIdmx3UHcyZ3ZEUlVKcHJ1U0pJc05TZHZBUUNkUDFQME54bU8vK0VaZEVMNjhDWU5qdi91NTFuekdUUmltR3pLSUZvdkFQeEVQek41RjVETGpVMUlIOTZrUWNlSzZxejVqTGNEMk9SUkt3VUEvUC9qZlZsWS9qVlg5NXNOaGpyZVFTZW1EMi9SWUhqWHU2WjRMTUZHdFZJQStKeUxYSHF5ZE4yM0RKMmdQcnhGZzczM0xqSE5aKzE4UEdDR2hRTEE5LzBaYjNsb0NrR3hlR3RhZlZDek5MalkrYjU1SGpOTW40ZHVKWllKQUI4QTQvditZQXgwOEZIZ05Cak9mZUFJWDZXWWJVQXNLd0hneTgvTXVKaU1HSGgzQ3o2QmZiaWFCcWZmZWNHUy9yVFpKc1psSlFCOHJrV3EvUCtzSkhUZWJZNjE5L1BoUFJwY1BkNmVOdkhObksxcTRRbWdpN0xsMlk2dTg2NUZSZE11M1VkdjFqUVlIZTZtbmZjMDVNVmJhcG5lRTJTSkFFRExpWWt2YmJTbUlTbTBDdkdad3hlUU1ZNEdSMTk4MGhMZTRsc244bzNhY2hhQTVpcXVBc3lDVm5STXFJSlRpbVpxakkvZWpEUVkyUDRTNHdrcmVJdHYxZGs4VTdSQUFIakRJc2ZDNDJTQWViRG5XK3didCtuREd6UVlpdjNKMHRscXJRMWN4a0lXcnRDTUF0QXlqNlJzZjVndm9PZWpYek5RdkxnUWZVdlg5OU1TQVZob2JyUnFSZ0VBdjM4dVNYQm1Ub0tCRDE1QzN3d2Z2WTdTQUZybmh5dHZzSnlmK0ZoQUpFM05ldllDc0lEN3dscDdoaFdEL3RmMzhsUE1FK0F6WW1FTDQraHdOek40cmRMNUUvaTFscXRhekNJck5HQm03aStrUk5peGFONUZlc1d2SHloWVhEM1JrVk9PanhtMHpEVTNWemlqQU1RYXJKM0lrVkdDNTk1S1QyL2I0cWRORkJLR2UranBiYi9PSzhpVlM5K3FiSncyQVRNSlJwQnpiZmNOOExsRGwvYjZDWFNGa05pMlo5MTh4L2dHUnFoT3BrTVFxd1hBL2hNZ21TRDRuaUx2WWFqakhicnZnUlVaQjRWWURlRFJkRzM3VFF0QWJDbGZDZVlzOC9Ob1gxWkYrMTdkVUxSeng3eUFLMzF0dFArTlo5TjJjck5mQVBqYWRWSTRBakFPS0pMZXZiYVdIdjdWb3l5SU11ckF3R1lmdlVscEFMUWZhbjJidFM2QjdnM1pGckI3U2dDd1ZhQjBnQkZFUG5PNnQzR3RpaUlBRnF0QVdFWndOamk5N1RlK0FDQUx3S210djBMbkExdU5ZS2Zkb0did3haR0lMd0RJQXZERmtZaTdCTUJrN3BxckFtRm0wTlpRNFRPL1MreVQyTUl5OXdpQUxoQkdMQkFBcmlGV2kwMnBFTG5BbjBMcDdpbU9LaElnLzhmU1ZJZ1cvZ3R0U0liTEZiNytYeGgxdktyRjRPZUdXWklNWjJjNmRENjR1T2M5OUkzMzBadFRFeXRiQldDUnhlblFkaFhFNUF0LytJYTNobGlvRHNIeWdwZ3dWeElKL1VHeGIzQzh1d1QycHZ2bzFkRWdNdnNXZEw2d3BTVFNqcUw0Zk5HNXZ0NW5RSmNKNFI0SEU5NnlMb3F2Y0dGYkZDdlE4K1I2OUEzMzBhdWpRZmRQMXFIemhTMXRVWmhVNWRCMDFFNThzdWsrbndGZEpvUWZiN3dQblMrYTdXcU1wV3VObU1Nd1lxdHgrSVhIMERmY1I2L3BXVjZPRnNOWTJScFI3MXZGdHdQNlh2bVp6NEF1RThLK2w1OUM1d3VJVTVsdDRHQytQWG9XQ1VaMjQ4UWZuMFhmY0IrOU9ocjB2N0VablM5NFRRVnlnaXdUQUoxdXRRci9CRGkxOVFXZkFWMG1oS2UyNGtlRFlYaUxXVnMxdXhGSk1zbHJSSkxWOEU4QTk2RWYrUVF3amtpeWZFZ2U5QVdkbkJHQWV3cjROb0Q3MElkc0E3VHdsV0RMYkJBQS9aUVl2QnNGK0Y0ZzkrRXdzaGVJZDlSa094M0dsQURBWkpqSldrdmNFOENQQTdnUEgvLzh4Nmc4b1J1VVhXT0RBT2hTSW1BTUpXSkV1T2RKdnhiWWJlaCtBakVTSERSa0s1VGJJQUNBdGhYdUtKRDNjNEhjaHoySXVVQjhKd2pnVVRPZk5TVUFPanRnQVpLMCs5bWdya1FFTVJzVTZsUnkwZjlOQzBCemRYNERzNjJFWHcvZ0hseERyZ2ZRNWFwVjJ5Z0FvYUJJMjFjVFZ5VEcrUlZoN3NFd1lrVVk4R0F1L3YrY0JBQUFWV0dUN2xDOFU4Q3ZDWFlQVGlQV0JFZnI4cXRZTkMwQWZJbGt0aW1uZHNEdkN1RWU5Q0oyaFlpdDRBTzB4SDRCQVBlbkc5U2d0c1YrWDZCaTd3c1U1dFNmamh4ZDg2WUZ3S2dHbWJXNnJZVGZHYTY0TzhORk9LOGtkSVBJNVRzQ2VmdGRFYk5EZlR1Z2VMTkFRNkFGTk9ZZmx3cmtHbm5qWFUvUWtCU0RDTjFQL0FpZEFZb2QzWS9pZElmVzJhTHdFTTR4TXlGZ3hUaEs2Q0NOUW9TWk45R1JNNTNvVEZDc0dCbmNhL21jMzJ6UnlzMnR5TWNibWJNQWhDdjArUmRZeHZEQWV5K2lNMEt4NHZTMjM2RHNlYmdTNmxQaXhtK1c3VThzRndCakNScFcyMFFZdTRuTkNNV0t6cnNXb2FjK1pETUV3ellCZ0xDekxrTzAzSGtoZ0lITGw0L0YwSm1oMkhENVdBeG5KRks1UWZPb1FoUUFZeXM2ck1nd1RCN0hab2hpdzlFWGY0S3kxN3p0Q1ZXSytYNWZ3TXFKSE8yclJaUjY0WlpaUC9TTllRZVpmK1JNSjByMkovQVc4SmlWUGFyeUZnQndQOFc0YW55c3ZrSDlyMjFFZnlvV0MvcGUzWURlOXdkU0lLeG8wNW0vQUxCVHdHQUxJSndDMFhtMzBaRnorOUNabzlCeC9keCtHcTJkanRMMUFkSWRKcC8rMWp4b0xSRUFZN1VZVm5xRTN5N0ZmZ0U0L29kblVQYVdIOVZsdHVyTEVRRm9OcDRDbFNLS0xYRDFSQWY2VTdKUWNiVy9nN2JVVEVQeSs5c3pydGN5QVRCVzVtTzFVSVRVWEd4R0tWVDBQSWxUK003SG04ejAvSEZjQU1Jekp5TjB6RWVMTVZnN0tOTGhuZHZRbWFYUU1OU3hsZEVXYy9JN2FCWldaeHhZS2dDQTFrV0dnaG1FOWlrZEsydm82SVZ1ZEtZcEZJeWVQMERibDFjN3ZvOGhROUpscXczWkJnRmJlalN1d2U4aWQvaVhqNkF6VHFIZzBITVBvWGQ3ZzlGSFp2cjlvQWtBQU1aVDZvNnRtUWhDRUJUcFdmWDM2TXpqZFp4cmZoMUY5ZEhVYVM3bGZvNDlhN0JGQUFEUVBuRXlaSTBUSEFPdmtGODFsanZ6WHo0YXhZbjRHbEpzckRaOEhSRUFjRjI1UVJYYXM2NmVYcit3SC8xSjZqVmN2N0NmN3I2OUZsMzFZUnBFSmZHZUFBQmFhZzJxa01tbVJWWUJxcFpHaDMyak9Gdm1IeDN1cGdjZVdZT3lWOEFqdkNjeFVtdXY5bUNyQUJncmQ4Q2l4eHF1QWQyTHNaK3FYc0doelEraTdCRTRVSGl2VDc2NS9xNFFnSEM1dm5nWkJBSnIxckEvV0NNejh4OTc2YWNvZXdPQTB0cUpoMlVqMUpjUTd3dUFjWG9IYWtlNW9FajdYOStFL29SMWRaNVBVRVRQODdjNjNRRmRBSXczMklFOFp1bVRaeCtnWThNOTZBem5HZ3ozMEtOYmNBcGNqRzEybkhhWU9DWUF4aU1PVWx0aCtpUVcwWHVlWE85SGl5LzIwdEdoSG5wd3c5MW8rOEM2dTYzQlU1RURxaVQ4MlZFamh5dWVBWU1IYkFRczR1OTdZQVVkR1NqZXRpb2pBNTIwNi83bGFQU0hiZzY4MGR2dXRKTkVJbU1CVlNLZk9uclRNL1JsYlN4SWhqaDJOYllnU0lkM3Y0dk9qRTdqVXRkMjFsOFZpKzZ3NTdFVjlpYTZaWUlpQ3hkQkJUcUY0K3ZsaEFEUk04VFdVM0VqN1gramVLYlBEN3k3aFRaWDNvaEdieGJwNWRYaHRTSWJ2dUwwT2hTWm5BZ29zbkFRZ3dndGMvV0dEeEFFQm5CZ2JRcGcvOE9OOU1yeGRuUUd0UXRYK3Ryby9vZFdvZEpZTlRDL2x1ZUR0QmFKOU1BSm9HQVJJbEtuRndJMjRBRHhKQUEwMTl6TVRnTXdEckVaMXNySTdzbTNuMmYzaHNyOFFVSmJHL1RNSDYzRFc0OGlDeCtCQUR5SFNSUyswbCtySk1NOUJjYXhjOVVzTnZvSG0zbnp4YVc5SDlCZHErZWkwMU9Wa3pBLzRvU2h1QUJzQWdGWWpVMFlmdnJrdUJCZ3ppR2VRRkJrbmlJdkdzbVh1ajVrSll6UU9RK2JqcUdneUVwa2RjeVBPR1YwSEUwU1dSa0lTZUl0MkFzQndOaFZuUkNBWVl6b0hVcVdWWHFoOVcxMHhzNkVvWTUzbU5CaVJYVFZaTjRlTGpWZVkzNTNyRzFIS2JrNXNLUGlwbStxa3ZBbDltSUFrVnE5RUVEN2kzdzYvOXFCM1d0cjZZbTNubU9qUWJHWmZSelhUdTVpYTlxMVpoNDZmVlFPRU9QaDgvb3hXK1lrUUJLK2JKbGU4bzBBWElvc0hFQmZVQXJEbUFYTEVNZXhwdDdjRzVoSFpiRHBOVHB5dHN0eHBvZmZIR3o2SGQzLzBFcTJGbXg2cUFaQWxGOFg1R0pkQS9IWHhXRXZZMzRtQUJMWjZJSUZUU0F5VjlURkNTQklrdXNJSENjUUtwOUNkemJPWm5YSUY2SnYwZXZucmU5UUIwWCtZTkJDVzhMT3V4ZlRjS1g3bUY3bGNudjRMbTZ3bDJpdXpoUlFKUEt6Q1FGb0toWEszRWhFUG1Mc3F1TXowOXBuZko4SnhJSEhiMmVkcXdjK2VJbGU2dnFBdFJSUE4rRWVYcnQ4ckpXOUZ6NERuKzErYkMzN0x2aE83UHRTczFSaitZSVcyRU9zUXFoMENFa2xwUk1DRUpzMjdhdXFUSzVnTDhvSVVIMk14eWp6RUxuSU9NNFZNRm9JZW13Q3NNWU1xUllDOW9SUGRwekk3WEdoK3FwS3dtVWwrQzkvTnlFQW1ob2t2T3hLd29JaFpTQXNzd3RjK0ZRcFZvU3JrenlvbHJqM1FhVkl3cGFBOFFLWEVQYkNUQjJ0WUZRdDBQSktzTmRXdEFpQzAwTFVwVE5QcUtwdWlPT2tRRWdTYmt3UUFCb0lmQVVqTWM1c1pSbGZYam1lVFlyU2Q2aklFWjVweU9hTWx6RmlGanBsbXdBSHZKNGdBSEZ2MERyc0JXWUN4QVdNS2hFOGdkaHA0T0tuVHFFZ0ZIL3E2N3gwOGNBbFptMUh0bENDd3Rxa3pEOXVEQ3NTR2NKZVpEYUFkaG5Hb3hkNmtXS2sxUllMbW12RUJGMmZQWHhzYmwxaUdTUmhlT3ZjcVY5TEtRRHhVK0IrOUlWbUNaaEJBTFVFdWcySlA0MWM2WDN3S01LVmhNWU1pV3hNL1Z4bWI5TXF5L2xGSXZla1pYNG1BRUh4NjFBcGc3MVkwNzFJRFRFRE9LSWo5YzYwMWloVWhNcTFSRVdqdWdPTmF1M3ExV2tYUUxNSmwzNzNId0xaWEUyU3VOaUxtOFVTNmd4cVVmdHFyZFdlVzExeXJrUlpQQy9MUUV2d3drVVh1UzgvS3hzb3BVSmRJTnNMckdSRkZscXhGNTFyRGdvL3FZYVBTRVpoZ3FWL0lxU21YM204ZlkzeEljTEtWdDJaazVVZGhQYVVucDlVbHlxVC8xQWw4bGY4eGVlR2xsbjZEaFM4MFFhREZyeWt1OXFOY0NWaE5FbkcrSkNSNjFTVEtsc2drYi91bUQ3bDMwMHhQeWNFZDZQZmdBV0R2TUU3Wk54WU9NN0JuUXJEL1lveG1BYjMzRHhiWkE0RFk0QnhndkV0R2tXS2pQV0JYQzh0T0NhODc0S2J5QTlCYmJOanl4SUZnYUZSWkhaQ01RVFVRSTBCdzlZWVVHeWZDQ3hxRXoreDEybFZ6YTlwMWNkNFFjR01JZ2tEQmNNQTFWb2dMZGxUYnp5V0FMYUNkL1hkRkV3L1AvbEoyQjQvRFNGM0oxeFZFRTk4QmtVbWd5RnA2cmNDVmx6aFV1RTdrRUdIZlZPV01rVjUzTk5oRE93WXNobEJOMmFxUUptM29yVVFFSVJUTGJZaXhhbkhVaGVJNWlFck1IdElrY25Wa0NSK0wyRGxwUVRGcWRCS0R2dm1MQWN3UzQxSW80dEZYUkZITXVNWnZFdVJlcTFXd1UzeEJWZ0xySWt4UEhqQTB0d0gzQ08wbjNGemdaR2FEMWlyVC9FSEFUc3VWUzZwVW1UaGIrZzNhUmNqTVZ0QmE5K1JWaGo0RTJLSnlGeUhjRW93RzhMT2s2Sk1zMVBndCtBM1dVNVV1aFBNeVBTekNqdGZTbUc4V1ZJVnNQTlNTb1VaVGpiVXhmU1NnTDBBVDlXazd0UjBhQlJabGlxMEFva3UxSmdWOG1XZ0d4NHdMME0xMFNQK2R5Z2RoTkZTMEM4SlBndmZ3UXJMVXhpdEtkV2JGWEhEdmxoeW95VHlGNlcwWkk2dHpEOGhCRUZ4cWlJTG42UGZ0Sk1BTldPVzVrRUJoalNtQjJBQzFxS3BaM0dmdll2VU05VVpYTEZON1VrdEJGTytxMHJrakF0dUh0VzdBbkVHZU5LQzJzUzhMTm1vVHJsaWpmWWI4RnRnaThCdkY1SzNTczBCaWl5Y0JpZE5BT09DdmlxcUpHekZKb0xid0l6U0tpM0lCb2w2MEE0RW1rRkJIZzFrVlFJZ0FNVmo0dStMUlBaZStBeDhGcjREdnN0TlJyZnFFaWdTMlc2WnF6UFhpK1VOU2NLZFhrNmI4RUc4UlFPTjE5Ym5IZVN5OG1xZVB1VmZWVmtJb3hQSFIySFRRQ0p0a0tjV2NPc0ZYaUpGSm1mUkNlV2pvR2lnU0dRSTB2UmQ5ZFJQZFVIaGdTb0xkNmlTY0I2YmNENjhUUU5GRmk2cE1ua2NDclVDWHJ1MGhsdkM3YXBFVG1JVDBvZTNhS0RJNUFUd0R2QlFvQkN1c0RTbFJKR0U1MVdKZklaTlhCL3V6ZUZSSlBLNktndlRQYUhxNUhLeHpoT2xvcVRLd3RPcVJQYTVwVFc3RCtJOERTVGhTMFVtWGFvc2JBQ2VTR2hYV0F3WHhCS1VvREJOa1lSVk1MSkdrWVFkOFhidHA1aitWNGdKZU1VQ2lZekZkWGpZeXdPUW53OTdESk5aWU04bit2TWpYdjhQYzZvYXJhOCtXVndBQUFBQVNVVk9SSzVDWUlJPSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9wbmcifV19">
 </head>
 <body>
 
     <header>
         <h1>🍁2026/11🍁<br>東京迪士尼楓葉行</h1>
         <div class="time-box">
-            <div id="real-date">讀取中...</div>
-            <div id="realtime-clock"></div>
+            <div id="real-date">即時時間</div>
+            <div id="realtime-clock">
+                <div class="clock-item">🇹🇼 <span id="clock-tw">--:--:--</span></div>
+                <div class="clock-item" style="border-left: 1px solid #ddd; padding-left: 6px;">🇯🇵 <span id="clock-jp">--:--:--</span></div>
+            </div>
         </div>
     </header>
 
-    <button id="add-fab" class="fab" onclick="handleFabClick()">＋</button>
+    <button id="fab-btn" class="fab" onclick="handleFabClick()">＋</button>
 
-    <!-- 行程詳細燈箱 -->
+    <!-- 行程日期新增/編輯 Modal -->
+    <div id="day-modal" class="overlay">
+        <div class="modal-content">
+            <button id="day-delete-btn" class="btn-delete-itin-top" style="display:none;" onclick="deleteTripDay()">🗑️</button>
+            <button class="detail-close" style="background:#F5E8CF; color:var(--dark-pink); top:15px; right:15px;" onclick="closeModal('day-modal')">✕</button>
+            <div class="modal-title" id="day-modal-title">新增旅行日期</div>
+            <input type="hidden" id="day-edit-id">
+            <div class="form-group">
+                <label>選擇日期 <span style="color:#B74735">*</span></label>
+                <input type="date" id="day-date-input">
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('day-modal')">取消</button>
+                <button class="btn-save" onclick="saveTripDay()">儲存日期</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 行程詳情查看 Modal -->
     <div id="detail-overlay" class="overlay" onclick="closeItinDetail()">
         <div class="detail-card" onclick="event.stopPropagation()">
             <button class="detail-close" onclick="closeItinDetail()">✕</button>
@@ -405,6 +378,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 <div id="itin-images-preview-grid" class="multi-img-grid"></div>
                 <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 圖片將自動壓縮並上傳</div>
             </div>
+
             <div class="modal-btns">
                 <button class="btn-cancel" onclick="closeModal('itin-modal')">取消</button>
                 <button class="btn-save" onclick="saveItin()">儲存行程</button>
@@ -424,20 +398,21 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         <div id="itinerary-list"></div>
     </div>
 
-    <!-- 2. ✨✨ 清單頁面（包含購物清單、必帶行李、景點預約等所有分類標籤）✨✨ -->
+    <!-- 2. 清單頁面 -->
     <div id="page-checklist" class="tab-content">
-        <div class="card" style="margin-bottom: 12px; padding: 14px;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                <span style="font-size: 0.8rem; font-weight: 700; color: #8d6e63;">👤 選擇登記旅伴</span>
-                <button onclick="openWhoManageModal()" style="border: none; background: none; color: var(--forest-green); font-weight: 700; cursor: pointer;">⚙️ 管理</button>
+        <!-- 旅伴 selector 區域 -->
+        <div style="background: white; padding: 12px; border-radius: 18px; margin-bottom: 12px; border: 1.5px solid #E8D8B9; box-shadow: 0 4px 10px rgba(130,83,42,0.05);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <label style="font-size: 0.8rem; font-weight: bold; color: var(--forest-green);">👤 選擇登記旅伴</label>
+                <button type="button" class="cl-tab-manage" onclick="openWhoManageModal()">⚙️ 旅伴管理</button>
             </div>
-            <div class="who-container" id="who-selector"></div>
+            <div id="who-selector" class="who-container"></div>
         </div>
-        
-        <!-- 清單分類標籤列 -->
-        <div class="checklist-tabs" id="cl-tabs-container">
-            <div id="cl-tabs" style="display: flex; gap: 8px; overflow-x: auto; flex: 1;"></div>
-            <button class="cl-tab-manage" onclick="openCatModal()">⚙️ 分類</button>
+
+        <!-- 清單分類 Tab 列 -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div id="cl-tabs" class="checklist-tabs" style="margin-bottom: 0; flex: 1; margin-right: 8px;"></div>
+            <button type="button" class="cl-tab-manage" onclick="openCatManageModal()">⚙️ 分類管理</button>
         </div>
         
         <!-- 項目列表 -->
@@ -447,91 +422,102 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
     <!-- 3. 匯率頁面 -->
     <div id="page-exchange" class="tab-content">
         <div class="card">
-            <div class="input-group"><label>🇯🇵 日幣 JPY</label><input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')"><span class="currency-unit">円</span></div>
-            <div class="input-group"><label>🇹🇼 台幣 TWD</label><input type="number" id="twd-val" placeholder="0" oninput="convert('twd')"><span class="currency-unit">元</span></div>
+            <div class="input-group">
+                <label>🇯🇵 日幣 JPY</label>
+                <input type="number" id="jpy-val" placeholder="0" oninput="convert('jpy')">
+                <span class="currency-unit">円</span>
+            </div>
+
+            <!-- 快捷選取日幣金額與累加按鈕 -->
+                <div style="font-size: 0.78rem; color: var(--dark-pink); font-weight: bold; margin-top: 12px; margin-bottom: 6px;">➕ 快速加總金額</div>
+                <div class="quick-btn-group">
+                    <button type="button" class="quick-chip add-chip" onclick="addJpyQuick(1)">+1円</button>
+                    <button type="button" class="quick-chip add-chip" onclick="addJpyQuick(10)">+10円</button>
+                    <button type="button" class="quick-chip add-chip" onclick="addJpyQuick(100)">+100円</button>
+                    <button type="button" class="quick-chip add-chip" onclick="addJpyQuick(1000)">+1,000円</button>
+                    <button type="button" class="quick-chip add-chip" onclick="addJpyQuick(10000)">+10,000円</button>
+                    <button type="button" class="quick-chip reset-chip" onclick="setJpyQuick(0)">🧹 歸零</button>
+            </div>
+
+            <div class="input-group" style="margin-top: 16px;"><label>🇹🇼 台幣 TWD</label><input type="number" id="twd-val" placeholder="0" oninput="convert('twd')"><span class="currency-unit">元</span></div>
         </div>
-        <div style="margin-top: 20px; background: #fdf2f4; border: 1.5px dashed var(--dark-pink); padding: 16px; border-radius: 18px;">
+
+        <div style="margin-top: 16px; background: #fdf2f4; border: 1.5px dashed var(--dark-pink); padding: 16px; border-radius: 18px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                 <label style="font-size: 0.8rem; color: var(--dark-pink); font-weight: bold;">🪄 自訂匯率 (1 JPY = ? TWD)</label>
                 <button type="button" id="btn-fetch-bot-rate" onclick="fetchBankOfTaiwanRate()" style="font-size: 0.72rem; padding: 6px 12px; background: var(--dark-pink); color: white; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(183,71,53,0.2);">
-                    🔄 抓取台銀日幣現金賣價
+                    🔄 抓取台銀日幣現金賣出"參考"價
                 </button>
             </div>
             <input type="number" id="base-rate" value="0.21" step="0.0001" style="width: 100%; border: none; background: transparent; font-size: 1.35rem; font-weight: 800; outline: none; color: var(--dark-pink);" oninput="convert('jpy')">
-            <div id="rate-update-time" style="font-size: 0.72rem; color: #8d6e63; margin-top: 4px; font-weight: 500;">預設匯率：0.2100 (可點擊按鈕自動抓取最新台銀現金賣價)</div>
+            <div id="rate-update-time" style="font-size: 0.72rem; color: #8d6e63; margin-top: 4px; font-weight: 500;">預設匯率：0.2100 (可點擊按鈕自動抓取最新台銀現金賣出"參考"價)</div>
         </div>
     </div>
 
-    <!-- 4. 日文常用語頁面 -->
+    <!-- 4. 日文常用語頁面（可動態管理分類與例句） -->
     <div id="page-japanese" class="tab-content">
-        <div id="fixed-back-container"><button class="back-btn-styled" onclick="backToMenu()">← 返回分類</button></div>
-        <div id="jp-menu" class="jp-menu-grid">
-            <div class="menu-btn" onclick="showCategory('hotel')"><span>🏩</span>飯店用語</div>
-            <div class="menu-btn" onclick="showCategory('transport')"><span>🚋</span>交通用語</div>
-            <div class="menu-btn" onclick="showCategory('shop')"><span>🎀</span>購物用語</div>
-            <div class="menu-btn" onclick="showCategory('food')"><span>🍰</span>餐廳用語</div>
-            <div class="menu-btn" onclick="showCategory('common')"><span>🍭</span>常用語</div>
+        <div id="fixed-back-container">
+            <button class="back-btn-styled" onclick="backToJpMenu()">← 返回分類</button>
         </div>
-        <div id="cat-hotel" class="phrase-list">
-            <div class="phrase-item" onclick="openFS('チェックインをお願いします', '我要辦理入住', 'Chekkuin o onegaishimasu')"><b>我要辦理入住</b><p>チェックインをお願いします</p><small class="romaji">Chekkuin o onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('荷物を預かってもらえますか？', '可以幫我寄放行李嗎？', 'Nimotsu o azukatte moraemasu ka?')"><b>可以幫我寄放行李嗎？</b><p>荷物を預かってもらえますか？</p><small class="romaji">Nimotsu o azukatte moraemasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('新しいタオルを3人分ください', '請給我們3條新毛巾', 'Atarashii taoru o sanninbun kudasai')"><b>請給我們3條新毛巾</b><p>新しいタオルを3人分ください</p><small class="romaji">Atarashii taoru o sanninbun kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('部屋の掃除は不要です', '房間不需要打掃', 'Heya no soji wa fuyo desu')"><b>房間不需要打掃</b><p>部屋の掃除は不要です</p><small class="romaji">Heya no soji wa fuyo desu</small></div>
-            <div class="phrase-item" onclick="openFS('タオルを替えてください', '請幫我更換毛巾', 'Taoru o kaete kudasai')"><b>請更換毛巾</b><p>タオルを替えてください</p><small class="romaji">Taoru o kaete kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('Wi-Fiのパスワードは何ですか？', 'Wi-Fi密碼是什麼？', 'Waifa-i no pasuwa-do wa nan desu ka?')"><b>Wi-Fi密碼是什麼？</b><p>Wi-Fiのパスワードは何ですか？</p><small class="romaji">Waifa-i no pasuwa-do wa nan desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('朝食は何時までですか？', '早餐供應到幾點？', 'Choushoku wa nanji made desu ka?')"><b>早餐供應到幾點？</b><p>朝食は何時までですか？</p><small class="romaji">Choushoku wa nanji made desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('部屋の鍵をなくしました', '我弄丟了房間鑰匙', 'Heya no kagi o nakushimashita')"><b>我弄丟了房間鑰匙</b><p>部屋の鍵をなくしました</p><small class="romaji">Heya no kagi o nakushimashita</small></div>
-            <div class="phrase-item" onclick="openFS('チェックアウトは何時ですか？', '退房時間是幾點？', 'Chekkuauto wa nanji desu ka?')"><b>退房時間是幾點？</b><p>チェックアウトは何時ですか？</p><small class="romaji">Chekkuauto wa nanji desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('チェックアウトをお願いします', '我要辦理退房', 'Chekkuauto o onegaishimasu')"><b>我要辦理退房</b><p>チェックアウトをお願いします</p><small class="romaji">Chekkuauto o onegaishimasu</small></div>
+        <div id="jp-menu" class="jp-menu-grid"></div>
+        <div id="jp-phrase-lists-container"></div>
+    </div>
+
+    <!-- 全局客製化確認對話框 -->
+    <div id="custom-confirm-modal" class="overlay" style="z-index: 4000;">
+        <div class="modal-content" style="max-width: 320px; text-align: center;">
+            <div class="modal-title" style="color: var(--dark-pink); font-size: 1.15rem; margin-bottom: 8px;">小心翼翼最安心</div>
+            <div id="custom-confirm-msg" style="font-size: 0.95rem; color: var(--text-color); margin-bottom: 20px; line-height: 1.4; font-weight: 500;">確定執行此操作？</div>
+            <div class="modal-btns">
+                <button type="button" class="btn-cancel" onclick="resolveCustomConfirm(false)">取消</button>
+                <button type="button" class="btn-save" style="background: #e53935; box-shadow: 0 4px 10px rgba(229,57,53,0.22);" onclick="resolveCustomConfirm(true)">確定刪除</button>
+            </div>
         </div>
-        <div id="cat-transport" class="phrase-list">
-            <div class="phrase-item" onclick="openFS('お手洗いはどこですか？', '廁所在哪裡？', 'Otearai wa doko desu ka?')"><b>廁所在哪裡？</b><p>お手洗いはどこですか？</p><small class="romaji">Otearai wa doko desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('エレベーターはどこですか？', '電梯在哪裡？', 'Erebeta wa doko desu ka?')"><b>電梯在哪裡？</b><p>エレベーターはどこですか？</p><small class="romaji">Erebeta wa doko desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('切符売り場はどこですか？', '售票處在哪裡？', 'Kippu uriba wa doko desu ka?')"><b>售票處在哪裡？</b><p>切符売り場はどこですか？</p><small class="romaji">Kippu uriba wa doko desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('ここに行きたいです', '我想去這裡（出示地圖）', 'Koko ni ikitai desu')"><b>我想去這裡（出示地圖）</b><p>ここに行きたいです</p><small class="romaji">Koko ni ikitai desu</small></div>
-            <div class="phrase-item" onclick="openFS('ICカードにチャージしたいです', '我想加值IC卡', 'Aishi-ka-do ni cha-ji shitai desu')"><b>我想加值IC卡</b><p>ICカードにチャージしたいです</p><small class="romaji">Aishi-ka-do ni cha-ji shitai desu</small></div>
-            <div class="phrase-item" onclick="openFS('これは〇〇駅に止まりますか？', '這班車會停靠〇〇站嗎？', 'Kore wa 〇〇-eki ni tomarimasu ka?')"><b>會停靠〇〇站嗎？</b><p>這是〇〇駅に止まりますか？</p><small class="romaji">Kore wa 〇〇-eki ni tomarimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('〇〇駅はどこですか？', '〇〇車站在哪裡？', '〇〇 chikai eki wa doko desu ka?')"><b>〇〇車站在哪裡？</b><p>〇〇駅はどこですか？</p><small class="romaji">〇〇 chikai eki wa doko desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('〇〇行きのバス停はどこですか？', '往〇〇的巴士站在哪裡？', '〇〇-iki no basutei wa doko desu ka?')"><b>往〇〇的巴士站在哪裡？</b><p>〇〇行きのバス停はどこですか？</p><small class="romaji">XX-iki no basutei wa doko desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('タクシーを3人で乗りたいです', '我們3人想共乘計程車', 'Takushi o sannin de noritai desu')"><b>我們3人想共乘計程車</b><p>タクシーを3人で乗りたいです</p><small class="romaji">Takushi o sannin de noritai desu</small></div>
+    </div>
+
+    <!-- 日文分類 Modal -->
+    <div id="jp-cat-modal" class="overlay">
+        <div class="modal-content">
+            <button id="btn-delete-jp-cat" class="btn-delete-itin-top" style="display:none;" onclick="delJpCatFromModal()">🗑️</button>
+            <button class="detail-close" style="background:#F5E8CF; color:var(--dark-pink); top:15px; right:15px;" onclick="closeModal('jp-cat-modal')">✕</button>
+            <div class="modal-title" id="jp-cat-modal-title">新增日文分類</div>
+            <div class="form-group">
+                <label>圖示 Emoji</label>
+                <input type="text" id="jp-cat-icon-input" placeholder="例如：🔖, 🛍️, 🍰" style="text-align:center; font-size:1.3rem;">
+            </div>
+            <div class="form-group">
+                <label>分類名稱 <span style="color:#B74735">*</span></label>
+                <input type="text" id="jp-cat-name-input" placeholder="例如：迪士尼對話、求助...">
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('jp-cat-modal')">取消</button>
+                <button class="btn-save" onclick="saveJpCategory()">儲存分類</button>
+            </div>
         </div>
-        <div id="cat-shop" class="phrase-list">
-            <div class="phrase-item" onclick="openFS('袋はいりません', '我不需要袋子', 'Fukuro wa irimasen')"><b>我不需要袋子</b><p>袋はいりません</p><small class="romaji">Fukuro wa irimasen</small></div>
-            <div class="phrase-item" onclick="openFS('これを見せてください', '請給我看這個', 'Kore o misete kudasai')"><b>請給我看這個</b><p>これを見せてください</p><small class="romaji">Kore o misete kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('いくらですか？', '多少錢？', 'Ikura desu ka?')"><b>多少錢？</b><p>いくらですか？</p><small class="romaji">Ikura desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('これをください', '我要買這個', 'Kore o kudasai')"><b>我要買這個</b><p>これをください</p><small class="romaji">Kore o kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('免税はできますか？', '可以免稅嗎？', 'Menzei wa dekimasu ka?')"><b>可以免稅嗎？</b><p>免税はできますか？</p><small class="romaji">Menzei wa dekimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('クレジットカードは使えますか？', '可以使用信用卡嗎？', 'Kurejitto ka-do wa tsukaemasu ka?')"><b>可以使用信用卡嗎？</b><p>クレジットカードは使えますか？</p><small class="romaji">Kurejitto ka-do wa tsukaemasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('お会計は別々にお願いします', '請幫我分開結帳', 'Okaikei wa betsubetsu ni onegaishimasu')"><b>請幫我分開結帳</b><p>お会計は別々にお願いします</p><small class="romaji">Okaikei wa betsubetsu de onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('試着してもいいですか？', '可以試穿嗎？', 'Shichaku shite mo ii desu ka?')"><b>可以試穿嗎？</b><p>試着してもいいですか？</p><small class="romaji">Shichaku shite mo ii desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('大きいサイズはありますか？', '有大一點的尺寸嗎？', 'Ookii saizu wa arimasu ka?')"><b>有大一點的尺寸嗎？</b><p>大きいサイズはありますか？</p><small class="romaji">Ookii saizu wa arimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('他の色はありますか？', '有其他的顏色嗎？', 'Hoka no iro wa arimasu ka?')"><b>有其他的顏色嗎？</b><p>他の色はありますか？</p><small class="romaji">Hoka no iro wa arimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('プレゼント用です', '這是要送人的禮物', 'Purezento you desu')"><b>這是要送人的禮物</b><p>プレゼント用です</p><small class="romaji">Purezento you desu</small></div>
-            <div class="phrase-item" onclick="openFS('一人〇個まで買えますか？', '一個人最多買〇個嗎？', 'Hitori 〇 made desu ka?')"><b>一個人最多買〇個嗎？</b><p>一人〇個まで買えますか？</p><small class="romaji">Hitori 〇 made desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('在庫はありますか？', '還有庫存嗎？', 'Zaiko wa arimasu ka?')"><b>還有庫存嗎？</b><p>在庫はありますか？</p><small class="romaji">Zaiko wa arimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('これを〇ください', '請給我〇個這個', 'Kore o 〇 kudasai')"><b>請給我〇個這個</b><p>これを〇ください</p><small class="romaji">Kore o 〇 kudasai</small></div>
-        </div>
-        <div id="cat-food" class="phrase-list">
-            <div class="phrase-item" onclick="openFS('三人です', '我們3位', 'Sannin desu')"><b>我們3位</b><p>三人です</p><small class="romaji">Sannin desu</small></div>
-            <div class="phrase-item" onclick="openFS('禁煙席をお願いします', '請給我禁菸席', 'Kin-en seki o onegaishimasu')"><b>請給我禁菸席</b><p>禁煙席をお願いします</p><small class="romaji">Kin-en seki o onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('三人一緒に座れますか？', '我們3人可以坐在一起嗎？', 'Sannin issho ni suwaremasu ka?')"><b>我們3人可以坐在一起嗎？</b><p>三人一緒に座れますか？</p><small class="romaji">Sannin issho ni suwaremasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('メニューをください', '請給我菜單', 'Menyu- o kudasai')"><b>請給我菜單</b><p>メニューをください</p><small class="romaji">Menyu- o kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('お水をください', '請給我水', 'Omizu o kudasai')"><b>請給我水</b><p>お水をください</p><small class="romaji">Omizu o kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('中国語のメニューはありますか？', '有中文菜單嗎？', 'Chugokugo no menyu wa arimasu ka?')"><b>有中文菜單嗎？</b><p>中国語のメニューはありますか？</p><small class="romaji">Chugokugo no menyu wa arimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('おすすめは何ですか？', '有什麼推薦的嗎？', 'Osusume wa nan desu ka?')"><b>有什麼推薦的嗎？</b><p>おすすめは何ですか？</p><small class="romaji">Osusume wa nan desu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('テイクアウトできますか？', '可以外帶嗎？', 'Teikuauto dekimasu ka?')"><b>可以外帶嗎？</b><p>テイクアウトできますか？</p><small class="romaji">Teikuauto dekimasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('注文をお願いします', '我要點餐', 'Chuumon o onegaishimasu')"><b>我要點餐</b><p>注文をお願いします</p><small class="romaji">Chuumon o onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('お会計をお願いします', '請結帳', 'Okaikei o onegaishimasu')"><b>請結帳</b><p>お会計をお願いします</p><small class="romaji">Okaikei o onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('お会計は別々でお願いします', '請幫我們分開結帳', 'Okaikei wa betsubetsu de onegaishimasu')"><b>請幫我們分開結帳</b><p>お会計は別々でお願いします</p><small class="romaji">Okaikei wa betsubetsu de onegaishimasu</small></div>
-        </div>
-        <div id="cat-common" class="phrase-list">
-            <div class="phrase-item" onclick="openFS('すみません', '不好意思／打擾一下', 'Sumimasen')"><b>不好意思／打擾一下</b><p>すみません</p><small class="romaji">Sumimasen</small></div>
-            <div class="phrase-item" onclick="openFS('ありがとうございます', '謝謝', 'Arigatou gozaimasu')"><b>謝謝</b><p>ありがとうございます</p><small class="romaji">Arigatou gozaimasu</small></div>
-            <div class="phrase-item" onclick="openFS('写真を撮ってもらえますか？', '可以幫我們拍照嗎？', 'Shashin o totte moraemasu ka?')"><b>可以幫我們拍照嗎？</b><p>写真を撮ってもらえますか？</p><small class="romaji">Shashin o totte moraemasu ka?</small></div>
-            <div class="phrase-item" onclick="openFS('はい / いいえ', '是 / 不是', 'Hai / Iie')"><b>是 / 不是</b><p>はい / いいえ</p><small class="romaji">Hai / Iie</small></div>
-            <div class="phrase-item" onclick="openFS('もう一度お願いします', '請再說一次', 'Mou ichido onegaishimasu')"><b>請再說一次</b><p>もう一度お願いします</p><small class="romaji">Mou ichido onegaishimasu</small></div>
-            <div class="phrase-item" onclick="openFS('ゆっくり話してください', '請慢慢說', 'Yukkuri hanashite kudasai')"><b>請慢慢說</b><p>ゆっくり話してください</p><small class="romaji">Yukkuri hanashite kudasai</small></div>
-            <div class="phrase-item" onclick="openFS('ちょっと待ってください', '請稍等一下', 'Chotto matte kudasai')"><b>請稍等一下</b><p>ちょっと待ってください</p><small class="romaji">Chotto matte kudasai</small></div>
+    </div>
+
+    <!-- 日文例句 Modal -->
+    <div id="jp-phrase-modal" class="overlay">
+        <div class="modal-content">
+            <button id="btn-delete-jp-phrase" class="btn-delete-itin-top" style="display:none;" onclick="delJpPhraseFromModal()">🗑️</button>
+            <button class="detail-close" style="background:#F5E8CF; color:var(--dark-pink); top:15px; right:15px;" onclick="closeModal('jp-phrase-modal')">✕</button>
+            <div class="modal-title" id="jp-phrase-modal-title">新增日文例句</div>
+            <div class="form-group">
+                <label>中文意思 <span style="color:#B74735">*</span></label>
+                <input type="text" id="jp-phrase-ch-input" placeholder="例如：請問這可以使用嗎？">
+            </div>
+            <div class="form-group">
+                <label>日文句子 <span style="color:#B74735">*</span></label>
+                <input type="text" id="jp-phrase-jp-input" placeholder="例如：使えますか？">
+            </div>
+            <div class="form-group">
+                <label>羅馬拼音 (選填)</label>
+                <input type="text" id="jp-phrase-romaji-input" placeholder="例如：Tsukaemasu ka?">
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('jp-phrase-modal')">取消</button>
+                <button class="btn-save" onclick="saveJpPhrase()">儲存例句</button>
+            </div>
         </div>
     </div>
 
@@ -607,7 +593,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
-    <!-- ✨✨ 清單項目 Modal（物品名稱、備註欄位、登記旅伴、多圖上傳與網址）✨✨ -->
+    <!-- 清單項目 Modal -->
     <div id="cl-item-modal" class="overlay">
         <div class="modal-content">
             <button id="btn-delete-cl-item" class="btn-delete-itin-top" style="display:none;" onclick="delClItemFromModal()">🗑️</button>
@@ -620,19 +606,16 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 <input type="text" id="cl-name-input" placeholder="例如：請發揮創意...">
             </div>
 
-            <!-- 備註欄位 -->
             <div class="form-group">
                 <label>備註 / 規格說明 (選填)</label>
                 <textarea id="cl-notes-input" placeholder="例如：尺寸、數量、限定商店、預估金額..." rows="2"></textarea>
             </div>
 
-            <!-- 登記旅伴 -->
             <div class="form-group">
                 <label>登記旅伴</label>
                 <div id="modal-who-chips" style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;"></div>
             </div>
 
-            <!-- 多張圖片上傳／拍照／網址 -->
             <div class="multi-img-upload-box">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張圖片)</label>
@@ -651,7 +634,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                     <button type="button" onclick="applySingleImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">➕ 加入此圖片</button>
                 </div>
 
-                <!-- 多圖縮圖預覽列 -->
                 <div id="cl-images-preview-grid" class="multi-img-grid"></div>
                 <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 圖片將自動壓縮並上傳</div>
             </div>
@@ -672,25 +654,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
     </div>
 
-    <!-- 旅行日期 Modal -->
-    <div id="day-modal" class="overlay">
-        <div class="modal-content">
-            <button class="detail-close" style="background:#F5E8CF; color:#526B45; top:15px; right:15px;" onclick="closeModal('day-modal')">✕</button>
-            <div class="modal-title" id="day-modal-title">新增旅行日期</div>
-            <input type="hidden" id="day-edit-id">
-            <div class="form-group">
-                <label>旅行日期</label>
-                <input type="date" id="day-date-input">
-            </div>
-            <div class="modal-btns">
-                <button class="btn-cancel" onclick="closeModal('day-modal')">取消</button>
-                <button class="btn-save" onclick="saveTripDay()">儲存日期</button>
-            </div>
-            <button id="day-delete-btn" class="btn-cancel" style="width:100%; margin-top:10px; padding:12px; border-radius:20px; display:none; color: #e53935;" onclick="deleteTripDay()">刪除此日期</button>
-        </div>
-    </div>
-
-    <!-- 底部導覽列（4個項目：行程、匯率、日文、清單） -->
+    <!-- 底部導覽列 -->
     <nav class="bottom-nav">
         <a href="#" class="nav-tab active" onclick="switchTab('itinerary', this)"><span class="nav-icon">📅</span><span>行程</span></a>
         <a href="#" class="nav-tab" onclick="switchTab('exchange', this)"><span class="nav-icon">💰</span><span>匯率</span></a>
@@ -698,7 +662,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>清單</span></a>
     </nav>
 
-    <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
+    <!-- 全螢幕日文顯示 Overlay -->
+    <div id="fs-overlay" onclick="this.classList.remove('active')">
+        <div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div>
+        <div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div>
+        <div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div>
+    </div>
 
     <script>
         const SUPABASE_URL = 'https://zyyjuzysjjdnuqwhummh.supabase.co';
@@ -724,7 +693,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 const text = await res.text();
                 return text ? JSON.parse(text) : [];
             } catch (e) {
-                console.warn('API connection offline or degraded:', e.message || e);
+                console.warn('API Connection fallback:', e.message || e);
                 return [];
             }
         }
@@ -802,7 +771,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function deleteTripDay() {
             const id = Number(document.getElementById('day-edit-id').value);
-            if (!id || !confirm('確定刪除這個旅行日期？')) return;
+            if (!id || !(await customConfirm('確定刪除這個旅行日期？'))) return;
             await sbFetch(`trip_days?day_id=eq.${id}`, { method: 'DELETE' });
             currentDay = null;
             closeModal('day-modal');
@@ -814,7 +783,8 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         let allItinerary = [];
         async function refreshItinerary() {
             const data = await sbFetch('itinerary_items?select=*,map_query&order=time.asc');
-            if (Array.isArray(data)) { allItinerary = data; renderItinerary(); }
+            allItinerary = Array.isArray(data) ? data : [];
+            renderItinerary();
         }
 
         function formatItinTime(timeStr) {
@@ -887,6 +857,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         function renderItinerary() {
             const list = document.getElementById('itinerary-list');
+            if (!list) return;
             const items = allItinerary.filter(i => i.day_id === currentDay);
             if (items.length === 0) {
                 list.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px; font-weight: 700; border: 2px dashed #f3e5f5; border-radius: 22px;">~快想想吧~<br>點擊 ＋ 號新增！</div>`;
@@ -936,7 +907,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 const noteText = [parsed.name, parsed.notes].filter(Boolean).join('\n');
                 document.getElementById('form-notes').value = noteText;
                 currentItinModalImages = parsed.images.map(url => ({ url, isLocal: false }));
-                delBtn.style.display = 'flex';
+                if (delBtn) delBtn.style.display = 'flex';
             } else {
                 document.getElementById('modal-title').innerText = '新增行程';
                 document.getElementById('edit-id').value = '';
@@ -947,7 +918,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 document.getElementById('form-trans').value = '';
                 document.getElementById('form-notes').value = '';
                 currentItinModalImages = [];
-                delBtn.style.display = 'none';
+                if (delBtn) delBtn.style.display = 'none';
             }
             renderItinModalImagesPreview();
             modal.classList.add('active');
@@ -1013,7 +984,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function delItinFromModal() {
             const id = document.getElementById('edit-id').value;
-            if (id && confirm('確定刪除此行程？')) {
+            if (id && await customConfirm('確定刪除此行程？')) {
                 await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'DELETE' });
                 closeModal('itin-modal'); refreshItinerary();
             }
@@ -1048,7 +1019,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
         function switchDay(dayId) { currentDay = Number(dayId); renderTripDays(); renderItinerary(); }
 
-        // --- 匯率與日文（極速抓取台灣銀行牌告 JPY 現金賣價）---
+        // --- 匯率與日文（極速抓取台灣銀行牌告 JPY 現金賣出"參考"價）---
         async function fetchBankOfTaiwanRate() {
             const btn = document.getElementById('btn-fetch-bot-rate');
             const rateInput = document.getElementById('base-rate');
@@ -1082,14 +1053,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
             const botCsvUrl = 'https://rate.bot.com.tw/xrt/flcsv/0/day?lang=zh-TW';
             const sources = [
-                // 1. 直連開放數據 API (超快速 ~100ms)
                 fetchWithTimeout('https://open.er-api.com/v6/latest/JPY', 1200).then(async r => {
                     if (!r.ok) throw new Error('API 失敗');
                     const d = await r.json();
                     if (d && d.rates && d.rates.TWD) return d.rates.TWD.toFixed(4);
                     throw new Error('格式錯誤');
                 }),
-                // 2. AllOrigins 代理台銀 CSV
                 fetchWithTimeout(`https://api.allorigins.win/raw?url=${encodeURIComponent(botCsvUrl)}`, 1800).then(async r => {
                     if (!r.ok) throw new Error('代理失敗');
                     const text = await r.text();
@@ -1097,7 +1066,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                     if (rate) return rate;
                     throw new Error('解析 CSV 失敗');
                 }),
-                // 3. CorsProxy 代理台銀 CSV
                 fetchWithTimeout(`https://corsproxy.io/?${encodeURIComponent(botCsvUrl)}`, 1800).then(async r => {
                     if (!r.ok) throw new Error('代理失敗');
                     const text = await r.text();
@@ -1108,22 +1076,21 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             ];
 
             try {
-                // 回傳最快響應之合格數據 (競速)
                 const rateStr = await Promise.any(sources);
                 if (rateStr && rateInput) {
                     rateInput.value = rateStr;
                     const nowStr = new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
-                    if (timeEl) timeEl.innerText = `已成功抓取台銀日幣現金賣價：${rateStr} (${nowStr})`;
+                    if (timeEl) timeEl.innerText = `已成功抓取台銀日幣現金賣出"參考"價：${rateStr} (${nowStr})`;
                     convert('jpy');
                     if (btn) btn.innerText = '✅ 抓取成功';
-                    setTimeout(() => { if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣價'; }, 2000);
+                    setTimeout(() => { if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣出"參考"價'; }, 2000);
                     return;
                 }
             } catch (err) {
                 console.warn('匯率抓取超時或連線失敗', err);
             }
 
-            if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣價';
+            if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣出"參考"價';
             alert('無法連線抓取最新匯率，請檢查網路連線或直接手動輸入金額。');
         }
 
@@ -1132,21 +1099,408 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             const twd = document.getElementById('twd-val'), jpy = document.getElementById('jpy-val');
             if (type === 'jpy') twd.value = jpy.value ? (parseFloat(jpy.value) * rate).toFixed(2) : '';
             else jpy.value = twd.value ? (parseFloat(twd.value) / rate).toFixed(0) : '';
+            updateExchangeQuickSheet();
         }
-        function showCategory(cat) {
-            document.getElementById('jp-menu').style.display = 'none';
-            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
-            document.getElementById('cat-' + cat).classList.add('active');
-            document.getElementById('fixed-back-container').style.display = 'block';
+
+        function setJpyQuick(amount) {
+            const jpyInput = document.getElementById('jpy-val');
+            if (!jpyInput) return;
+            if (amount === 0) {
+                jpyInput.value = '';
+            } else {
+                jpyInput.value = amount;
+            }
+            convert('jpy');
         }
-        function backToMenu() {
-            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
-            document.getElementById('jp-menu').style.display = 'grid';
-            document.getElementById('fixed-back-container').style.display = 'none';
+
+        function addJpyQuick(amount) {
+            const jpyInput = document.getElementById('jpy-val');
+            if (!jpyInput) return;
+            const current = parseFloat(jpyInput.value) || 0;
+            jpyInput.value = current + amount;
+            convert('jpy');
         }
+
+        function updateExchangeQuickSheet() {
+            const rate = parseFloat(document.getElementById('base-rate').value) || 0.21;
+            const sheetEl = document.getElementById('exchange-quick-sheet');
+            if (!sheetEl) return;
+            const amounts = [100, 500, 1000, 2000, 5000, 10000, 20000, 50000];
+            sheetEl.innerHTML = amounts.map(jpy => {
+                const twd = Math.round(jpy * rate);
+                return `
+                    <div class="quick-sheet-item" onclick="setJpyQuick(${jpy})">
+                        <span style="font-weight:700; color:var(--dark-pink);">${jpy.toLocaleString()} 円</span>
+                        <span style="font-weight:900; color:var(--forest-green);">≈ NT$ ${twd.toLocaleString()}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // --- 日文常用語（動態分類與例句管理）---
+        const DEFAULT_JAPANESE_CATEGORIES = [
+            {
+                id: 'hotel',
+                icon: '🏩',
+                name: '飯店用語',
+                phrases: [
+                    { ch: '我要辦理入住', jp: 'チェックインをお願いします', romaji: 'Chekkuin o onegaishimasu' },
+                    { ch: '可以幫我寄放行李嗎？', jp: '荷物を預かってもらえますか？', romaji: 'Nimotsu o azukatte moraemasu ka?' },
+                    { ch: '請給我們3條新毛巾', jp: '新しいタオルを3人分ください', romaji: 'Atarashii taoru o sanninbun kudasai' },
+                    { ch: '房間不需要打掃', jp: '部屋の掃除は不要です', romaji: 'Heya no soji wa fuyo desu' },
+                    { ch: '請更換毛巾', jp: 'タオルを替えてください', romaji: 'Taoru o kaete kudasai' },
+                    { ch: 'Wi-Fi密碼是什麼？', jp: 'Wi-Fiのパスワードは何ですか？', romaji: 'Waifa-i no pasuwa-do wa nan desu ka?' },
+                    { ch: '早餐供應到幾點？', jp: '朝食は何時までですか？', romaji: 'Choushoku wa nanji made desu ka?' },
+                    { ch: '我弄丟了房間鑰匙', jp: '部屋の鍵をなくしました', romaji: 'Heya no kagi o nakushimashita' },
+                    { ch: '退房時間是幾點？', jp: 'チェックアウトは何時ですか？', romaji: 'Chekkuauto wa nanji desu ka?' },
+                    { ch: '我要辦理退房', jp: 'チェックアウトをお願いします', romaji: 'Chekkuauto o onegaishimasu' }
+                ]
+            },
+            {
+                id: 'transport',
+                icon: '🚋',
+                name: '交通用語',
+                phrases: [
+                    { ch: '廁所在哪裡？', jp: 'お手洗いはどこですか？', romaji: 'Otearai wa doko desu ka?' },
+                    { ch: '電梯在哪裡？', jp: 'エレベーターはどこですか？', romaji: 'Erebeta wa doko desu ka?' },
+                    { ch: '售票處在哪裡？', jp: '切符売り場はどこですか？', romaji: 'Kippu uriba wa doko desu ka?' },
+                    { ch: '我想去這裡（出示地圖）', jp: 'ここに行きたいです', romaji: 'Koko ni ikitai desu' },
+                    { ch: '我想加值IC卡', jp: 'ICカードにチャージしたいです', romaji: 'Aishi-ka-do ni cha-ji shitai desu' },
+                    { ch: '會停靠〇〇站嗎？', jp: 'これは〇〇駅に止まりますか？', romaji: 'Kore wa 〇〇-eki ni tomarimasu ka?' },
+                    { ch: '〇〇車站在哪裡？', jp: '〇〇駅はどこですか？', romaji: '〇〇 chikai eki wa doko desu ka?' },
+                    { ch: '往〇〇的巴士站在哪裡？', jp: '〇〇行きのバス停はどこですか？', romaji: 'XX-iki no basutei wa doko desu ka?' },
+                    { ch: '我們3人想共乘計程車', jp: 'タクシーを3人で乗りたいです', romaji: 'Takushi o sannin de noritai desu' }
+                ]
+            },
+            {
+                id: 'shop',
+                icon: '🎀',
+                name: '購物用語',
+                phrases: [
+                    { ch: '我不需要袋子', jp: '袋はいりません', romaji: 'Fukuro wa irimasen' },
+                    { ch: '請給我看這個', jp: 'これを見せてください', romaji: 'Kore o misete kudasai' },
+                    { ch: '多少錢？', jp: 'いくらですか？', romaji: 'Ikura desu ka?' },
+                    { ch: '我要買這個', jp: 'これをください', romaji: 'Kore o kudasai' },
+                    { ch: '可以免稅嗎？', jp: '免税はできますか？', romaji: 'Menzei wa dekimasu ka?' },
+                    { ch: '可以使用信用卡嗎？', jp: 'クレジットカードは使えますか？', romaji: 'Kurejitto ka-do wa tsukaemasu ka?' },
+                    { ch: '請幫我分開結帳', jp: 'お会計は別々にお願いします', romaji: 'Okaikei wa betsubetsu ni onegaishimasu' },
+                    { ch: '可以試穿嗎？', jp: '試着してもいいですか？', romaji: 'Shichaku shite mo ii desu ka?' },
+                    { ch: '有大一點的尺寸嗎？', jp: '大きいサイズはありますか？', romaji: 'Ookii saizu wa arimasu ka?' },
+                    { ch: '有其他的顏色嗎？', jp: '他の色はありますか？', romaji: 'Hoka no iro wa arimasu ka?' },
+                    { ch: '這是要送人的禮物', jp: 'プレゼント用です', romaji: 'Purezento you desu' },
+                    { ch: '一個人最多買〇個嗎？', jp: '一人〇個まで買えますか？', romaji: 'Hitori 〇 made desu ka?' },
+                    { ch: '還有庫存嗎？', jp: '在庫はありますか？', romaji: 'Zaiko wa arimasu ka?' },
+                    { ch: '請給我〇個這個', jp: 'これを〇ください', romaji: 'Kore o 〇 kudasai' }
+                ]
+            },
+            {
+                id: 'food',
+                icon: '🍰',
+                name: '餐廳用語',
+                phrases: [
+                    { ch: '我們3位', jp: '三人です', romaji: 'Sannin desu' },
+                    { ch: '請給我禁菸席', jp: '禁煙席をお願いします', romaji: 'Kin-en seki o onegaishimasu' },
+                    { ch: '我們3人可以坐在一起嗎？', jp: '三人一緒に座れますか？', romaji: 'Sannin issho ni suwaremasu ka?' },
+                    { ch: '請給我菜單', jp: 'メニューをください', romaji: 'Menyu- o kudasai' },
+                    { ch: '請給我水', jp: 'お水をください', romaji: 'Omizu o kudasai' },
+                    { ch: '有中文菜單嗎？', jp: '中国語のメニューはありますか？', romaji: 'Chugokugo no menyu wa arimasu ka?' },
+                    { ch: '有什麼推薦的嗎？', jp: 'おすすめは何ですか？', romaji: 'Osusume wa nan desu ka?' },
+                    { ch: '可以外帶嗎？', jp: 'テイクアウトできますか？', romaji: 'Teikuauto dekimasu ka?' },
+                    { ch: '我要點餐', jp: '注文をお願いします', romaji: 'Chuumon o onegaishimasu' },
+                    { ch: '請結帳', jp: 'お会計をお願いします', romaji: 'Okaikei o onegaishimasu' },
+                    { ch: '請幫我們分開結帳', jp: 'お会計は別々でお願いします', romaji: 'Okaikei wa betsubetsu de onegaishimasu' }
+                ]
+            },
+            {
+                id: 'common',
+                icon: '🍭',
+                name: '常用語',
+                phrases: [
+                    { ch: '不好意思／打擾一下', jp: 'すみません', romaji: 'Sumimasen' },
+                    { ch: '謝謝', jp: 'ありがとうございます', romaji: 'Arigatou gozaimasu' },
+                    { ch: '可以幫我們拍照嗎？', jp: '写真を撮ってもらえますか？', romaji: 'Shashin o totte moraemasu ka?' },
+                    { ch: '是 / 不是', jp: 'はい / いいえ', romaji: 'Hai / Iie' },
+                    { ch: '請再說一次', jp: 'もう一度お願いします', romaji: 'Mou ichido onegaishimasu' },
+                    { ch: '請慢慢說', jp: 'ゆっくり話してください', romaji: 'Yukkuri hanashite kudasai' },
+                    { ch: '請稍等一下', jp: 'ちょっと待ってください', romaji: 'Chotto matte kudasai' }
+                ]
+            }
+        ];
+
+        let jpCategories = [];
+        let currentJpCatId = null;
+        let editingJpCatId = null;
+        let editingJpPhraseIdx = null;
+
+        function loadJapaneseCategories() {
+            try {
+                const saved = localStorage.getItem('japanese_custom_phrases_v3');
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    if (Array.isArray(parsed) && parsed.length > 0) {
+                        jpCategories = parsed;
+                        return;
+                    }
+                }
+            } catch (e) {}
+            jpCategories = JSON.parse(JSON.stringify(DEFAULT_JAPANESE_CATEGORIES));
+        }
+
+        function saveJapaneseCategories() {
+            try {
+                localStorage.setItem('japanese_custom_phrases_v3', JSON.stringify(jpCategories));
+            } catch(e) {}
+        }
+
+        let customConfirmResolver = null;
+        function customConfirm(message = '確定要刪除嗎？') {
+            return new Promise((resolve) => {
+                const msgEl = document.getElementById('custom-confirm-msg');
+                if (msgEl) msgEl.innerText = message;
+                customConfirmResolver = resolve;
+                document.getElementById('custom-confirm-modal').classList.add('active');
+            });
+        }
+        function resolveCustomConfirm(result) {
+            document.getElementById('custom-confirm-modal').classList.remove('active');
+            if (customConfirmResolver) {
+                customConfirmResolver(result);
+                customConfirmResolver = null;
+            }
+        }
+
+        async function resetJapaneseCategories() {
+            if (await customConfirm('確定重置所有日文用語至預設狀態？您的自訂修改將被還原。')) {
+                jpCategories = JSON.parse(JSON.stringify(DEFAULT_JAPANESE_CATEGORIES));
+                saveJapaneseCategories();
+                currentJpCatId = null;
+                renderJapaneseTab();
+            }
+        }
+
+        function renderJapaneseTab() {
+            const menuContainer = document.getElementById('jp-menu');
+            const listContainer = document.getElementById('jp-phrase-lists-container');
+            const backContainer = document.getElementById('fixed-back-container');
+
+            if (!currentJpCatId) {
+                if (backContainer) backContainer.style.display = 'none';
+                if (listContainer) listContainer.style.display = 'none';
+                if (menuContainer) {
+                    menuContainer.style.display = 'grid';
+                    menuContainer.innerHTML = `
+                        <div style="grid-column: 1 / -1; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                            <span style="font-weight:800; color:var(--dark-pink); font-size:1.05rem;">🍬 日文常用語分類 (只能本機編輯，還要上雲端，怠惰了......)</span>
+                            <div style="display:flex; gap:6px;">
+                                <button type="button" onclick="resetJapaneseCategories()" style="padding:5px 12px; background:#f0f0f0; color:#666; border:none; border-radius:50px; font-weight:bold; font-size:0.75rem; cursor:pointer;">↺ 重置例句</button>
+                                <button type="button" onclick="openJpCatModal()" style="padding:5px 12px; background:var(--forest-green); color:white; border:none; border-radius:50px; font-weight:bold; font-size:0.75rem; cursor:pointer;">➕ 新增分類</button>
+                            </div>
+                        </div>
+                        ` + jpCategories.map(cat => `
+                            <div class="menu-btn" style="position:relative;" onclick="selectJpCategory('${cat.id}')">
+                                <div style="position:absolute; top:8px; right:8px;" onclick="event.stopPropagation()">
+                                    <button type="button" onclick="openJpCatModal('${cat.id}')" style="width:28px; height:28px; border-radius:50%; border:1px solid #E8D8B9; background:#FFFCF5; font-size:12px; cursor:pointer;" title="編輯分類">✏️</button>
+                                </div>
+                                <span style="font-size:2rem; display:block; margin-bottom:4px;">${cat.icon || '🔖'}</span>
+                                <div style="font-weight:700; color:var(--forest-green); font-size:1rem;">${cat.name}</div>
+                                <div style="font-size:0.72rem; color:#aaa; margin-top:2px;">${(cat.phrases || []).length} 個例句</div>
+                            </div>
+                        `).join('');
+                }
+            } else {
+                const cat = jpCategories.find(c => c.id === currentJpCatId);
+                if (!cat) { currentJpCatId = null; renderJapaneseTab(); return; }
+
+                if (menuContainer) menuContainer.style.display = 'none';
+                if (backContainer) backContainer.style.display = 'none';
+                if (listContainer) {
+                    listContainer.style.display = 'block';
+                    listContainer.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center; background:white; padding:10px 14px; border-radius:15px; border:1px solid #E8D8B9; margin-bottom:12px; box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+                            <button type="button" onclick="backToJpMenu()" style="padding:6px 14px; background:var(--dark-pink); color:white; border:none; border-radius:50px; font-weight:bold; font-size:0.8rem; cursor:pointer;">← 返回分類</button>
+                            <div style="font-weight:800; color:var(--forest-green); font-size:1rem; display:flex; align-items:center; gap:6px;">
+                                <span>${cat.icon || '🔖'}</span>
+                                <span>${cat.name}</span>
+                            </div>
+                            <button type="button" onclick="openJpPhraseModal()" style="padding:6px 14px; background:var(--forest-green); color:white; border:none; border-radius:50px; font-weight:bold; font-size:0.8rem; cursor:pointer;">➕ 新增例句</button>
+                        </div>
+                        ${(cat.phrases || []).length === 0 ? `
+                            <div style="text-align:center; padding:30px 15px; color:#aaa; font-weight:bold; border:2px dashed #E8D8B9; border-radius:18px; background:white;">
+                                此分類尚無例句<br>
+                                <button type="button" onclick="openJpPhraseModal()" style="margin-top:8px; color:var(--dark-pink); text-decoration:underline; border:none; background:transparent; font-weight:bold; cursor:pointer;">點此新增例句</button>
+                            </div>
+                        ` : (cat.phrases || []).map((p, idx) => `
+                            <div class="phrase-item" style="display:flex; justify-content:space-between; align-items:center;" onclick="openFS('${(p.jp||'').replace(/'/g, "\\'")}', '${(p.ch||'').replace(/'/g, "\\'")}', '${(p.romaji||'').replace(/'/g, "\\'")}')">
+                                <div style="flex:1;">
+                                    <b>${p.ch}</b>
+                                    <p style="font-size:0.95rem; font-weight:700; color:#493B30; margin-top:2px;">${p.jp}</p>
+                                    ${p.romaji ? `<small class="romaji">${p.romaji}</small>` : ''}
+                                </div>
+                                <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;" onclick="event.stopPropagation()">
+                                    <button type="button" onclick="speakJapanese('${(p.jp||'').replace(/'/g, "\\'")}')" style="width:32px; height:32px; border-radius:50%; border:1px solid #E8D8B9; background:#F5E8CF; color:var(--forest-green); font-size:14px; cursor:pointer;" title="朗讀語音">🔊</button>
+                                    <button type="button" onclick="openFS('${(p.jp||'').replace(/'/g, "\\'")}', '${(p.ch||'').replace(/'/g, "\\'")}', '${(p.romaji||'').replace(/'/g, "\\'")}')" style="width:32px; height:32px; border-radius:50%; border:1px solid #eee; background:#f9f9f9; color:#555; font-size:12px; cursor:pointer;" title="全螢幕大字">🔍</button>
+                                    <button type="button" onclick="openJpPhraseModal(${idx})" style="width:32px; height:32px; border-radius:50%; border:1px solid #E8D8B9; background:#FFFCF5; color:var(--forest-green); font-size:12px; cursor:pointer;" title="編輯">✏️</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    `;
+                }
+            }
+        }
+
+        function selectJpCategory(catId) {
+            currentJpCatId = catId;
+            renderJapaneseTab();
+        }
+
+        function backToJpMenu() {
+            currentJpCatId = null;
+            renderJapaneseTab();
+        }
+
+        function speakJapanese(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.85;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function copyJpText(text) {
+            navigator.clipboard.writeText(text);
+            alert('已複製日文到剪貼簿！');
+        }
+
+        function openJpCatModal(catId = null) {
+            editingJpCatId = catId;
+            const modal = document.getElementById('jp-cat-modal');
+            const iconInput = document.getElementById('jp-cat-icon-input');
+            const nameInput = document.getElementById('jp-cat-name-input');
+            const titleEl = document.getElementById('jp-cat-modal-title');
+            const delBtn = document.getElementById('btn-delete-jp-cat');
+
+            if (catId) {
+                const cat = jpCategories.find(c => c.id === catId);
+                titleEl.innerText = '修改日文分類';
+                iconInput.value = cat ? (cat.icon || '🔖') : '🔖';
+                nameInput.value = cat ? cat.name : '';
+                if (delBtn) delBtn.style.display = 'flex';
+            } else {
+                titleEl.innerText = '新增日文分類';
+                iconInput.value = '🔖';
+                nameInput.value = '';
+                if (delBtn) delBtn.style.display = 'none';
+            }
+            modal.classList.add('active');
+        }
+
+        function saveJpCategory() {
+            const icon = document.getElementById('jp-cat-icon-input').value.trim() || '🔖';
+            const name = document.getElementById('jp-cat-name-input').value.trim();
+            if (!name) return alert('請輸入分類名稱！');
+
+            if (editingJpCatId) {
+                const cat = jpCategories.find(c => c.id === editingJpCatId);
+                if (cat) { cat.icon = icon; cat.name = name; }
+            } else {
+                const newId = 'cat_' + Date.now();
+                jpCategories.push({ id: newId, icon, name, phrases: [] });
+            }
+            saveJapaneseCategories();
+            closeModal('jp-cat-modal');
+            renderJapaneseTab();
+        }
+
+        async function delJpCatFromModal() {
+            if (editingJpCatId && await customConfirm('確定刪除此日文分類及其所有例句？')) {
+                jpCategories = jpCategories.filter(c => c.id !== editingJpCatId);
+                saveJapaneseCategories();
+                if (currentJpCatId === editingJpCatId) currentJpCatId = null;
+                closeModal('jp-cat-modal');
+                renderJapaneseTab();
+            }
+        }
+
+        function openJpPhraseModal(phraseIdx = null) {
+            editingJpPhraseIdx = phraseIdx;
+            const modal = document.getElementById('jp-phrase-modal');
+            const chInput = document.getElementById('jp-phrase-ch-input');
+            const jpInput = document.getElementById('jp-phrase-jp-input');
+            const romajiInput = document.getElementById('jp-phrase-romaji-input');
+            const titleEl = document.getElementById('jp-phrase-modal-title');
+            const delBtn = document.getElementById('btn-delete-jp-phrase');
+
+            const cat = jpCategories.find(c => c.id === currentJpCatId);
+            if (!cat) return;
+
+            if (phraseIdx !== null && phraseIdx >= 0 && cat.phrases[phraseIdx]) {
+                const p = cat.phrases[phraseIdx];
+                titleEl.innerText = '修改日文例句';
+                chInput.value = p.ch || '';
+                jpInput.value = p.jp || '';
+                romajiInput.value = p.romaji || '';
+                if (delBtn) delBtn.style.display = 'flex';
+            } else {
+                titleEl.innerText = '新增日文例句';
+                chInput.value = '';
+                jpInput.value = '';
+                romajiInput.value = '';
+                if (delBtn) delBtn.style.display = 'none';
+            }
+            modal.classList.add('active');
+        }
+
+        function saveJpPhrase() {
+            const ch = document.getElementById('jp-phrase-ch-input').value.trim();
+            const jp = document.getElementById('jp-phrase-jp-input').value.trim();
+            const romaji = document.getElementById('jp-phrase-romaji-input').value.trim();
+
+            if (!ch || !jp) return alert('請輸入中文意思與日文句子！');
+
+            const cat = jpCategories.find(c => c.id === currentJpCatId);
+            if (!cat) return;
+
+            if (editingJpPhraseIdx !== null && editingJpPhraseIdx >= 0) {
+                cat.phrases[editingJpPhraseIdx] = { ch, jp, romaji };
+            } else {
+                if (!Array.isArray(cat.phrases)) cat.phrases = [];
+                cat.phrases.push({ ch, jp, romaji });
+            }
+            saveJapaneseCategories();
+            closeModal('jp-phrase-modal');
+            renderJapaneseTab();
+        }
+
+        async function delJpPhraseFromModal() {
+            const cat = jpCategories.find(c => c.id === currentJpCatId);
+            if (cat && editingJpPhraseIdx !== null && await customConfirm('確定刪除此例句？')) {
+                cat.phrases.splice(editingJpPhraseIdx, 1);
+                saveJapaneseCategories();
+                closeModal('jp-phrase-modal');
+                renderJapaneseTab();
+            }
+        }
+
         function openFS(jp, ch, romaji) {
-            document.getElementById('fs-jp').innerText = jp; document.getElementById('fs-ch').innerText = ch;
-            document.getElementById('fs-romaji').innerText = romaji; document.getElementById('fs-overlay').classList.add('active');
+            document.getElementById('fs-jp').innerText = jp;
+            document.getElementById('fs-ch').innerText = ch;
+            document.getElementById('fs-romaji').innerText = romaji || '';
+            
+            let actionBox = document.getElementById('fs-action-box');
+            if (!actionBox) {
+                actionBox = document.createElement('div');
+                actionBox.id = 'fs-action-box';
+                actionBox.style.cssText = 'display:flex; gap:10px; margin-top:20px; justify-content:center; flex-wrap:wrap;';
+                document.getElementById('fs-overlay').appendChild(actionBox);
+            }
+            actionBox.innerHTML = `
+                <button type="button" onclick="event.stopPropagation(); speakJapanese('${jp.replace(/'/g, "\\'")}')" style="padding:8px 18px; border-radius:50px; background:var(--forest-green); color:white; font-weight:bold; border:none; font-size:0.85rem; cursor:pointer;">🔊 朗讀語音</button>
+                <button type="button" onclick="event.stopPropagation(); copyJpText('${jp.replace(/'/g, "\\'")}')" style="padding:8px 18px; border-radius:50px; background:var(--ginkgo-gold); color:white; font-weight:bold; border:none; font-size:0.85rem; cursor:pointer;">📋 複製日文</button>
+            `;
+
+            document.getElementById('fs-overlay').classList.add('active');
         }
 
         // --- 旅伴與分類管理 ---
@@ -1219,7 +1573,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             }
         }
         async function deleteWhoMember(id) {
-            if (confirm('確定刪除此旅伴？')) {
+            if (await customConfirm('確定刪除此旅伴？')) {
                 await sbFetch(`members?id=eq.${id}`, { method: 'DELETE' });
                 await refreshMembers();
                 openWhoManageModal();
@@ -1231,19 +1585,16 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             const curr = membersData[idx];
             const target = membersData[targetIdx];
             
-            // Swap member positions in array locally and update names or sort_order
             const temp = membersData[idx];
             membersData[idx] = membersData[targetIdx];
             membersData[targetIdx] = temp;
 
             try {
-                // If sort_order is supported on members table
                 const tempSort = curr.sort_order !== undefined ? curr.sort_order : idx;
                 const targetSort = target.sort_order !== undefined ? target.sort_order : targetIdx;
                 await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: targetSort }) });
                 await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
             } catch(e) {
-                // Fallback: swap names if sort_order column isn't present
                 await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ name: target.name }) });
                 await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ name: curr.name }) });
             }
@@ -1271,42 +1622,49 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 await sbFetch('checklist_categories', { method: 'POST', body: JSON.stringify({ name: val, sort_order: nextSort }) });
                 document.getElementById('new-cat-input').value = '';
                 await refreshCategories();
-                openCatModal();
+                openCatManageModal();
             }
         }
-
-
-    async function editCategory(id, oldName) {
-    const newName = prompt('請輸入新的分類名稱：', oldName);
-    if (newName && newName !== oldName) {
-        // 1. 更新分類清單表 (checklist_categories) 的名稱
-        await sbFetch(`checklist_categories?id=eq.${id}`, { 
-            method: 'PATCH', 
-            body: JSON.stringify({ name: newName }) 
-        });
-        
-        // 2. 同步更新所有隸屬該分類的清單項目 (checklist_items) 的 category 欄位
-        await sbFetch(`checklist_items?category=eq.${encodeURIComponent(oldName)}`, { 
-            method: 'PATCH', 
-            body: JSON.stringify({ category: newName }) 
-        });
-
-        // 3. 更新前端當前選擇的分類並重新載入資料
-        if (currentCat === oldName) currentCat = newName; 
-        await refreshCategories(); 
-        await refreshChecklist();
-        openCatModal(); 
-    }
-}
-
-
-
-
-
-        async function deleteCategory(id, name) {
-            if (confirm(`確定刪除分類「${name}」？`)) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'DELETE' }); if (currentCat === name) currentCat = categoriesData[0]?.name || ''; await refreshCategories(); openCatModal(); }
+        async function editCategory(id, oldName) {
+            const newName = prompt('請輸入新的分類名稱：', oldName);
+            if (newName && newName !== oldName) {
+                await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) });
+                if (currentCat === oldName) currentCat = newName;
+                await refreshCategories();
+                openCatManageModal();
+            }
         }
-        function openCatModal() {
+        async function deleteCategory(id) {
+            if (await customConfirm('確定刪除此分類？分類下的所有項目也會一併移除。')) {
+                await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'DELETE' });
+                await refreshCategories();
+                openCatManageModal();
+            }
+        }
+        async function sortCategory(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= categoriesData.length) return;
+            const curr = categoriesData[idx];
+            const target = categoriesData[targetIdx];
+            
+            const temp = categoriesData[idx];
+            categoriesData[idx] = categoriesData[targetIdx];
+            categoriesData[targetIdx] = temp;
+
+            try {
+                const tempSort = curr.sort_order !== undefined ? curr.sort_order : idx;
+                const targetSort = target.sort_order !== undefined ? target.sort_order : targetIdx;
+                await sbFetch(`checklist_categories?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: targetSort }) });
+                await sbFetch(`checklist_categories?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
+            } catch(e) {
+                await sbFetch(`checklist_categories?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ name: target.name }) });
+                await sbFetch(`checklist_categories?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ name: curr.name }) });
+            }
+            await refreshCategories();
+            openCatManageModal();
+        }
+
+        function openCatManageModal() {
             document.getElementById('cat-list-container').innerHTML = categoriesData.map((c, i) => `
                 <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #eee;">
                     <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">${c.name}</span>
@@ -1314,46 +1672,29 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                         <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="上移">▲</button>
                         <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, 1)" ${i === categoriesData.length - 1 ? 'disabled' : ''} title="下移">▼</button>
                         <button type="button" class="manage-icon-btn" onclick="editCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="編輯">✏️</button>
-                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="刪除">🗑️</button>
+                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id})" title="刪除">🗑️</button>
                     </div>
                 </div>
             `).join('');
             document.getElementById('cat-modal').classList.add('active');
         }
 
-        async function sortCategory(idx, direction) {
-            const targetIdx = idx + direction;
-            if (targetIdx < 0 || targetIdx >= categoriesData.length) return;
-            const curr = categoriesData[idx];
-            const target = categoriesData[targetIdx];
-            const tempSort = curr.sort_order;
-            await sbFetch(`checklist_categories?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: target.sort_order }) });
-            await sbFetch(`checklist_categories?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
-            await refreshCategories();
-            openCatModal();
-        }
-
-        // --- ✨✨ 清單／多圖／備註／iOS 點擊／上下移動核心處理 ✨✨ ---
-        const STORAGE_BUCKET = 'checklist-images'; // Supabase Storage Bucket 名稱
+        const STORAGE_BUCKET = 'checklist-images';
         let checklistSortableInstance = null;
-        
         let currentModalImages = [];
         let modalSelectedWho = '';
 
-        // 解析包含「名稱、備註、多張圖片」的內容結構
         function parseItemContent(rawText, explicitImg) {
             let text = rawText || '';
             let notes = '';
             let images = [];
 
-            // 1. 提取備註 <!--NOTES:...-->
             const noteMatch = text.match(/<!--NOTES:([\s\S]*?)-->/);
             if (noteMatch) {
                 notes = noteMatch[1].trim();
                 text = text.replace(noteMatch[0], '').trim();
             }
 
-            // 2. 提取多張圖片陣列 <!--IMGS:[...]-->
             const multiImgMatch = text.match(/<!--IMGS:([\s\S]*?)-->/);
             if (multiImgMatch) {
                 try {
@@ -1363,7 +1704,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 text = text.replace(multiImgMatch[0], '').trim();
             }
 
-            // 3. 相容舊版單圖 <!--IMG:...-->
             const singleImgMatch = text.match(/<!--IMG:([\s\S]*?)-->/);
             if (singleImgMatch) {
                 const singleUrl = singleImgMatch[1].trim();
@@ -1371,7 +1711,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 text = text.replace(singleImgMatch[0], '').trim();
             }
 
-            // 4. 若有 explicitImg 欄位
             if (explicitImg && explicitImg.trim() && !images.includes(explicitImg.trim())) {
                 images.push(explicitImg.trim());
             }
@@ -1379,7 +1718,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             return { name: text, notes, images };
         }
 
-        // 將 Data URL 轉為 Blob
         function dataURLtoBlob(dataurl) {
             const arr = dataurl.split(',');
             const mime = arr[0].match(/:(.*?);/)[1] || 'image/jpeg';
@@ -1392,7 +1730,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             return new Blob([u8arr], { type: mime });
         }
 
-        // 圖片自動壓縮工具
         function compressImage(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -1437,15 +1774,17 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         function toggleUrlField() {
             const el = document.getElementById('cl-url-container');
-            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+            if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
         }
 
         function applySingleImageUrl() {
-            const url = document.getElementById('cl-img-url-input').value.trim();
+            const urlInput = document.getElementById('cl-img-url-input');
+            const url = urlInput ? urlInput.value.trim() : '';
             if (url) {
                 currentModalImages.push({ url, isLocal: false });
-                document.getElementById('cl-img-url-input').value = '';
-                document.getElementById('cl-url-container').style.display = 'none';
+                if (urlInput) urlInput.value = '';
+                const el = document.getElementById('cl-url-container');
+                if (el) el.style.display = 'none';
                 renderModalImagesPreview();
             }
         }
@@ -1458,14 +1797,16 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         function renderModalImagesPreview() {
             const grid = document.getElementById('cl-images-preview-grid');
             const badge = document.getElementById('img-count-badge');
-            badge.innerText = `${currentModalImages.length} 張圖片`;
+            if (badge) badge.innerText = `${currentModalImages.length} 張圖片`;
 
-            grid.innerHTML = currentModalImages.map((item, idx) => `
-                <div class="multi-img-item">
-                    <img src="${item.url}" alt="縮圖">
-                    <button type="button" class="btn-remove-single-img" onclick="removeModalImageAt(${idx})">✕</button>
-                </div>
-            `).join('');
+            if (grid) {
+                grid.innerHTML = currentModalImages.map((item, idx) => `
+                    <div class="multi-img-item">
+                        <img src="${item.url}" alt="縮圖">
+                        <button type="button" class="btn-remove-single-img" onclick="removeModalImageAt(${idx})">✕</button>
+                    </div>
+                `).join('');
+            }
         }
 
         async function uploadSingleToStorage(dataUrl) {
@@ -1498,13 +1839,10 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function refreshChecklist() {
             const data = await sbFetch('checklist_items?order=sort_order.asc');
-            if (Array.isArray(data)) {
-                allItems = data;
-                renderItems();
-            }
+            allItems = Array.isArray(data) ? data : [];
+            renderItems();
         }
 
-        // --- 清單頁面分類標籤列 ---
         function renderChecklistTabs() { 
             const container = document.getElementById('cl-tabs');
             if (!container) return;
@@ -1519,7 +1857,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             const listDiv = document.getElementById('cl-items-list');
             if (!listDiv) return;
 
-            // 抓出屬於當前分類的項目
             const items = allItems.filter(i => i.category === currentCat);
             if (items.length === 0) {
                 listDiv.innerHTML = `<div style="text-align: center; color: #8d6e63; padding: 40px 20px; font-weight: bold; border: 2px dashed #E8D8B9; border-radius: 20px; background: white;">
@@ -1550,14 +1887,12 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             });
         }
 
-        // 單個卡片（✨縮圖放名稱後面、多圖、備註、iOS 點擊優化✨）
         function renderSingleShoppingCard(i, index, totalCount) {
             const parsed = parseItemContent(i.text, i.image_url);
             const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
             const safeName = parsed.name.replace(/"/g, '&quot;');
             const safeCategory = (i.category || '').replace(/"/g, '&quot;');
 
-            // 縮圖橫排 HTML（放在名稱後面）
             const thumbsHtml = parsed.images.length > 0 ? `
                 <div class="shop-thumbs-wrap">
                     ${parsed.images.map(img => `
@@ -1566,7 +1901,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 </div>
             ` : '';
 
-            // 備註 HTML
             const notesHtml = parsed.notes ? `
                 <div class="shop-notes-row">
                     <span>📝</span>
@@ -1574,7 +1908,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 </div>
             ` : '';
 
-            // 旅伴標籤（消除 "沒有人" 的問題，無人指派時預設為目前選擇的旅伴或全員）
             let displayWho = i.who;
             if (!displayWho || displayWho === '沒有人' || displayWho === '未指派') {
                 displayWho = currentWho || (membersData[0]?.name || '全員');
@@ -1583,7 +1916,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             return `
                 <div class="shop-item-card ${i.done ? 'done' : ''}" data-id="${i.id}">
                     <div class="shop-card-main-row">
-                        <!-- 針對 iOS 優化的勾選按鈕 (使用 <button> 搭配 touch-action) -->
                         <button type="button" class="cl-check" 
                                 onclick="event.stopPropagation(); toggleItem(${i.id}, ${i.done})"
                                 ontouchstart="event.stopPropagation();"
@@ -1591,7 +1923,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                             ${i.done ? '✓' : ''}
                         </button>
                         
-                        <!-- 點擊卡片單純顯示詳情資訊 (如同行程卡片) -->
                         <div class="shop-title-and-thumbs" onclick='openClDetail(${safeItem})'>
                             <span class="shop-title-text">${parsed.name}</span>
                             ${thumbsHtml}
@@ -1599,7 +1930,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
                         <span class="cl-who-badge">${displayWho}</span>
 
-                        <!-- 右邊按鈕改為編輯 ✏️ -->
                         <button type="button" class="itin-action-btn" onclick='event.stopPropagation(); openClItemModal(${safeItem}, "${safeCategory}")' title="編輯">✏️</button>
                     </div>
                     ${notesHtml}
@@ -1641,7 +1971,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
         async function delClItemFromModal() {
             const id = document.getElementById('cl-edit-id').value;
-            if (id && confirm('確定刪除此清單項目？')) {
+            if (id && await customConfirm('確定刪除此清單項目？')) {
                 await delItem(Number(id));
                 closeModal('cl-item-modal');
             }
@@ -1657,7 +1987,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             await Promise.all(updates);
         }
 
-        // --- 打開新增/修改清單項目 Modal ---
         function openClItemModal(item = null, defaultCat = null) {
             const modal = document.getElementById('cl-item-modal');
             const delBtn = document.getElementById('btn-delete-cl-item');
@@ -1679,7 +2008,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 editCat.value = item.category || targetCategory;
                 if (delBtn) delBtn.style.display = 'flex';
                 
-                // 正確預設旅伴，消除 "沒有人" 的問題
                 let whoVal = item.who;
                 if (!whoVal || whoVal === '沒有人' || whoVal === '未指派') whoVal = currentWho || (membersData[0]?.name || '');
                 modalSelectedWho = whoVal;
@@ -1688,7 +2016,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 nameInput.value = parsed.name;
                 notesInput.value = parsed.notes;
 
-                // 載入多張已存在的圖片
                 currentModalImages = parsed.images.map(url => ({ url, isLocal: false }));
             } else {
                 titleEl.innerText = `新增${targetCategory || '清單'}項目`;
@@ -1717,7 +2044,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             renderModalWhoChips();
         }
 
-        // --- 儲存清單項目（圖片至 Storage + 備註 + 正確旅伴） ---
         async function saveClItem() {
             const id = document.getElementById('cl-edit-id').value;
             const targetCategory = document.getElementById('cl-edit-category').value || currentCat;
@@ -1727,7 +2053,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
 
             if (!name) { alert('請輸入物品名稱！'); return; }
 
-            // 1. 上傳尚未上傳的本機新圖片至 Supabase Storage
             const finalImageUrls = [];
             const hasLocalImages = currentModalImages.some(i => i.isLocal);
 
@@ -1755,7 +2080,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 saveBtn.innerText = '儲存中...';
             }
 
-            // 2. 組成完整格式（名稱 + 備註標籤 + 多圖標籤）
             let finalText = name;
             if (notes) {
                 finalText += `\n<!--NOTES:${notes}-->`;
@@ -1764,7 +2088,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 finalText += `\n<!--IMGS:${JSON.stringify(finalImageUrls)}-->`;
             }
 
-            // 確保旅伴名稱不為空，也不為 "沒有人"
             let assignee = modalSelectedWho || currentWho || (membersData[0]?.name || '');
             if (assignee === '沒有人' || assignee === '未指派') {
                 assignee = currentWho || (membersData[0]?.name || '');
@@ -1802,82 +2125,88 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             }
         }
 
-        async function toggleItem(id, status) {
-            await sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ done: !status }) });
-            refreshChecklist();
+        async function toggleItem(id, currentDone) {
+            await sbFetch(`checklist_items?id=eq.${id}`, {
+                method: 'PATCH',
+                body: JSON.stringify({ done: !currentDone })
+            });
+            await refreshChecklist();
         }
 
         async function delItem(id) {
-            if (confirm('確定刪除此項目？')) {
+            if (await customConfirm('確定刪除此項目？')) {
                 await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
-                refreshChecklist();
+                await refreshChecklist();
             }
         }
 
-        // --- 分頁切換與 FAB 按鈕 ---
-        let currentTabId = 'itinerary';
+        // --- 全域分頁與初始化 ---
+        function switchTab(tabId, el) {
+            document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+            document.querySelectorAll('.nav-tab').forEach(nt => nt.classList.remove('active'));
+            document.getElementById('page-' + tabId).classList.add('active');
+            if (el) el.classList.add('active');
+            localStorage.setItem('trip_last_tab', tabId);
+
+            const fab = document.getElementById('fab-btn');
+            if (tabId === 'itinerary' || tabId === 'checklist') {
+                fab.style.display = 'flex';
+            } else {
+                fab.style.display = 'none';
+            }
+
+            if (tabId === 'japanese') {
+                renderJapaneseTab();
+            } else if (tabId === 'exchange') {
+                updateExchangeQuickSheet();
+            }
+        }
 
         function handleFabClick() {
-            if (navigator.vibrate) navigator.vibrate(5);
-            if (currentTabId === 'itinerary') {
+            const activeTab = document.querySelector('.nav-tab.active')?.getAttribute('onclick') || '';
+            if (activeTab.includes('itinerary')) {
                 openItinModal();
-            } else if (currentTabId === 'checklist') {
-                openClItemModal(null, currentCat);
+            } else if (activeTab.includes('checklist')) {
+                openClItemModal();
             }
         }
 
-        function switchTab(id, el) {
-            if (navigator.vibrate) navigator.vibrate(5);
-            currentTabId = id;
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById('page-' + id).classList.add('active');
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            if (el) el.classList.add('active');
-
-            // 浮動按鈕在 行程、清單 時顯示
-            document.getElementById('add-fab').style.display = 
-                (id === 'itinerary' || id === 'checklist') ? 'flex' : 'none';
-
-            if (id === 'checklist') renderItems();
-        }
-
-        function updateClock() {
+        function updateClocks() {
             const now = new Date();
-            document.getElementById('real-date').innerText = now.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit', weekday: 'short' });
-            const tw = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Taipei' });
-            const jp = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' });
-            document.getElementById('realtime-clock').innerHTML = `<div class="clock-item">🇯🇵 ${jp}</div> <span style="opacity:0.3">|</span> <div class="clock-item">🇹🇼 ${tw}</div>`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            
+            const twTime = new Intl.DateTimeFormat('zh-TW', { ...options, timeZone: 'Asia/Taipei' }).format(now);
+            const jpTime = new Intl.DateTimeFormat('zh-TW', { ...options, timeZone: 'Asia/Tokyo' }).format(now);
+            
+            const twEl = document.getElementById('clock-tw');
+            const jpEl = document.getElementById('clock-jp');
+            if (twEl) twEl.innerText = twTime;
+            if (jpEl) jpEl.innerText = jpTime;
 
-        function subscribeRealtime() {
-            if (supabaseClient.getChannels().length > 0) supabaseClient.removeAllChannels();
-            supabaseClient.channel('itinerary-changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'itinerary_items' }, () => refreshItinerary())
-                .subscribe();
-            supabaseClient.channel('checklist-changes')
-                .on('postgres_changes', { event: '*', schema: 'public', table: 'checklist_items' }, () => refreshChecklist())
-                .subscribe();
+            const dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short' };
+            const dateStr = new Intl.DateTimeFormat('zh-TW', dateOptions).format(now);
+            const dateEl = document.getElementById('real-date');
+            if (dateEl) dateEl.innerText = dateStr;
         }
 
-        document.addEventListener("visibilitychange", () => {
-            if (document.hidden) {
-                supabaseClient.removeAllChannels();
-            } else {
-                refreshMembers(); refreshCategories(); refreshChecklist(); refreshItinerary();
-                subscribeRealtime();
-            }
-        });
+        window.addEventListener('DOMContentLoaded', async () => {
+            setInterval(updateClocks, 1000);
+            updateClocks();
 
-        window.onload = async () => {
+            loadJapaneseCategories();
+
             await refreshTripDays();
+            await refreshItinerary();
             await refreshMembers();
             await refreshCategories();
             await refreshChecklist();
-            await refreshItinerary();
-            subscribeRealtime();
-        };
+
+            updateExchangeQuickSheet();
+
+            const lastTab = localStorage.getItem('trip_last_tab') || 'itinerary';
+            const tabBtn = document.querySelector(`.nav-tab[onclick*="${lastTab}"]`);
+            switchTab(lastTab, tabBtn);
+        });
     </script>
 </body>
 </html>
