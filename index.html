@@ -338,6 +338,13 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                         <div class="detail-text-content" id="dt-notes">尚無備註</div>
                     </div>
                 </div>
+                <div class="detail-row" id="dt-imgs-row" style="display:none;">
+                    <div class="detail-icon">🖼️</div>
+                    <div style="flex:1;">
+                        <span class="detail-text-label">相片附件</span>
+                        <div id="dt-imgs-grid" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -372,6 +379,30 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             <div class="form-group">
                 <label>備註 / 提醒 (選填)</label>
                 <textarea id="form-notes" rows="3" placeholder="(選填) 妳說說，我不聽..."></textarea>
+            </div>
+
+            <!-- 多張圖片上傳／拍照／網址 -->
+            <div class="multi-img-upload-box">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張圖片)</label>
+                    <span id="itin-img-count-badge" style="font-size: 0.7rem; color: #795A22; font-weight: bold;">0 張</span>
+                </div>
+
+                <div class="multi-img-btns">
+                    <button type="button" class="btn-upload-action" onclick="document.getElementById('itin-multi-file-input').click()">📷 圖片</button>
+                    <button type="button" class="btn-upload-action" onclick="toggleItinUrlField()">🔗 貼上網址</button>
+                </div>
+                
+                <input type="file" id="itin-multi-file-input" accept="image/*" multiple style="display:none;" onchange="handleItinMultiFilesSelect(event)">
+                
+                <div id="itin-url-container" style="display: none; margin-top: 8px;">
+                    <input type="url" id="itin-img-url-input" placeholder="https://... 貼上圖片網址" style="padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid #D5AC38;">
+                    <button type="button" onclick="applyItinSingleImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">➕ 加入此圖片</button>
+                </div>
+
+                <!-- 多圖縮圖預覽列 -->
+                <div id="itin-images-preview-grid" class="multi-img-grid"></div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳</div>
             </div>
             <div class="modal-btns">
                 <button class="btn-cancel" onclick="closeModal('itin-modal')">取消</button>
@@ -739,6 +770,61 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             else window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`, '_blank');
         }
 
+        let currentItinModalImages = [];
+
+        async function handleItinMultiFilesSelect(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            for (let i = 0; i < files.length; i++) {
+                try {
+                    const dataUrl = await compressImage(files[i]);
+                    currentItinModalImages.push({ url: dataUrl, isLocal: true });
+                } catch (e) {
+                    console.error('圖片壓縮失敗', e);
+                }
+            }
+            renderItinModalImagesPreview();
+            event.target.value = '';
+        }
+
+        function toggleItinUrlField() {
+            const el = document.getElementById('itin-url-container');
+            if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function applyItinSingleImageUrl() {
+            const urlInput = document.getElementById('itin-img-url-input');
+            const url = urlInput ? urlInput.value.trim() : '';
+            if (url) {
+                currentItinModalImages.push({ url, isLocal: false });
+                if (urlInput) urlInput.value = '';
+                const el = document.getElementById('itin-url-container');
+                if (el) el.style.display = 'none';
+                renderItinModalImagesPreview();
+            }
+        }
+
+        function removeItinModalImageAt(index) {
+            currentItinModalImages.splice(index, 1);
+            renderItinModalImagesPreview();
+        }
+
+        function renderItinModalImagesPreview() {
+            const grid = document.getElementById('itin-images-preview-grid');
+            const badge = document.getElementById('itin-img-count-badge');
+            if (badge) badge.innerText = `${currentItinModalImages.length} 張圖片`;
+
+            if (grid) {
+                grid.innerHTML = currentItinModalImages.map((item, idx) => `
+                    <div class="multi-img-item">
+                        <img src="${item.url}" alt="縮圖">
+                        <button type="button" class="btn-remove-single-img" onclick="removeItinModalImageAt(${idx})">✕</button>
+                    </div>
+                `).join('');
+            }
+        }
+
         function renderItinerary() {
             const list = document.getElementById('itinerary-list');
             const items = allItinerary.filter(i => i.day_id === currentDay);
@@ -746,20 +832,31 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 list.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px; font-weight: 700; border: 2px dashed #f3e5f5; border-radius: 22px;">~快想想吧~<br>點擊 ＋ 號新增！</div>`;
                 return;
             }
-            list.innerHTML = items.map(i => `
-                <div class="itin-card" onclick='openItinDetail(${JSON.stringify(i).replace(/'/g, "&#39;")})'>
-                    <div class="itin-time">${formatItinTime(i.time)}</div>
-                    <div class="itin-content">
-                        <div class="itin-loc">${i.location}</div>
-                        ${i.transport ? `<div class="itin-detail-row"><span>🚋 ${i.transport}</span></div>` : ''}
-                        ${i.notes ? `<div class="itin-notes-row"><span>📝 ${i.notes}</span></div>` : ''}
+            list.innerHTML = items.map(i => {
+                const parsed = parseItemContent(i.notes || '', i.image_url);
+                const noteText = [parsed.name, parsed.notes].filter(Boolean).join('\n');
+                return `
+                    <div class="itin-card" onclick='openItinDetail(${JSON.stringify(i).replace(/'/g, "&#39;")})'>
+                        <div class="itin-time">${formatItinTime(i.time)}</div>
+                        <div class="itin-content">
+                            <div class="itin-loc">${i.location}</div>
+                            ${i.transport ? `<div class="itin-detail-row"><span>🚋 ${i.transport}</span></div>` : ''}
+                            ${noteText ? `<div class="itin-notes-row"><span>📝 ${noteText}</span></div>` : ''}
+                            ${parsed.images && parsed.images.length > 0 ? `
+                                <div class="shop-thumbs-wrap" style="margin-top: 4px;" onclick="event.stopPropagation()">
+                                    ${parsed.images.map(img => `
+                                        <img src="${img}" class="shop-thumb" onclick="event.stopPropagation(); openLightbox('${img}', '${(i.location || '').replace(/'/g, "\\'")}')">
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                        <div class="itin-action-group">
+                            <button class="itin-action-btn" onclick='event.stopPropagation(); openItinModal(${JSON.stringify(i).replace(/'/g, "&#39;")})'>✏️</button>
+                            ${(i.map_query && i.map_query.trim() !== '') ? `<button class="itin-action-btn itin-map-btn" onclick="event.stopPropagation(); goToMap(\`${i.map_query}\`)">📍</button>` : ''}
+                        </div>
                     </div>
-                    <div class="itin-action-group">
-                        <button class="itin-action-btn" onclick='event.stopPropagation(); openItinModal(${JSON.stringify(i).replace(/'/g, "&#39;")})'>✏️</button>
-                        ${(i.map_query && i.map_query.trim() !== '') ? `<button class="itin-action-btn itin-map-btn" onclick="event.stopPropagation(); goToMap(\`${i.map_query}\`)">📍</button>` : ''}
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function openItinModal(item = null) {
@@ -774,7 +871,11 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 document.getElementById('form-loc').value = item.location || '';
                 document.getElementById('form-map-query').value = item.map_query || '';
                 document.getElementById('form-trans').value = item.transport || '';
-                document.getElementById('form-notes').value = item.notes || '';
+                
+                const parsed = parseItemContent(item.notes || '', item.image_url);
+                const noteText = [parsed.name, parsed.notes].filter(Boolean).join('\n');
+                document.getElementById('form-notes').value = noteText;
+                currentItinModalImages = parsed.images.map(url => ({ url, isLocal: false }));
                 delBtn.style.display = 'flex';
             } else {
                 document.getElementById('modal-title').innerText = '新增行程';
@@ -785,8 +886,10 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 document.getElementById('form-map-query').value = '';
                 document.getElementById('form-trans').value = '';
                 document.getElementById('form-notes').value = '';
+                currentItinModalImages = [];
                 delBtn.style.display = 'none';
             }
+            renderItinModalImagesPreview();
             modal.classList.add('active');
         }
 
@@ -797,13 +900,55 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             const location = document.getElementById('form-loc').value;
             const map_query = document.getElementById('form-map-query').value.trim();
             const transport = document.getElementById('form-trans').value;
-            const notes = document.getElementById('form-notes').value;
+            const notesInput = document.getElementById('form-notes').value.trim();
             if (!location) return;
+
+            const saveBtn = document.querySelector('#itin-modal .btn-save');
+            const hasLocalImages = currentItinModalImages.some(i => i.isLocal);
+            if (hasLocalImages && saveBtn) {
+                saveBtn.innerText = '上傳中...';
+                saveBtn.disabled = true;
+            }
+
+            const finalImageUrls = [];
+            for (let i = 0; i < currentItinModalImages.length; i++) {
+                const item = currentItinModalImages[i];
+                if (item.isLocal && item.url.startsWith('data:')) {
+                    try {
+                        const uploadedUrl = await uploadSingleToStorage(item.url);
+                        finalImageUrls.push(uploadedUrl);
+                    } catch (err) {
+                        console.warn('Storage 上傳失敗，降級保留', err);
+                        finalImageUrls.push(item.url);
+                    }
+                } else {
+                    finalImageUrls.push(item.url);
+                }
+            }
+
+            if (saveBtn) saveBtn.innerText = '儲存中...';
+
+            let finalNotes = notesInput;
+            if (finalImageUrls.length > 0) {
+                finalNotes += (finalNotes ? '\n' : '') + `<!--IMGS:${JSON.stringify(finalImageUrls)}-->`;
+            }
+
             const combinedTime = `${start}|${end}`;
-            const body = { day_id: currentDay, time: combinedTime, location, map_query: map_query || null, transport, notes };
-            if (id) await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(body) });
-            else await sbFetch('itinerary_items', { method: 'POST', body: JSON.stringify(body) });
-            closeModal('itin-modal'); refreshItinerary();
+            const body = { day_id: currentDay, time: combinedTime, location, map_query: map_query || null, transport, notes: finalNotes };
+
+            try {
+                if (id) await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(body) });
+                else await sbFetch('itinerary_items', { method: 'POST', body: JSON.stringify(body) });
+                closeModal('itin-modal');
+                refreshItinerary();
+            } catch (e) {
+                alert('儲存失敗，請確認網路連線');
+            } finally {
+                if (saveBtn) {
+                    saveBtn.innerText = '儲存行程';
+                    saveBtn.disabled = false;
+                }
+            }
         }
 
         async function delItinFromModal() {
@@ -819,7 +964,25 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             document.getElementById('dt-time').innerText = (parts[0] || parts[1]) ? `${parts[0]} - ${parts[1]}` : '--:--';
             document.getElementById('dt-loc').innerText = item.location;
             document.getElementById('dt-trans').innerText = item.transport || '無設定';
-            document.getElementById('dt-notes').innerText = item.notes || '尚無備註';
+
+            const parsed = parseItemContent(item.notes || '', item.image_url);
+            const noteText = [parsed.name, parsed.notes].filter(Boolean).join('\n');
+            document.getElementById('dt-notes').innerText = noteText || '尚無備註';
+
+            const imgsRow = document.getElementById('dt-imgs-row');
+            const imgsGrid = document.getElementById('dt-imgs-grid');
+            if (parsed.images && parsed.images.length > 0) {
+                if (imgsRow) imgsRow.style.display = 'flex';
+                if (imgsGrid) {
+                    imgsGrid.innerHTML = parsed.images.map(img => `
+                        <img src="${img}" class="shop-thumb" style="width: 54px; height: 54px;" onclick="openLightbox('${img}', '${(item.location || '').replace(/'/g, "\\'")}')">
+                    `).join('');
+                }
+            } else {
+                if (imgsRow) imgsRow.style.display = 'none';
+                if (imgsGrid) imgsGrid.innerHTML = '';
+            }
+
             document.getElementById('detail-overlay').classList.add('active');
         }
         function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
