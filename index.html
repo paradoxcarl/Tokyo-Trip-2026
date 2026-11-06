@@ -338,13 +338,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                         <div class="detail-text-content" id="dt-notes">尚無備註</div>
                     </div>
                 </div>
-                <div class="detail-row" id="dt-images-row" style="display:none;">
-                    <div class="detail-icon">📸</div>
-                    <div style="min-width:0;">
-                        <span class="detail-text-label">照片</span>
-                        <div id="dt-images" class="shop-thumbs-wrap" style="margin-top:8px;"></div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -380,27 +373,9 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 <label>備註 / 提醒 (選填)</label>
                 <textarea id="form-notes" rows="3" placeholder="(選填) 妳說說，我不聽..."></textarea>
             </div>
-            <!-- 行程照片：直接沿用清單原有的多圖上傳介面與樣式 -->
-            <div class="multi-img-upload-box">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張圖片)</label>
-                    <span id="itin-img-count-badge" style="font-size: 0.7rem; color: #795A22; font-weight: bold;">0 張圖片</span>
-                </div>
-                <div class="multi-img-btns">
-                    <button type="button" class="btn-upload-action" onclick="document.getElementById('itin-multi-file-input').click()">📷 圖片</button>
-                    <button type="button" class="btn-upload-action" onclick="toggleItinUrlField()">🔗 貼上網址</button>
-                </div>
-                <input type="file" id="itin-multi-file-input" accept="image/*" multiple style="display:none;" onchange="handleItinMultiFilesSelect(event)">
-                <div id="itin-url-container" style="display:none; margin-top:8px;">
-                    <input type="url" id="itin-img-url-input" placeholder="https://... 貼上圖片網址" style="padding:8px; font-size:0.8rem; border-radius:8px; border:1px solid #D5AC38;">
-                    <button type="button" onclick="applyItinImageUrl()" style="width:100%; margin-top:5px; padding:6px; background:var(--forest-green); color:white; border:none; border-radius:8px; font-weight:bold; font-size:0.8rem; cursor:pointer;">➕ 加入此圖片</button>
-                </div>
-                <div id="itin-images-preview-grid" class="multi-img-grid"></div>
-                <div style="font-size:0.68rem; color:#795A22; margin-top:6px; text-align:center;">☁️ 照片將自動壓縮並上傳</div>
-            </div>
             <div class="modal-btns">
                 <button class="btn-cancel" onclick="closeModal('itin-modal')">取消</button>
-                <button class="btn-save" id="btn-save-itin" onclick="saveItin()">儲存行程</button>
+                <button class="btn-save" onclick="saveItin()">儲存行程</button>
             </div>
         </div>
     </div>
@@ -500,4 +475,1060 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         </div>
         <div id="cat-food" class="phrase-list">
             <div class="phrase-item" onclick="openFS('三人です', '我們3位', 'Sannin desu')"><b>我們3位</b><p>三人です</p><small class="romaji">Sannin desu</small></div>
-            <div class="phrase-item" onclick="openFS('禁煙席をお願いします', '請給我禁菸席', 'Kin-en seki o onegaishimasu')"><b>請給我禁菸席</b><p>禁煙席をお願いします</p><small class="romaji">Kin-en seki o onegaishima
+            <div class="phrase-item" onclick="openFS('禁煙席をお願いします', '請給我禁菸席', 'Kin-en seki o onegaishimasu')"><b>請給我禁菸席</b><p>禁煙席をお願いします</p><small class="romaji">Kin-en seki o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('三人一緒に座れますか？', '我們3人可以坐在一起嗎？', 'Sannin issho ni suwaremasu ka?')"><b>我們3人可以坐在一起嗎？</b><p>三人一緒に座れますか？</p><small class="romaji">Sannin issho ni suwaremasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('メニューをください', '請給我菜單', 'Menyu- o kudasai')"><b>請給我菜單</b><p>メニューをください</p><small class="romaji">Menyu- o kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('お水をください', '請給我水', 'Omizu o kudasai')"><b>請給我水</b><p>お水をください</p><small class="romaji">Omizu o kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('中国語のメニューはありますか？', '有中文菜單嗎？', 'Chugokugo no menyu wa arimasu ka?')"><b>有中文菜單嗎？</b><p>中国語のメニューはありますか？</p><small class="romaji">Chugokugo no menyu wa arimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('おすすめは何ですか？', '有什麼推薦的嗎？', 'Osusume wa nan desu ka?')"><b>有什麼推薦的嗎？</b><p>おすすめは何ですか？</p><small class="romaji">Osusume wa nan desu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('テイクアウトできますか？', '可以外帶嗎？', 'Teikuauto dekimasu ka?')"><b>可以外帶嗎？</b><p>テイクアウトできますか？</p><small class="romaji">Teikuauto dekimasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('注文をお願いします', '我要點餐', 'Chuumon o onegaishimasu')"><b>我要點餐</b><p>注文をお願いします</p><small class="romaji">Chuumon o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('お会計をお願いします', '請結帳', 'Okaikei o onegaishimasu')"><b>請結帳</b><p>お会計をお願いします</p><small class="romaji">Okaikei o onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('お会計は別々でお願いします', '請幫我們分開結帳', 'Okaikei wa betsubetsu de onegaishimasu')"><b>請幫我們分開結帳</b><p>お会計は別々でお願いします</p><small class="romaji">Okaikei wa betsubetsu de onegaishimasu</small></div>
+        </div>
+        <div id="cat-common" class="phrase-list">
+            <div class="phrase-item" onclick="openFS('すみません', '不好意思／打擾一下', 'Sumimasen')"><b>不好意思／打擾一下</b><p>すみません</p><small class="romaji">Sumimasen</small></div>
+            <div class="phrase-item" onclick="openFS('ありがとうございます', '謝謝', 'Arigatou gozaimasu')"><b>謝謝</b><p>ありがとうございます</p><small class="romaji">Arigatou gozaimasu</small></div>
+            <div class="phrase-item" onclick="openFS('写真を撮ってもらえますか？', '可以幫我們拍照嗎？', 'Shashin o totte moraemasu ka?')"><b>可以幫我們拍照嗎？</b><p>写真を撮ってもらえますか？</p><small class="romaji">Shashin o totte moraemasu ka?</small></div>
+            <div class="phrase-item" onclick="openFS('はい / いいえ', '是 / 不是', 'Hai / Iie')"><b>是 / 不是</b><p>はい / いいえ</p><small class="romaji">Hai / Iie</small></div>
+            <div class="phrase-item" onclick="openFS('もう一度お願いします', '請再說一次', 'Mou ichido onegaishimasu')"><b>請再說一次</b><p>もう一度お願いします</p><small class="romaji">Mou ichido onegaishimasu</small></div>
+            <div class="phrase-item" onclick="openFS('ゆっくり話してください', '請慢慢說', 'Yukkuri hanashite kudasai')"><b>請慢慢說</b><p>ゆっくり話してください</p><small class="romaji">Yukkuri hanashite kudasai</small></div>
+            <div class="phrase-item" onclick="openFS('ちょっと待ってください', '請稍等一下', 'Chotto matte kudasai')"><b>請稍等一下</b><p>ちょっと待ってください</p><small class="romaji">Chotto matte kudasai</small></div>
+        </div>
+    </div>
+
+    <!-- 旅伴管理 Modal -->
+    <div id="who-manage-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:var(--forest-green); top:15px; right:15px;" onclick="closeModal('who-manage-modal')">✕</button>
+            <div class="modal-title">旅伴管理</div>
+            <div id="who-list-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; border: 2px solid #fcfaff; border-radius: 12px;"></div>
+            <div class="form-group">
+                <label>新增旅伴</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="new-who-input" placeholder="名稱">
+                    <button class="btn-add-inline" onclick="addWho()">新增</button>
+                </div>
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" style="width: 100%;" onclick="closeModal('who-manage-modal')">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 分類管理 Modal -->
+    <div id="cat-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:var(--forest-green); top:15px; right:15px;" onclick="closeModal('cat-modal')">✕</button>
+            <div class="modal-title">分類管理</div>
+            <div id="cat-list-container" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px; border: 2px solid #fcfaff; border-radius: 12px;"></div>
+            <div class="form-group">
+                <label>新增分類</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="new-cat-input" placeholder="分類名稱">
+                    <button class="btn-add-inline" onclick="addCategory()">新增</button>
+                </div>
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" style="width: 100%;" onclick="closeModal('cat-modal')">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ✨✨ 清單項目 Modal（物品名稱、備註欄位、登記旅伴、多圖上傳與網址）✨✨ -->
+    <div id="cl-item-modal" class="overlay">
+        <div class="modal-content">
+            <div class="modal-title" id="cl-modal-title">清單項目</div>
+            <input type="hidden" id="cl-edit-id">
+            <input type="hidden" id="cl-edit-category">
+
+            <div class="form-group">
+                <label>物品 / 項目名稱 <span style="color:#B74735">*</span></label>
+                <input type="text" id="cl-name-input" placeholder="例如：請發揮創意...">
+            </div>
+
+            <!-- 備註欄位 -->
+            <div class="form-group">
+                <label>備註 / 規格說明 (選填)</label>
+                <textarea id="cl-notes-input" placeholder="例如：尺寸、數量、限定商店、預估金額..." rows="2"></textarea>
+            </div>
+
+            <!-- 登記旅伴 -->
+            <div class="form-group">
+                <label>登記旅伴</label>
+                <div id="modal-who-chips" style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;"></div>
+            </div>
+
+            <!-- 多張圖片上傳／拍照／網址 -->
+            <div class="multi-img-upload-box">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label style="font-size: 0.78rem; font-weight: bold; color: var(--dark-pink);">📸 圖片 (可放多張圖片)</label>
+                    <span id="img-count-badge" style="font-size: 0.7rem; color: #795A22; font-weight: bold;">0 張</span>
+                </div>
+
+                <div class="multi-img-btns">
+                    <button type="button" class="btn-upload-action" onclick="document.getElementById('cl-multi-file-input').click()">📷 圖片</button>
+                    <button type="button" class="btn-upload-action" onclick="toggleUrlField()">🔗 貼上網址</button>
+                </div>
+                
+                <input type="file" id="cl-multi-file-input" accept="image/*" multiple style="display:none;" onchange="handleMultiFilesSelect(event)">
+                
+                <div id="cl-url-container" style="display: none; margin-top: 8px;">
+                    <input type="url" id="cl-img-url-input" placeholder="https://... 貼上圖片網址" style="padding: 8px; font-size: 0.8rem; border-radius: 8px; border: 1px solid #D5AC38;">
+                    <button type="button" onclick="applySingleImageUrl()" style="width: 100%; margin-top: 5px; padding: 6px; background: var(--forest-green); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 0.8rem; cursor: pointer;">➕ 加入此圖片</button>
+                </div>
+
+                <!-- 多圖縮圖預覽列 -->
+                <div id="cl-images-preview-grid" class="multi-img-grid"></div>
+                <div style="font-size: 0.68rem; color: #795A22; margin-top: 6px; text-align: center;">☁️ 照片將自動壓縮並上傳</div>
+            </div>
+
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('cl-item-modal')">取消</button>
+                <button class="btn-save" id="btn-save-cl-item" onclick="saveClItem()">儲存</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 圖片放大檢視燈箱 -->
+    <div id="cl-lightbox" onclick="closeLightbox()">
+        <div class="lightbox-box" onclick="event.stopPropagation()">
+            <img id="lightbox-full-img" class="lightbox-img" src="" alt="商品圖片">
+            <div id="lightbox-title" class="lightbox-caption"></div>
+            <button onclick="closeLightbox()" style="margin: 0 15px 15px; padding: 8px 25px; border-radius: 20px; border: none; background: var(--dark-pink); color: white; font-weight: bold; cursor: pointer;">關閉</button>
+        </div>
+    </div>
+
+    <!-- 旅行日期 Modal -->
+    <div id="day-modal" class="overlay">
+        <div class="modal-content">
+            <button class="detail-close" style="background:#F5E8CF; color:#526B45; top:15px; right:15px;" onclick="closeModal('day-modal')">✕</button>
+            <div class="modal-title" id="day-modal-title">新增旅行日期</div>
+            <input type="hidden" id="day-edit-id">
+            <div class="form-group">
+                <label>旅行日期</label>
+                <input type="date" id="day-date-input">
+            </div>
+            <div class="modal-btns">
+                <button class="btn-cancel" onclick="closeModal('day-modal')">取消</button>
+                <button class="btn-save" onclick="saveTripDay()">儲存日期</button>
+            </div>
+            <button id="day-delete-btn" class="btn-cancel" style="width:100%; margin-top:10px; padding:12px; border-radius:20px; display:none; color: #e53935;" onclick="deleteTripDay()">刪除此日期</button>
+        </div>
+    </div>
+
+    <!-- 底部導覽列（4個項目：行程、匯率、日文、清單） -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-tab active" onclick="switchTab('itinerary', this)"><span class="nav-icon">📅</span><span>行程</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('exchange', this)"><span class="nav-icon">💰</span><span>匯率</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('japanese', this)"><span class="nav-icon">🍬</span><span>日文</span></a>
+        <a href="#" class="nav-tab" onclick="switchTab('checklist', this)"><span class="nav-icon">📝</span><span>清單</span></a>
+    </nav>
+
+    <div id="fs-overlay" onclick="this.classList.remove('active')"><div id="fs-jp" style="font-size:2.2rem; font-weight:700; margin-bottom:20px;"></div><div id="fs-ch" style="font-size:1.6rem; font-weight:700;"></div><div id="fs-romaji" style="font-size:1.2rem; color:#b39ddb; margin-top:15px; font-style:italic;"></div></div>
+
+    <script>
+        const SUPABASE_URL = 'https://zyyjuzysjjdnuqwhummh.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5eWp1enlzampkbnVxd2h1bW1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5OTU3MzEsImV4cCI6MjEwODU3MTczMX0.4d7Id1Zz4fac3q7V6ENNlV957fxaCyuQ8Y_8elGAV3M';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function sbFetch(path, options = {}) {
+            try {
+                const res = await fetch(`${SUPABASE_URL}/rest/v1/${path}`, {
+                    ...options,
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': (options.method === 'POST' || options.method === 'PATCH') ? 'return=representation' : '', ...(options.headers || {}) }
+                });
+                const text = await res.text(); return text ? JSON.parse(text) : [];
+            } catch (e) { console.error('API Error:', e); return []; }
+        }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+        // --- 旅行日期管理 ---
+        let tripDays = [];
+        let currentDay = null;
+
+        function renderTripDays() {
+            const container = document.getElementById('date-buttons');
+            const chineseWeekdays = ['日', '一', '二', '三', '四', '五', '六'];
+            const japaneseWeekdays = ['日', '月', '火', '水', '木', '金', '土'];
+
+            container.innerHTML = tripDays.map((day, index) => {
+                const [year, monthValue, dayValue] = day.trip_date.split('-').map(Number);
+                const date = new Date(year, monthValue - 1, dayValue);
+                const month = date.getMonth() + 1;
+                const dayNumber = date.getDate();
+                const weekday = date.getDay();
+                const weekdayText = `（${chineseWeekdays[weekday]}、${japaneseWeekdays[weekday]}）`;
+
+                return `
+                    <div style="position:relative; flex:0 0 85px;">
+                        <button class="date-btn ${day.day_id === currentDay ? 'active' : ''}" style="width:85px;" onclick="switchDay(${day.day_id})">
+                            <span class="date-day">第${index + 1}日</span>
+                            <span class="date-num">${month}/${dayNumber}</span>
+                            <span class="date-week">${weekdayText}</span>
+                        </button>
+                        <button title="編輯日期" onclick="openDayModal(${day.day_id})" style="position:absolute; right:-3px; top:-5px; border:0; border-radius:50%; background:#F5E8CF; width:26px; height:26px; cursor:pointer;">✏️</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        async function refreshTripDays() {
+            const data = await sbFetch('trip_days?select=*&order=trip_date.asc');
+            if (!Array.isArray(data)) return;
+            tripDays = data;
+            if (!tripDays.some(day => day.day_id === currentDay)) {
+                currentDay = tripDays[0]?.day_id ?? null;
+            }
+            renderTripDays();
+            renderItinerary();
+        }
+
+        function openDayModal(dayId = null) {
+            const day = tripDays.find(d => d.day_id === dayId);
+            document.getElementById('day-edit-id').value = day ? day.day_id : '';
+            document.getElementById('day-date-input').value = day?.trip_date || '';
+            document.getElementById('day-modal-title').innerText = day ? '修改旅行日期' : '新增旅行日期';
+            document.getElementById('day-delete-btn').style.display = day ? 'block' : 'none';
+            document.getElementById('day-modal').classList.add('active');
+        }
+
+        async function saveTripDay() {
+            const id = document.getElementById('day-edit-id').value;
+            const date = document.getElementById('day-date-input').value;
+            if (!date) { alert('請選擇旅行日期。'); return; }
+            if (tripDays.some(d => d.trip_date === date && String(d.day_id) !== String(id))) {
+                alert('這個日期已經存在，請勿重複新增。'); return;
+            }
+            const path = id ? `trip_days?day_id=eq.${id}` : 'trip_days';
+            const result = await sbFetch(path, { method: id ? 'PATCH' : 'POST', body: JSON.stringify({ trip_date: date }) });
+            if (id) currentDay = Number(id); else currentDay = result[0]?.day_id ?? null;
+            closeModal('day-modal');
+            await refreshTripDays();
+            await refreshItinerary();
+        }
+
+        async function deleteTripDay() {
+            const id = Number(document.getElementById('day-edit-id').value);
+            if (!id || !confirm('確定刪除這個旅行日期？')) return;
+            await sbFetch(`trip_days?day_id=eq.${id}`, { method: 'DELETE' });
+            currentDay = null;
+            closeModal('day-modal');
+            await refreshTripDays();
+            await refreshItinerary();
+        }
+
+        // --- 行程功能 ---
+        let allItinerary = [];
+        async function refreshItinerary() {
+            const data = await sbFetch('itinerary_items?select=*,map_query&order=time.asc');
+            if (Array.isArray(data)) { allItinerary = data; renderItinerary(); }
+        }
+
+        function formatItinTime(timeStr) {
+            if (!timeStr || timeStr.trim() === '' || timeStr === '|') return '<span>--:--</span>';
+            const parts = timeStr.split(/[-|]/).map(s => s.trim());
+            return `<span>${parts[0] || ""}</span><span class="time-sep">|</span><span>${parts[1] || ""}</span>`;
+        }
+
+        function goToMap(query) {
+            if (!query) return;
+            const q = query.trim();
+            if (q.startsWith('http')) window.open(q, '_blank');
+            else window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`, '_blank');
+        }
+
+        function renderItinerary() {
+            const list = document.getElementById('itinerary-list');
+            const items = allItinerary.filter(i => i.day_id === currentDay);
+            if (items.length === 0) {
+                list.innerHTML = `<div style="text-align: center; color: #b39ddb; padding: 40px 20px; font-weight: 700; border: 2px dashed #f3e5f5; border-radius: 22px;">~快想想吧~<br>點擊 ＋ 號新增！</div>`;
+                return;
+            }
+            list.innerHTML = items.map(i => `
+                <div class="itin-card" onclick='openItinDetail(${JSON.stringify(i).replace(/'/g, "&#39;")})'>
+                    <div class="itin-time">${formatItinTime(i.time)}</div>
+                    <div class="itin-content">
+                        <div class="itin-loc">${i.location}</div>
+                        ${i.transport ? `<div class="itin-detail-row"><span>🚋 ${i.transport}</span></div>` : ''}
+                        ${i.notes ? `<div class="itin-notes-row"><span>📝 ${i.notes}</span></div>` : ''}
+                    </div>
+                    <div class="itin-action-group">
+                        <button class="itin-action-btn" onclick='event.stopPropagation(); openItinModal(${JSON.stringify(i).replace(/'/g, "&#39;")})'>✏️</button>
+                        ${(i.map_query && i.map_query.trim() !== '') ? `<button class="itin-action-btn itin-map-btn" onclick="event.stopPropagation(); goToMap(\`${i.map_query}\`)">📍</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openItinModal(item = null) {
+            const modal = document.getElementById('itin-modal');
+            const delBtn = document.getElementById('btn-delete-itin');
+            if (item) {
+                document.getElementById('modal-title').innerText = '修改行程';
+                document.getElementById('edit-id').value = item.id;
+                const parts = (item.time || '').split(/[-|]/).map(s => s.trim());
+                document.getElementById('form-time-start').value = parts[0] || '';
+                document.getElementById('form-time-end').value = parts[1] || '';
+                document.getElementById('form-loc').value = item.location || '';
+                document.getElementById('form-map-query').value = item.map_query || '';
+                document.getElementById('form-trans').value = item.transport || '';
+                document.getElementById('form-notes').value = item.notes || '';
+                delBtn.style.display = 'flex';
+            } else {
+                document.getElementById('modal-title').innerText = '新增行程';
+                document.getElementById('edit-id').value = '';
+                document.getElementById('form-time-start').value = '';
+                document.getElementById('form-time-end').value = '';
+                document.getElementById('form-loc').value = '';
+                document.getElementById('form-map-query').value = '';
+                document.getElementById('form-trans').value = '';
+                document.getElementById('form-notes').value = '';
+                delBtn.style.display = 'none';
+            }
+            modal.classList.add('active');
+        }
+
+        async function saveItin() {
+            const id = document.getElementById('edit-id').value;
+            const start = document.getElementById('form-time-start').value;
+            const end = document.getElementById('form-time-end').value;
+            const location = document.getElementById('form-loc').value;
+            const map_query = document.getElementById('form-map-query').value.trim();
+            const transport = document.getElementById('form-trans').value;
+            const notes = document.getElementById('form-notes').value;
+            if (!location) return;
+            const combinedTime = `${start}|${end}`;
+            const body = { day_id: currentDay, time: combinedTime, location, map_query: map_query || null, transport, notes };
+            if (id) await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify(body) });
+            else await sbFetch('itinerary_items', { method: 'POST', body: JSON.stringify(body) });
+            closeModal('itin-modal'); refreshItinerary();
+        }
+
+        async function delItinFromModal() {
+            const id = document.getElementById('edit-id').value;
+            if (id && confirm('確定刪除此行程？')) {
+                await sbFetch(`itinerary_items?id=eq.${id}`, { method: 'DELETE' });
+                closeModal('itin-modal'); refreshItinerary();
+            }
+        }
+
+        function openItinDetail(item) {
+            const parts = (item.time || '').split(/[-|]/).map(s => s.trim());
+            document.getElementById('dt-time').innerText = (parts[0] || parts[1]) ? `${parts[0]} - ${parts[1]}` : '--:--';
+            document.getElementById('dt-loc').innerText = item.location;
+            document.getElementById('dt-trans').innerText = item.transport || '無設定';
+            document.getElementById('dt-notes').innerText = item.notes || '尚無備註';
+            document.getElementById('detail-overlay').classList.add('active');
+        }
+        function closeItinDetail() { document.getElementById('detail-overlay').classList.remove('active'); }
+        function switchDay(dayId) { currentDay = Number(dayId); renderTripDays(); renderItinerary(); }
+
+        // --- 匯率與日文 ---
+        function convert(type) {
+            const rate = parseFloat(document.getElementById('base-rate').value) || 0.21;
+            const twd = document.getElementById('twd-val'), jpy = document.getElementById('jpy-val');
+            if (type === 'jpy') twd.value = jpy.value ? (parseFloat(jpy.value) * rate).toFixed(2) : '';
+            else jpy.value = twd.value ? (parseFloat(twd.value) / rate).toFixed(0) : '';
+        }
+        function showCategory(cat) {
+            document.getElementById('jp-menu').style.display = 'none';
+            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
+            document.getElementById('cat-' + cat).classList.add('active');
+            document.getElementById('fixed-back-container').style.display = 'block';
+        }
+        function backToMenu() {
+            document.querySelectorAll('.phrase-list').forEach(l => l.classList.remove('active'));
+            document.getElementById('jp-menu').style.display = 'grid';
+            document.getElementById('fixed-back-container').style.display = 'none';
+        }
+        function openFS(jp, ch, romaji) {
+            document.getElementById('fs-jp').innerText = jp; document.getElementById('fs-ch').innerText = ch;
+            document.getElementById('fs-romaji').innerText = romaji; document.getElementById('fs-overlay').classList.add('active');
+        }
+
+        // --- 旅伴與分類管理 ---
+        let currentWho = localStorage.getItem('currentUserName') || ''; 
+        let membersData = [];
+        let categoriesData = []; 
+        let currentCat = '';
+        let allItems = [];
+
+        async function refreshMembers() {
+            const remote = await sbFetch('members?order=id.asc');
+            let data = (remote && remote.length) ? remote : [{id: 999, name: '未命名'}];
+            if (!currentWho || (Array.isArray(currentWho) && currentWho.length === 0)) {
+                if (data.length > 0 && data[0].name) {
+                    currentWho = data[0].name;
+                    localStorage.setItem('currentUserName', currentWho);
+                }
+            }
+            membersData = data;
+            renderWhoSelector();
+        }
+
+        function renderWhoSelector() { 
+            const container = document.getElementById('who-selector');
+            if (!container) return;
+            container.innerHTML = membersData.map(m => `
+                <div class="who-chip ${m.name === currentWho ? 'active' : ''}" onclick="setWho('${m.name}')">${m.name}</div>
+            `).join(''); 
+        }
+
+        function setWho(name) { 
+            currentWho = name; 
+            localStorage.setItem('osaka_who', name); 
+            localStorage.setItem('currentUserName', name); 
+            renderWhoSelector(); 
+            renderItems(); 
+        }
+
+        function openWhoManageModal() {
+            document.getElementById('who-list-container').innerHTML = membersData.map((m, i) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">${m.name}</span>
+                    <div class="manage-btn-group">
+                        <button type="button" class="manage-icon-btn" onclick="sortWho(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="上移">▲</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortWho(${i}, 1)" ${i === membersData.length - 1 ? 'disabled' : ''} title="下移">▼</button>
+                        <button type="button" class="manage-icon-btn" onclick="editWho(${m.id}, '${m.name.replace(/'/g, "\\'")}')" title="編輯">✏️</button>
+                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteWhoMember(${m.id})" title="刪除">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('who-manage-modal').classList.add('active');
+        }
+        async function addWho() {
+            const val = document.getElementById('new-who-input').value.trim();
+            if (val) {
+                await sbFetch('members', { method: 'POST', body: JSON.stringify({ name: val }) });
+                document.getElementById('new-who-input').value = '';
+                await refreshMembers();
+                openWhoManageModal();
+            }
+        }
+        async function editWho(id, oldName) {
+            const newName = prompt('請輸入新的旅伴名稱：', oldName);
+            if (newName && newName !== oldName) {
+                await sbFetch(`members?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ name: newName }) });
+                if (currentWho === oldName) currentWho = newName;
+                await refreshMembers();
+                openWhoManageModal();
+            }
+        }
+        async function deleteWhoMember(id) {
+            if (confirm('確定刪除此旅伴？')) {
+                await sbFetch(`members?id=eq.${id}`, { method: 'DELETE' });
+                await refreshMembers();
+                openWhoManageModal();
+            }
+        }
+        async function sortWho(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= membersData.length) return;
+            const curr = membersData[idx];
+            const target = membersData[targetIdx];
+            
+            // Swap member positions in array locally and update names or sort_order
+            const temp = membersData[idx];
+            membersData[idx] = membersData[targetIdx];
+            membersData[targetIdx] = temp;
+
+            try {
+                // If sort_order is supported on members table
+                const tempSort = curr.sort_order !== undefined ? curr.sort_order : idx;
+                const targetSort = target.sort_order !== undefined ? target.sort_order : targetIdx;
+                await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: targetSort }) });
+                await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
+            } catch(e) {
+                // Fallback: swap names if sort_order column isn't present
+                await sbFetch(`members?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ name: target.name }) });
+                await sbFetch(`members?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ name: curr.name }) });
+            }
+            await refreshMembers();
+            openWhoManageModal();
+        }
+
+        async function refreshCategories() {
+            const data = await sbFetch('checklist_categories?order=sort_order.asc');
+            categoriesData = data.length > 0 ? data : [];
+            if (!currentCat && categoriesData.length > 0) {
+                currentCat = categoriesData[0].name;
+            }
+            renderChecklistTabs();
+            renderItems();
+        }
+
+        async function addCategory() {
+            const val = document.getElementById('new-cat-input').value;
+            if (val) {
+                const nextSort = categoriesData.length > 0 ? categoriesData[categoriesData.length-1].sort_order + 1 : 1;
+                await sbFetch('checklist_categories', { method: 'POST', body: JSON.stringify({ name: val, sort_order: nextSort }) });
+                document.getElementById('new-cat-input').value = '';
+                await refreshCategories();
+                openCatModal();
+            }
+        }
+
+
+    async function editCategory(id, oldName) {
+    const newName = prompt('請輸入新的分類名稱：', oldName);
+    if (newName && newName !== oldName) {
+        // 1. 更新分類清單表 (checklist_categories) 的名稱
+        await sbFetch(`checklist_categories?id=eq.${id}`, { 
+            method: 'PATCH', 
+            body: JSON.stringify({ name: newName }) 
+        });
+        
+        // 2. 同步更新所有隸屬該分類的清單項目 (checklist_items) 的 category 欄位
+        await sbFetch(`checklist_items?category=eq.${encodeURIComponent(oldName)}`, { 
+            method: 'PATCH', 
+            body: JSON.stringify({ category: newName }) 
+        });
+
+        // 3. 更新前端當前選擇的分類並重新載入資料
+        if (currentCat === oldName) currentCat = newName; 
+        await refreshCategories(); 
+        await refreshChecklist();
+        openCatModal(); 
+    }
+}
+
+
+
+
+
+        async function deleteCategory(id, name) {
+            if (confirm(`確定刪除分類「${name}」？`)) { await sbFetch(`checklist_categories?id=eq.${id}`, { method: 'DELETE' }); if (currentCat === name) currentCat = categoriesData[0]?.name || ''; await refreshCategories(); openCatModal(); }
+        }
+        function openCatModal() {
+            document.getElementById('cat-list-container').innerHTML = categoriesData.map((c, i) => `
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #eee;">
+                    <span style="font-weight:700; color:var(--text-color); font-size:0.95rem;">${c.name}</span>
+                    <div class="manage-btn-group">
+                        <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, -1)" ${i === 0 ? 'disabled' : ''} title="上移">▲</button>
+                        <button type="button" class="manage-icon-btn" onclick="sortCategory(${i}, 1)" ${i === categoriesData.length - 1 ? 'disabled' : ''} title="下移">▼</button>
+                        <button type="button" class="manage-icon-btn" onclick="editCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="編輯">✏️</button>
+                        <button type="button" class="manage-icon-btn btn-del-small" onclick="deleteCategory(${c.id}, '${c.name.replace(/'/g, "\\'")}')" title="刪除">🗑️</button>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('cat-modal').classList.add('active');
+        }
+
+        async function sortCategory(idx, direction) {
+            const targetIdx = idx + direction;
+            if (targetIdx < 0 || targetIdx >= categoriesData.length) return;
+            const curr = categoriesData[idx];
+            const target = categoriesData[targetIdx];
+            const tempSort = curr.sort_order;
+            await sbFetch(`checklist_categories?id=eq.${curr.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: target.sort_order }) });
+            await sbFetch(`checklist_categories?id=eq.${target.id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: tempSort }) });
+            await refreshCategories();
+            openCatModal();
+        }
+
+        // --- ✨✨ 清單／多圖／備註／iOS 點擊／上下移動核心處理 ✨✨ ---
+        const STORAGE_BUCKET = 'checklist-images'; // Supabase Storage Bucket 名稱
+        let checklistSortableInstance = null;
+        
+        let currentModalImages = [];
+        let modalSelectedWho = '';
+
+        // 解析包含「名稱、備註、多張圖片」的內容結構
+        function parseItemContent(rawText, explicitImg) {
+            let text = rawText || '';
+            let notes = '';
+            let images = [];
+
+            // 1. 提取備註 <!--NOTES:...-->
+            const noteMatch = text.match(/<!--NOTES:([\s\S]*?)-->/);
+            if (noteMatch) {
+                notes = noteMatch[1].trim();
+                text = text.replace(noteMatch[0], '').trim();
+            }
+
+            // 2. 提取多張圖片陣列 <!--IMGS:[...]-->
+            const multiImgMatch = text.match(/<!--IMGS:([\s\S]*?)-->/);
+            if (multiImgMatch) {
+                try {
+                    const parsedImgs = JSON.parse(multiImgMatch[1]);
+                    if (Array.isArray(parsedImgs)) images = parsedImgs;
+                } catch(e) {}
+                text = text.replace(multiImgMatch[0], '').trim();
+            }
+
+            // 3. 相容舊版單圖 <!--IMG:...-->
+            const singleImgMatch = text.match(/<!--IMG:([\s\S]*?)-->/);
+            if (singleImgMatch) {
+                const singleUrl = singleImgMatch[1].trim();
+                if (singleUrl && !images.includes(singleUrl)) images.push(singleUrl);
+                text = text.replace(singleImgMatch[0], '').trim();
+            }
+
+            // 4. 若有 explicitImg 欄位
+            if (explicitImg && explicitImg.trim() && !images.includes(explicitImg.trim())) {
+                images.push(explicitImg.trim());
+            }
+
+            return { name: text, notes, images };
+        }
+
+        // 將 Data URL 轉為 Blob
+        function dataURLtoBlob(dataurl) {
+            const arr = dataurl.split(',');
+            const mime = arr[0].match(/:(.*?);/)[1] || 'image/jpeg';
+            const bstr = atob(arr[1]);
+            let n = bstr.length;
+            const u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n);
+            }
+            return new Blob([u8arr], { type: mime });
+        }
+
+        // 圖片自動壓縮工具
+        function compressImage(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onerror = reject;
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onerror = reject;
+                    img.onload = () => {
+                        let w = img.width, h = img.height;
+                        const maxDim = 850;
+                        if (w > maxDim || h > maxDim) {
+                            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+                            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+                        }
+                        const canvas = document.createElement('canvas');
+                        canvas.width = w; canvas.height = h;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, w, h);
+                        resolve(canvas.toDataURL('image/jpeg', 0.8));
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handleMultiFilesSelect(event) {
+            const files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            for (let i = 0; i < files.length; i++) {
+                try {
+                    const dataUrl = await compressImage(files[i]);
+                    currentModalImages.push({ url: dataUrl, isLocal: true });
+                } catch (e) {
+                    console.error('圖片壓縮失敗', e);
+                }
+            }
+            renderModalImagesPreview();
+            event.target.value = '';
+        }
+
+        function toggleUrlField() {
+            const el = document.getElementById('cl-url-container');
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function applySingleImageUrl() {
+            const url = document.getElementById('cl-img-url-input').value.trim();
+            if (url) {
+                currentModalImages.push({ url, isLocal: false });
+                document.getElementById('cl-img-url-input').value = '';
+                document.getElementById('cl-url-container').style.display = 'none';
+                renderModalImagesPreview();
+            }
+        }
+
+        function removeModalImageAt(index) {
+            currentModalImages.splice(index, 1);
+            renderModalImagesPreview();
+        }
+
+        function renderModalImagesPreview() {
+            const grid = document.getElementById('cl-images-preview-grid');
+            const badge = document.getElementById('img-count-badge');
+            badge.innerText = `${currentModalImages.length} 張圖片`;
+
+            grid.innerHTML = currentModalImages.map((item, idx) => `
+                <div class="multi-img-item">
+                    <img src="${item.url}" alt="縮圖">
+                    <button type="button" class="btn-remove-single-img" onclick="removeModalImageAt(${idx})">✕</button>
+                </div>
+            `).join('');
+        }
+
+        async function uploadSingleToStorage(dataUrl) {
+            const blob = dataURLtoBlob(dataUrl);
+            const fileName = `shop_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.jpg`;
+
+            const { data, error } = await supabaseClient.storage
+                .from(STORAGE_BUCKET)
+                .upload(fileName, blob, {
+                    contentType: 'image/jpeg',
+                    cacheControl: '3600',
+                    upsert: false
+                });
+
+            if (error) throw error;
+
+            const { data: urlData } = supabaseClient.storage
+                .from(STORAGE_BUCKET)
+                .getPublicUrl(fileName);
+
+            return urlData.publicUrl;
+        }
+
+        function openLightbox(imgUrl, title) {
+            document.getElementById('lightbox-full-img').src = imgUrl;
+            document.getElementById('lightbox-title').innerText = title || '';
+            document.getElementById('cl-lightbox').classList.add('active');
+        }
+        function closeLightbox() { document.getElementById('cl-lightbox').classList.remove('active'); }
+
+        async function refreshChecklist() {
+            const data = await sbFetch('checklist_items?order=sort_order.asc');
+            if (Array.isArray(data)) {
+                allItems = data;
+                renderItems();
+            }
+        }
+
+        // --- 清單頁面分類標籤列 ---
+        function renderChecklistTabs() { 
+            const container = document.getElementById('cl-tabs');
+            if (!container) return;
+            container.innerHTML = categoriesData.map(c => `
+                <button class="cl-tab-btn ${c.name === currentCat ? 'active' : ''}" onclick="switchClTab('${c.name}')">${c.name}</button>
+            `).join(''); 
+        }
+
+        function switchClTab(c) { currentCat = c; renderChecklistTabs(); renderItems(); }
+
+        function renderItems() {
+            const listDiv = document.getElementById('cl-items-list');
+            if (!listDiv) return;
+
+            // 抓出屬於當前分類的項目
+            const items = allItems.filter(i => i.category === currentCat);
+            if (items.length === 0) {
+                listDiv.innerHTML = `<div style="text-align: center; color: #8d6e63; padding: 40px 20px; font-weight: bold; border: 2px dashed #E8D8B9; border-radius: 20px; background: white;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 6px;">📝</span>
+                    目前「${currentCat}」清單空空如也<br>
+                    <span style="font-size: 0.8rem; color: #aaa; font-weight: normal;">點擊右下角 ＋ 新增項目吧！</span>
+                </div>`;
+                return;
+            }
+
+            const pending = items.filter(i => !i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+            const completed = items.filter(i => i.done).sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+
+            let html = pending.map((i, idx) => renderSingleShoppingCard(i, idx, pending.length)).join('');
+            if (completed.length > 0) {
+                html += `<div style="text-align:center; font-size:12px; color:#aaa; font-weight:bold; margin:16px 0 10px;">✓ 已完成項目 (${completed.length})</div>`;
+                html += completed.map((i, idx) => renderSingleShoppingCard(i, idx, completed.length)).join('');
+            }
+            listDiv.innerHTML = html;
+
+            if (checklistSortableInstance) checklistSortableInstance.destroy();
+            checklistSortableInstance = new Sortable(listDiv, {
+                animation: 150, delay: 100, delayOnTouchOnly: false, touchStartThreshold: 10,
+                filter: '.cl-check, .btn-card-del, .shop-thumb',
+                preventOnFilter: false,
+                ghostClass: 'cl-item-ghost',
+                onEnd: async function () { await saveChecklistOrder(); }
+            });
+        }
+
+        // 單個卡片（✨縮圖放名稱後面、多圖、備註、iOS 點擊優化✨）
+        function renderSingleShoppingCard(i, index, totalCount) {
+            const parsed = parseItemContent(i.text, i.image_url);
+            const safeItem = JSON.stringify(i).replace(/"/g, '&quot;');
+            const safeName = parsed.name.replace(/"/g, '&quot;');
+            const safeCategory = (i.category || '').replace(/"/g, '&quot;');
+
+            // 縮圖橫排 HTML（放在名稱後面）
+            const thumbsHtml = parsed.images.length > 0 ? `
+                <div class="shop-thumbs-wrap">
+                    ${parsed.images.map(img => `
+                        <img src="${img}" class="shop-thumb" onclick="event.stopPropagation(); openLightbox('${img}', '${safeName}')" title="點擊放大檢視">
+                    `).join('')}
+                </div>
+            ` : '';
+
+            // 備註 HTML
+            const notesHtml = parsed.notes ? `
+                <div class="shop-notes-row">
+                    <span>📝</span>
+                    <span>${parsed.notes}</span>
+                </div>
+            ` : '';
+
+            // 旅伴標籤（消除 "沒有人" 的問題，無人指派時預設為目前選擇的旅伴或全員）
+            let displayWho = i.who;
+            if (!displayWho || displayWho === '沒有人' || displayWho === '未指派') {
+                displayWho = currentWho || (membersData[0]?.name || '全員');
+            }
+
+            return `
+                <div class="shop-item-card ${i.done ? 'done' : ''}" data-id="${i.id}">
+                    <div class="shop-card-main-row">
+                        <!-- 針對 iOS 優化的勾選按鈕 (使用 <button> 搭配 touch-action) -->
+                        <button type="button" class="cl-check" 
+                                onclick="event.stopPropagation(); toggleItem(${i.id}, ${i.done})"
+                                ontouchstart="event.stopPropagation();"
+                                title="標記完成狀態">
+                            ${i.done ? '✓' : ''}
+                        </button>
+                        
+                        <!-- 名稱與後面跟隨的多張縮圖 -->
+                        <div class="shop-title-and-thumbs" onclick="openClItemModal(${safeItem}, '${safeCategory}')">
+                            <span class="shop-title-text">${parsed.name}</span>
+                            ${thumbsHtml}
+                        </div>
+
+                        <span class="cl-who-badge">${displayWho}</span>
+
+                        <button type="button" class="btn-card-del" onclick="event.stopPropagation(); delItem(${i.id})" title="刪除">✕</button>
+                    </div>
+                    ${notesHtml}
+                </div>
+            `;
+        }
+
+        async function saveChecklistOrder() {
+            const listDiv = document.getElementById('cl-items-list');
+            const items = listDiv.querySelectorAll('.shop-item-card');
+            const updates = Array.from(items).map((el, index) => {
+                const id = el.getAttribute('data-id');
+                return sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ sort_order: index }) });
+            });
+            await Promise.all(updates);
+        }
+
+        // --- 打開新增/修改清單項目 Modal ---
+        function openClItemModal(item = null, defaultCat = null) {
+            const modal = document.getElementById('cl-item-modal');
+            const nameInput = document.getElementById('cl-name-input');
+            const notesInput = document.getElementById('cl-notes-input');
+            const editId = document.getElementById('cl-edit-id');
+            const editCat = document.getElementById('cl-edit-category');
+            const titleEl = document.getElementById('cl-modal-title');
+            
+            currentModalImages = [];
+
+            let targetCategory = defaultCat || currentCat;
+            if (!targetCategory && categoriesData.length > 0) targetCategory = categoriesData[0].name;
+            editCat.value = targetCategory;
+
+            if (item) {
+                titleEl.innerText = `修改${item.category || '清單'}項目`;
+                editId.value = item.id;
+                editCat.value = item.category || targetCategory;
+                
+                // 正確預設旅伴，消除 "沒有人" 的問題
+                let whoVal = item.who;
+                if (!whoVal || whoVal === '沒有人' || whoVal === '未指派') whoVal = currentWho || (membersData[0]?.name || '');
+                modalSelectedWho = whoVal;
+
+                const parsed = parseItemContent(item.text, item.image_url);
+                nameInput.value = parsed.name;
+                notesInput.value = parsed.notes;
+
+                // 載入多張已存在的圖片
+                currentModalImages = parsed.images.map(url => ({ url, isLocal: false }));
+            } else {
+                titleEl.innerText = `新增${targetCategory || '清單'}項目`;
+                editId.value = '';
+                nameInput.value = '';
+                notesInput.value = '';
+                modalSelectedWho = currentWho || (membersData[0]?.name || '');
+            }
+
+            renderModalWhoChips();
+            renderModalImagesPreview();
+            document.getElementById('cl-url-container').style.display = 'none';
+            modal.classList.add('active');
+        }
+
+        function renderModalWhoChips() {
+            const container = document.getElementById('modal-who-chips');
+            container.innerHTML = membersData.map(m => `
+                <div class="who-chip ${m.name === modalSelectedWho ? 'active' : ''}" style="padding: 5px 12px; font-size: 0.75rem;" onclick="setModalWho('${m.name}')">${m.name}</div>
+            `).join('');
+        }
+
+        function setModalWho(name) {
+            modalSelectedWho = name;
+            renderModalWhoChips();
+        }
+
+        // --- 儲存清單項目（照片至 Storage + 備註 + 正確旅伴） ---
+        async function saveClItem() {
+            const id = document.getElementById('cl-edit-id').value;
+            const targetCategory = document.getElementById('cl-edit-category').value || currentCat;
+            const name = document.getElementById('cl-name-input').value.trim();
+            const notes = document.getElementById('cl-notes-input').value.trim();
+            const saveBtn = document.getElementById('btn-save-cl-item');
+
+            if (!name) { alert('請輸入物品名稱！'); return; }
+
+            // 1. 上傳尚未上傳的本機新照片至 Supabase Storage
+            const finalImageUrls = [];
+            const hasLocalImages = currentModalImages.some(i => i.isLocal);
+
+            if (hasLocalImages && saveBtn) {
+                saveBtn.innerText = '上傳中...';
+                saveBtn.disabled = true;
+            }
+
+            for (let i = 0; i < currentModalImages.length; i++) {
+                const item = currentModalImages[i];
+                if (item.isLocal && item.url.startsWith('data:')) {
+                    try {
+                        const uploadedUrl = await uploadSingleToStorage(item.url);
+                        finalImageUrls.push(uploadedUrl);
+                    } catch (err) {
+                        console.warn('Storage 上傳失敗，降級保留', err);
+                        finalImageUrls.push(item.url);
+                    }
+                } else {
+                    finalImageUrls.push(item.url);
+                }
+            }
+
+            if (saveBtn) {
+                saveBtn.innerText = '儲存中...';
+            }
+
+            // 2. 組成完整格式（名稱 + 備註標籤 + 多圖標籤）
+            let finalText = name;
+            if (notes) {
+                finalText += `\n<!--NOTES:${notes}-->`;
+            }
+            if (finalImageUrls.length > 0) {
+                finalText += `\n<!--IMGS:${JSON.stringify(finalImageUrls)}-->`;
+            }
+
+            // 確保旅伴名稱不為空，也不為 "沒有人"
+            let assignee = modalSelectedWho || currentWho || (membersData[0]?.name || '');
+            if (assignee === '沒有人' || assignee === '未指派') {
+                assignee = currentWho || (membersData[0]?.name || '');
+            }
+
+            try {
+                if (id) {
+                    await sbFetch(`checklist_items?id=eq.${id}`, {
+                        method: 'PATCH',
+                        body: JSON.stringify({ text: finalText, who: assignee, category: targetCategory })
+                    });
+                } else {
+                    const catItems = allItems.filter(i => i.category === targetCategory);
+                    const maxSort = catItems.length > 0 ? Math.max(...catItems.map(i => i.sort_order || 0)) : -1;
+                    await sbFetch('checklist_items', {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            category: targetCategory,
+                            text: finalText,
+                            done: false,
+                            who: assignee,
+                            sort_order: maxSort + 1
+                        })
+                    });
+                }
+                closeModal('cl-item-modal');
+                await refreshChecklist();
+            } catch (e) {
+                alert('儲存失敗，請確認網路連線');
+            } finally {
+                if (saveBtn) {
+                    saveBtn.innerText = '儲存';
+                    saveBtn.disabled = false;
+                }
+            }
+        }
+
+        async function toggleItem(id, status) {
+            await sbFetch(`checklist_items?id=eq.${id}`, { method: 'PATCH', body: JSON.stringify({ done: !status }) });
+            refreshChecklist();
+        }
+
+        async function delItem(id) {
+            if (confirm('確定刪除此項目？')) {
+                await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
+                refreshChecklist();
+            }
+        }
+
+        // --- 分頁切換與 FAB 按鈕 ---
+        let currentTabId = 'itinerary';
+
+        function handleFabClick() {
+            if (navigator.vibrate) navigator.vibrate(5);
+            if (currentTabId === 'itinerary') {
+                openItinModal();
+            } else if (currentTabId === 'checklist') {
+                openClItemModal(null, currentCat);
+            }
+        }
+
+        function switchTab(id, el) {
+            if (navigator.vibrate) navigator.vibrate(5);
+            currentTabId = id;
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('page-' + id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            if (el) el.classList.add('active');
+
+            // 浮動按鈕在 行程、清單 時顯示
+            document.getElementById('add-fab').style.display = 
+                (id === 'itinerary' || id === 'checklist') ? 'flex' : 'none';
+
+            if (id === 'checklist') renderItems();
+        }
+
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('real-date').innerText = now.toLocaleDateString('zh-TW', { month: '2-digit', day: '2-digit', weekday: 'short' });
+            const tw = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Taipei' });
+            const jp = now.toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Tokyo' });
+            document.getElementById('realtime-clock').innerHTML = `<div class="clock-item">🇯🇵 ${jp}</div> <span style="opacity:0.3">|</span> <div class="clock-item">🇹🇼 ${tw}</div>`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function subscribeRealtime() {
+            if (supabaseClient.getChannels().length > 0) supabaseClient.removeAllChannels();
+            supabaseClient.channel('itinerary-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'itinerary_items' }, () => refreshItinerary())
+                .subscribe();
+            supabaseClient.channel('checklist-changes')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'checklist_items' }, () => refreshChecklist())
+                .subscribe();
+        }
+
+        document.addEventListener("visibilitychange", () => {
+            if (document.hidden) {
+                supabaseClient.removeAllChannels();
+            } else {
+                refreshMembers(); refreshCategories(); refreshChecklist(); refreshItinerary();
+                subscribeRealtime();
+            }
+        });
+
+        window.onload = async () => {
+            await refreshTripDays();
+            await refreshMembers();
+            await refreshCategories();
+            await refreshChecklist();
+            await refreshItinerary();
+            subscribeRealtime();
+        };
+    </script>
+</body>
+</html>
