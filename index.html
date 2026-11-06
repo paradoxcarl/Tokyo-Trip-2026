@@ -458,7 +458,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 </button>
             </div>
             <input type="number" id="base-rate" value="0.21" step="0.0001" style="width: 100%; border: none; background: transparent; font-size: 1.35rem; font-weight: 800; outline: none; color: var(--dark-pink);" oninput="convert('jpy')">
-            <div id="rate-update-time" style="font-size: 0.72rem; color: #8d6e63; margin-top: 4px; font-weight: 500;">預設匯率：0.2100 (可點擊按鈕自動抓取最新台銀現金賣出"參考"價)</div>
+            <div id="rate-update-time" style="font-size: 0.72rem; color: #8d6e63; margin-top: 4px; font-weight: 500;">預設匯率：0.2100</div>
         </div>
     </div>
 
@@ -1088,7 +1088,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                 if (rateStr && rateInput) {
                     rateInput.value = rateStr;
                     const nowStr = new Date().toLocaleTimeString('zh-TW', { hour: '2-digit', minute: '2-digit' });
-                    if (timeEl) timeEl.innerText = `已成功抓取台銀日幣現金賣出"參考"價：${rateStr} (${nowStr})`;
+                    if (timeEl) timeEl.innerText = `台銀日幣現金賣出"參考"價：${rateStr} (${nowStr})`;
                     convert('jpy');
                     if (btn) btn.innerText = '✅ 抓取成功';
                     setTimeout(() => { if (btn) btn.innerText = '🔄 抓取台銀日幣現金賣出"參考"價'; }, 2000);
@@ -1298,7 +1298,7 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
                     menuContainer.style.display = 'grid';
                     menuContainer.innerHTML = `
                         <div style="grid-column: 1 / -1; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-                            <span style="font-weight:800; color:var(--dark-pink); font-size:1.05rem;">🍬 日文常用語分類 (只能本機編輯，還要上雲端，怠惰了......)</span>
+                            <span style="font-weight:800; color:var(--dark-pink); font-size:1.05rem;">🍬 日文常用語分類<br> (只能本機編輯，還要上雲端，怠惰了......)</br></span>
                             <div style="display:flex; gap:6px;">
                                 <button type="button" onclick="resetJapaneseCategories()" style="padding:5px 12px; background:#f0f0f0; color:#666; border:none; border-radius:50px; font-weight:bold; font-size:0.75rem; cursor:pointer;">↺ 重置例句</button>
                                 <button type="button" onclick="openJpCatModal()" style="padding:5px 12px; background:var(--forest-green); color:white; border:none; border-radius:50px; font-weight:bold; font-size:0.75rem; cursor:pointer;">➕ 新增分類</button>
