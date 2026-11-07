@@ -1980,8 +1980,9 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
         async function delClItemFromModal() {
             const id = document.getElementById('cl-edit-id').value;
             if (id && await customConfirm('確定刪除此清單項目？')) {
-                await delItem(Number(id));
+                await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
                 closeModal('cl-item-modal');
+                await refreshChecklist();
             }
         }
 
@@ -2141,12 +2142,6 @@ header h1 { font-size: 1.3rem; color: var(--dark-pink); letter-spacing: 1.5px; f
             await refreshChecklist();
         }
 
-        async function delItem(id) {
-            if (await customConfirm('確定刪除此項目？')) {
-                await sbFetch(`checklist_items?id=eq.${id}`, { method: 'DELETE' });
-                await refreshChecklist();
-            }
-        }
 
         // --- 全域分頁與初始化 ---
         function switchTab(tabId, el) {
